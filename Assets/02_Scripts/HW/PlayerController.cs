@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    #region Stats Change
+    #region Stats Change functions
     public void ChangeHP(float amount)
     {
         _currentHp += amount;
