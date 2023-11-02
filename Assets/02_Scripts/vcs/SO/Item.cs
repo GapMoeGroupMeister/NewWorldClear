@@ -42,5 +42,12 @@ public class Item : ScriptableObject
     * </summary>
     */
    public float maxDurability;
-   
+
+   /**
+    * <summary>
+    * 한 슬롯당 최대치
+    * </summary>
+    */
+   public int SlotSetAmount;
+
 }

@@ -34,6 +34,8 @@ public class Slot : MonoBehaviour
 
     public void SetSlot(ItemSlot slotInfo)
     {
-        
+        Item item = slotInfo.item;
+        ItemImage.sprite = item.itemSprite;
+        GuageFill.fillAmount = Mathf.Clamp(item.durability / item.maxDurability, 0f, 1f);
     }
 }

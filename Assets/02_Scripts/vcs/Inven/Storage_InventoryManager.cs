@@ -2,8 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DBManager : MonoBehaviour
+public class Storage_InventoryManager : MonoBehaviour
 {
+    
+    [SerializeField] private GameObject slotPrefab;
+    [SerializeField] private Transform _grid;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -15,5 +19,9 @@ public class DBManager : MonoBehaviour
     {
         
     }
-    
+
+    private void Set_Slot()
+    {
+        
+    }
 }
