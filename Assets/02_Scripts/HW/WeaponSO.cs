@@ -5,11 +5,10 @@ using UnityEngine;
 
 public enum WeaponType
 {
-    Knife,
-    Blunt,
-    Gun,
-    Bow
+    LongRange,
+    ShortRange,
 }
+[CreateAssetMenu(menuName = "SO/WeaponSO")]
 public class WeaponSO : ScriptableObject
 {
     public string name;
