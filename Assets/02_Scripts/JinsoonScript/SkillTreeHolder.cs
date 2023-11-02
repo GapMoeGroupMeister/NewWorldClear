@@ -15,7 +15,7 @@ public class SkillTreeHolder : MonoBehaviour
 
     private void Awake()
     {
-        coinTmp = GameObject.Find("SkillTreeNumTxt").GetComponent<TextMeshProUGUI>();
+        coinTmp = GameObject.Find("SkillTreeCoinNumTxt").GetComponent<TextMeshProUGUI>();
         coinTmp.SetText(skillTreeCoin.ToString());
     }
 
