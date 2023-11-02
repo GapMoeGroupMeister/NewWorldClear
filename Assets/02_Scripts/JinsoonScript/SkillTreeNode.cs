@@ -13,6 +13,8 @@ public class SkillTreeNode : MonoBehaviour, IPointerEnterHandler, IPointerClickH
     private Transform selectedTrm = null;
     private Transform frameTrm = null;
 
+    private bool isLoading = false;
+
     private void Awake()
     {
         connecter = transform.Find("connecter/connecterFill").GetComponent<Image>();
@@ -21,6 +23,14 @@ public class SkillTreeNode : MonoBehaviour, IPointerEnterHandler, IPointerClickH
 
         selectedTrm.gameObject.SetActive(false);
         frameTrm.gameObject.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if(isLoading == true)
+        {
+
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -35,12 +45,12 @@ public class SkillTreeNode : MonoBehaviour, IPointerEnterHandler, IPointerClickH
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        throw new System.NotImplementedException();
+        isLoading = true;
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        throw new System.NotImplementedException();
+        isLoading = false;
     }
 
     
