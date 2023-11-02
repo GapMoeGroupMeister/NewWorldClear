@@ -76,6 +76,7 @@ public class PlayerWeapon : MonoBehaviour
             foreach(Collider2D col in enemies)
             {
                 Debug.Log($"°ø°Ý¿¡ ¸ÂÀº ³ð : {col.name}");
+                col.GetComponent<Enemy_TEST>().Damage(_damage);
             }
         }
         else
@@ -100,6 +101,7 @@ public class PlayerWeapon : MonoBehaviour
                 }
             }
             Debug.Log($"°Ü³ÉµÈ ³ð : {nearest.name}");
+            nearest.GetComponent<Enemy_TEST>().Damage(_damage);
         }
         else
         {
