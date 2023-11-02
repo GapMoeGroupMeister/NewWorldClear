@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.ShaderGraph;
 using UnityEngine;
 
 public class PlayerWeapon : MonoBehaviour
@@ -88,7 +89,17 @@ public class PlayerWeapon : MonoBehaviour
         Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, _attackRange.x, _enemyMask);
         if(enemies.Length > 0) 
         {
-            Debug.Log($"败成等 仇 : {enemies[0].name}"); 
+            Transform nearest = null;
+            float distance = float.MaxValue;
+            foreach(Collider2D col in enemies)
+            {
+                if (Vector2.Distance(transform.position, col.transform.position) < distance)
+                {
+                    distance = Vector2.Distance(transform.position, col.transform.position);
+                    nearest = col.transform;
+                }
+            }
+            Debug.Log($"败成等 仇 : {nearest.name}");
         }
         else
         {
