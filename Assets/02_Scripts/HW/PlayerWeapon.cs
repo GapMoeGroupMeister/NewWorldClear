@@ -19,6 +19,10 @@ public class PlayerWeapon : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
+    private void Update()
+    {
+    }
+
     public void WeaponChange(WeaponSO weaponSO)
     {
         _name = weaponSO.name;
@@ -30,10 +34,32 @@ public class PlayerWeapon : MonoBehaviour
         _attackRange = weaponSO.attackRange;
 
         _spriteRenderer.sprite = _weaponSprite;
+
+        CancelInvoke("Weapon");
+        InvokeRepeating("Weapon", _attackDelay, _attackDelay);
     }
 
     private void Attack()
     {
+        Vector2 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        Collider2D[] enemies = Physics2D.OverlapBoxAll(transform.position, _attackRange, Mathf.Atan2(dir.x, dir.x));
+        if(enemies.Length > 0) 
+        {
+            print(enemies.Length);
+            Debug.Log($"공격에 맞은 적의 수 : {enemies.Length}");
+        }
+        else
+        {
+            Debug.Log("공격에 아무도 맞지 않음");
+        }
+    }
 
+    private void LongRangeAttack()
+    {
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, _attackRange.x);
+        if(enemies.Length > 0) 
+        {
+            Debug.Log($"겨냥된 놈 : {enemies[0].name}"); 
+        }
     }
 }

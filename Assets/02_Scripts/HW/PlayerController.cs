@@ -30,11 +30,11 @@ public class PlayerController : MonoBehaviour
         _weaponTrm.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
         if(Mathf.Abs(_weaponTrm.rotation.z) >= 0.5f)
         {
-            _weaponVisualTrm.localScale = new Vector2(-0.2f, -1f);
+            _weaponVisualTrm.localScale = Vector2.one * -1f;
         }
         else
         {
-            _weaponVisualTrm.localScale = new Vector2(0.2f, 1f);
+            _weaponVisualTrm.localScale = Vector2.one;
         }
     }
 }
