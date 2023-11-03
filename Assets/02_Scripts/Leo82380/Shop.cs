@@ -19,6 +19,9 @@ public class Shop : MonoBehaviour
         weaponPanel.transform.DOMoveX(-7.5f, duration).SetEase(ease).OnComplete(() => { isMoving = false; });
     }
 
+    /// <summary>
+    /// 돌아가기
+    /// </summary>
     public void Main()
     {
         mainPanel.SetActive(true);

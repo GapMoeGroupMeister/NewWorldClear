@@ -12,10 +12,11 @@ public class WeaponShop : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI descriptionText;
     [SerializeField] private Shop shop;
+    [Tooltip("무기 설명이 나타나는 시간")]
     [SerializeField] private Ease ease;
 
     [SerializeField] private float duration;
-
+    [Tooltip("무기 설명")]
     [SerializeField] private WeaponDescription weaponDescriprion;
     
 
@@ -53,6 +54,9 @@ public class WeaponShop : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     }
 }
 
+/// <summary>
+/// 무기 설명
+/// </summary>
 [System.Serializable]
 public class WeaponDescription
 {
