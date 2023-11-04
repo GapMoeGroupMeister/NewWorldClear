@@ -23,5 +23,7 @@ public class Storage_InventoryManager : MonoBehaviour
     private void Set_Slot()
     {
         
+        
+        
     }
 }
