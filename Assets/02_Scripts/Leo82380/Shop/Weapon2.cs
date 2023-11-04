@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
 using DG.Tweening;
-using Unity.VisualScripting;
 
 public class Weapon2 : MonoBehaviour, IPointerClickHandler
 {

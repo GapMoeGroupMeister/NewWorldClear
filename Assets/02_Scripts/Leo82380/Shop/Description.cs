@@ -1,13 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using DG.Tweening;
 
 public class Description : MonoBehaviour
 {
-    private Weapon2 weapon2;
-
     private bool isOn = false;
     public Weapon2 Weapon2 { get; set; }
     public bool IsOn { get { return isOn; } }
