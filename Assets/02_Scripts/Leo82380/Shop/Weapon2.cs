@@ -31,7 +31,10 @@ public class Weapon2 : MonoBehaviour, IPointerClickHandler
         description.transform.DOScale(1f, 0.5f);
 
         nameText.text = weaponDescription.name;
-        descriptionText.text = weaponDescription.description;
+        if (isSoldOut)
+            descriptionText.text = "이미 구매한 무기입니다!";
+        else
+            descriptionText.text = weaponDescription.description;
         descriptionScript.Weapon2 = this;
     }
 }

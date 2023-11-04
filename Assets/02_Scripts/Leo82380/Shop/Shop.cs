@@ -5,6 +5,7 @@ public class Shop : MonoBehaviour
 {
     [SerializeField] private GameObject mainPanel;
     [SerializeField] private GameObject weaponPanel;
+    [SerializeField] private GameObject description;
     [SerializeField] private Ease ease;
 
     [SerializeField] private float duration;
@@ -17,6 +18,7 @@ public class Shop : MonoBehaviour
         isMoving = true;
         weaponPanel.transform.position = new Vector3(-15f, 0f, 0f);
         weaponPanel.transform.DOMoveX(-7.5f, duration).SetEase(ease).OnComplete(() => { isMoving = false; });
+        description.SetActive(false);
     }
 
     /// <summary>

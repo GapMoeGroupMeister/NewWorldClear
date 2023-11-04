@@ -448,8 +448,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: a5ba98961b3b67e43aa363271ab58a87, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -3277,6 +3277,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainPanel: {fileID: 1443575859}
   weaponPanel: {fileID: 621806822}
+  description: {fileID: 0}
   ease: 19
   duration: 1
 --- !u!1 &509552810
@@ -3648,8 +3649,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: a5ba98961b3b67e43aa363271ab58a87, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -3698,8 +3699,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 646663005}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.34089774}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4018,8 +4019,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: a5ba98961b3b67e43aa363271ab58a87, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -4604,7 +4605,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &754768529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4619,6 +4620,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainPanel: {fileID: 1443575859}
   weaponPanel: {fileID: 1135273638}
+  description: {fileID: 1564695898}
   ease: 19
   duration: 1
 --- !u!114 &754768530
@@ -5001,8 +5003,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: a5ba98961b3b67e43aa363271ab58a87, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -5251,8 +5253,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: a5ba98961b3b67e43aa363271ab58a87, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -6163,7 +6165,7 @@ MonoBehaviour:
   descriptionScript: {fileID: 1564695902}
   weaponDescription:
     name: "\uBB34\uAE303"
-    description: "\uC57C\uD638\uC57C\uD638\uC57C\uD638"
+    description: "\uB2A5\uB825: \uC18D\uB3C4 \uC99D\uAC00!!!!!!"
 --- !u!1 &1178017600
 GameObject:
   m_ObjectHideFlags: 0
@@ -6356,8 +6358,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: a5ba98961b3b67e43aa363271ab58a87, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -6546,7 +6548,7 @@ MonoBehaviour:
   descriptionScript: {fileID: 1564695902}
   weaponDescription:
     name: "\uBB34\uAE306"
-    description: "\uC57C\uD638\uC57C\uD638\uC57C\uD638\uC57C\uD638\uC57C\uD638\uC57C\uD638"
+    description: "\uB2A5\uB825: \uC57C\uD638 \uC2E0\uC774\uB41C\uB2E4"
 --- !u!1 &1260453097
 GameObject:
   m_ObjectHideFlags: 0
@@ -6973,8 +6975,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: a5ba98961b3b67e43aa363271ab58a87, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -7183,8 +7185,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: a5ba98961b3b67e43aa363271ab58a87, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -7564,7 +7566,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1443575860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7661,7 +7663,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64a1feeac7a821448830c8ee2bf98db5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shopPanel: {fileID: 486080361}
+  shopPanel: {fileID: 754768528}
   requestPanel: {fileID: 159239557}
 --- !u!1 &1469519708
 GameObject:
@@ -7760,7 +7762,7 @@ MonoBehaviour:
   descriptionScript: {fileID: 1564695902}
   weaponDescription:
     name: "\uBB34\uAE304"
-    description: "\uC57C\uD638\uC57C\uD638\uC57C\uD638\uC57C\uD638"
+    description: "\uB2A5\uB825: \uB4DC\uB78D\uB960 \uC99D\uAC00!!!!!!"
 --- !u!1 &1485059643
 GameObject:
   m_ObjectHideFlags: 0
@@ -7991,7 +7993,7 @@ MonoBehaviour:
   descriptionScript: {fileID: 1564695902}
   weaponDescription:
     name: "\uBB34\uAE302"
-    description: "\uC57C\uD638\uC57C\uD638"
+    description: "\uB2A5\uB825: \uD30C\uC6CC \uC5C5!!!!!!!!!!!!!!!"
 --- !u!1 &1559437650
 GameObject:
   m_ObjectHideFlags: 0
@@ -8143,7 +8145,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1564695899
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8156,8 +8158,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1715071002}
   - {fileID: 1047783940}
+  - {fileID: 1715071002}
   - {fileID: 1559437651}
   - {fileID: 62379134}
   m_Father: {fileID: 754768533}
@@ -8426,7 +8428,7 @@ MonoBehaviour:
   descriptionScript: {fileID: 1564695902}
   weaponDescription:
     name: "\uBB34\uAE305"
-    description: "\uC57C\uD638\uC57C\uD638\uC57C\uD638\uC57C\uD638\uC57C\uD638"
+    description: "\uB2A5\uB825: HP \uC99D\uAC00!!!"
 --- !u!1 &1605428303
 GameObject:
   m_ObjectHideFlags: 0
@@ -8485,8 +8487,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: a5ba98961b3b67e43aa363271ab58a87, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -8936,8 +8938,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -9002,8 +9004,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -18.790009}
-  m_SizeDelta: {x: 0, y: -269.46}
+  m_AnchoredPosition: {x: 0, y: 5.0899963}
+  m_SizeDelta: {x: 0, y: -221.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1746417440
 GameObject:
@@ -9063,8 +9065,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: a5ba98961b3b67e43aa363271ab58a87, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -10107,7 +10109,7 @@ MonoBehaviour:
   descriptionScript: {fileID: 1564695902}
   weaponDescription:
     name: "\uBB34\uAE301"
-    description: "\uC57C\uD638"
+    description: "\uB2A5\uB825: \uAE30\uBCF8 \uBB34\uAE30\uBCF4\uB2E4 \uC148 \uC57C\uD638"
 --- !u!1 &1932616299
 GameObject:
   m_ObjectHideFlags: 0
@@ -11005,8 +11007,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: a5ba98961b3b67e43aa363271ab58a87, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -11081,8 +11083,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: a5ba98961b3b67e43aa363271ab58a87, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
