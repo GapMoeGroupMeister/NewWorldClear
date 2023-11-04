@@ -29,7 +29,7 @@ public class WeaponShop : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(isSoldOut) return;
+        if (isSoldOut) return;
 
         soldOut.SetActive(true);
         isSoldOut = true;
