@@ -9,10 +9,10 @@ public class Description : MonoBehaviour
 
     public void Buy()
     {
-        if (Weapon2.IsSoldOut) return;
+        if (Weapon2.WeaponDescription.isSoldOut) return;
 
         Weapon2.SoldOut.SetActive(true);
-        Weapon2.IsSoldOut = true;
+        Weapon2.WeaponDescription.isSoldOut = true;
 
         Cancel();
     }
