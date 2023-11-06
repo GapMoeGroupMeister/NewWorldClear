@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
 using Tkfkadlsi;
+using UnityEditor;
 
 
 public class Storage_UIManager : MonoSingleton<Storage_UIManager>
@@ -48,5 +49,6 @@ public class Storage_UIManager : MonoSingleton<Storage_UIManager>
         Text_ItemName.text = _item.itemName;
         Text_Description.text = _item.description;
     }
+
     
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Storage_InventoryManager : MonoBehaviour
 {
-    
+    [Tooltip("인벤슬롯 프리팹")]
     [SerializeField] private GameObject slotPrefab;
     [SerializeField] private Transform _grid;
     
@@ -26,4 +26,11 @@ public class Storage_InventoryManager : MonoBehaviour
         
         
     }
+
+    private void Refresh_Setting()
+    {
+        
+    }
+
+    
 }

@@ -16,10 +16,11 @@ public class Slot : MonoBehaviour, IPointerEnterHandler,  IPointerExitHandler
 
     private void Awake()
     {
+        
+        
         ItemImage = transform.Find("ItemImage").GetComponent<Image>();
         GuageFill = transform.Find("ConditionGuage").transform.Find("GuageFill").GetComponent<Image>();
         ItemAmount = transform.Find("AmountBG").transform.Find("AmountText").GetComponent<TextMeshProUGUI>();
-
     }
 
 
@@ -36,7 +37,6 @@ public class Slot : MonoBehaviour, IPointerEnterHandler,  IPointerExitHandler
         Storage_UIManager.Instance.On_DescriptionUI();
         Storage_UIManager.Instance.Refresh_DescriptionUI(thisSlot.item);
     }
-    
     public void OnPointerExit(PointerEventData eventData)
     {
         Storage_UIManager.Instance.Off_DescriptionUI();
