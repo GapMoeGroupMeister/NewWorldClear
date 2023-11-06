@@ -12,8 +12,9 @@ public class Weapon2 : MonoBehaviour, IPointerClickHandler
     [SerializeField] private Description descriptionScript;
     [SerializeField] private WeaponDescription2 weaponDescription;
 
-    public GameObject SoldOut { get { return soldOut; } }
-    public WeaponDescription2 WeaponDescription { get { return weaponDescription; } }
+    public GameObject SoldOut => soldOut;
+    public WeaponDescription2 WeaponDescription => weaponDescription;
+
     private void Start()
     {
         description.gameObject.transform.localScale = Vector3.zero;
@@ -29,11 +30,8 @@ public class Weapon2 : MonoBehaviour, IPointerClickHandler
         description.transform.DOScale(1f, 0.5f);
 
         nameText.text = weaponDescription.name;
-
-        if (weaponDescription.isSoldOut)
-            descriptionText.text = "이미 구매한 무기입니다!";
-        else
-            descriptionText.text = weaponDescription.description;
+        descriptionText.text = weaponDescription.isSoldOut ? "이미 구매한 무기입니다!" : weaponDescription.description;
+        
         descriptionScript.Weapon2 = this;
     }
 }
