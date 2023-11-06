@@ -29,7 +29,12 @@ public class DBManager : MonoBehaviour
     {
         
     }
-
+    
+    /**
+     * <summary>
+     * json으로 저장된 인벤토리 정보를 불러와 반환해줌
+     * </summary>
+     */
     public List<ItemSlot> Get_Inventory()
     {   
         if (File.Exists(_inventoryPath))
@@ -50,9 +55,10 @@ public class DBManager : MonoBehaviour
         Save_Inventory(inven);
         return inven;
     }
+    
     /**
      * <summary>
-     * 
+     * 인벤토리 정보를 받아와 json파일로 저장함
      * </summary>
      */
     public void Save_Inventory(List<ItemSlot> inven)
@@ -62,58 +68,43 @@ public class DBManager : MonoBehaviour
         File.WriteAllText(_inventoryPath, json);
     }
 
+    /**
+     * <summary>
+     * json으로 저장된 유저 정보를 불러와 반환해줌
+     * </summary>
+     */
     public SaveInfo Get_UserInfo()
     {
-        if (!File.Exists(_userInfoPath))
+        if (File.Exists(_userInfoPath))
         {
-            
-            JsonSave();
-        }else
-        {
-
-            string loadJson = File.ReadAllText(path);
-            saveData = JsonUtility.FromJson<AccountStatus>(loadJson);
+            string loadJson = File.ReadAllText(_userInfoPath);
+            SaveInfo saveData = JsonUtility.FromJson<SaveInfo>(loadJson);
 
             if (saveData != null)
             {
-                AccountManager.Instance.account = saveData;
-                
+                return saveData;
             }
         }
+
+        SaveInfo userInfo = new SaveInfo();
+        Save_userInfo(userInfo);
+        return userInfo;
+
+
     }
     
-    public void JsonLoad()
+    /**
+     * <summary>
+     * 유저 정보를 받아와 json파일로 저장함
+     * </summary>
+     */
+    public void Save_userInfo(SaveInfo saveInfo)
     {
-        AccountStatus saveData = new AccountStatus();
-        if (!File.Exists(path))
-        {
-            AccountManager.Instance.UserInformReset();
+        string json = JsonUtility.ToJson(saveInfo, true);
 
-            JsonSave();
-        }
-        else
-        {
-
-            string loadJson = File.ReadAllText(path);
-            saveData = JsonUtility.FromJson<AccountStatus>(loadJson);
-
-            if (saveData != null)
-            {
-                AccountManager.Instance.account = saveData;
-                
-            }
-        }
+        File.WriteAllText(_userInfoPath, json);
     }
-
-    public void JsonSave()
-    {
-        AccountStatus saveData = new AccountStatus();
-
-
-        string json = JsonUtility.ToJson(saveData, true);
-
-        File.WriteAllText(path, json);
-    }
-
+    
+    
     
 }
