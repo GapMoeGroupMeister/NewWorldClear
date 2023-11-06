@@ -11,7 +11,7 @@ public class Shop : MonoBehaviour
     [SerializeField] private float duration;
 
     private bool isMoving = false;
-    public bool IsMoving { get { return isMoving; } }
+    public bool IsMoving => isMoving;
     
     private void OnEnable()
     {

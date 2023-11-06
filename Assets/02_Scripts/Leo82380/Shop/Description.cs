@@ -5,7 +5,7 @@ public class Description : MonoBehaviour
 {
     private bool isOn = false;
     public Weapon2 Weapon2 { get; set; }
-    public bool IsOn { get { return isOn; } }
+    public bool IsOn => isOn;
 
     public void Buy()
     {
@@ -23,10 +23,12 @@ public class Description : MonoBehaviour
         Weapon2 = null;
         isOn = false;
     }
+    
     private void OnEnable()
     {
         isOn = true;
     }
+    
     private void OnDisable()
     {
         isOn = false;

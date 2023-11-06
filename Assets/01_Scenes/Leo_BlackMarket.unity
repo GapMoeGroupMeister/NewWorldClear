@@ -3699,8 +3699,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 646663005}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.3408978}
-  m_AnchorMax: {x: 1, y: 0.99999994}
+  m_AnchorMin: {x: 0, y: 0.3434344}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5059,8 +5059,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000030518}
-  m_SizeDelta: {x: 0, y: 986.19}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 990}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &969366904
 GameObject:
@@ -6165,7 +6165,8 @@ MonoBehaviour:
   descriptionScript: {fileID: 1564695902}
   weaponDescription:
     name: "\uBB34\uAE303"
-    description: "\uB2A5\uB825: \uC18D\uB3C4 \uC99D\uAC00!!!!!!"
+    description: "\uC2A4\uD0AC: \uAE30\uBCF8 \uC2A4\uD0AC \uC124\uBA85"
+    isSoldOut: 0
 --- !u!1 &1178017600
 GameObject:
   m_ObjectHideFlags: 0
@@ -6548,7 +6549,8 @@ MonoBehaviour:
   descriptionScript: {fileID: 1564695902}
   weaponDescription:
     name: "\uBB34\uAE306"
-    description: "\uB2A5\uB825: \uC57C\uD638 \uC2E0\uC774\uB41C\uB2E4"
+    description: "\uC2A4\uD0AC: \uAE30\uBCF8 \uC2A4\uD0AC \uC124\uBA85"
+    isSoldOut: 0
 --- !u!1 &1260453097
 GameObject:
   m_ObjectHideFlags: 0
@@ -7762,7 +7764,8 @@ MonoBehaviour:
   descriptionScript: {fileID: 1564695902}
   weaponDescription:
     name: "\uBB34\uAE304"
-    description: "\uB2A5\uB825: \uB4DC\uB78D\uB960 \uC99D\uAC00!!!!!!"
+    description: "\uC2A4\uD0AC: \uAE30\uBCF8 \uC2A4\uD0AC \uC124\uBA85"
+    isSoldOut: 0
 --- !u!1 &1485059643
 GameObject:
   m_ObjectHideFlags: 0
@@ -7993,7 +7996,8 @@ MonoBehaviour:
   descriptionScript: {fileID: 1564695902}
   weaponDescription:
     name: "\uBB34\uAE302"
-    description: "\uB2A5\uB825: \uD30C\uC6CC \uC5C5!!!!!!!!!!!!!!!"
+    description: "\uC2A4\uD0AC: \uAE30\uBCF8 \uC2A4\uD0AC \uC124\uBA85"
+    isSoldOut: 0
 --- !u!1 &1559437650
 GameObject:
   m_ObjectHideFlags: 0
@@ -8428,7 +8432,8 @@ MonoBehaviour:
   descriptionScript: {fileID: 1564695902}
   weaponDescription:
     name: "\uBB34\uAE305"
-    description: "\uB2A5\uB825: HP \uC99D\uAC00!!!"
+    description: "\uC2A4\uD0AC: \uAE30\uBCF8 \uC2A4\uD0AC \uC124\uBA85"
+    isSoldOut: 0
 --- !u!1 &1605428303
 GameObject:
   m_ObjectHideFlags: 0
@@ -9412,8 +9417,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 612217912}
   m_HandleRect: {fileID: 612217910}
   m_Direction: 2
-  m_Value: 0.9999998
-  m_Size: 0.65910214
+  m_Value: 1
+  m_Size: 0.6565656
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -10109,7 +10114,8 @@ MonoBehaviour:
   descriptionScript: {fileID: 1564695902}
   weaponDescription:
     name: "\uBB34\uAE301"
-    description: "\uB2A5\uB825: \uAE30\uBCF8 \uBB34\uAE30\uBCF4\uB2E4 \uC148 \uC57C\uD638"
+    description: "\uC2A4\uD0AC: \uAE30\uBCF8 \uC2A4\uD0AC \uC124\uBA85"
+    isSoldOut: 0
 --- !u!1 &1932616299
 GameObject:
   m_ObjectHideFlags: 0

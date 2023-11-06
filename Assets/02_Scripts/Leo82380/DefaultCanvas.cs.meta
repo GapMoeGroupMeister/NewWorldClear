@@ -3,7 +3,9 @@ guid: 64a1feeac7a821448830c8ee2bf98db5
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - shopPanel: {instanceID: 0}
+  - requestPanel: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

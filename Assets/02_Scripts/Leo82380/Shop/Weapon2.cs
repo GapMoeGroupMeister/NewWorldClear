@@ -5,10 +5,15 @@ using DG.Tweening;
 
 public class Weapon2 : MonoBehaviour, IPointerClickHandler
 {
+    [Header("GameObjects")]
     [SerializeField] private GameObject soldOut;
     [SerializeField] private GameObject description;
+    [Space]
+    [Header("Texts")]
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI descriptionText;
+    [Space]
+    [Header("Weapon Description")]
     [SerializeField] private Description descriptionScript;
     [SerializeField] private WeaponDescription2 weaponDescription;
 

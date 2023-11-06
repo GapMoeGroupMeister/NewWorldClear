@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class DefaultCanvas : MonoBehaviour
 {
+    [Header("Panels")]
     [SerializeField] private GameObject shopPanel;
     [SerializeField] private GameObject requestPanel;
 

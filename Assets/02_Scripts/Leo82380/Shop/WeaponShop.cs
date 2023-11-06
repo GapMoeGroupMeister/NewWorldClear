@@ -5,14 +5,19 @@ using TMPro;
 
 public class WeaponShop : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
+    [Header("GameObjects")]
     [SerializeField] private GameObject soldOut;
     [SerializeField] private GameObject description;
+    
+    [Header("Texts")]
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI descriptionText;
+    [Space]
+    
     [SerializeField] private Shop shop;
     [Tooltip("무기 설명이 나타나는 시간")]
     [SerializeField] private Ease ease;
-
+    [Range(0f, 10f)]
     [SerializeField] private float duration;
     [Tooltip("무기 설명")]
     [SerializeField] private WeaponDescription weaponDescriprion;
