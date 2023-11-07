@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using System.IO;
+using Tkfkadlsi;
 
-public class DBManager : MonoBehaviour
+public class DBManager : MonoSingleton<DBManager>
 {
 
     private string _inventoryPath;
@@ -18,17 +19,7 @@ public class DBManager : MonoBehaviour
         _userInfoPath = Path.Combine(Application.dataPath, "00_Database/Json/userInfo.json");
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
     
     /**
      * <summary>

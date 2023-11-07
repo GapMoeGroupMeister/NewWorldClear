@@ -14,6 +14,9 @@ public class Slot : MonoBehaviour, IPointerEnterHandler,  IPointerExitHandler
     private Image GuageFill;
     private TextMeshProUGUI ItemAmount;
 
+    [SerializeField]
+    private ItemSlot currentSlot;
+
     private void Awake()
     {
         
@@ -26,10 +29,27 @@ public class Slot : MonoBehaviour, IPointerEnterHandler,  IPointerExitHandler
 
     public void SetSlot(ItemSlot slotInfo)
     {
-        Item item = slotInfo.item;
-        ItemImage.sprite = item.itemSprite;
-        GuageFill.fillAmount = Mathf.Clamp(slotInfo.durability / item.maxDurability, 0f, 1f);
-        ItemAmount.text = slotInfo.amount.ToString();
+        currentSlot = slotInfo;
+        Item item = currentSlot.item;
+        SetItemIcon();
+        
+        ItemAmount.text = currentSlot.amount.ToString();
+    }
+
+    private void SetItemIcon()
+    {
+        
+        ItemImage.sprite = currentSlot.item.itemSprite;
+        RectTransform rect = (RectTransform)ItemImage.transform;
+        rect.sizeDelta = ItemImage.sprite.rect.size;
+        ItemImage.sprite = currentSlot.item.itemSprite;
+        SetGuage();
+
+    }
+
+    private void SetGuage()
+    {
+        GuageFill.fillAmount = Mathf.Clamp(currentSlot.durability / currentSlot.item.maxDurability, 0f, 1f);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
