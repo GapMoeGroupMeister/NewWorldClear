@@ -25,6 +25,9 @@ namespace Tkfkadlsi
         [SerializeField] private float defaultSPD;
         public float DefaultSPD { get { return defaultSPD; } }
 
+        [SerializeField] private float attackCycle;
+        public float AttackCycle { get { return attackCycle; } }
+
 
         [SerializeField] private float detectRange;
         public float DetectRange { get { return detectRange; } }

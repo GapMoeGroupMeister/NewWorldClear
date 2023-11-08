@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Enemy1
   defaultHP: 10
+  defaultATK: 5
   defaultDEF: 1
   defaultSPD: 3
+  attackCycle: 0.5
   detectRange: 15

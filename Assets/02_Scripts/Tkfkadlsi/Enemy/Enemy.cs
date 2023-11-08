@@ -21,11 +21,12 @@ namespace Tkfkadlsi
         private State currentState;
         private FSM fsm;
 
-        private float hp;
-        private float atk;
-        private float def;
-        private float spd;
-        private float range;
+        public float hp;
+        public float atk;
+        public float def;
+        public float spd;
+        public float atkCycle;
+        public float range;
 
         private bool CanAttackPlayer = false;
 
@@ -45,10 +46,16 @@ namespace Tkfkadlsi
             atk = data.DefaultATK;
             def = data.DefaultDEF;
             spd = data.DefaultSPD;
+            atkCycle = data.AttackCycle;
             range = data.DetectRange;
         }
 
         private void Update()
+        {
+            SetState();
+        }
+
+        private void SetState()
         {
             switch (currentState)
             {

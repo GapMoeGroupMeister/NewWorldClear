@@ -43,7 +43,7 @@ namespace Tkfkadlsi
             Vector3 moveDir = Vector3.zero;
             moveDir = enemy.target.transform.position - enemy.transform.position;
             moveDir = moveDir.normalized;
-            enemy.transform.position += moveDir * enemy.data.DefaultSPD * Time.deltaTime;
+            enemy.transform.position += moveDir * enemy.spd * Time.deltaTime;
         }
     }
 
@@ -51,9 +51,12 @@ namespace Tkfkadlsi
     {
         public AttackState(Enemy initenemy) : base(initenemy) { }
 
+        private float cycle = 0f;
+
         public override void OnStateEnter()
         {
             enemy.anim.SetTrigger("Attack");
+            cycle = 0f;
         }
 
         public override void OnStateExit()
@@ -63,7 +66,16 @@ namespace Tkfkadlsi
 
         public override void OnStateUpdate()
         {
-            
+            cycle -= Time.deltaTime;
+
+
+
+            if (cycle < 0)
+            {
+                PlayerController playerController = enemy.target.GetComponent<PlayerController>();
+                playerController.Hit(enemy.atk);
+                cycle = enemy.atkCycle;
+            }
         }
     }
 }
