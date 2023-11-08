@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
 using DG.Tweening;
+using UnityEngine.UI;
 
 public class Weapon2 : MonoBehaviour, IPointerClickHandler
 {
@@ -12,10 +14,13 @@ public class Weapon2 : MonoBehaviour, IPointerClickHandler
     [Header("Texts")]
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI descriptionText;
+    [SerializeField] private TextMeshProUGUI weaponNameText;
     [Space]
     [Header("Weapon Description")]
     [SerializeField] private Description descriptionScript;
     [SerializeField] private WeaponDescription2 weaponDescription;
+    
+    [SerializeField] private Image weaponImage;
 
     public GameObject SoldOut => soldOut;
     public WeaponDescription2 WeaponDescription => weaponDescription;
@@ -23,6 +28,12 @@ public class Weapon2 : MonoBehaviour, IPointerClickHandler
     private void Start()
     {
         description.gameObject.transform.localScale = Vector3.zero;
+        weaponNameText.text = weaponDescription.name + "\n<size=25>" + weaponDescription.price + "¿ø</size>";
+    }
+
+    private void Update()
+    {
+        weaponImage.SetNativeSize();
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -50,5 +61,6 @@ public class WeaponDescription2
     public string name;
     [TextArea(3, 5)]
     public string description;
+    public int price;
     public bool isSoldOut;
 }
