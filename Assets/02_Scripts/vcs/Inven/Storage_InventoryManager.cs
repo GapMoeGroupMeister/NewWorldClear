@@ -11,15 +11,14 @@ public class Storage_InventoryManager : MonoBehaviour
     [SerializeField] private GameObject slotPrefab;
 
     [SerializeField] private Transform grid;
-    private static Transform _grid;
 
-    private static List<ItemSlot> inventory;
+    [SerializeField]
+    private List<ItemSlot> inventory;
 
     [SerializeField] private ItemSlot defaultItem;
 
     private void Awake()
     {
-        _grid = grid;
     }
 
     void Start()
@@ -52,21 +51,24 @@ public class Storage_InventoryManager : MonoBehaviour
 
     }
 
-    [MenuItem("Debug/Inventory/SlotsRefresh")]
-    private static void Debug_Refresh()
+    [ContextMenu("SlotsRefresh")]
+    private void Debug_Refresh()
     {
-        
+        Set_AllSlot();
+
     }
 
-    [MenuItem("Debug/Inventory/SlotsRefresh")]
-    private static void Debug_Delete()
+    [ContextMenu("SlotsDelete")]
+    private void Debug_Delete()
     {
+        inventory = new List<ItemSlot>();
+        Set_AllSlot();
     }
     
-    [MenuItem("Debug/Inventory/SlotsRefresh")]
-    private static void Debug_AddItem()
+    [ContextMenu("AddAnyItem")]
+    private void Debug_AddItem()
     {
-        AddItem(new ItemSlot());
+        AddItem(defaultItem, 1);
     }
     
     /**
@@ -83,39 +85,55 @@ public class Storage_InventoryManager : MonoBehaviour
      * inventory 전체를 지움
      * </summary>
      */
-    private static void Delete_Inven()
+    private void Delete_Inven()
     {
-        foreach (Transform child in _grid)
+        foreach (Transform child in grid)
         {
             Destroy(child.gameObject) ;
         }
     }
 
-    public static void AddItem(ItemSlot itemSlot)
+    public void AddItem(ItemSlot itemSlot, int _amount)
     {
+        ItemSlot? slot = Finditem(itemSlot.item.itemName);
+        if (slot == null)
+        {
+            print("현재 인벤에 존재하지 않는 아이템");
+            inventory.Add(itemSlot);
+            _amount--;
+        }
         
+        while (_amount > 0)
+        {
+            _amount = itemSlot.Add(_amount);
+        }
         
     }
 
     [CanBeNull]
-    public static ItemSlot Finditem(string itemName)
+    public ItemSlot Finditem(string itemName)
     {
         ItemSlot targetItem = new ItemSlot(){amount = -10};
 
         for (int i = 0; i < inventory.Count; i++)
         {
+            
             ItemSlot slot = inventory[i];
             if (targetItem.amount <= 0)
             {
-                
+                inventory.Remove(slot);
+                i--;
+                continue;
             }
-        }
-        foreach (ItemSlot item in inventory)
-        {
-            
-            targetItem = item;
-        }
 
+            if (slot.item.itemName == itemName)
+            {
+                targetItem = slot;
+                break;
+            }
+            
+        }
+        
         if (targetItem.amount <= 0)
         {
             return null;

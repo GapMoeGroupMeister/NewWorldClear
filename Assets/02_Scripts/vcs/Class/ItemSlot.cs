@@ -30,22 +30,25 @@ public class ItemSlot
     
     /**
      * <summary>
-     * Default 반환은 false.
+     * 반환값은남은 
      *
      * amount에서 입력 받은 수 만큼을 더함
      * amount가 슬롯 보관 
      * </summary>
      */
-    public bool Add(int _amount)
+    public int Add(int _amount)
     {
+        int remain = 0;
         this.amount += _amount;
 
         if (this.amount > item.SlotSetAmount)
         {
-            return true;
+            amount = item.SlotSetAmount;
+            remain = _amount - item.SlotSetAmount;
+            return remain;
         }
 
-        return false;
+        return 0;
     }
 
     /**
