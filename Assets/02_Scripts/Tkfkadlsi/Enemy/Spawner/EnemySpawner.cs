@@ -8,13 +8,27 @@ namespace Tkfkadlsi
     {
         public List<string> SpawnMobList;
 
-        private List<Transform> spawnPoints;
+        [SerializeField] private List<Transform> spawnPoints;
+        [SerializeField] private float spawnDelay;
+
+        private void Start()
+        {
+            StartCoroutine(MobSpawnStart());
+        }
+
+        private IEnumerator MobSpawnStart()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                SpawnMonster();
+                yield return new WaitForSeconds(spawnDelay);
+            }
+        }
 
         public void SpawnMonster()
         {
             int idx = Random.Range(0, SpawnMobList.Count);
             GameObject spawnMob = PoolManager.Instance.GetObject(SpawnMobList[idx]);
-
 
             idx = Random.Range(0, spawnPoints.Count);
             spawnMob.transform.position = spawnPoints[idx].position;

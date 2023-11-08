@@ -14,6 +14,9 @@ namespace Tkfkadlsi
         [SerializeField] private float defaultHP;
         public float DefaultHP { get { return defaultHP; } }
 
+        [SerializeField] private float defaultATK;
+        public float DefaultATK { get { return defaultATK; } }
+
 
         [SerializeField] private float defaultDEF;
         public float DefaultDEF { get { return defaultDEF; } }

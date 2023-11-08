@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,17 +15,37 @@ namespace Tkfkadlsi
         }
 
         public EnemyData data;
+        public Animator anim;
+        public GameObject target;
 
         private State currentState;
         private FSM fsm;
-        private GameObject target;
+
+        private float hp;
+        private float atk;
+        private float def;
+        private float spd;
+        private float range;
 
         private bool CanAttackPlayer = false;
 
         private void Start()
         {
+            target = FindObjectOfType<EnemySpawner>().gameObject;
+            anim = this.GetComponent<Animator>();
             currentState = State.Idle;
             fsm = new FSM(new IdleState(this));
+
+            SetStatus();
+        }
+
+        private void SetStatus()
+        {
+            hp = data.DefaultHP;
+            atk = data.DefaultATK;
+            def = data.DefaultDEF;
+            spd = data.DefaultSPD;
+            range = data.DetectRange;
         }
 
         private void Update()
@@ -70,7 +91,7 @@ namespace Tkfkadlsi
         private void ChangeState(State nextState)
         {
             currentState = nextState;
-            switch (nextState)
+            switch (currentState)
             {
                 case State.Idle:
                     fsm.ChangeState(new IdleState(this));
@@ -108,65 +129,18 @@ namespace Tkfkadlsi
                 CanAttackPlayer = false;
             }
         }
-    }
 
-    public class IdleState : StateBase
-    {
-        public IdleState(Enemy initenemy) : base(initenemy){ }
-
-        public override void OnStateEnter()
+        public void Hit(float damage)
         {
-            throw new System.NotImplementedException();
+            hp -= damage;
+
+
+            if (hp < 0) Dead();
         }
 
-        public override void OnStateExit()
+        private void Dead()
         {
-            throw new System.NotImplementedException();
-        }
-
-        public override void OnStateUpdate()
-        {
-            throw new System.NotImplementedException();
-        }
-    }
-
-    public class MoveState : StateBase
-    {
-        public MoveState(Enemy initenemy) : base(initenemy) { }
-
-        public override void OnStateEnter()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override void OnStateExit()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override void OnStateUpdate()
-        {
-            throw new System.NotImplementedException();
-        }
-    }
-
-    public class AttackState : StateBase
-    {
-        public AttackState(Enemy initenemy) : base(initenemy) { }
-
-        public override void OnStateEnter()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override void OnStateExit()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override void OnStateUpdate()
-        {
-            throw new System.NotImplementedException();
+            Destroy(gameObject);
         }
     }
 }
