@@ -40,11 +40,8 @@ public class Slot : MonoBehaviour, IPointerEnterHandler,  IPointerExitHandler
     {
         
         ItemImage.sprite = currentSlot.item.itemSprite;
-        RectTransform rect = (RectTransform)ItemImage.transform;
-        rect.sizeDelta = ItemImage.sprite.rect.size;
-        ItemImage.sprite = currentSlot.item.itemSprite;
         SetGuage();
-
+        
     }
 
     private void SetGuage()

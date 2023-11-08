@@ -2089,7 +2089,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotPrefab: {fileID: 171938223386310512, guid: 70f82d77a63280042867dc5ecba476ff, type: 3}
   grid: {fileID: 951298582}
-  inventory: []
+  inventory:
+  - item: {fileID: 11400000, guid: 888a080889ad0ce41ae514bff30d799d, type: 2}
+    amount: 400
+    durability: 0
+  - item: {fileID: 11400000, guid: 9436ae634a10bc24ca3807a4cc39822f, type: 2}
+    amount: 1
+    durability: 1
 --- !u!1 &1991862026
 GameObject:
   m_ObjectHideFlags: 0
