@@ -31,7 +31,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler,  IPointerExitHandler
     {
         currentSlot = slotInfo;
         SetItemIcon();
-        
+        SetGuage();
         ItemAmount.text = currentSlot.amount.ToString();
     }
 
@@ -40,13 +40,21 @@ public class Slot : MonoBehaviour, IPointerEnterHandler,  IPointerExitHandler
         
         ItemImage.sprite = currentSlot.item.itemSprite;
         ItemImage.SetNativeSize();
-        SetGuage();
+        
         
     }
 
     private void SetGuage()
     {
-        GuageFill.fillAmount = Mathf.Clamp(currentSlot.durability / currentSlot.item.maxDurability, 0f, 1f);
+        if (currentSlot.item.isLimited)
+        {
+            GuageFill.fillAmount = Mathf.Clamp(currentSlot.durability / currentSlot.item.maxDurability, 0f, 1f);
+
+        }
+        else
+        {
+            GuageFill.fillAmount = 1;
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)

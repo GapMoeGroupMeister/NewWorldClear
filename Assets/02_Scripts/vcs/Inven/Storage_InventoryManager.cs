@@ -90,13 +90,13 @@ public class Storage_InventoryManager : MonoBehaviour
     [ContextMenu("AddAnyItem")]
     private void Debug_AddItem()
     {
-        AddItem(defaultItem, 1);
+        AddItem(new ItemSlot(defaultItem.item), 1);
     }
     
     [ContextMenu("AddAnyItemSoup")]
     private void Debug_AddItemCan()
     {
-        AddItem(canSoup, 1);
+        AddItem(new ItemSlot(canSoup.item), 1);
     }
     
     private void Refresh_Setting()
@@ -118,8 +118,7 @@ public class Storage_InventoryManager : MonoBehaviour
 
     public void AddItem(ItemSlot itemSlot, int _amount)
     {
-        ItemSlot? slot = Finditem(itemSlot.item.itemName);
-        if (slot == null)
+        if (Finditem(itemSlot.item.itemName) == null)
         {
             print("현재 인벤에 존재하지 않는 아이템");
             inventory.Add(itemSlot);

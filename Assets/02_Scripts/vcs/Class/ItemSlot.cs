@@ -26,8 +26,24 @@ public class ItemSlot
      * </summary>
      */
     public float durability;
+
+    public ItemSlot()
+    {
+        
+    }
+    public ItemSlot(Item item)
+    {
+        this.item = item;
+        amount = 1;
+        durability = item.maxDurability;
+    }
     
-    
+    public ItemSlot(Item item, int amount)
+    {
+        this.item = item;
+        this.amount = amount;
+        durability = item.maxDurability;
+    }
     /**
      * <summary>
      * 반환값은남은 
@@ -38,13 +54,15 @@ public class ItemSlot
      */
     public int Add(int _amount)
     {
+        Debug.Log("아이템을 추가함");
         int remain = 0;
         amount += _amount;
 
-        if (_amount > item.SlotSetAmount)
+        if (amount > item.SlotSetAmount)
         {
             amount = item.SlotSetAmount;
-            remain = _amount - item.SlotSetAmount;
+            remain = amount - item.SlotSetAmount;
+            Debug.Log("아이템이 "+remain+"개 남음");
             return remain;
         }
 
