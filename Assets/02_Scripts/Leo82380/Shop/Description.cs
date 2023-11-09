@@ -3,16 +3,15 @@ using DG.Tweening;
 
 public class Description : MonoBehaviour
 {
-    private bool isOn = false;
     public Weapon2 Weapon2 { get; set; }
-    public bool IsOn => isOn;
+    public bool IsOn { get; private set; } = false;
 
     public void Buy()
     {
-        if (Weapon2.WeaponDescription.isSoldOut) return;
+        if (Weapon2.WeaponDescription[Weapon2.RandomIndex].isSoldOut) return;
 
         Weapon2.SoldOut.SetActive(true);
-        Weapon2.WeaponDescription.isSoldOut = true;
+        Weapon2.WeaponDescription[Weapon2.RandomIndex].isSoldOut = true;
 
         Cancel();
     }
@@ -21,16 +20,16 @@ public class Description : MonoBehaviour
     {
         transform.DOScale(0f, 0.5f).OnComplete(() => gameObject.SetActive(false));
         Weapon2 = null;
-        isOn = false;
+        IsOn = false;
     }
     
     private void OnEnable()
     {
-        isOn = true;
+        IsOn = true;
     }
     
     private void OnDisable()
     {
-        isOn = false;
+        IsOn = false;
     }
 }

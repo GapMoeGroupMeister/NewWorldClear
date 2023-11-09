@@ -1365,7 +1365,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &159239558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3792,7 +3792,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
+  m_Color: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 0.84313726}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3849,8 +3849,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 646663005}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0.34343433}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4237,7 +4237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
+  m_Color: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 0.84313726}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4905,7 +4905,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &754768529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5371,7 +5371,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
+  m_Color: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 0.84313726}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6479,11 +6479,11 @@ RectTransform:
   - {fileID: 695582918}
   m_Father: {fileID: 968025933}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 169, y: -482}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 60, y: 0}
   m_SizeDelta: {x: 200, y: 200}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1157072495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6541,10 +6541,16 @@ MonoBehaviour:
   weaponNameText: {fileID: 1178017602}
   descriptionScript: {fileID: 1564695902}
   weaponDescription:
-    name: "\uC2DD\uB7C9"
-    description: "\uC2DD\uB7C9"
-    price: 300
+  - name: e
+    description: ee
+    price: 1234
     isSoldOut: 0
+    weaponIcon: {fileID: 21300000, guid: 5520efef964c2394b9af26730420c4c2, type: 3}
+  - name: f
+    description: ff
+    price: 0
+    isSoldOut: 0
+    weaponIcon: {fileID: 21300000, guid: d276dbde241f3f1469cd1a47a8abe982, type: 3}
   weaponImage: {fileID: 638625702}
 --- !u!1 &1178017600
 GameObject:
@@ -6867,11 +6873,11 @@ RectTransform:
   - {fileID: 1605428304}
   m_Father: {fileID: 968025933}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 432, y: -784}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -60, y: 60}
   m_SizeDelta: {x: 200, y: 200}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 1, y: 0}
 --- !u!114 &1218913019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6929,10 +6935,16 @@ MonoBehaviour:
   weaponNameText: {fileID: 21779430}
   descriptionScript: {fileID: 1564695902}
   weaponDescription:
-    name: "\uBAA9\uC7AC"
-    description: "\uAE30\uBCF8 \uC7AC\uB8CC"
-    price: 1000
+  - name: k
+    description: kk
+    price: 0
     isSoldOut: 0
+    weaponIcon: {fileID: 21300000, guid: 4c7da3e0d1048b849a99a5d11614de38, type: 3}
+  - name: l
+    description: ll
+    price: 0
+    isSoldOut: 0
+    weaponIcon: {fileID: 21300000, guid: 42674fc07c84f714f9b627817436af76, type: 3}
   weaponImage: {fileID: 740338121}
 --- !u!1 &1260453097
 GameObject:
@@ -8086,11 +8098,11 @@ RectTransform:
   - {fileID: 2105166860}
   m_Father: {fileID: 968025933}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 432, y: -482}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -60, y: 0}
   m_SizeDelta: {x: 200, y: 200}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1469519711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8148,10 +8160,16 @@ MonoBehaviour:
   weaponNameText: {fileID: 463234932}
   descriptionScript: {fileID: 1564695902}
   weaponDescription:
-    name: "\uBC30\uD130\uB9AC"
-    description: "\uBC1C\uC804"
-    price: 400
+  - name: g
+    description: gg
+    price: 11
     isSoldOut: 0
+    weaponIcon: {fileID: 21300000, guid: f827f232643c277408c2b3ef271b46ed, type: 3}
+  - name: h
+    description: hh
+    price: 0
+    isSoldOut: 0
+    weaponIcon: {fileID: 21300000, guid: 5520efef964c2394b9af26730420c4c2, type: 3}
   weaponImage: {fileID: 826231520}
 --- !u!1 &1485059643
 GameObject:
@@ -8322,11 +8340,11 @@ RectTransform:
   - {fileID: 952896698}
   m_Father: {fileID: 968025933}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 432, y: -179.99997}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -60, y: -60}
   m_SizeDelta: {x: 200, y: 200}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 1, y: 1}
 --- !u!114 &1539927807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8384,10 +8402,16 @@ MonoBehaviour:
   weaponNameText: {fileID: 1089485100}
   descriptionScript: {fileID: 1564695902}
   weaponDescription:
-    name: "\uCD1D\uC54C"
-    description: "\uBA85\uC911\uB960 10% \uC99D\uAC00"
-    price: 200
+  - name: c
+    description: cc
+    price: 323
     isSoldOut: 0
+    weaponIcon: {fileID: 21300000, guid: f827f232643c277408c2b3ef271b46ed, type: 3}
+  - name: d
+    description: dd
+    price: 111
+    isSoldOut: 0
+    weaponIcon: {fileID: 21300000, guid: 47cf8e9f478901c408fadca1f98c1d79, type: 3}
   weaponImage: {fileID: 265772082}
 --- !u!1 &1559437650
 GameObject:
@@ -8686,7 +8710,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -250.5}
+  m_AnchoredPosition: {x: 0, y: -250.49998}
   m_SizeDelta: {x: -340, y: -701}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1589409304
@@ -8786,11 +8810,11 @@ RectTransform:
   - {fileID: 609282405}
   m_Father: {fileID: 968025933}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 169, y: -784}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 60, y: 60}
   m_SizeDelta: {x: 200, y: 200}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &1596400869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8848,10 +8872,16 @@ MonoBehaviour:
   weaponNameText: {fileID: 1673451835}
   descriptionScript: {fileID: 1564695902}
   weaponDescription:
-    name: "\uBCFC\uD2B8"
-    description: "\uACE0\uCE58\uAE30"
-    price: 500
+  - name: i
+    description: ii
+    price: 0
     isSoldOut: 0
+    weaponIcon: {fileID: 21300000, guid: 47cf8e9f478901c408fadca1f98c1d79, type: 3}
+  - name: j
+    description: jj
+    price: 7
+    isSoldOut: 0
+    weaponIcon: {fileID: 21300000, guid: 4c7da3e0d1048b849a99a5d11614de38, type: 3}
   weaponImage: {fileID: 450665177}
 --- !u!1 &1605428303
 GameObject:
@@ -8904,7 +8934,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
+  m_Color: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 0.84313726}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -10474,7 +10504,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 169, y: -180}
+  m_AnchoredPosition: {x: 160, y: -160}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1880098421
@@ -10534,10 +10564,36 @@ MonoBehaviour:
   weaponNameText: {fileID: 1788361912}
   descriptionScript: {fileID: 1564695902}
   weaponDescription:
-    name: "\uBD95\uB300"
-    description: "\uCCB4\uB825 \uD68C\uBCF5"
-    price: 100
+  - name: a
+    description: aa
+    price: 1
     isSoldOut: 0
+    weaponIcon: {fileID: 21300000, guid: 42674fc07c84f714f9b627817436af76, type: 3}
+  - name: b
+    description: bb
+    price: 0
+    isSoldOut: 0
+    weaponIcon: {fileID: 21300000, guid: 4c7da3e0d1048b849a99a5d11614de38, type: 3}
+  - name: c
+    description: cc
+    price: 0
+    isSoldOut: 0
+    weaponIcon: {fileID: 21300000, guid: f827f232643c277408c2b3ef271b46ed, type: 3}
+  - name: d
+    description: dd
+    price: 0
+    isSoldOut: 0
+    weaponIcon: {fileID: 21300000, guid: 47cf8e9f478901c408fadca1f98c1d79, type: 3}
+  - name: e
+    description: ee
+    price: 0
+    isSoldOut: 0
+    weaponIcon: {fileID: 21300000, guid: 5520efef964c2394b9af26730420c4c2, type: 3}
+  - name: f
+    description: ff
+    price: 0
+    isSoldOut: 0
+    weaponIcon: {fileID: 21300000, guid: d276dbde241f3f1469cd1a47a8abe982, type: 3}
   weaponImage: {fileID: 1906533697}
 --- !u!1 &1906533695
 GameObject:
@@ -11504,7 +11560,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
+  m_Color: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 0.84313726}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -11580,7 +11636,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
+  m_Color: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 0.84313726}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
