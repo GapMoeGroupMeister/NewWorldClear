@@ -1,8 +1,0 @@
-Player가 무기를 스왑해야 하니 기본이 되는 Name, Sprite, Damage, AttackDelay같은 변수들을 담은 Weapon SO를 만들면 될듯
-
-적중 시 효과나 기본 지속효과 같은 효과들은 Action으로 컨트롤 해주고
-무기에따라 얘는 실행하고 얘는 실행 안할 순 없으니까 Action은 Player의 공격을 담당하는 Script에다가 두면 될 것 같고
-
-구조 짜기 개어려움
-
-공격 범위와 방식이 달라지는 거에 대핸 생각 안해놨음
