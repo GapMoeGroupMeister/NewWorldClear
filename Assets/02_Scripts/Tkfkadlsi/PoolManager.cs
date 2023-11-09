@@ -17,7 +17,7 @@ namespace Tkfkadlsi
     {
         public List<PoolingObject> poolingObjects = new List<PoolingObject>();
         public Dictionary<string, Queue<GameObject>> pools = new Dictionary<string, Queue<GameObject>>();
-
+        public bool readyPool = false;
         private void Awake()
         {
             if (Instance == this)
@@ -32,6 +32,7 @@ namespace Tkfkadlsi
 
                 CreateObjectInPool(@object.objectName, @object.objectAmount, @object.objectPrefab, @object.poolLocation);
             }
+            readyPool = true;
         }
 
         private void CreateObjectInPool(string objectName, int count, GameObject objectPrefab, Transform location)
