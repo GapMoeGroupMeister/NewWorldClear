@@ -2,11 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.Events;
 
+[System.Serializable]
 public class PlayerController : MonoBehaviour
 {
     Rigidbody2D _rigidbody;
+    Animator _animator;
+    SpriteRenderer _spriteRenderer;
+
     Transform _weaponTrm;
     Transform _weaponVisualTrm;
 
@@ -14,6 +18,7 @@ public class PlayerController : MonoBehaviour
 
     private float _maxHp = 100f;
     private float _currentHp = 100f;
+
 
     #region 얘네로 뭐하는지 정확히 알 수 없음
     private float _maxStemina = 200f;
@@ -26,11 +31,12 @@ public class PlayerController : MonoBehaviour
     private float _currentThirstiness = 100f;
     #endregion
 
-    public WeaponSO weaponSO;
-
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+
         _weaponTrm = transform.Find("Weapon");
         _weaponVisualTrm = _weaponTrm.Find("Visual");
     }
@@ -44,24 +50,41 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         _rigidbody.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized * _moveSpeed;
-
+        _animator.SetFloat("Speed", _rigidbody.velocity.magnitude);
     }
 
     private void WeaponRotate()
     {
         Vector2 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         _weaponTrm.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
-        if (Mathf.Abs(_weaponTrm.rotation.z) >= 0.5f)
+        if (Mathf.Abs(_weaponTrm.rotation.z) > 0.7f)
         {
-            _weaponVisualTrm.localScale = -Vector2.one;
+            transform.localScale = new Vector2(-1, 1);
+            _weaponTrm.localScale = -Vector2.one;
         }
         else
         {
-            _weaponVisualTrm.localScale = Vector2.one;
+            transform.localScale = new Vector2(1, 1);
+            _weaponTrm.localScale = Vector2.one;
         }
     }
 
-    #region Stats Change functions
+    public void Hit(float damage)
+    {
+        _currentHp -= damage;
+        if(_currentHp <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        print("죽은");
+    }
+
+
+    #region Stat Change functions
     public void ChangeHP(float amount)
     {
         _currentHp += amount;

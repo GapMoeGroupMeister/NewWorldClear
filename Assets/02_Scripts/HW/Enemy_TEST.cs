@@ -6,6 +6,9 @@ public class Enemy_TEST : MonoBehaviour
 {
     [SerializeField]
     Transform _playerTrm;
+
+    public float speed = 1;
+
     float hp = 10;
     private void Awake()
     {
@@ -13,7 +16,7 @@ public class Enemy_TEST : MonoBehaviour
     }
     void Update()
     {
-        transform.position = Vector2.MoveTowards(transform.position, _playerTrm.position, Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, _playerTrm.position, Time.deltaTime * speed);
     }
 
     public void Damage(float damage)
