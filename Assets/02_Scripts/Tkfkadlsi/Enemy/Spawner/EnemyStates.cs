@@ -51,12 +51,12 @@ namespace Tkfkadlsi
     {
         public AttackState(Enemy initenemy) : base(initenemy) { }
 
-        private float cycle = 0f;
+        private float cycle;
 
         public override void OnStateEnter()
         {
             enemy.anim.SetTrigger("Attack");
-            cycle = 0f;
+            cycle = enemy.atkCycle;
         }
 
         public override void OnStateExit()
@@ -73,7 +73,7 @@ namespace Tkfkadlsi
             if (cycle < 0)
             {
                 PlayerController playerController = enemy.target.GetComponent<PlayerController>();
-                playerController.Hit(enemy.atk);
+                //playerController.Hit(enemy.atk);
                 cycle = enemy.atkCycle;
             }
         }

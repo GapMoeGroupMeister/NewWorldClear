@@ -13,25 +13,19 @@ namespace Tkfkadlsi
 
         private void Start()
         {
-            StartCoroutine(MobSpawnStart());
+            StartCoroutine(SpawnMonster());
         }
 
-        private IEnumerator MobSpawnStart()
-        {
-            for (int i = 0; i < 10; i++)
-            {
-                SpawnMonster();
-                yield return new WaitForSeconds(spawnDelay);
-            }
-        }
-
-        public void SpawnMonster()
+        public IEnumerator SpawnMonster()
         {
             int idx = Random.Range(0, SpawnMobList.Count);
             GameObject spawnMob = PoolManager.Instance.GetObject(SpawnMobList[idx]);
 
             idx = Random.Range(0, spawnPoints.Count);
             spawnMob.transform.position = spawnPoints[idx].position;
+            yield return new WaitForSeconds(spawnDelay);
+
+            StartCoroutine(SpawnMonster());
         }
     }
 }

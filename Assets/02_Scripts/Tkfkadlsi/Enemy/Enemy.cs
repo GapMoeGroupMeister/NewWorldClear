@@ -32,7 +32,7 @@ namespace Tkfkadlsi
 
         private void Start()
         {
-            target = FindObjectOfType<EnemySpawner>().gameObject;
+            target = FindObjectOfType<PlayerController>().gameObject;
             anim = this.GetComponent<Animator>();
             currentState = State.Idle;
             fsm = new FSM(new IdleState(this));
