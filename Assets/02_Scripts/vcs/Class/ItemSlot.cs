@@ -39,9 +39,9 @@ public class ItemSlot
     public int Add(int _amount)
     {
         int remain = 0;
-        this.amount += _amount;
+        amount += _amount;
 
-        if (this.amount > item.SlotSetAmount)
+        if (_amount > item.SlotSetAmount)
         {
             amount = item.SlotSetAmount;
             remain = _amount - item.SlotSetAmount;

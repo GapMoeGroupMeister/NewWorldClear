@@ -16,6 +16,7 @@ public class Storage_InventoryManager : MonoBehaviour
     private List<ItemSlot> inventory;
 
     [SerializeField] private ItemSlot defaultItem;
+    [SerializeField] private ItemSlot canSoup;
 
     private void Awake()
     {
@@ -33,17 +34,38 @@ public class Storage_InventoryManager : MonoBehaviour
         
     }
 
+    
+    /**
+     * <summary>
+     * inventory 전체를 지웠다가 다시 만듬
+     * </summary>
+     */
+    private void Refresh()
+    {
+        Delete_Inven();
+        Set_AllSlot();
+        
+    }
     private void Set_AllSlot()
     {
-        if (inventory == null)
+        if (inventory.Count <= 0)
+        {
             return;
+
+        }
+        
         
         foreach (ItemSlot _slot in inventory)
         {
+            if (_slot.item == null)
+            {
+                inventory.Remove(_slot);
+                return;
+            }
+            
             Set_Slot(_slot);
         }
     }
-    
     private void Set_Slot(ItemSlot itemSlot)
     {
         GameObject slot = Instantiate(slotPrefab, grid);
@@ -54,7 +76,7 @@ public class Storage_InventoryManager : MonoBehaviour
     [ContextMenu("SlotsRefresh")]
     private void Debug_Refresh()
     {
-        Set_AllSlot();
+        Refresh();
 
     }
 
@@ -62,7 +84,7 @@ public class Storage_InventoryManager : MonoBehaviour
     private void Debug_Delete()
     {
         inventory = new List<ItemSlot>();
-        Set_AllSlot();
+        Delete_Inven();
     }
     
     [ContextMenu("AddAnyItem")]
@@ -71,11 +93,12 @@ public class Storage_InventoryManager : MonoBehaviour
         AddItem(defaultItem, 1);
     }
     
-    /**
-     * <summary>
-     * inventory 전체를 지웠다가 다시 만듬
-     * </summary>
-     */
+    [ContextMenu("AddAnyItemSoup")]
+    private void Debug_AddItemCan()
+    {
+        AddItem(canSoup, 1);
+    }
+    
     private void Refresh_Setting()
     {
             
@@ -119,12 +142,13 @@ public class Storage_InventoryManager : MonoBehaviour
         {
             
             ItemSlot slot = inventory[i];
-            if (targetItem.amount <= 0)
+            if (slot.amount <= 0)
             {
                 inventory.Remove(slot);
                 i--;
                 continue;
             }
+            
 
             if (slot.item.itemName == itemName)
             {
