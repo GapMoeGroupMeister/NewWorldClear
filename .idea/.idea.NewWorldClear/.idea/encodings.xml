@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding" addBOMForNewFiles="with BOM under Windows, with no BOM otherwise" />
+  <component name="Encoding" addBOMForNewFiles="with BOM under Windows, with no BOM otherwise">
+    <file url="file://$PROJECT_DIR$/Assets/02_Scripts/Leo82380/DefaultCanvas.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/02_Scripts/Leo82380/Request/Request.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/02_Scripts/Leo82380/Shop/Shop.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/02_Scripts/Leo82380/Shop/Weapon2.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/02_Scripts/Leo82380/Shop/WeaponShop.cs" charset="x-windows-949" />
+  </component>
 </project>
