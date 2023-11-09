@@ -17,6 +17,8 @@ public class PlayerWeapon : MonoBehaviour
     private Vector2 _attackRange;
     private WeaponEvent _weaponEvent;
 
+    public GameObject effect;
+
     Transform _nearestEnemy;
 
     SpriteRenderer _spriteRenderer;
@@ -102,7 +104,12 @@ public class PlayerWeapon : MonoBehaviour
     private void ShortRangeAttack()
     {
         Vector2 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        Collider2D[] enemies = Physics2D.OverlapBoxAll(transform.position + ((Vector3)dir.normalized * (_attackRange.x / 2)), _attackRange, Mathf.Atan2(dir.x, dir.x), _enemyMask);
+        Vector2 attackRange = transform.position + ((Vector3)dir.normalized * (_attackRange.x / 2));
+        float angle = Mathf.Atan2(dir.y, dir.x);
+        Collider2D[] enemies = Physics2D.OverlapBoxAll(attackRange, _attackRange, angle * Mathf.Rad2Deg, _enemyMask);
+        GameObject obj = Instantiate(effect, attackRange, Quaternion.Euler(0, 0, angle * Mathf.Rad2Deg));
+        obj.transform.localScale = _attackRange;
+        Destroy(obj, 0.5f);
         if (enemies.Length > 0)
         {
             Debug.Log($"공격에 맞은 적의 수 : {enemies.Length}");

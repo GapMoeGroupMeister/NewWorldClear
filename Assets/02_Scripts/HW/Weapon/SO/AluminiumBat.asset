@@ -15,7 +15,7 @@ MonoBehaviour:
   name: AluminiumBat
   desc: Very sharp.
   weaponSprite: {fileID: 21300000, guid: d7ab8d35698ed1a4084dbacc8b0f9d2e, type: 3}
-  damage: 1
+  damage: 5
   attackDelay: 1.3
   weaponType: 1
   attackRange: {x: 3, y: 2}
