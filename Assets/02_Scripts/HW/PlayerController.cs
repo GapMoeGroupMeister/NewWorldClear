@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -22,7 +23,7 @@ public enum Buffs
     ThinSheild = 8,
 }
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour , IDamageable
 {
     Rigidbody2D _rigidbody;
     Animator _animator;
@@ -93,10 +94,28 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Hit(float damage)
+    public void HitDamage(float damage)
     {
         _currentHp -= damage;
-        if(_currentHp <= 0)
+        if (_currentHp <= 0)
+        {
+            Die();
+        }
+    }
+
+    public void BleedDamage(float damage)
+    {
+        _currentHp -= damage;
+        if (_currentHp <= 0)
+        {
+            Die();
+        }
+    }
+
+    public void PoisonDamage(float damage)
+    {
+        _currentHp -= damage;
+        if (_currentHp <= 0)
         {
             Die();
         }
@@ -128,5 +147,10 @@ public class PlayerController : MonoBehaviour
     {
         _currentThirstiness += amount;
     }
+
+    
+
+
     #endregion
+
 }
