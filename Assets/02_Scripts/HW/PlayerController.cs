@@ -4,7 +4,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[System.Serializable]
+public enum Debuffs
+{
+    None = 0,
+    Slow = 1,
+    Stun = 2,
+    Subdue = 4,
+    Poison = 8
+}
+
+public enum Buffs
+{
+    None = 0,
+    Fast = 1,
+    Generation = 2,
+    PowerUp = 4,
+    ThinSheild = 8,
+}
+
 public class PlayerController : MonoBehaviour
 {
     Rigidbody2D _rigidbody;
@@ -19,6 +36,8 @@ public class PlayerController : MonoBehaviour
     private float _maxHp = 100f;
     private float _currentHp = 100f;
 
+    public Debuffs currentDebuffs = Debuffs.None;
+    public Buffs currentBuffs = Buffs.None;
 
     #region 얘네로 뭐하는지 정확히 알 수 없음
     private float _maxStemina = 200f;
@@ -39,6 +58,11 @@ public class PlayerController : MonoBehaviour
 
         _weaponTrm = transform.Find("Weapon");
         _weaponVisualTrm = _weaponTrm.Find("Visual");
+        currentBuffs |= Buffs.Generation;
+        if(Buffs.Generation == (currentBuffs & Buffs.Generation))
+        {
+            Debug.Log("재생중");
+        }
     }
 
     private void Update()
