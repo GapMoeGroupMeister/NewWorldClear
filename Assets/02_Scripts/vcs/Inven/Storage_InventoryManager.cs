@@ -12,14 +12,14 @@ public class Storage_InventoryManager : MonoBehaviour
 
     [SerializeField] private Transform grid;
 
-    [SerializeField]
-    private List<ItemSlot> inventory;
+    public List<ItemSlot> inventory;
 
     [SerializeField] private ItemSlot defaultItem;
     [SerializeField] private ItemSlot canSoup;
 
     private void Awake()
     {
+        
     }
 
     void Start()
@@ -115,23 +115,76 @@ public class Storage_InventoryManager : MonoBehaviour
             Destroy(child.gameObject) ;
         }
     }
-
+    /**
+     * <summary>
+     * 아이템 추가 메서드 <param name="itemSlot"> 아이템 개체, amount를 개체 내부에서 반영함</param>
+     * </summary>
+     */
+    public void AddItem(ItemSlot itemSlot)
+    {
+        int _amount = itemSlot.amount;
+        if (Finditem(itemSlot.item.itemName) == null)
+        {
+            print("Null임");
+            inventory.Add(new ItemSlot(itemSlot.item));
+            _amount--;
+        }
+        
+        itemSlot = Finditem(itemSlot.item.itemName);
+        do
+        {
+            _amount = itemSlot.Add(_amount);
+            if (_amount > 0)
+            {
+                inventory.Add(new ItemSlot(itemSlot.item));
+                _amount--;
+            }
+        
+        } while (_amount > 0);
+        
+    }
+    
+    /**
+     * <summary>
+     * 아이템 추가 메서드
+     * <param name="itemSlot"> 아이템 개체, item속성만 반영함</param>
+     * <param name="_amount"> 아이템 개수, itemSlot에서 반영하지 않고 따로 입력받음 </param>
+     * </summary>
+     */
     public void AddItem(ItemSlot itemSlot, int _amount)
     {
         if (Finditem(itemSlot.item.itemName) == null)
         {
-            print("현재 인벤에 존재하지 않는 아이템");
-            inventory.Add(itemSlot);
+            print("Null임");
+            inventory.Add(new ItemSlot(itemSlot.item));
             _amount--;
         }
         
-        while (_amount > 0)
+        itemSlot = Finditem(itemSlot.item.itemName);
+        do
         {
             _amount = itemSlot.Add(_amount);
-        }
+            if (_amount > 0)
+            {
+                inventory.Add(new ItemSlot(itemSlot.item));
+                _amount--;
+            }
+        
+        } while (_amount > 0);
         
     }
 
+    /**
+     * <summary>
+     * 인벤토리에서 아이템을 찾아주는 메서드
+     * </summary>
+     * <param name="itemName">
+     * 찾을 아이템의 이름
+     * </param>
+     * <returns type = "ItemSlot">
+     * 해당하는 아이템 슬롯을 반환함
+     * </returns>
+     */
     [CanBeNull]
     public ItemSlot Finditem(string itemName)
     {

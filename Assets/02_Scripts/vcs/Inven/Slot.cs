@@ -30,6 +30,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler,  IPointerExitHandler
     public void SetSlot(ItemSlot slotInfo)
     {
         currentSlot = slotInfo;
+        print(currentSlot.item.itemName);
         SetItemIcon();
         SetGuage();
         ItemAmount.text = currentSlot.amount.ToString();
