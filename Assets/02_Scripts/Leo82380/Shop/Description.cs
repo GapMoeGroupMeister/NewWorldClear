@@ -9,9 +9,10 @@ public class Description : MonoBehaviour
      * </summary>
      */
     public Weapon2 Weapon2 { get; set; }
-    /// <summary>
-    /// 설명창이 켜져있는지 확인하기 위한 프로퍼티
-    /// </summary>
+    /** <summary>
+     * 설명창이 켜져있는지 확인하기 위한 프로퍼티
+     * </summary>
+     */
     public bool IsOn { get; private set; } = false;
 
     /**

@@ -59,12 +59,12 @@ public class Weapon2 : MonoBehaviour, IPointerClickHandler
      * 무기를 랜덤으로 바꾸기 위한 메서드
      * </summary>
      */
-    private void OnImageChanged()
+    public void OnImageChanged()
     {
         _randomIndex = Random.Range(0, WeaponDescription.Length);
         
-        weaponImage.SetNativeSize();
         weaponImage.sprite = weaponDescription[_randomIndex].weaponIcon;
+        weaponImage.SetNativeSize();
         weaponNameText.text = weaponDescription[_randomIndex].name + "\n<size=25>" + weaponDescription[_randomIndex].price + "원</size>";
 
         foreach (var item in weaponDescription)
