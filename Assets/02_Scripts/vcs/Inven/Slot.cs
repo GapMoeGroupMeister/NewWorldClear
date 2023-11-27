@@ -10,8 +10,12 @@ using UnityEngine.EventSystems;
 public class Slot : MonoBehaviour, IPointerEnterHandler,  IPointerExitHandler
 {
     public ItemSlot thisSlot;
+    
+    [SerializeField]
     private Image ItemImage;
+    [SerializeField]
     private Image GuageFill;
+    [SerializeField]
     private TextMeshProUGUI ItemAmount;
 
     [SerializeField]
@@ -21,7 +25,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler,  IPointerExitHandler
     {
         
         
-        ItemImage = transform.Find("ItemImage").GetComponent<Image>();
+        ItemImage = transform.GetChild(0).GetComponent<Image>();
         GuageFill = transform.Find("ConditionGuage").transform.Find("GuageFill").GetComponent<Image>();
         ItemAmount = transform.Find("AmountBG").transform.Find("AmountText").GetComponent<TextMeshProUGUI>();
     }
@@ -38,7 +42,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler,  IPointerExitHandler
 
     private void SetItemIcon()
     {
-        
+        if (ItemImage == null) return;
         ItemImage.sprite = currentSlot.item.itemSprite;
         ItemImage.SetNativeSize();
         

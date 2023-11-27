@@ -90,15 +90,15 @@ public class ItemSlot
      * </summary>
      * <param name="_amount">뺄 아이템의 수량</param>
      */
-    public bool Sub(int _amount)
+    public bool Sub(int amount)
     {
-        if (_amount > this.amount)
+        if (amount > this.amount)
         {
             Debug.Log(item.itemName+": 아이템의 수량은 음수가 될 수 없습니다");
             return false;
         }
             
-        this.amount -= _amount;
+        this.amount -= amount;
         return true;
     }
 }
