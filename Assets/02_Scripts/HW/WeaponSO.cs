@@ -18,7 +18,6 @@ public class WeaponSO : ScriptableObject
     public float attackDelay;
     public WeaponType weaponType;
     public Vector2 attackRange; //원거리의 경우엔 Vector2 값중 x값만 받아와 사용함.
-    public WeaponEvent weaponEvent;
 }
 
 

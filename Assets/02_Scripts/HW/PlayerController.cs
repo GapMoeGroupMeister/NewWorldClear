@@ -5,25 +5,9 @@ using System.Net;
 using UnityEngine;
 using UnityEngine.Events;
 
-public enum Debuffs
-{
-    None = 0,
-    Slow = 1,
-    Stun = 2,
-    Subdue = 4,
-    Poison = 8
-}
 
-public enum Buffs
-{
-    None = 0,
-    Fast = 1,
-    Generation = 2,
-    PowerUp = 4,
-    ThinSheild = 8,
-}
 
-public class PlayerController : MonoBehaviour , IDamageable
+public class PlayerController : Damageable
 {
     Rigidbody2D _rigidbody;
     Animator _animator;
@@ -31,11 +15,6 @@ public class PlayerController : MonoBehaviour , IDamageable
 
     Transform _weaponTrm;
     Transform _weaponVisualTrm;
-
-    private float _moveSpeed = 5f;
-
-    private float _maxHp = 100f;
-    private float _currentHp = 100f;
 
     public Debuffs currentDebuffs = Debuffs.None;
     public Buffs currentBuffs = Buffs.None;
@@ -60,10 +39,7 @@ public class PlayerController : MonoBehaviour , IDamageable
         _weaponTrm = transform.Find("Weapon");
         _weaponVisualTrm = _weaponTrm.Find("Visual");
         currentBuffs |= Buffs.Generation;
-        if(Buffs.Generation == (currentBuffs & Buffs.Generation))
-        {
-            Debug.Log("Àç»ýÁß");
-        }
+        AddBuff(Buffs.Generation, 5f);
     }
 
     private void Update()
@@ -94,7 +70,7 @@ public class PlayerController : MonoBehaviour , IDamageable
         }
     }
 
-    public void HitDamage(float damage)
+    public override void HitDamage(float damage)
     {
         _currentHp -= damage;
         if (_currentHp <= 0)
@@ -103,7 +79,7 @@ public class PlayerController : MonoBehaviour , IDamageable
         }
     }
 
-    public void BleedDamage(float damage)
+    public override void BleedDamage(float damage)
     {
         _currentHp -= damage;
         if (_currentHp <= 0)
@@ -112,7 +88,7 @@ public class PlayerController : MonoBehaviour , IDamageable
         }
     }
 
-    public void PoisonDamage(float damage)
+    public override void PoisonDamage(float damage)
     {
         _currentHp -= damage;
         if (_currentHp <= 0)
@@ -147,10 +123,5 @@ public class PlayerController : MonoBehaviour , IDamageable
     {
         _currentThirstiness += amount;
     }
-
-    
-
-
     #endregion
-
 }

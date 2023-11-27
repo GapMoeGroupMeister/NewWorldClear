@@ -19,4 +19,3 @@ MonoBehaviour:
   attackDelay: 1.3
   weaponType: 1
   attackRange: {x: 3, y: 2}
-  weaponEvent: {fileID: 0}
