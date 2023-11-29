@@ -6,11 +6,11 @@ using UnityEngine;
 [System.Serializable]
 public class Item : ScriptableObject
 {
-  /**
-  * <summary>
-  * 아이템 이름
-  * </summary>
-  */
+   /**
+   * <summary>
+   * 아이템 이름
+   * </summary>
+   */
    public string itemName;
    /**
     * <summary>
@@ -30,12 +30,7 @@ public class Item : ScriptableObject
     * </summary>
     */
    public bool isLimited;
-   /**
-    * <summary>
-    * 내구도 수치
-    * </summary>
-    */
-   public float durability;
+   
    /**
     * <summary>
     * 내구도 최대치 제한
