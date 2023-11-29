@@ -5,12 +5,16 @@ using Tkfkadlsi;
 
 public class Dust : MonoBehaviour
 {
-    private GameObject target;
+    private PlayerController target;
     private Rigidbody2D rigid;
-    private EnemyData data;
+    private TrailRenderer trailRenderer;
+    private GameObject skill2WarningObject;
+
+    public EnemyData data;
 
     private bool checkTarget = false;
     private bool isSkillActive = false;
+    private bool dustShield = false;
 
     public float hp;
     public float atk;
@@ -21,9 +25,14 @@ public class Dust : MonoBehaviour
 
     private void Awake()
     {
-        target = FindObjectOfType<PlayerController>().gameObject;
+        target = FindObjectOfType<PlayerController>();
         rigid = this.GetComponent<Rigidbody2D>();
+        trailRenderer = this.GetComponent<TrailRenderer>();
+        skill2WarningObject = transform.GetChild(0).gameObject;
         SetStatus();
+
+        skill2WarningObject.SetActive(false);
+        trailRenderer.enabled = false;
     }
 
     private void Start()
@@ -39,6 +48,21 @@ public class Dust : MonoBehaviour
             Moveing();
         else if (!checkTarget)
             DetectTarget();
+    }
+
+    public void Hit(float damage)
+    {
+        if (dustShield)
+        {
+            int rand = Random.Range(0, 10);
+            if(rand < 3)
+            {
+                return;
+            }
+        }
+
+        hp -= damage;
+        if (hp < 0) Dead();
     }
 
     private void SetStatus()
@@ -76,7 +100,7 @@ public class Dust : MonoBehaviour
 
     private IEnumerator SkillDelay()
     {
-        float t = Random.Range(1.50f, 3.50f);
+        float t = Random.Range(atkCycle, atkCycle*3);
         yield return new WaitForSeconds(t);
         float sk = Random.Range(1, 4);
 
@@ -98,16 +122,32 @@ public class Dust : MonoBehaviour
 
     private IEnumerator Skill1()
     {
+        trailRenderer.enabled = true;
         for(int i = 0; i < 3; i++)
         {
-
-            yield return new WaitForSeconds(0.5f);
+            Vector2 dir = target._rigidbody.position - rigid.position;
+            dir = dir.normalized * 10f;
+            yield return StartCoroutine(MoveLerp(0.125f, rigid.position + dir));
+            yield return new WaitForSeconds(0.25f);
         }
+        trailRenderer.enabled = false;
+        SkillExit();
     }
 
     private IEnumerator Skill2()
     {
-        yield return null;
+        skill2WarningObject.SetActive(true);
+        yield return StartCoroutine(ColorLerp(new Color(1, 0, 0, 0), new Color(1, 0, 0, 1), 3));
+        skill2WarningObject.SetActive(false);
+        StartCoroutine(Skill2_DustShieldOn());
+        SkillExit();
+    }
+
+    private IEnumerator Skill2_DustShieldOn()
+    {
+        dustShield = true;
+        yield return new WaitForSeconds(20f);
+        dustShield = false;
     }
 
     private IEnumerator Skill3()
@@ -118,6 +158,7 @@ public class Dust : MonoBehaviour
     private void SkillExit()
     {
         isSkillActive = false;
+        StartCoroutine(SkillDelay());
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -127,5 +168,42 @@ public class Dust : MonoBehaviour
             PlayerController playerController = target.GetComponent<PlayerController>();
             playerController.HitDamage(atk);
         }
+    }
+
+    private IEnumerator MoveLerp(float lerpTime, Vector2 endPos)
+    {
+        float t = 0;
+        Vector2 startPos = transform.position;
+
+        while(t < lerpTime)
+        {
+            rigid.position = Vector2.Lerp(startPos, endPos, t / lerpTime);
+
+            t += Time.deltaTime;
+            yield return null;
+        }
+
+        rigid.position = endPos;
+    }
+
+    private IEnumerator ColorLerp(Color startColor, Color endColor, float lerpTime)
+    {
+        float t = 0;
+        SpriteRenderer spriteRenderer = skill2WarningObject.GetComponent<SpriteRenderer>();
+
+        while(t < lerpTime)
+        {
+            spriteRenderer.color = Color.Lerp(startColor, endColor, t / lerpTime);
+
+            t += Time.deltaTime;
+            yield return null;
+        }
+
+        spriteRenderer.color = endColor;
+    }
+
+    private void Dead()
+    {
+        Destroy(gameObject);
     }
 }
