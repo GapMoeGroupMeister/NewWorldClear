@@ -12,14 +12,18 @@ public class Storage_InventoryManager : MonoBehaviour
 
     [SerializeField] private Transform grid;
 
-    [SerializeField]
-    private List<ItemSlot> inventory;
+    public List<ItemSlot> inventory;
 
     [SerializeField] private ItemSlot defaultItem;
     [SerializeField] private ItemSlot canSoup;
 
+
+    public bool isEditMode = false;
+    private ItemSlot MoveSlot;
+    private ItemSlot targetSlot;
     private void Awake()
     {
+        
     }
 
     void Start()
@@ -73,31 +77,7 @@ public class Storage_InventoryManager : MonoBehaviour
 
     }
 
-    [ContextMenu("SlotsRefresh")]
-    private void Debug_Refresh()
-    {
-        Refresh();
-
-    }
-
-    [ContextMenu("SlotsDelete")]
-    private void Debug_Delete()
-    {
-        inventory = new List<ItemSlot>();
-        Delete_Inven();
-    }
     
-    [ContextMenu("AddAnyItem")]
-    private void Debug_AddItem()
-    {
-        AddItem(new ItemSlot(defaultItem.item), 1);
-    }
-    
-    [ContextMenu("AddAnyItemSoup")]
-    private void Debug_AddItemCan()
-    {
-        AddItem(new ItemSlot(canSoup.item), 1);
-    }
     
     private void Refresh_Setting()
     {
@@ -115,23 +95,77 @@ public class Storage_InventoryManager : MonoBehaviour
             Destroy(child.gameObject) ;
         }
     }
-
-    public void AddItem(ItemSlot itemSlot, int _amount)
+    /**
+     * <summary>
+     * 아이템 추가 메서드 
+     * </summary>
+     * <param name="itemSlot"> 아이템 개체, amount를 개체 내부에서 반영함</param>
+     */
+    public void AddItem(ItemSlot itemSlot)
     {
+        int _amount = itemSlot.amount;
         if (Finditem(itemSlot.item.itemName) == null)
         {
-            print("현재 인벤에 존재하지 않는 아이템");
-            inventory.Add(itemSlot);
+            print("Null임");
+            inventory.Add(new ItemSlot(itemSlot.item));
             _amount--;
         }
         
-        while (_amount > 0)
+        itemSlot = Finditem(itemSlot.item.itemName);
+        do
         {
             _amount = itemSlot.Add(_amount);
+            if (_amount > 0)
+            {
+                inventory.Add(new ItemSlot(itemSlot.item));
+                _amount--;
+            }
+        
+        } while (_amount > 0);
+        
+    }
+    
+    /**
+     * <summary>
+     * 아이템 추가 메서드
+     * <param name="itemSlot"> 아이템 개체, item속성만 반영함</param>
+     * <param name="amount"> 아이템 개수, itemSlot에서 반영하지 않고 따로 입력받음 </param>
+     * </summary>
+     */
+    public void AddItem(ItemSlot itemSlot, int amount)
+    {
+        if (Finditem(itemSlot.item.itemName) == null)
+        {
+            print("Null임");
+            inventory.Add(new ItemSlot(itemSlot.item));
+            amount--;
         }
+        
+        itemSlot = Finditem(itemSlot.item.itemName);
+        do
+        {
+            amount = itemSlot.Add(amount);
+            if (amount > 0)
+            {
+                inventory.Add(new ItemSlot(itemSlot.item));
+                amount--;
+            }
+        
+        } while (amount > 0);
         
     }
 
+    /**
+     * <summary>
+     * 인벤토리에서 아이템을 찾아주는 메서드
+     * </summary>
+     * <param name="itemName">
+     * 찾을 아이템의 이름
+     * </param>
+     * <returns>
+     * 해당하는 아이템 슬롯을 반환함
+     * </returns>
+     */
     [CanBeNull]
     public ItemSlot Finditem(string itemName)
     {
@@ -185,7 +219,7 @@ public class Storage_InventoryManager : MonoBehaviour
         DBManager.Instance.Save_Inventory(inventory);
     }
 
-    private void SlotChange()
+    private void SlotMove()
     {
         
     }
@@ -194,5 +228,46 @@ public class Storage_InventoryManager : MonoBehaviour
     {
         SaveInventoryFile();
     }
+
+    #region  Debug
+
+    [ContextMenu("SlotsRefresh")]
+    private void Debug_Refresh()
+    {
+        Refresh();
+
+    }
+
+    [ContextMenu("SlotsDelete")]
+    private void Debug_Delete()
+    {
+        inventory = new List<ItemSlot>();
+        Delete_Inven();
+    }
+    
+    [ContextMenu("AddAnyItem")]
+    private void Debug_AddItem()
+    {
+        AddItem(new ItemSlot(defaultItem.item), 1);
+    }
+    
+    [ContextMenu("AddAnyItemSoup")]
+    private void Debug_AddItemCan()
+    {
+        AddItem(new ItemSlot(canSoup.item), 1);
+    }
+
+    [ContextMenu("SaveInven")]
+    private void Debug_SaveInven()
+    {
+        SaveInventoryFile();
+    }
+
+    [ContextMenu("LoadInven")]
+    private void Debug_LoadInven()
+    {
+        LoadInventoryFile();
+    }
+    #endregion
     
 }

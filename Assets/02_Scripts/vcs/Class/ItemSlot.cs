@@ -46,46 +46,59 @@ public class ItemSlot
     }
     /**
      * <summary>
-     * 반환값은남은 
      *
-     * amount에서 입력 받은 수 만큼을 더함
-     * amount가 슬롯 보관 
+     * 
      * </summary>
+     * <param name="amount">
+     * 더할 아이템의 수
+     * </param>
+     * <returns>
+     * 한 세트를 채우고 남은 아이템을 반환한다.
+     * </returns>
+     * 
      */
-    public int Add(int _amount)
+    public int Add(int amount)
     {
-        Debug.Log("아이템을 추가함");
         int remain = 0;
-        amount += _amount;
 
-        if (amount > item.SlotSetAmount)
+        //amount += _amount;
+
+        // 최대치 적용 코드 : 안씀
+        
+        if (this.amount+amount > item.SlotSetAmount)
         {
-            amount = item.SlotSetAmount;
-            remain = amount - item.SlotSetAmount;
-            Debug.Log("아이템이 "+remain+"개 남음");
-            return remain;
+            remain = (this.amount + amount - item.SlotSetAmount);
+            this.amount = item.SlotSetAmount;
+            
+        }
+        else
+        {
+            this.amount += amount;
         }
 
-        return 0;
+        Debug.Log("Remain : "+remain);
+        return remain;
     }
 
     /**
      * <summary>
-     * Default 반환은 true.
      *  
      * amount에서 입력 받은 수 만큼을 뺌
      * amount가 음수로 내려갈 시 false를 반환하며 연산은 취소 됨
+     *
+     * 
      * </summary>
+     * <param name="_amount">뺄 아이템의 수량</param>
      */
-    public bool Sub(int _amount)
+    public bool Sub(int amount)
     {
-        if (_amount > this.amount)
+        if (amount > this.amount)
         {
             Debug.Log(item.itemName+": 아이템의 수량은 음수가 될 수 없습니다");
             return false;
         }
             
-        this.amount -= _amount;
+        this.amount -= amount;
         return true;
     }
 }
