@@ -2085,8 +2085,11 @@ MonoBehaviour:
   grid: {fileID: 951298582}
   inventory:
   - item: {fileID: 11400000, guid: 888a080889ad0ce41ae514bff30d799d, type: 2}
-    amount: 1
+    amount: 2
     durability: 0
+  - item: {fileID: 11400000, guid: 9436ae634a10bc24ca3807a4cc39822f, type: 2}
+    amount: 1
+    durability: 2
   - item: {fileID: 11400000, guid: 9436ae634a10bc24ca3807a4cc39822f, type: 2}
     amount: 1
     durability: 2
@@ -2098,6 +2101,7 @@ MonoBehaviour:
     item: {fileID: 11400000, guid: 9436ae634a10bc24ca3807a4cc39822f, type: 2}
     amount: 1
     durability: 2
+  isEditMode: 0
 --- !u!1 &1991862026
 GameObject:
   m_ObjectHideFlags: 0

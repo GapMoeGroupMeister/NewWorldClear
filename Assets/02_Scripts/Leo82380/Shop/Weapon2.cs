@@ -11,11 +11,13 @@ public class Weapon2 : MonoBehaviour, IPointerClickHandler
     [Header("GameObjects")]
     [SerializeField] private GameObject soldOut;
     [SerializeField] private GameObject description;
+
     [Space]
     [Header("Texts")]
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI descriptionText;
     [SerializeField] private TextMeshProUGUI weaponNameText;
+
     [Space]
     [Header("Weapon Description")]
     [SerializeField] private Description descriptionScript;
@@ -35,12 +37,7 @@ public class Weapon2 : MonoBehaviour, IPointerClickHandler
     {
         _randomIndex = Random.Range(0, WeaponDescription.Length);
         description.gameObject.transform.localScale = Vector3.zero;
-        WeaponSetup();
-    }
-
-    private void Update()
-    {
-        weaponImage.SetNativeSize();
+        OnImageChanged();
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -57,29 +54,33 @@ public class Weapon2 : MonoBehaviour, IPointerClickHandler
         descriptionScript.Weapon2 = this;
     }
 
-    [ContextMenu("Test/Change Image")]
-    private void OnImageChanged()
+    /**
+     * <summary>
+     * 무기를 랜덤으로 바꾸기 위한 메서드
+     * </summary>
+     */
+    public void OnImageChanged()
     {
         _randomIndex = Random.Range(0, WeaponDescription.Length);
-        WeaponSetup();
+        
+        weaponImage.sprite = weaponDescription[_randomIndex].weaponIcon;
         weaponImage.SetNativeSize();
+        weaponNameText.text = weaponDescription[_randomIndex].name + "\n<size=25>" + weaponDescription[_randomIndex].price + "원</size>";
+
         foreach (var item in weaponDescription)
         {
             item.isSoldOut = false;
         }
         soldOut.SetActive(false);
-    }
 
-    private void WeaponSetup()
-    {
-        weaponImage.sprite = weaponDescription[_randomIndex].weaponIcon;
-        weaponNameText.text = weaponDescription[_randomIndex].name + "\n<size=25>" + weaponDescription[_randomIndex].price + "원</size>";
+
     }
 }
 
-/// <summary>
-/// 무기 설명
-/// </summary>
+/** <summary>
+ * 무기 설명 클래스
+ * </summary>
+ */
 [Serializable]
 public class WeaponDescription2
 {
