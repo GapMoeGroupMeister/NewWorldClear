@@ -12,10 +12,23 @@ public class Dust : MonoBehaviour
     private bool checkTarget = false;
     private bool isSkillActive = false;
 
+    public float hp;
+    public float atk;
+    public float def;
+    public float spd;
+    public float atkCycle;
+    public float range;
+
     private void Awake()
     {
         target = FindObjectOfType<PlayerController>().gameObject;
         rigid = this.GetComponent<Rigidbody2D>();
+        SetStatus();
+    }
+
+    private void Start()
+    {
+        StartCoroutine(SkillStart());
     }
 
     private void Update()
@@ -28,11 +41,21 @@ public class Dust : MonoBehaviour
             DetectTarget();
     }
 
+    private void SetStatus()
+    {
+        hp = data.DefaultHP;
+        atk = data.DefaultATK;
+        def = data.DefaultDEF;
+        spd = data.DefaultSPD;
+        atkCycle = data.AttackCycle;
+        range = data.DetectRange;
+    }
+
     private void Moveing()
     {
         Vector2 dir = target.transform.position - transform.position;
 
-        rigid.MovePosition(rigid.position += dir.normalized * data.DefaultSPD * Time.deltaTime);
+        rigid.MovePosition(rigid.position += dir.normalized * spd * Time.deltaTime);
 
 
     }
@@ -75,7 +98,11 @@ public class Dust : MonoBehaviour
 
     private IEnumerator Skill1()
     {
-        yield return null;
+        for(int i = 0; i < 3; i++)
+        {
+
+            yield return new WaitForSeconds(0.5f);
+        }
     }
 
     private IEnumerator Skill2()
@@ -91,5 +118,14 @@ public class Dust : MonoBehaviour
     private void SkillExit()
     {
         isSkillActive = false;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject == target)
+        {
+            PlayerController playerController = target.GetComponent<PlayerController>();
+            playerController.HitDamage(atk);
+        }
     }
 }
