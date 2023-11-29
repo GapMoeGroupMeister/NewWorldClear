@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using System.IO;
-using Tkfkadlsi;
+using System.Linq;
 
 public class DBManager : MonoSingleton<DBManager>
 {
@@ -32,7 +32,13 @@ public class DBManager : MonoSingleton<DBManager>
         {
 
             string loadJson = File.ReadAllText(_inventoryPath);
-            List<ItemSlot> saveData = JsonUtility.FromJson<List<ItemSlot>>(loadJson);
+            ItemSlot[] save = JsonUtility.FromJson<ItemSlot[]>(loadJson);
+            List<ItemSlot> saveData = new List<ItemSlot>();
+
+            foreach (ItemSlot item in save)
+            {
+                saveData.Add(item);
+            }
 
             if (saveData != null)
             {
@@ -54,8 +60,8 @@ public class DBManager : MonoSingleton<DBManager>
      */
     public void Save_Inventory(List<ItemSlot> inven)
     {
-        string json = JsonUtility.ToJson(inven, true);
-
+        string json = JsonUtility.ToJson(inven.ToArray(), true);
+        print(json);
         File.WriteAllText(_inventoryPath, json);
     }
 
