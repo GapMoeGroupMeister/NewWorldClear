@@ -84,7 +84,7 @@ public abstract class Damageable : MonoBehaviour
         buffs -= Buffs.Fast;
     }
 
-    // 대안은 없지만 아무튼 ㅈㄴ구림 코드가
+    // 대안이 생각나는건 없지만 아무튼 ㅈㄴ구림 코드가
     // 이유는 모름
     IEnumerator IEGeneration (float coolTime)
     {

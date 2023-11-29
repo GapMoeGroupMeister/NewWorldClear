@@ -10,7 +10,7 @@ public class Enemy_TEST : Damageable
     public float speed = 1;
 
     float hp = 10;
-    protected override void Awake()
+    private void Awake()
     {
         _playerTrm = FindObjectOfType<PlayerController>().transform;
     }
