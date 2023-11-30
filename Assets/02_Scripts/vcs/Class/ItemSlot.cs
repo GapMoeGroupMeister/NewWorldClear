@@ -7,10 +7,10 @@ public class ItemSlot
     
     /**
      * <summary>
-     * 아이템 SO 정보
+     * 아이템 SO 식별 Id
      * </summary>
      */
-    public Item item;
+    public Item itemId;
     /**
      * <summary>
      * 아이템의 수량

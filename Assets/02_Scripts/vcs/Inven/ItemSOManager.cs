@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
@@ -16,12 +14,11 @@ public class ItemSOManager : MonoBehaviour
      */
     public static List<Item> itemSOBase;
     
-
-    private void Awake()
-    {
-        
-    }
-
+    /**
+     * <summary>
+     * 아이템 정보를 에셋 창에서 가져오는 메서드
+     * </summary>
+     */
     public static void LoadItem()
     {
         itemSOBase = Resources.LoadAll<Item>("SO/Item").ToList();
@@ -37,6 +34,9 @@ public class ItemSOManager : MonoBehaviour
      * <summary>
      * 아이템 아이디로 찾기
      * </summary>
+     * <returns>
+     * 해당하는 Id의 아이템을 찾아 반환
+     * </returns>
      */
     [CanBeNull]
     public static Item GetItem(int _id)
@@ -62,6 +62,9 @@ public class ItemSOManager : MonoBehaviour
      * <summary>
      * 아이템 이름으로 찾기
      * </summary>
+     * <returns>
+     * 해당하는 이름의 아이템을 찾아 반환
+     * </returns>
      */
     [CanBeNull]
     public static Item GetItem(string _name)

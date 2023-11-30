@@ -66,7 +66,8 @@ public class Storage_InventoryManager : MonoBehaviour
                 inventory.Remove(_slot);
                 return;
             }
-            
+            // 아이템에 저장되지 못한 Sprite정보를 보충
+            _slot.item = ItemSOManager.GetItem(_slot.item.id);
             Set_Slot(_slot);
         }
     }
