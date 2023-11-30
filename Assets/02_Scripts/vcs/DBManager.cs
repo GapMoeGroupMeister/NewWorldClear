@@ -5,8 +5,9 @@ using UnityEditor;
 using UnityEngine;
 using System.IO;
 using System.Linq;
+using EasyJson;
 
-public class DBManager : MonoSingleton<DBManager>
+public class DBManager : MonoBehaviour
 {
 
     private string _inventoryPath;
@@ -15,9 +16,10 @@ public class DBManager : MonoSingleton<DBManager>
 
     private void Awake()
     {
-        _inventoryPath = Path.Combine(Application.dataPath, "00_Database/Json/inventory.json");
-        _userInfoPath = Path.Combine(Application.dataPath, "00_Database/Json/userInfo.json");
+        _userInfoPath = Path.Combine(Application.dataPath+"00_Database/Json/", "userInfo.json");
     }
+    
+    
 
     
     
@@ -26,31 +28,9 @@ public class DBManager : MonoSingleton<DBManager>
      * json으로 저장된 인벤토리 정보를 불러와 반환해줌
      * </summary>
      */
-    public List<ItemSlot> Get_Inventory()
-    {   
-        if (File.Exists(_inventoryPath))
-        {
-
-            string loadJson = File.ReadAllText(_inventoryPath);
-            ItemSlot[] save = JsonUtility.FromJson<ItemSlot[]>(loadJson);
-            List<ItemSlot> saveData = new List<ItemSlot>();
-
-            foreach (ItemSlot item in save)
-            {
-                saveData.Add(item);
-            }
-
-            if (saveData != null)
-            {
-                return saveData;
-                
-            }
-        }
-
-        List<ItemSlot> inven = new List<ItemSlot>();
-        
-        Save_Inventory(inven);
-        return inven;
+    public static List<ItemSlot> Get_Inventory()
+    {
+        return EasyToJson.ListFromJson<ItemSlot>("inventory");
     }
     
     /**
@@ -58,11 +38,9 @@ public class DBManager : MonoSingleton<DBManager>
      * 인벤토리 정보를 받아와 json파일로 저장함
      * </summary>
      */
-    public void Save_Inventory(List<ItemSlot> inven)
+    public static void Save_Inventory(List<ItemSlot> inven)
     {
-        string json = JsonUtility.ToJson(inven.ToArray(), true);
-        print(json);
-        File.WriteAllText(_inventoryPath, json);
+        EasyToJson.ListToJson(inven, "inventory", true);
     }
 
     /**
