@@ -7,7 +7,7 @@ namespace EasyJson
 {
     public static class EasyToJson
     {
-        private static string localPath = Path.Combine(Application.dataPath, "Json/");
+        private static string localPath = Application.dataPath + "/00_Database/Json/";
         /**
          * <summary>
          * Json 파일로 저장
