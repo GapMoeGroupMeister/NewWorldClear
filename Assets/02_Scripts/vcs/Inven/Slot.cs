@@ -21,6 +21,8 @@ public class Slot : MonoBehaviour, IPointerEnterHandler,  IPointerExitHandler
     [SerializeField]
     private ItemSlot currentSlot;
 
+    private Item currentItem;
+
     private void Awake()
     {
         
@@ -34,7 +36,10 @@ public class Slot : MonoBehaviour, IPointerEnterHandler,  IPointerExitHandler
     public void SetSlot(ItemSlot slotInfo)
     {
         currentSlot = slotInfo;
-        print(currentSlot.item.itemName);
+        currentItem = ItemSOManager.GetItem(currentSlot.itemId);
+
+        
+        print(currentItem.itemName);
         SetItemIcon();
         SetGuage();
         ItemAmount.text = currentSlot.amount.ToString();
@@ -43,7 +48,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler,  IPointerExitHandler
     private void SetItemIcon()
     {
         if (ItemImage == null) return;
-        ItemImage.sprite = currentSlot.item.itemSprite;
+        ItemImage.sprite = currentItem.itemSprite;
         ItemImage.SetNativeSize();
         
         
@@ -51,9 +56,9 @@ public class Slot : MonoBehaviour, IPointerEnterHandler,  IPointerExitHandler
 
     private void SetGuage()
     {
-        if (currentSlot.item.isLimited)
+        if (currentItem.isLimited)
         {
-            GuageFill.fillAmount = Mathf.Clamp(currentSlot.durability / currentSlot.item.maxDurability, 0f, 1f);
+            GuageFill.fillAmount = Mathf.Clamp(currentSlot.durability / currentItem.maxDurability, 0f, 1f);
 
         }
         else
@@ -65,7 +70,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler,  IPointerExitHandler
     public void OnPointerEnter(PointerEventData eventData)
     {
         Storage_UIManager.Instance.On_DescriptionUI();
-        Storage_UIManager.Instance.Refresh_DescriptionUI(thisSlot.item);
+        Storage_UIManager.Instance.Refresh_DescriptionUI(currentItem);
     }
     public void OnPointerExit(PointerEventData eventData)
     {

@@ -58,16 +58,16 @@ public class Storage_InventoryManager : MonoBehaviour
 
         }
         
-        
         foreach (ItemSlot _slot in inventory)
         {
-            if (_slot.item == null)
+            Item thisItem = ItemSOManager.GetItem(_slot.itemId);
+
+            if (thisItem == null)
             {
                 inventory.Remove(_slot);
                 return;
             }
-            // 아이템에 저장되지 못한 Sprite정보를 보충
-            _slot.item = ItemSOManager.GetItem(_slot.item.id);
+            
             Set_Slot(_slot);
         }
     }
@@ -95,15 +95,16 @@ public class Storage_InventoryManager : MonoBehaviour
     public int Add(ItemSlot slot, int amount)
     {
         int remain = 0;
+        Item thisItem = ItemSOManager.GetItem(slot.itemId);
 
         //amount += _amount;
 
         // 최대치 적용 코드 : 안씀
         
-        if (slot.amount+amount > slot.item.SlotSetAmount)
+        if (slot.amount+amount > thisItem.SlotSetAmount)
         {
-            remain = (slot.amount + amount - slot.item.SlotSetAmount);
-            slot.amount = slot.item.SlotSetAmount;
+            remain = (slot.amount + amount - thisItem.SlotSetAmount);
+            slot.amount = thisItem.SlotSetAmount;
             
         }
         else
@@ -129,7 +130,7 @@ public class Storage_InventoryManager : MonoBehaviour
     {
         if (amount > slot.amount)
         {
-            Debug.Log(slot.item.itemName+": 아이템의 수량은 음수가 될 수 없습니다");
+            Debug.Log(ItemSOManager.GetItem(slot.itemId) +": 아이템의 수량은 음수가 될 수 없습니다");
             return false;
         }
             
@@ -163,25 +164,7 @@ public class Storage_InventoryManager : MonoBehaviour
      */
     public void AddItem(ItemSlot itemSlot)
     {
-        int _amount = itemSlot.amount;
-        if (FindItem(itemSlot.item.itemName) == null)
-        {
-            print("Null임");
-            inventory.Add(NewItemSlot(itemSlot.item));
-            _amount--;
-        }
-        
-        itemSlot = FindItem(itemSlot.item.itemName);
-        do
-        {
-            _amount = Add(itemSlot,_amount);
-            if (_amount > 0)
-            {
-                inventory.Add(NewItemSlot(itemSlot.item));
-                _amount--;
-            }
-        
-        } while (_amount > 0);
+        AddItem(NewItemSlot(itemSlot.itemId, itemSlot.amount));
         
     }
     
@@ -194,20 +177,20 @@ public class Storage_InventoryManager : MonoBehaviour
      */
     public void AddItem(ItemSlot itemSlot, int amount)
     {
-        if (FindItem(itemSlot.item.itemName) == null)
+        if (FindItem(itemSlot.itemId) == null)
         {
             print("Null임");
-            inventory.Add(NewItemSlot(itemSlot.item));
+            inventory.Add(NewItemSlot(itemSlot.itemId));
             amount--;
         }
         
-        itemSlot = FindItem(itemSlot.item.itemName);
+        itemSlot = FindItem(itemSlot.itemId);
         do
         {
             amount = Add(itemSlot, amount);
             if (amount > 0)
             {
-                inventory.Add(NewItemSlot(itemSlot.item));
+                inventory.Add(NewItemSlot(itemSlot.itemId));
                 amount--;
             }
         
@@ -227,14 +210,14 @@ public class Storage_InventoryManager : MonoBehaviour
      * </returns>
      */
     [CanBeNull]
-    public ItemSlot FindItem(string itemName)
+    public ItemSlot FindItem(int itemId)
     {
         ItemSlot targetItem = new ItemSlot(){amount = -10};
-
         for (int i = 0; i < inventory.Count; i++)
         {
             
             ItemSlot slot = inventory[i];
+
             if (slot.amount <= 0)
             {
                 inventory.Remove(slot);
@@ -243,7 +226,7 @@ public class Storage_InventoryManager : MonoBehaviour
             }
             
 
-            if (slot.item.itemName == itemName)
+            if (slot.itemId == itemId)
             {
                 targetItem = slot;
                 break;
@@ -308,13 +291,13 @@ public class Storage_InventoryManager : MonoBehaviour
     [ContextMenu("AddAnyItem")]
     private void Debug_AddItem()
     {
-        AddItem(NewItemSlot(defaultItem.item), 1);
+        AddItem(NewItemSlot(defaultItem.itemId, 1));
     }
     
     [ContextMenu("AddAnyItemSoup")]
     private void Debug_AddItemCan()
     {
-        AddItem(NewItemSlot(canSoup.item), 1);
+        AddItem(NewItemSlot(canSoup.itemId, 1));
     }
 
     [ContextMenu("SaveInven")]
@@ -335,14 +318,9 @@ public class Storage_InventoryManager : MonoBehaviour
      * 생성자를 흉내내는 무언가
      * </summary>
      */
-    public ItemSlot NewItemSlot(Item _item)
+    public ItemSlot NewItemSlot(int _itemId)
     {
-        return new ItemSlot()
-        {
-            item = _item,
-            amount = 1,
-            durability = _item.maxDurability
-        };
+        return NewItemSlot(_itemId, 1);
     }
     
     /**
@@ -350,13 +328,20 @@ public class Storage_InventoryManager : MonoBehaviour
      * 생성자를 흉내내는 무언가
      * </summary>
      */
-    public ItemSlot NewItemSlot(Item _item, int _amount)
+    public ItemSlot NewItemSlot(int _itemId, int _amount)
     {
+        Item item = ItemSOManager.GetItem(_itemId);
+        if (item == null)
+        {
+            Debug.Log($"<color='red'>Error: NewItemSlot, {_itemId} is not exist</color>");
+            return defaultItem;
+
+        }
         return new ItemSlot()
         {
-            item = _item,
+            itemId = _itemId,
             amount = _amount,
-            durability = _item.maxDurability
+            durability = item.maxDurability
         };
 
     }

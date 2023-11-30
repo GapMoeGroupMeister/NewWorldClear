@@ -10,7 +10,7 @@ public class ItemSlot
      * 아이템 SO 식별 Id
      * </summary>
      */
-    public Item itemId;
+    public int itemId;
     /**
      * <summary>
      * 아이템의 수량
