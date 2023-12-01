@@ -332,7 +332,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 095b3e18ea4a2f142b32ceaeb371dc02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemSOBase: []
 --- !u!4 &482628840
 Transform:
   m_ObjectHideFlags: 0
@@ -2130,11 +2129,11 @@ MonoBehaviour:
   grid: {fileID: 951298582}
   inventory: []
   defaultItem:
-    item: {fileID: 11400000, guid: 888a080889ad0ce41ae514bff30d799d, type: 2}
+    itemId: 1
     amount: 1
     durability: 0
   canSoup:
-    item: {fileID: 11400000, guid: 9436ae634a10bc24ca3807a4cc39822f, type: 2}
+    itemId: 0
     amount: 1
     durability: 2
   isEditMode: 0

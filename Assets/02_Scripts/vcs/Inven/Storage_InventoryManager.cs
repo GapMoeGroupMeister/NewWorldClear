@@ -164,7 +164,7 @@ public class Storage_InventoryManager : MonoBehaviour
      */
     public void AddItem(ItemSlot itemSlot)
     {
-        AddItem(NewItemSlot(itemSlot.itemId, itemSlot.amount));
+        AddItem(new ItemSlot(ItemSOManager.GetItem(itemSlot.itemId), itemSlot.amount), itemSlot.amount);
         
     }
     
@@ -182,6 +182,11 @@ public class Storage_InventoryManager : MonoBehaviour
             print("Null임");
             inventory.Add(NewItemSlot(itemSlot.itemId));
             amount--;
+        }
+
+        if (amount <= 0)
+        {
+            return;
         }
         
         itemSlot = FindItem(itemSlot.itemId);
@@ -212,7 +217,7 @@ public class Storage_InventoryManager : MonoBehaviour
     [CanBeNull]
     public ItemSlot FindItem(int itemId)
     {
-        ItemSlot targetItem = new ItemSlot(){amount = -10};
+        ItemSlot targetItem = new ItemSlot(){amount = -1};
         for (int i = 0; i < inventory.Count; i++)
         {
             
