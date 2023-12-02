@@ -8,7 +8,11 @@ public class Dust : MonoBehaviour
     private PlayerController target;
     private Rigidbody2D rigid;
     private TrailRenderer trailRenderer;
+    private SpriteRenderer spriteRenderer;
     private GameObject skill2WarningObject;
+    [SerializeField] private GameObject skill3Blind;
+    [SerializeField] private float dashM;
+    [Range(0f, 360f)] [SerializeField] private float skill2Angle;
 
     public EnemyData data;
 
@@ -28,10 +32,12 @@ public class Dust : MonoBehaviour
         target = FindObjectOfType<PlayerController>();
         rigid = this.GetComponent<Rigidbody2D>();
         trailRenderer = this.GetComponent<TrailRenderer>();
+        spriteRenderer = this.GetComponent<SpriteRenderer>();
         skill2WarningObject = transform.GetChild(0).gameObject;
         SetStatus();
 
         skill2WarningObject.SetActive(false);
+        skill3Blind.SetActive(false);
         trailRenderer.enabled = false;
     }
 
@@ -40,8 +46,15 @@ public class Dust : MonoBehaviour
         StartCoroutine(SkillStart());
     }
 
+    private Vector2 AngleToDir(float angle)
+    {
+        float radian = (angle - 90) * Mathf.Deg2Rad;
+        return new Vector2(Mathf.Cos(radian), Mathf.Sin(radian));
+    }
     private void Update()
     {
+        
+
         if (isSkillActive) return;
 
         if (checkTarget)
@@ -77,11 +90,15 @@ public class Dust : MonoBehaviour
 
     private void Moveing()
     {
+        if (isSkillActive) return;
+
         Vector2 dir = target.transform.position - transform.position;
 
         rigid.MovePosition(rigid.position += dir.normalized * spd * Time.deltaTime);
 
 
+        float angle = Mathf.Atan2(target._rigidbody.position.y - rigid.position.y, target._rigidbody.position.x - rigid.position.x) * Mathf.Rad2Deg;
+        this.transform.rotation = Quaternion.AngleAxis(angle + 90, Vector3.forward);
     }
 
     private void DetectTarget()
@@ -126,7 +143,7 @@ public class Dust : MonoBehaviour
         for(int i = 0; i < 3; i++)
         {
             Vector2 dir = target._rigidbody.position - rigid.position;
-            dir = dir.normalized * 10f;
+            dir = dir.normalized * dashM;
             yield return StartCoroutine(MoveLerp(0.125f, rigid.position + dir));
             yield return new WaitForSeconds(0.25f);
         }
@@ -136,12 +153,20 @@ public class Dust : MonoBehaviour
 
     private IEnumerator Skill2()
     {
-        skill2WarningObject.SetActive(true);
-        yield return StartCoroutine(ColorLerp(new Color(1, 0, 0, 0), new Color(1, 0, 0, 1), 3));
-        skill2WarningObject.SetActive(false);
+        float lookingAngle = transform.rotation.eulerAngles.z;  //캐릭터가 바라보는 방향의 각도
+        Vector3 rightDir = AngleToDir(lookingAngle + skill2Angle * 0.5f);
+        Vector3 leftDir = AngleToDir(lookingAngle - skill2Angle * 0.5f);
+        Vector3 lookDir = AngleToDir(lookingAngle);
+
+        Debug.DrawRay(transform.position, rightDir * 5, Color.blue);
+        Debug.DrawRay(transform.position, leftDir * 5, Color.blue);
+        Debug.DrawRay(transform.position, lookDir * 5, Color.cyan);
+
         StartCoroutine(Skill2_DustShieldOn());
+        yield return new WaitForSeconds(0.25f);
         SkillExit();
     }
+
 
     private IEnumerator Skill2_DustShieldOn()
     {
@@ -152,7 +177,20 @@ public class Dust : MonoBehaviour
 
     private IEnumerator Skill3()
     {
-        yield return null;
+        skill3Blind.SetActive(true);
+        skill3Blind.transform.position = transform.position + (Vector3.down * 2);
+        yield return StartCoroutine(MoveLerp(1.5f, rigid.position + Vector2.down * 2));
+        spriteRenderer.enabled = false;
+        skill3Blind.SetActive(false);
+        yield return new WaitForSeconds(1);
+        rigid.position = target._rigidbody.position;
+        yield return new WaitForSeconds(1);
+        skill3Blind.SetActive(true);
+        skill3Blind.transform.position = transform.position;
+        spriteRenderer.enabled = true;
+        yield return StartCoroutine(MoveLerp(0.5f, rigid.position + Vector2.up * 2));
+        skill3Blind.SetActive(false);
+        SkillExit();
     }
 
     private void SkillExit()
@@ -189,17 +227,17 @@ public class Dust : MonoBehaviour
     private IEnumerator ColorLerp(Color startColor, Color endColor, float lerpTime)
     {
         float t = 0;
-        SpriteRenderer spriteRenderer = skill2WarningObject.GetComponent<SpriteRenderer>();
+        SpriteRenderer skill2WarningObjectSpriteRenderer = skill2WarningObject.GetComponent<SpriteRenderer>();
 
         while(t < lerpTime)
         {
-            spriteRenderer.color = Color.Lerp(startColor, endColor, t / lerpTime);
+            skill2WarningObjectSpriteRenderer.color = Color.Lerp(startColor, endColor, t / lerpTime);
 
             t += Time.deltaTime;
             yield return null;
         }
 
-        spriteRenderer.color = endColor;
+        skill2WarningObjectSpriteRenderer.color = endColor;
     }
 
     private void Dead()
