@@ -41,12 +41,19 @@ public class ItemSOManager : MonoBehaviour
     [CanBeNull]
     public static Item GetItem(int _id)
     {
+        print(_id);
         if (itemSOBase == null)
         {
             LoadItem();
         }
+
+        if (itemSOBase == null)
+        {
+            print("null임");
+        }
         foreach (Item item in itemSOBase)
         {
+            print(item.itemName +" > "+item.id);
             if (item.id == _id)
             {
                 return item;

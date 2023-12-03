@@ -42,6 +42,7 @@ public class ItemSlot
     
     public ItemSlot(Item item, int amount)
     {
+        
         itemId = item.id;
         this.amount = amount;
         durability = item.maxDurability;

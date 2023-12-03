@@ -296,13 +296,13 @@ public class Storage_InventoryManager : MonoBehaviour
     [ContextMenu("AddAnyItem")]
     private void Debug_AddItem()
     {
-        AddItem(NewItemSlot(defaultItem.itemId, 1));
+        AddItem(new ItemSlot(ItemSOManager.GetItem(defaultItem.itemId), 1));
     }
     
     [ContextMenu("AddAnyItemSoup")]
     private void Debug_AddItemCan()
     {
-        AddItem(NewItemSlot(canSoup.itemId, 1));
+        AddItem(new ItemSlot(ItemSOManager.GetItem(canSoup.itemId), 1));
     }
 
     [ContextMenu("SaveInven")]
