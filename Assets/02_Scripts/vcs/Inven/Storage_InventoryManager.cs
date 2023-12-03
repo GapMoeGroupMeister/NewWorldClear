@@ -60,7 +60,7 @@ public class Storage_InventoryManager : MonoBehaviour
         
         foreach (ItemSlot _slot in inventory)
         {
-            Item thisItem = ItemSOManager.GetItem(_slot.itemId);
+            Item thisItem = ItemSOManager.Instance.GetItem(_slot.itemId);
 
             if (thisItem == null)
             {
@@ -95,7 +95,7 @@ public class Storage_InventoryManager : MonoBehaviour
     public int Add(ItemSlot slot, int amount)
     {
         int remain = 0;
-        Item thisItem = ItemSOManager.GetItem(slot.itemId);
+        Item thisItem = ItemSOManager.Instance.GetItem(slot.itemId);
 
         //amount += _amount;
 
@@ -130,7 +130,7 @@ public class Storage_InventoryManager : MonoBehaviour
     {
         if (amount > slot.amount)
         {
-            Debug.Log(ItemSOManager.GetItem(slot.itemId) +": 아이템의 수량은 음수가 될 수 없습니다");
+            Debug.Log(ItemSOManager.Instance.GetItem(slot.itemId) +": 아이템의 수량은 음수가 될 수 없습니다");
             return false;
         }
             
@@ -164,7 +164,7 @@ public class Storage_InventoryManager : MonoBehaviour
      */
     public void AddItem(ItemSlot itemSlot)
     {
-        AddItem(new ItemSlot(ItemSOManager.GetItem(itemSlot.itemId), itemSlot.amount), itemSlot.amount);
+        AddItem(new ItemSlot(ItemSOManager.Instance.GetItem(itemSlot.itemId), itemSlot.amount), itemSlot.amount);
         
     }
     
@@ -296,13 +296,13 @@ public class Storage_InventoryManager : MonoBehaviour
     [ContextMenu("AddAnyItem")]
     private void Debug_AddItem()
     {
-        AddItem(new ItemSlot(ItemSOManager.GetItem(defaultItem.itemId), 1));
+        AddItem(new ItemSlot(ItemSOManager.Instance.GetItem(defaultItem.itemId), 1));
     }
     
     [ContextMenu("AddAnyItemSoup")]
     private void Debug_AddItemCan()
     {
-        AddItem(new ItemSlot(ItemSOManager.GetItem(canSoup.itemId), 1));
+        AddItem(new ItemSlot(ItemSOManager.Instance.GetItem(canSoup.itemId), 1));
     }
 
     [ContextMenu("SaveInven")]
@@ -335,7 +335,7 @@ public class Storage_InventoryManager : MonoBehaviour
      */
     public ItemSlot NewItemSlot(int _itemId, int _amount)
     {
-        Item item = ItemSOManager.GetItem(_itemId);
+        Item item = ItemSOManager.Instance.GetItem(_itemId);
         if (item == null)
         {
             Debug.Log($"<color='red'>Error: NewItemSlot, {_itemId} is not exist</color>");

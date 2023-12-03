@@ -36,7 +36,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler,  IPointerExitHandler
     public void SetSlot(ItemSlot slotInfo)
     {
         currentSlot = slotInfo;
-        currentItem = ItemSOManager.GetItem(currentSlot.itemId);
+        currentItem = ItemSOManager.Instance.GetItem(currentSlot.itemId);
 
         
         print(currentItem.itemName);

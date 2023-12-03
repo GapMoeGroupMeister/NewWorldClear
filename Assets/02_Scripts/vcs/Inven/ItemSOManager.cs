@@ -1,10 +1,12 @@
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using JetBrains.Annotations;
 using UnityEditor;
 using UnityEngine;
 
-public class ItemSOManager : MonoBehaviour
+public class ItemSOManager : MonoSingleton<ItemSOManager>
 {
     /**
      * <summary>
@@ -12,21 +14,31 @@ public class ItemSOManager : MonoBehaviour
      * 아이템 SO 뭉탱이
      * </summary>
      */
-    public static List<Item> itemSOBase;
-    
+    public List<Item> itemSOBase;
+
+
+    private void Awake()
+    {
+        LoadItem();
+    }
+
     /**
      * <summary>
      * 아이템 정보를 에셋 창에서 가져오는 메서드
      * </summary>
      */
-    public static void LoadItem()
+    public void LoadItem()
     {
-        itemSOBase = Resources.LoadAll<Item>("SO/Item").ToList();
+        print("ItemSO들을 불러옴");
+        //itemSOBase = Resources.LoadAll<Item>("SO/Item").ToList();
 
-        object[] objectArr = AssetDatabase.LoadAllAssetsAtPath(Application.dataPath + "/00_Database/SO/Item");
+        object[] objectArr =
+            AssetDatabase.LoadAllAssetsAtPath("Assets/00_Database/SO/Item");
         for (int i = 0; i < objectArr.Length; i++)
         {
             itemSOBase[i] = (Item)objectArr[i];
+            print(itemSOBase[i].itemName+" 불러옴");
+
         }
     }
         
@@ -39,7 +51,7 @@ public class ItemSOManager : MonoBehaviour
      * </returns>
      */
     [CanBeNull]
-    public static Item GetItem(int _id)
+    public Item GetItem(int _id)
     {
         print(_id);
         if (itemSOBase == null)
@@ -74,7 +86,7 @@ public class ItemSOManager : MonoBehaviour
      * </returns>
      */
     [CanBeNull]
-    public static Item GetItem(string _name)
+    public Item GetItem(string _name)
     {
         if (itemSOBase == null)
         {
