@@ -22,6 +22,8 @@ public class Weapon2 : MonoBehaviour, IPointerClickHandler
     [Header("Weapon Description")]
     [SerializeField] private Description descriptionScript;
     [SerializeField] private WeaponDescription2[] weaponDescription;
+    [SerializeField] private Image weaponImage;
+    
     
     private int _randomIndex;
     private Image _image;
