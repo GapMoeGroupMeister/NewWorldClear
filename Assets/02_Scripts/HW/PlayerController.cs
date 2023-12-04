@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Events;
 public class PlayerController : Damageable
 {
-    Rigidbody2D _rigidbody;
+    public Rigidbody2D _rigidbody;
     Animator _animator;
 
     Transform _weaponTrm;
