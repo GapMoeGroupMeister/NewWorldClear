@@ -4,20 +4,12 @@ using System.Collections.Generic;
 using System.Net;
 using UnityEngine;
 using UnityEngine.Events;
-
-
-
 public class PlayerController : Damageable
 {
     Rigidbody2D _rigidbody;
     Animator _animator;
-    SpriteRenderer _spriteRenderer;
 
     Transform _weaponTrm;
-    Transform _weaponVisualTrm;
-
-    public Debuffs currentDebuffs = Debuffs.None;
-    public Buffs currentBuffs = Buffs.None;
 
     #region 얘네로 뭐하는지 정확히 알 수 없음
     private float _maxStemina = 200f;
@@ -34,12 +26,19 @@ public class PlayerController : Damageable
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
-        _spriteRenderer = GetComponent<SpriteRenderer>();
 
         _weaponTrm = transform.Find("Weapon");
-        _weaponVisualTrm = _weaponTrm.Find("Visual");
-        currentBuffs |= Buffs.Generation;
-        AddBuff(Buffs.Generation, 5f);
+        _moveSpeed = 5f;
+    }
+
+    private void Start()
+    {
+        //Invoke("TestBuff", 2f);
+    }
+
+    private void TestBuff()
+    {
+        AddDebuff(Debuffs.Stun, 8f);
     }
 
     private void Update()
@@ -50,6 +49,7 @@ public class PlayerController : Damageable
 
     private void Move()
     {
+        if (isStun) return;
         _rigidbody.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized * _moveSpeed;
         _animator.SetFloat("Speed", _rigidbody.velocity.magnitude);
     }
@@ -68,38 +68,6 @@ public class PlayerController : Damageable
             transform.localScale = new Vector2(1, 1);
             _weaponTrm.localScale = Vector2.one;
         }
-    }
-
-    public override void HitDamage(float damage)
-    {
-        _currentHp -= damage;
-        if (_currentHp <= 0)
-        {
-            Die();
-        }
-    }
-
-    public override void BleedDamage(float damage)
-    {
-        _currentHp -= damage;
-        if (_currentHp <= 0)
-        {
-            Die();
-        }
-    }
-
-    public override void PoisonDamage(float damage)
-    {
-        _currentHp -= damage;
-        if (_currentHp <= 0)
-        {
-            Die();
-        }
-    }
-
-    private void Die()
-    {
-        print("죽은");
     }
 
 
