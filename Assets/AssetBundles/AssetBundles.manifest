@@ -1,0 +1,7 @@
+ManifestFileVersion: 0
+CRC: 3946038165
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: itemicon
+      Dependencies: {}

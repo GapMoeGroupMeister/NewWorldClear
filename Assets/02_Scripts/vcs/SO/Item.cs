@@ -1,11 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "SO/Item/Item")]
 [System.Serializable]
 public class Item : ScriptableObject
 {
+   /**
+    * <summary>
+    * 아이템 식별용 아이디
+    * </summary>
+    */
+   public int id;
    /**
    * <summary>
    * 아이템 이름
@@ -14,10 +21,10 @@ public class Item : ScriptableObject
    public string itemName;
    /**
     * <summary>
-    * 아이템의 스프라이트
+    * 아이템의 스프라이트 이름
     * </summary>
    */
-   public Sprite itemSprite;
+   public int itemSpriteName;
    /**
     * <summary>
     * 아이템 설명
