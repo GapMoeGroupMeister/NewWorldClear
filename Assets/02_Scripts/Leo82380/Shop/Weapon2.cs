@@ -23,12 +23,6 @@ public class Weapon2 : MonoBehaviour, IPointerClickHandler
     [SerializeField] private Description descriptionScript;
     [SerializeField] private WeaponDescription2[] weaponDescription;
     
-    [Space]
-    [Header("Weapon Material")]
-    [SerializeField] private Material[] weaponMaterial;
-    
-    [SerializeField] private Image weaponImage;
-    
     private int _randomIndex;
     private Image _image;
 
@@ -36,10 +30,6 @@ public class Weapon2 : MonoBehaviour, IPointerClickHandler
     public WeaponDescription2[] WeaponDescription => weaponDescription;
     public int RandomIndex => _randomIndex;
 
-    private void Awake()
-    {
-        _image = GetComponent<Image>();
-    }
 
     private void Start()
     {
@@ -58,26 +48,23 @@ public class Weapon2 : MonoBehaviour, IPointerClickHandler
         description.transform.DOScale(1f, 0.5f);
 
         nameText.text = weaponDescription[_randomIndex].name;
-        descriptionText.text = weaponDescription[_randomIndex].isSoldOut ? "ÀÌ¹Ì ±¸¸ÅÇÑ ¹«±âÀÔ´Ï´Ù!" : weaponDescription[_randomIndex].description;
+        descriptionText.text = weaponDescription[_randomIndex].isSoldOut ? "ì´ë¯¸ êµ¬ë§¤í•œ ë¬´ê¸°ì…ë‹ˆë‹¤!" : weaponDescription[_randomIndex].description;
         descriptionScript.Weapon2 = this;
     }
 
     /**
      * <summary>
-     * ¹«±â¸¦ ·£´ıÀ¸·Î ¹Ù²Ù±â À§ÇÑ ¸Ş¼­µå
+     * ë¬´ê¸°ë¥¼ ëœë¤ìœ¼ë¡œ ë°”ê¾¸ê¸° ìœ„í•œ ë©”ì„œë“œ
      * </summary>
      */
     public void OnImageChanged()
     {
         _randomIndex = Random.Range(0, WeaponDescription.Length);
         
-        if (_image == null)
-            _image = GetComponent<Image>();
-        _image.material = weaponMaterial[(int)weaponDescription[_randomIndex].weaponType];
         
         weaponImage.sprite = weaponDescription[_randomIndex].weaponIcon;
         weaponImage.SetNativeSize();
-        weaponNameText.text = weaponDescription[_randomIndex].name + "\n<size=25>" + weaponDescription[_randomIndex].price + "¿ø</size>";
+        weaponNameText.text = weaponDescription[_randomIndex].name + "\n<size=25>" + weaponDescription[_randomIndex].price + "ì›</size>";
 
         foreach (var item in weaponDescription)
         {
@@ -90,7 +77,7 @@ public class Weapon2 : MonoBehaviour, IPointerClickHandler
 }
 
 /** <summary>
- * ¹«±â ¼³¸í Å¬·¡½º
+ * ë¬´ê¸° ì„¤ëª… í´ë˜ìŠ¤
  * </summary>
  */
 [Serializable]
