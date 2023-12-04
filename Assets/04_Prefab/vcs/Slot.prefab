@@ -95,6 +95,9 @@ MonoBehaviour:
     item: {fileID: 11400000, guid: 888a080889ad0ce41ae514bff30d799d, type: 2}
     amount: 0
     durability: 0
+  ItemImage: {fileID: 0}
+  GuageFill: {fileID: 0}
+  ItemAmount: {fileID: 0}
   currentSlot:
     item: {fileID: 0}
     amount: 0
@@ -164,7 +167,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0e227c053e4f4d44e9c17896855b5fa0, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
