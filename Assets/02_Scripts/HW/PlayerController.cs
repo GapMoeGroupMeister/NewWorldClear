@@ -25,7 +25,7 @@ public enum Buffs
 
 public class PlayerController : MonoBehaviour , IDamageable
 {
-    Rigidbody2D _rigidbody;
+    public Rigidbody2D _rigidbody;
     Animator _animator;
     SpriteRenderer _spriteRenderer;
 
