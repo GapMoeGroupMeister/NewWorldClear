@@ -6,7 +6,8 @@ public class DefaultCanvas : MonoBehaviour
     [SerializeField] private GameObject shopPanel;
     [SerializeField] private GameObject requestPanel;
     
-    /** <summary>
+    /** 
+     * <summary>
      * 상점 들어가기
      * </summary>
      */

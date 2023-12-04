@@ -23,13 +23,14 @@ public class Weapon2 : MonoBehaviour, IPointerClickHandler
     [SerializeField] private Description descriptionScript;
     [SerializeField] private WeaponDescription2[] weaponDescription;
     
+    
+    [SerializeField] private Image weaponImage;
+    
     private int _randomIndex;
-    private Image _image;
 
     public GameObject SoldOut => soldOut;
     public WeaponDescription2[] WeaponDescription => weaponDescription;
     public int RandomIndex => _randomIndex;
-
 
     private void Start()
     {
