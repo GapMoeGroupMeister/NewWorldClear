@@ -21,7 +21,7 @@ public class RequestPanel : MonoBehaviour
     }
 
     [ContextMenu("Test/Request Setup")]
-    internal void RequestSetup()
+    public void RequestSetup()
     {
         day++;
         if(day > 3)
@@ -59,21 +59,4 @@ public class Ingredients
 {
     public string ingredients;
     public int count;
-}
-
-[CustomEditor(typeof(RequestPanel))]
-class RequestInspector : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        base.OnInspectorGUI();
-
-        GUILayout.Space(20f);
-        GUILayout.Label("Button");
-        if (GUILayout.Button("Request Random Setup"))
-        {
-            var requestPanel = target as RequestPanel;
-            requestPanel.RequestSetup();
-        }
-    }
 }
