@@ -18,6 +18,11 @@ public class WeaponMarketManager : MonoBehaviour
         WeaponChange();
     }
 
+    /**
+     * <summary>
+     * 무기 전부 바꾸기
+     * </summary>
+     */
     internal void WeaponChange()
     {
         foreach (var item in _weapons)
