@@ -39,7 +39,6 @@ public class Slot : MonoBehaviour, IPointerEnterHandler,  IPointerExitHandler
         currentItem = slotInfo.item;
 
         
-        print(currentItem.itemName);
         SetItemIcon();
         SetGuage();
         ItemAmount.text = currentSlot.amount.ToString();
