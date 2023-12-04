@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class BetaBossFlashLight : MonoBehaviour
+public class FlashBang : MonoBehaviour
 {
     private Rigidbody2D rb = null;
     private Vector2 moveDir;
@@ -11,6 +11,7 @@ public class BetaBossFlashLight : MonoBehaviour
     private float flySpeed = 5f;
     private float flyTime = 2f;
 
+    private float originRotateSpeed = 1f;
     private float rotateSpeed = 1f;
 
     private Sequence seq = null;
@@ -38,7 +39,7 @@ public class BetaBossFlashLight : MonoBehaviour
         flySpeed *= 0.2f;
     }
 
-    IEnumerator StartRoutine()
+    IEnumerator FlashBangRoutine()
     {
         seq = DOTween.Sequence();
         Vector3 originScale = transform.localScale;
@@ -68,6 +69,7 @@ public class BetaBossFlashLight : MonoBehaviour
         transform.position = pos;
         moveDir = dir;
         flySpeed = originFlySpeed;
-        StartCoroutine("StartRoutine");
+        rotateSpeed = originRotateSpeed;
+        StartCoroutine("FlashBangRoutine");
     }
 }
