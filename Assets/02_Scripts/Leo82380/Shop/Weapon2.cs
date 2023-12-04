@@ -22,16 +22,16 @@ public class Weapon2 : MonoBehaviour, IPointerClickHandler
     [Header("Weapon Description")]
     [SerializeField] private Description descriptionScript;
     [SerializeField] private WeaponDescription2[] weaponDescription;
-    
     [SerializeField] private Image weaponImage;
     
+    
     private int _randomIndex;
+    private Image _image;
 
     public GameObject SoldOut => soldOut;
     public WeaponDescription2[] WeaponDescription => weaponDescription;
     public int RandomIndex => _randomIndex;
 
-    
 
     private void Start()
     {
@@ -50,22 +50,23 @@ public class Weapon2 : MonoBehaviour, IPointerClickHandler
         description.transform.DOScale(1f, 0.5f);
 
         nameText.text = weaponDescription[_randomIndex].name;
-        descriptionText.text = weaponDescription[_randomIndex].isSoldOut ? "ÀÌ¹Ì ±¸¸ÅÇÑ ¹«±âÀÔ´Ï´Ù!" : weaponDescription[_randomIndex].description;
+        descriptionText.text = weaponDescription[_randomIndex].isSoldOut ? "ì´ë¯¸ êµ¬ë§¤í•œ ë¬´ê¸°ì…ë‹ˆë‹¤!" : weaponDescription[_randomIndex].description;
         descriptionScript.Weapon2 = this;
     }
 
     /**
      * <summary>
-     * ¹«±â¸¦ ·£´ıÀ¸·Î ¹Ù²Ù±â À§ÇÑ ¸Ş¼­µå
+     * ë¬´ê¸°ë¥¼ ëœë¤ìœ¼ë¡œ ë°”ê¾¸ê¸° ìœ„í•œ ë©”ì„œë“œ
      * </summary>
      */
     public void OnImageChanged()
     {
         _randomIndex = Random.Range(0, WeaponDescription.Length);
         
+        
         weaponImage.sprite = weaponDescription[_randomIndex].weaponIcon;
         weaponImage.SetNativeSize();
-        weaponNameText.text = weaponDescription[_randomIndex].name + "\n<size=25>" + weaponDescription[_randomIndex].price + "¿ø</size>";
+        weaponNameText.text = weaponDescription[_randomIndex].name + "\n<size=25>" + weaponDescription[_randomIndex].price + "ì›</size>";
 
         foreach (var item in weaponDescription)
         {
@@ -78,7 +79,7 @@ public class Weapon2 : MonoBehaviour, IPointerClickHandler
 }
 
 /** <summary>
- * ¹«±â ¼³¸í Å¬·¡½º
+ * ë¬´ê¸° ì„¤ëª… í´ë˜ìŠ¤
  * </summary>
  */
 [Serializable]
@@ -90,4 +91,12 @@ public class WeaponDescription2
     public int price;
     public bool isSoldOut;
     public Sprite weaponIcon;
+    public enum WeaponType
+    {
+        Normal,
+        Unique,
+        Epic,
+        Legendary
+    }
+    public WeaponType weaponType;
 }

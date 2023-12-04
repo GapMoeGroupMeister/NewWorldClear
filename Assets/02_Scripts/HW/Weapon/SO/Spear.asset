@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 49158c3b4635ef24395bc84ebb1cc3b3, type: 3}
-  m_Name: TestWeapon 2
+  m_Name: Spear
   m_EditorClassIdentifier: 
-  name: Electricc
-  desc: fewfaewfawe
-  weaponSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  damage: 3
-  attackDelay: 0.2
+  name: Spaer
+  weaponPrefab: {fileID: 5451285432579555106, guid: 19ffc8aacd8908b42b7ed3238a37f008, type: 3}
+  damage: 5
+  attackDelay: 1
   weaponType: 1
-  attackRange: {x: 3, y: 2}
+  attackMotion: 2
+  attackRange: {x: 3, y: 0.5}

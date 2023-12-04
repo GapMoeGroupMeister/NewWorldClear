@@ -14,7 +14,7 @@ public class BattleDroneFlashBang : BossSkill
 
         if (range != null && skillCoolTimeDown <= 0)
         {
-            playerDir = (range.transform.poswition - transform.position).normalized;
+            playerDir = (range.transform.position - transform.position).normalized;
             return true;
         }
 
