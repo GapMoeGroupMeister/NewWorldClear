@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.ShaderGraph;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -105,10 +104,10 @@ public class PlayerWeapon : MonoBehaviour
         Collider2D[] enemies = Physics2D.OverlapBoxAll(transform.position + ((Vector3)dir.normalized * (_attackRange.x / 2)), _attackRange, Mathf.Atan2(dir.x, dir.x), _enemyMask);
         if (enemies.Length > 0)
         {
-            Debug.Log($"°ø°Ý¿¡ ¸ÂÀº ÀûÀÇ ¼ö : {enemies.Length}");
+            Debug.Log($"ï¿½ï¿½ï¿½Ý¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ : {enemies.Length}");
             foreach (Collider2D col in enemies)
             {
-                Debug.Log($"°ø°Ý¿¡ ¸ÂÀº ³ð : {col.name}");
+                Debug.Log($"ï¿½ï¿½ï¿½Ý¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ : {col.name}");
                 col.GetComponent<Enemy_TEST>().Damage(_damage);
                 if(_weaponEvent != null)
                 {

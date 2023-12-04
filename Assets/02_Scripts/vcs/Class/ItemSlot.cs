@@ -7,10 +7,10 @@ public class ItemSlot
     
     /**
      * <summary>
-     * 아이템 SO 식별 Id
+     * 아이템 SO 정보
      * </summary>
      */
-    public int itemId;
+    public Item item;
     /**
      * <summary>
      * 아이템의 수량
@@ -24,7 +24,23 @@ public class ItemSlot
      */
     public float durability;
 
+    public ItemSlot()
+    {
+        
+    }
+    public ItemSlot(Item item)
+    {
+        this.item = item;
+        amount = 1;
+        durability = item.maxDurability;
+    }
     
-    
+    public ItemSlot(Item item, int amount)
+    {
+        
+        this.item = item;
+        this.amount = amount;
+        durability = item.maxDurability;
+    }
     
 }

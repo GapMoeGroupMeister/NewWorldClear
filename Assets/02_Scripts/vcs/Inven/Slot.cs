@@ -36,10 +36,9 @@ public class Slot : MonoBehaviour, IPointerEnterHandler,  IPointerExitHandler
     public void SetSlot(ItemSlot slotInfo)
     {
         currentSlot = slotInfo;
-        currentItem = ItemSOManager.GetItem(currentSlot.itemId);
+        currentItem = slotInfo.item;
 
         
-        print(currentItem.itemName);
         SetItemIcon();
         SetGuage();
         ItemAmount.text = currentSlot.amount.ToString();
@@ -48,7 +47,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler,  IPointerExitHandler
     private void SetItemIcon()
     {
         if (ItemImage == null) return;
-        ItemImage.sprite = currentItem.itemSprite;
+        //ItemImage.sprite = ;
         ItemImage.SetNativeSize();
         
         
