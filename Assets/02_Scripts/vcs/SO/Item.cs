@@ -21,11 +21,10 @@ public class Item : ScriptableObject
    public string itemName;
    /**
     * <summary>
-    * 아이템의 스프라이트
+    * 아이템의 스프라이트 아이디
     * </summary>
    */
-   [JsonIgnore]
-   public Sprite itemSprite;
+   public int itemSpriteId;
    /**
     * <summary>
     * 아이템 설명

@@ -19,7 +19,6 @@ public class ItemSOManager : MonoSingleton<ItemSOManager>
 
     private void Awake()
     {
-        LoadItem();
     }
 
     /**

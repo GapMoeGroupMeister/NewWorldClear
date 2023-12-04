@@ -1,8 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using UnityEngine;
 
 [System.Serializable]
 public class ItemSlot 
@@ -15,7 +10,7 @@ public class ItemSlot
      * 아이템 SO 정보
      * </summary>
      */
-    public int itemId;
+    public Item item;
     /**
      * <summary>
      * 아이템의 수량
@@ -35,7 +30,7 @@ public class ItemSlot
     }
     public ItemSlot(Item item)
     {
-        itemId = item.id;
+        this.item = item;
         amount = 1;
         durability = item.maxDurability;
     }
@@ -43,7 +38,7 @@ public class ItemSlot
     public ItemSlot(Item item, int amount)
     {
         
-        itemId = item.id;
+        this.item = item;
         this.amount = amount;
         durability = item.maxDurability;
     }
