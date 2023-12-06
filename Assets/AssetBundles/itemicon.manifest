@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 126204279
+CRC: 1041177132
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: f41a1e615276c1abe61503e0fe41f86d
+    Hash: 74a23d10a50ddaa38999421dfed3da68
   TypeTreeHash:
     serializedVersion: 2
     Hash: 2d8df09e698f722ada1caa03d3413830
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: f41a1e615276c1abe61503e0fe41f86d
+    Hash: 74a23d10a50ddaa38999421dfed3da68
 HashAppended: 0
 ClassTypes:
 - Class: 28
@@ -18,6 +18,6 @@ ClassTypes:
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
-- Assets/03_Texture/00_Sprite/ItemIcon/Item_Icon_Coin.Png
-- Assets/03_Texture/00_Sprite/ItemIcon/Item_Icon_Canfood.Png
+- Assets/03_Texture/00_Sprite/ItemIcon/Coin.Png
+- Assets/03_Texture/00_Sprite/ItemIcon/CanSoup.Png
 Dependencies: []
