@@ -1,5 +1,5 @@
+using System;
 using JetBrains.Annotations;
-using UnityEditor;
 using UnityEngine;
 
 public class SpriteLoader : MonoSingleton<SpriteLoader>
@@ -7,7 +7,12 @@ public class SpriteLoader : MonoSingleton<SpriteLoader>
 
     public Sprite[] spriteBase;
 
-    [MenuItem("Custom/SpriteLoad")]
+    private void Awake()
+    {
+        Load();
+    }
+
+    [ContextMenu("Custom/SpriteLoad")]
     public void Load()
     {
         AssetBundle bundle = AssetBundle.LoadFromFile("Assets/AssetBundles/itemicon");
@@ -24,16 +29,18 @@ public class SpriteLoader : MonoSingleton<SpriteLoader>
         }
         foreach(Sprite sprite in spriteBase)
         {
-            if (sprite.ToString() == spriteName)
+            print(sprite.name);
+            if (sprite.name == spriteName)
             {
                 return sprite;
             }
+            
         }
-
+        
         return null;
     }
 
-    [MenuItem("Custom/SpriteCheckLoad")]
+    [ContextMenu("Custom/SpriteCheckLoad")]
     public void LoadCheck()
     {
         Debug.Log("spriteBase,Length: "+spriteBase.Length);

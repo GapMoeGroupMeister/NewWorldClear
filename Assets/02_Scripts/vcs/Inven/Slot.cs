@@ -6,7 +6,6 @@ using UnityEngine.EventSystems;
 
 public class Slot : MonoBehaviour, IPointerEnterHandler,  IPointerExitHandler
 {
-    public ItemSlot thisSlot;
     
     [SerializeField]
     private Image ItemImage;
@@ -41,8 +40,10 @@ public class Slot : MonoBehaviour, IPointerEnterHandler,  IPointerExitHandler
 
     private void SetItemIcon()
     {
-        if (ItemImage == null) return;
-        ItemImage.sprite = SpriteLoader.Instance.FindSprite(currentSlot.item.itemSpriteName);
+        Sprite sprite = SpriteLoader.Instance.FindSprite(currentSlot.item.itemSpriteName);
+        ItemImage.sprite = sprite;
+        if(sprite == null)
+            print("null임");
         ItemImage.SetNativeSize();
          
         
