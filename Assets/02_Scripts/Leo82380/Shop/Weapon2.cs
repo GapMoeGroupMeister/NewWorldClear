@@ -23,6 +23,9 @@ public class Weapon2 : MonoBehaviour, IPointerClickHandler
     [SerializeField] private Description descriptionScript;
     [SerializeField] private WeaponDescription2[] weaponDescription;
     [SerializeField] private Image weaponImage;
+
+    [SerializeField] private Image[] frameImages;
+    [SerializeField] private Sprite[] frameSprites;
     
     
     private int _randomIndex;
@@ -63,18 +66,43 @@ public class Weapon2 : MonoBehaviour, IPointerClickHandler
     {
         _randomIndex = Random.Range(0, WeaponDescription.Length);
         
-        
         weaponImage.sprite = weaponDescription[_randomIndex].weaponIcon;
         weaponImage.SetNativeSize();
         weaponNameText.text = weaponDescription[_randomIndex].name + "\n<size=25>" + weaponDescription[_randomIndex].price + "원</size>";
+
+        switch (weaponDescription[_randomIndex].weaponType)
+        {
+            case WeaponDescription2.WeaponType.Normal:
+                foreach (var item in frameImages)
+                {
+                    item.sprite = frameSprites[0];
+                }
+                break;
+            case WeaponDescription2.WeaponType.Unique:
+                foreach (var item in frameImages)
+                {
+                    item.sprite = frameSprites[1];
+                }
+                break;
+            case WeaponDescription2.WeaponType.Epic:
+                foreach (var item in frameImages)
+                {
+                    item.sprite = frameSprites[2];
+                }
+                break;
+            case WeaponDescription2.WeaponType.Legendary:
+                foreach (var item in frameImages)
+                {
+                    item.sprite = frameSprites[3];
+                }
+                break;
+        }
 
         foreach (var item in weaponDescription)
         {
             item.isSoldOut = false;
         }
         soldOut.SetActive(false);
-
-
     }
 }
 
