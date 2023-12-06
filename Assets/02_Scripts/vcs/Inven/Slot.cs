@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -25,8 +22,6 @@ public class Slot : MonoBehaviour, IPointerEnterHandler,  IPointerExitHandler
 
     private void Awake()
     {
-        
-        
         ItemImage = transform.GetChild(0).GetComponent<Image>();
         GuageFill = transform.Find("ConditionGuage").transform.Find("GuageFill").GetComponent<Image>();
         ItemAmount = transform.Find("AmountBG").transform.Find("AmountText").GetComponent<TextMeshProUGUI>();
@@ -47,9 +42,9 @@ public class Slot : MonoBehaviour, IPointerEnterHandler,  IPointerExitHandler
     private void SetItemIcon()
     {
         if (ItemImage == null) return;
-        //ItemImage.sprite = ;
+        ItemImage.sprite = SpriteLoader.Instance.FindSprite(currentSlot.item.itemSpriteName);
         ItemImage.SetNativeSize();
-        
+         
         
     }
 

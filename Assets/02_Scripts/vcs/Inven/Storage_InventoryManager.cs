@@ -112,7 +112,6 @@ public class Storage_InventoryManager : MonoBehaviour
             slot.amount += amount;
         }
 
-        Debug.Log("Remain : "+remain);
         return remain;
     }
 
@@ -318,37 +317,4 @@ public class Storage_InventoryManager : MonoBehaviour
     }
     #endregion
 
-    /**
-     * <summary>
-     * 생성자를 흉내내는 무언가
-     * </summary>
-     */
-    public ItemSlot NewItemSlot(Item item)
-    {
-        return NewItemSlot(item, 1);
-    }
-    
-    /**
-     * <summary>
-     * 생성자를 흉내내는 무언가
-     * </summary>
-     */
-    public ItemSlot NewItemSlot(Item item, int _amount)
-    {
-        
-        if (item == null)
-        {
-            Debug.Log($"<color='red'>Error: NewItemSlot, {item.itemName} is not exist</color>");
-            return defaultItem;
-
-        }
-        return new ItemSlot()
-        {
-            item = item,
-            amount = _amount,
-            durability = item.maxDurability
-        };
-
-    }
-    
 }
