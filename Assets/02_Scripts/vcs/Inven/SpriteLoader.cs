@@ -1,33 +1,52 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using JetBrains.Annotations;
 using UnityEngine;
 
-public class SpriteLoader : MonoBehaviour
+public class SpriteLoader : MonoSingleton<SpriteLoader>
 {
 
-    public static Sprite[] spriteBase;
+    public Sprite[] spriteBase;
 
-    public static void Load()
+    private void Awake()
+    {
+        Load();
+    }
+
+    [ContextMenu("Custom/SpriteLoad")]
+    public void Load()
     {
         AssetBundle bundle = AssetBundle.LoadFromFile("Assets/AssetBundles/itemicon");
-        spriteBase = (Sprite[])bundle.LoadAllAssets();
+        spriteBase = bundle.LoadAllAssets<Sprite>();
 
         
     }
-
     [CanBeNull]
-    public static Sprite FindSprite(string spriteName)
+    public Sprite FindSprite(string spriteName)
     {
-        
+        if (spriteBase == null)
+        {
+            Load();
+        }
         foreach(Sprite sprite in spriteBase)
         {
-            if (sprite.ToString() == spriteName)
+            print(sprite.name);
+            if (sprite.name == spriteName)
             {
                 return sprite;
             }
+            
         }
-
+        
         return null;
+    }
+
+    [ContextMenu("Custom/SpriteCheckLoad")]
+    public void LoadCheck()
+    {
+        Debug.Log("spriteBase,Length: "+spriteBase.Length);
+        foreach (Sprite sprite in spriteBase)
+        {
+            Debug.Log("sprite : ["+sprite.ToString()+"]");
+        }
     }
 }

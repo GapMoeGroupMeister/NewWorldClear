@@ -24,7 +24,7 @@ public class Item : ScriptableObject
     * 아이템의 스프라이트 이름
     * </summary>
    */
-   public int itemSpriteName;
+   public string itemSpriteName;
    /**
     * <summary>
     * 아이템 설명
