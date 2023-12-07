@@ -78,7 +78,7 @@ public class RequestPanel : MonoBehaviour
     {
         if (ingredients[randomIndex].count > reserves)
         {
-            resultText.text = "보유량이 충붕하지 않습니다!";
+            resultText.text = "보유량이 충분하지 않습니다!";
             resultText.color = Color.red;
             return;
         }
@@ -90,6 +90,7 @@ public class RequestPanel : MonoBehaviour
             print(reserves);
             requestPanel.transform.DOMoveY(-10f, duration).SetEase(ease);
             ingredientText.text = "감사합니다!\n<color=black><size=70>버튼을 눌러 돌아가기</size></color>";
+            acceptButton.SetActive(false);
         }
     }
 }
