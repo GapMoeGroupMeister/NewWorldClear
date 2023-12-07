@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Request", menuName = "SO/Request")]
+[CreateAssetMenu(fileName = "RequestSO", menuName = "SO/RequestSO")]
 public class RequestSO : ScriptableObject
 {
     public string request;

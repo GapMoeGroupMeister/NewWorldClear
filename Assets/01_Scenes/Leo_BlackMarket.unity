@@ -769,7 +769,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1499,7 +1499,7 @@ RectTransform:
   m_Father: {fileID: 646663005}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2237,7 +2237,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &754768529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3789,10 +3789,10 @@ RectTransform:
   - {fileID: 695582918}
   m_Father: {fileID: 968025933}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -450}
-  m_SizeDelta: {x: 200, y: 200}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1157072495
 MonoBehaviour:
@@ -3851,30 +3851,14 @@ MonoBehaviour:
   weaponNameText: {fileID: 1178017602}
   descriptionScript: {fileID: 1564695902}
   weaponDescription:
-  - name: "\uC2DD\uB7C9"
-    description: "\uC2DD\uB7C9\uC774\uB2E4\n\uB9DB\uC788\uB2E4"
-    price: 1
+  - shopSO: {fileID: 11400000, guid: a801cbb1ebe2e834d88cb4c69d6371a3, type: 2}
     isSoldOut: 0
-    weaponIcon: {fileID: 21300000, guid: f827f232643c277408c2b3ef271b46ed, type: 3}
-    weaponType: 0
-  - name: "\uBC30\uD130\uB9AC"
-    description: "\uBC30\uD130\uB9AC\uB85C \uCDA9\uC804\uD55C\uB2E4"
-    price: 10
+  - shopSO: {fileID: 11400000, guid: 3357ad4f2b33c134480998859f014373, type: 2}
     isSoldOut: 0
-    weaponIcon: {fileID: 21300000, guid: 47cf8e9f478901c408fadca1f98c1d79, type: 3}
-    weaponType: 1
-  - name: "\uB098\uC0AC"
-    description: "\uAE30\uACC4\uB97C \uB9E4\uC6B0 \uC798 \uACE0\uCE5C\uB2E4"
-    price: 100
+  - shopSO: {fileID: 11400000, guid: 50a30fc08454b6241b16f9092a06c654, type: 2}
     isSoldOut: 0
-    weaponIcon: {fileID: 21300000, guid: 5520efef964c2394b9af26730420c4c2, type: 3}
-    weaponType: 2
-  - name: "\uB098\uBB34"
-    description: "\uC544\uB984\uB2F5\uACE0 \uB2E8\uB2E8\uD558\uB2E4"
-    price: 1000
+  - shopSO: {fileID: 11400000, guid: c40620683d2b0f24e89f0cddf0d0bee3, type: 2}
     isSoldOut: 0
-    weaponIcon: {fileID: 21300000, guid: d276dbde241f3f1469cd1a47a8abe982, type: 3}
-    weaponType: 3
   weaponImage: {fileID: 638625702}
   frameImages:
   - {fileID: 476183401}
@@ -4724,7 +4708,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1443575860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4860,10 +4844,10 @@ RectTransform:
   - {fileID: 2105166860}
   m_Father: {fileID: 968025933}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 500, y: -450}
-  m_SizeDelta: {x: 200, y: 200}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1469519711
 MonoBehaviour:
@@ -4922,30 +4906,14 @@ MonoBehaviour:
   weaponNameText: {fileID: 463234932}
   descriptionScript: {fileID: 1564695902}
   weaponDescription:
-  - name: "\uB098\uBB34"
-    description: "\uBB3C\uC774 \uBA39\uC5B4 \uC369\uC5C8\uB2E4"
-    price: 1
+  - shopSO: {fileID: 11400000, guid: a801cbb1ebe2e834d88cb4c69d6371a3, type: 2}
     isSoldOut: 0
-    weaponIcon: {fileID: 21300000, guid: d276dbde241f3f1469cd1a47a8abe982, type: 3}
-    weaponType: 0
-  - name: "\uD1B5\uC870\uB9BC"
-    description: "\uC624\uB798\uB418\uC5C8\uB2E4"
-    price: 10
+  - shopSO: {fileID: 11400000, guid: 3357ad4f2b33c134480998859f014373, type: 2}
     isSoldOut: 0
-    weaponIcon: {fileID: 21300000, guid: f827f232643c277408c2b3ef271b46ed, type: 3}
-    weaponType: 1
-  - name: "\uBC30\uD130\uB9AC"
-    description: "50% \uCDA9\uC804\uB418\uC5C8\uB2E4"
-    price: 100
+  - shopSO: {fileID: 11400000, guid: 50a30fc08454b6241b16f9092a06c654, type: 2}
     isSoldOut: 0
-    weaponIcon: {fileID: 21300000, guid: 47cf8e9f478901c408fadca1f98c1d79, type: 3}
-    weaponType: 2
-  - name: "\uB098\uC0AC"
-    description: "\uC544\uB984\uB2E4\uC6B4 \uB098\uC0AC\uB2E4"
-    price: 1000
+  - shopSO: {fileID: 11400000, guid: c40620683d2b0f24e89f0cddf0d0bee3, type: 2}
     isSoldOut: 0
-    weaponIcon: {fileID: 21300000, guid: 5520efef964c2394b9af26730420c4c2, type: 3}
-    weaponType: 2
   weaponImage: {fileID: 826231520}
   frameImages:
   - {fileID: 2019562697}
@@ -5392,10 +5360,10 @@ RectTransform:
   - {fileID: 952896698}
   m_Father: {fileID: 968025933}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 500, y: -50}
-  m_SizeDelta: {x: 200, y: 200}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1539927807
 MonoBehaviour:
@@ -5454,30 +5422,14 @@ MonoBehaviour:
   weaponNameText: {fileID: 1089485100}
   descriptionScript: {fileID: 1564695902}
   weaponDescription:
-  - name: "\uB098\uBB34"
-    description: "\uB2E8\uB2E8\uD558\uB2E4"
-    price: 323
+  - shopSO: {fileID: 11400000, guid: a801cbb1ebe2e834d88cb4c69d6371a3, type: 2}
     isSoldOut: 0
-    weaponIcon: {fileID: 21300000, guid: d276dbde241f3f1469cd1a47a8abe982, type: 3}
-    weaponType: 0
-  - name: "\uBC30\uD130\uB9AC"
-    description: "\uBC30\uD130\uB9AC\uB2E4"
-    price: 111
+  - shopSO: {fileID: 11400000, guid: 3357ad4f2b33c134480998859f014373, type: 2}
     isSoldOut: 0
-    weaponIcon: {fileID: 21300000, guid: 47cf8e9f478901c408fadca1f98c1d79, type: 3}
-    weaponType: 1
-  - name: "\uBD95\uB300"
-    description: "\uCCB4\uB825 \uD68C\uBCF5 +100"
-    price: 111
+  - shopSO: {fileID: 11400000, guid: 50a30fc08454b6241b16f9092a06c654, type: 2}
     isSoldOut: 0
-    weaponIcon: {fileID: 21300000, guid: 42674fc07c84f714f9b627817436af76, type: 3}
-    weaponType: 2
-  - name: "\uCD1D\uC54C"
-    description: "\uCD1D\uC54C\uC744 \uB9E4\uC6B0 \uB9CE\uC774 \uC900\uB2E4"
-    price: 111
+  - shopSO: {fileID: 11400000, guid: c40620683d2b0f24e89f0cddf0d0bee3, type: 2}
     isSoldOut: 0
-    weaponIcon: {fileID: 21300000, guid: 4c7da3e0d1048b849a99a5d11614de38, type: 3}
-    weaponType: 2
   weaponImage: {fileID: 265772082}
   frameImages:
   - {fileID: 1821322276}
@@ -5939,14 +5891,8 @@ MonoBehaviour:
   ease: 27
   ingredientText: {fileID: 320424058}
   ingredients:
-  - ingredients: "\uBAA9\uC7AC"
-    count: 5
-  - ingredients: "\uC0AC\uC554"
-    count: 3
-  - ingredients: "\uC11D\uD0C4"
-    count: 10
-  - ingredients: "\uCCA0\uC6D0\uC11D"
-    count: 20
+  - {fileID: 11400000, guid: ab51a43b7f096d74a9414936f2c5ed86, type: 2}
+  - {fileID: 11400000, guid: 4477bb204349ee244a77c271d0779573, type: 2}
   man: {fileID: 163371839}
   acceptButton: {fileID: 1101727834}
   requestPanel: {fileID: 1990484305}
@@ -7205,10 +7151,10 @@ RectTransform:
   - {fileID: 2058748819}
   m_Father: {fileID: 968025933}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 150, y: -150}
-  m_SizeDelta: {x: 200, y: 200}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1880098421
 MonoBehaviour:
@@ -7267,30 +7213,14 @@ MonoBehaviour:
   weaponNameText: {fileID: 1788361912}
   descriptionScript: {fileID: 1564695902}
   weaponDescription:
-  - name: "\uBD95\uB300"
-    description: "\uCCB4\uB825 \uD68C\uBCF5 +10"
-    price: 1
+  - shopSO: {fileID: 11400000, guid: a801cbb1ebe2e834d88cb4c69d6371a3, type: 2}
     isSoldOut: 0
-    weaponIcon: {fileID: 21300000, guid: 42674fc07c84f714f9b627817436af76, type: 3}
-    weaponType: 0
-  - name: "\uCD1D\uC54C"
-    description: "\uCD1D\uC54C\uC774\uB2E4"
-    price: 10
+  - shopSO: {fileID: 11400000, guid: 3357ad4f2b33c134480998859f014373, type: 2}
     isSoldOut: 0
-    weaponIcon: {fileID: 21300000, guid: 4c7da3e0d1048b849a99a5d11614de38, type: 3}
-    weaponType: 1
-  - name: "\uB098\uC0AC"
-    description: "\uAE30\uACC4\uB97C \uACE0\uCE5C\uB2E4"
-    price: 100
+  - shopSO: {fileID: 11400000, guid: 50a30fc08454b6241b16f9092a06c654, type: 2}
     isSoldOut: 0
-    weaponIcon: {fileID: 21300000, guid: 5520efef964c2394b9af26730420c4c2, type: 3}
-    weaponType: 2
-  - name: "\uC2DD\uB7C9"
-    description: "\uB9DB\uC788\uB2E4"
-    price: 1000
+  - shopSO: {fileID: 11400000, guid: c40620683d2b0f24e89f0cddf0d0bee3, type: 2}
     isSoldOut: 0
-    weaponIcon: {fileID: 21300000, guid: f827f232643c277408c2b3ef271b46ed, type: 3}
-    weaponType: 3
   weaponImage: {fileID: 1906533697}
   frameImages:
   - {fileID: 115449690}

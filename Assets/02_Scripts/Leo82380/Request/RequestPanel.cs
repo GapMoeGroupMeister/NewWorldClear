@@ -46,12 +46,12 @@ public class RequestPanel : MonoBehaviour
             transform.position = new Vector3(0f, -10f, 0f);
             transform.DOMoveY(-3.5f, duration).SetEase(ease);
             randomIndex = Random.Range(0, ingredients.Count);
-            ingredientText.text =
-                ingredients[randomIndex].item.itemName + " 주세요\n" +
-                "<size=70><color=#000000>목표: " + ingredients[randomIndex].item.itemName + " " +
+            nowRequest = ingredients[randomIndex];
+            ingredientText.text = nowRequest.request + 
+                "\n<size=70><color=#000000>목표: " + nowRequest.item.itemName + " " +
                 ingredients[randomIndex].amount + "개</color></size>";
 
-            count = ingredients[randomIndex].amount;
+            count = nowRequest.amount;
             acceptButton.SetActive(true);
         }
         else
@@ -68,27 +68,28 @@ public class RequestPanel : MonoBehaviour
 
     public void Request()
     {
+        int? amount = ItemManager.Instance.FindItem(nowRequest.item).amount;
         requestPanel.transform.DOMoveY(0, duration).SetEase(ease);
         
-        targetText.text = ingredients[randomIndex].item.itemName + " " + ingredients[randomIndex].amount + "개";
-        reservesText.text = ingredients[randomIndex].item.itemName + " " + 1 + "개";
+        targetText.text = nowRequest.item.itemName + " " + nowRequest.amount + "개";
+        reservesText.text = nowRequest.item.itemName + " " + 
+                            (amount < 0 ? "0" : amount) + "개";
     }
 
     public void Pass()
     {
         if (ItemManager.Instance.FindItem(nowRequest.item) == null) return;
-        if (ItemManager.Instance)
-        {
-            resultText.text = "보유량이 충분하지 않습니다!";
-            resultText.color = Color.red;
-        }
-        else
+        if (ItemManager.Instance.SubItem(nowRequest.item, nowRequest.amount))
         {
             resultText.text = string.Empty;
-            
             requestPanel.transform.DOMoveY(-10f, duration).SetEase(ease);
             ingredientText.text = "감사합니다!\n<color=black><size=70>버튼을 눌러 돌아가기</size></color>";
             acceptButton.SetActive(false);
+        }
+        else
+        {
+            resultText.text = "보유량이 충분하지 않습니다!";
+            resultText.color = Color.red;
         }
     }
 }
