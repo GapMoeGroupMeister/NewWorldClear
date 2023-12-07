@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
@@ -9,7 +9,7 @@ public class RequestPanel : MonoBehaviour
     [Header("ingredients")]
     [SerializeField] private Ease ease;
     [SerializeField] private TextMeshProUGUI ingredientText;
-    [SerializeField] private Ingredients[] ingredients;
+    [SerializeField] private List<RequestSO> ingredients;
     [SerializeField] private GameObject man;
 
     [Space]
@@ -24,8 +24,8 @@ public class RequestPanel : MonoBehaviour
     
     private int count;
     private int day;
-    private int reserves = 10;
     private int randomIndex;
+    private RequestSO nowRequest;
 
     private void OnEnable()
     {
@@ -45,13 +45,13 @@ public class RequestPanel : MonoBehaviour
             man.SetActive(true);
             transform.position = new Vector3(0f, -10f, 0f);
             transform.DOMoveY(-3.5f, duration).SetEase(ease);
-            randomIndex = Random.Range(0, ingredients.Length);
+            randomIndex = Random.Range(0, ingredients.Count);
             ingredientText.text =
-                ingredients[randomIndex].ingredients + " 주세요\n" +
-                "<size=70><color=#000000>목표: " + ingredients[randomIndex].ingredients + " " +
-                ingredients[randomIndex].count + "개</color></size>";
+                ingredients[randomIndex].item.itemName + " 주세요\n" +
+                "<size=70><color=#000000>목표: " + ingredients[randomIndex].item.itemName + " " +
+                ingredients[randomIndex].amount + "개</color></size>";
 
-            count = ingredients[randomIndex].count;
+            count = ingredients[randomIndex].amount;
             acceptButton.SetActive(true);
         }
         else
@@ -70,37 +70,25 @@ public class RequestPanel : MonoBehaviour
     {
         requestPanel.transform.DOMoveY(0, duration).SetEase(ease);
         
-        targetText.text = ingredients[randomIndex].ingredients + " " + ingredients[randomIndex].count + "개";
-        reservesText.text = ingredients[randomIndex].ingredients + " " + reserves + "개";
+        targetText.text = ingredients[randomIndex].item.itemName + " " + ingredients[randomIndex].amount + "개";
+        reservesText.text = ingredients[randomIndex].item.itemName + " " + 1 + "개";
     }
 
     public void Pass()
     {
-        if (ingredients[randomIndex].count > reserves)
+        if (ItemManager.Instance.FindItem(nowRequest.item) == null) return;
+        if (ItemManager.Instance)
         {
             resultText.text = "보유량이 충분하지 않습니다!";
             resultText.color = Color.red;
-            return;
         }
         else
         {
             resultText.text = string.Empty;
-            print(reserves);
-            reserves -= ingredients[randomIndex].count;
-            print(reserves);
+            
             requestPanel.transform.DOMoveY(-10f, duration).SetEase(ease);
             ingredientText.text = "감사합니다!\n<color=black><size=70>버튼을 눌러 돌아가기</size></color>";
             acceptButton.SetActive(false);
         }
     }
-}
-
-/// <summary>
-/// 필요한 재료
-/// </summary>
-[Serializable]
-public class Ingredients
-{
-    public string ingredients;
-    public int count;
 }
