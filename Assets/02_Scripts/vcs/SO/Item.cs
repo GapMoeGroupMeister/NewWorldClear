@@ -13,6 +13,14 @@ public class Item : ScriptableObject
     * </summary>
     */
    public int id;
+
+   /**
+    * <summary>
+    * 아이템 랭크, 1 ~ 4
+    * </summary>
+    */
+   public int Tier;
+   
    /**
    * <summary>
    * 아이템 이름
