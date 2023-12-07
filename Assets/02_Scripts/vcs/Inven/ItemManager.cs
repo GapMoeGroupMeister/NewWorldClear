@@ -110,6 +110,34 @@ public class ItemManager : MonoSingleton<ItemManager>
     }
 
     /**
+     * <param name="item">
+     * 인벤에서 뺄 아이템
+     * </param>
+     * <param name="amount">
+     * 뺄 아이템 개수
+     * </param>
+     * <summary>
+     * 아이템 빼는 메서드
+     * </summary>
+     * <returns>
+     * 성공적으로 아이템을 뺐는지 Bool 값으로 반환
+     * </returns>
+     */
+    public bool SubItem(Item item, int amount)
+    {
+
+        ItemSlot? slot = FindItem(item);
+        if (slot == null)
+        {
+            Debug.Log("아이템이 인벤토리에 존재하지 않아 뺄수 없습니다");
+            return false;
+        }
+
+        return Sub(slot, amount);
+        
+    }
+
+    /**
      * <summary>
      * 인벤토리에서 아이템을 찾아주는 메서드
      * </summary>
