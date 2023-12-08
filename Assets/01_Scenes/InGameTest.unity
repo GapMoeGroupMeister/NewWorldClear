@@ -1785,6 +1785,7 @@ MonoBehaviour:
   thinSheild: 0
   buffs: 0
   debuffs: 0
+  _rigidbody: {fileID: 0}
 --- !u!95 &1049123942
 Animator:
   serializedVersion: 5
@@ -3281,7 +3282,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2050964440
 Transform:
   m_ObjectHideFlags: 0
