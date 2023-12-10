@@ -2,7 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
+using System;
 
 public class RequestPanel : MonoBehaviour
 {
@@ -19,13 +21,14 @@ public class RequestPanel : MonoBehaviour
     [SerializeField] private TMP_Text targetText;
     [SerializeField] private TMP_Text reservesText;
     [SerializeField] private TMP_Text resultText;
+    [SerializeField] private Image[] ingredientImage;
 
     [SerializeField] private float duration = 0.5f;
     
     private int count;
     private int day;
     private int randomIndex;
-    private RequestSO nowRequest;
+    public RequestSO nowRequest;
 
     private void OnEnable()
     {
@@ -68,12 +71,28 @@ public class RequestPanel : MonoBehaviour
 
     public void Request()
     {
-        int? amount = ItemManager.Instance.FindItem(nowRequest.item).amount;
-        requestPanel.transform.DOMoveY(0, duration).SetEase(ease);
-        
-        targetText.text = nowRequest.item.itemName + " " + nowRequest.amount + "개";
-        reservesText.text = nowRequest.item.itemName + " " + 
-                            (amount < 0 ? "0" : amount) + "개";
+        #nullable enable
+        try
+        {
+            ItemSlot? slot = ItemManager.Instance.FindItem(nowRequest.item);
+            int? amount = slot.amount;
+            requestPanel.transform.DOMoveY(0, duration).SetEase(ease);
+
+            targetText.text = nowRequest.item.itemName + " " + nowRequest.amount + "개";
+            reservesText.text = nowRequest.item.itemName + " " +
+                                (amount < 0 ? "0" : amount) + "개";
+            print(slot.item);
+            for (int i = 0; i < ingredientImage.Length; i++)
+            {
+                ingredientImage[i].sprite = SpriteLoader.Instance.FindSprite(slot.item.itemSpriteName);
+                ingredientImage[i].SetNativeSize();
+                ingredientImage[i].gameObject.GetComponent<RectTransform>().localScale = ingredientImage[i].gameObject.GetComponent<RectTransform>().localScale * 3f;
+            }
+        }
+        catch (Exception e)
+        {
+            print(e.Message);
+        }
     }
 
     public void Pass()
@@ -91,5 +110,10 @@ public class RequestPanel : MonoBehaviour
             resultText.text = "보유량이 충분하지 않습니다!";
             resultText.color = Color.red;
         }
+    }
+    
+    public void RequestPanelClose()
+    {
+        requestPanel.transform.DOMoveY(-10f, duration).SetEase(ease);
     }
 }
