@@ -179,7 +179,7 @@ public class ItemManager : MonoSingleton<ItemManager>
     
     /**
      * <summary>
-     * json에서 인벤토리 파일을 불러옴
+     * json에서 창고 인벤토리 파일을 불러옴
      * </summary>
      */
     public void LoadInventoryFile()
@@ -188,7 +188,7 @@ public class ItemManager : MonoSingleton<ItemManager>
     }
     /**
      * <summary>
-     * 인벤토리 파일을 json으로 저장함
+     * 창고 인벤토리 파일을 json으로 저장함
      * </summary>
      */
     public void SaveInventoryFile()
