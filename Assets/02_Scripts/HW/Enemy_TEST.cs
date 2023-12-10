@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_TEST : MonoBehaviour
+public class Enemy_TEST : Damageable
 {
     [SerializeField]
     Transform _playerTrm;
@@ -26,5 +26,20 @@ public class Enemy_TEST : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public override void HitDamage(float damage)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void BleedDamage(float damage)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void PoisonDamage(float damage)
+    {
+        throw new System.NotImplementedException();
     }
 }

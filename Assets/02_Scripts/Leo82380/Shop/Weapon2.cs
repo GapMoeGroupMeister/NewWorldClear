@@ -22,16 +22,19 @@ public class Weapon2 : MonoBehaviour, IPointerClickHandler
     [Header("Weapon Description")]
     [SerializeField] private Description descriptionScript;
     [SerializeField] private WeaponDescription2[] weaponDescription;
-    
     [SerializeField] private Image weaponImage;
+
+    [SerializeField] private Image[] frameImages;
+    [SerializeField] private Sprite[] frameSprites;
+    
     
     private int _randomIndex;
+    private Image _image;
 
     public GameObject SoldOut => soldOut;
     public WeaponDescription2[] WeaponDescription => weaponDescription;
     public int RandomIndex => _randomIndex;
 
-    
 
     private void Start()
     {
@@ -49,45 +52,69 @@ public class Weapon2 : MonoBehaviour, IPointerClickHandler
         description.SetActive(true);
         description.transform.DOScale(1f, 0.5f);
 
-        nameText.text = weaponDescription[_randomIndex].name;
-        descriptionText.text = weaponDescription[_randomIndex].isSoldOut ? "ÀÌ¹Ì ±¸¸ÅÇÑ ¹«±âÀÔ´Ï´Ù!" : weaponDescription[_randomIndex].description;
+        nameText.text = weaponDescription[_randomIndex].shopSO.itemName;
+        descriptionText.text = weaponDescription[_randomIndex].isSoldOut ? "ì´ë¯¸ êµ¬ë§¤í•œ ë¬´ê¸°ì…ë‹ˆë‹¤!" : weaponDescription[_randomIndex].shopSO.description;
         descriptionScript.Weapon2 = this;
     }
 
     /**
      * <summary>
-     * ¹«±â¸¦ ·£´ıÀ¸·Î ¹Ù²Ù±â À§ÇÑ ¸Ş¼­µå
+     * ë¬´ê¸°ë¥¼ ëœë¤ìœ¼ë¡œ ë°”ê¾¸ê¸° ìœ„í•œ ë©”ì„œë“œ
      * </summary>
      */
     public void OnImageChanged()
     {
         _randomIndex = Random.Range(0, WeaponDescription.Length);
-        
-        weaponImage.sprite = weaponDescription[_randomIndex].weaponIcon;
+
+        weaponImage.sprite = weaponDescription[_randomIndex].shopSO.itemIcon;
         weaponImage.SetNativeSize();
-        weaponNameText.text = weaponDescription[_randomIndex].name + "\n<size=25>" + weaponDescription[_randomIndex].price + "¿ø</size>";
+        weaponNameText.text = weaponDescription[_randomIndex].shopSO.itemName + "\n<size=25>" + weaponDescription[_randomIndex].shopSO.price + "ì›</size>";
+
+        switch (weaponDescription[_randomIndex].shopSO.grade)
+        {
+            case 1:
+                foreach (var item in frameImages)
+                {
+                    item.sprite = frameSprites[0];
+                }
+                break;
+            case 2:
+                foreach (var item in frameImages)
+                {
+                    item.sprite = frameSprites[1];
+                }
+                break;
+            case 3:
+                foreach (var item in frameImages)
+                {
+                    item.sprite = frameSprites[2];
+                }
+                break;
+            case 4:
+                foreach (var item in frameImages)
+                {
+                    item.sprite = frameSprites[3];
+                }
+                break;
+            default:
+                throw new Exception("ì˜ëª»ëœ ë“±ê¸‰ì…ë‹ˆë‹¤");
+        }
 
         foreach (var item in weaponDescription)
         {
             item.isSoldOut = false;
         }
         soldOut.SetActive(false);
-
-
     }
 }
 
 /** <summary>
- * ¹«±â ¼³¸í Å¬·¡½º
+ * ë¬´ê¸° ì„¤ëª… í´ë˜ìŠ¤
  * </summary>
  */
 [Serializable]
 public class WeaponDescription2
 {
-    public string name;
-    [TextArea(3, 5)]
-    public string description;
-    public int price;
+    public ShopSO shopSO;
     public bool isSoldOut;
-    public Sprite weaponIcon;
 }

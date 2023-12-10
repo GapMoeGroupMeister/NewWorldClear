@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09c21cebde383634288bf6a7f376f5bf, type: 3}
+  m_Name: Dust
+  m_EditorClassIdentifier: 
+  enemyName: Dust
+  defaultHP: 1000
+  defaultATK: 10
+  defaultDEF: 2
+  defaultSPD: 2
+  attackCycle: 1.25
+  detectRange: 7
