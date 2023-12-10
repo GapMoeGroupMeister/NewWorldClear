@@ -14,10 +14,17 @@ public class DropItemObject : DropObject
 
     public override void Get()
     {
-        
+        GetItem();
     }
 
-
+    private void GetItem()
+    {
+        ItemManager.Instance.AddItem(new ItemSlot(_dropItem.item, _dropItem.amount));
+        
+        // 풀링 추가되면 넣어야함
+        Destroy(gameObject);
+        
+    }
     
     
     
