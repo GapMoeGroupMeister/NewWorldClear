@@ -71,27 +71,19 @@ public class RequestPanel : MonoBehaviour
 
     public void Request()
     {
-        #nullable enable
-        try
-        {
-            ItemSlot? slot = ItemManager.Instance.FindItem(nowRequest.item);
-            int? amount = slot.amount;
-            requestPanel.transform.DOMoveY(0, duration).SetEase(ease);
+        ItemSlot? slot = ItemManager.Instance.FindItem(nowRequest.item); 
+        int? amount = slot.amount;
+        requestPanel.transform.DOMoveY(0, duration).SetEase(ease);
 
-            targetText.text = nowRequest.item.itemName + " " + nowRequest.amount + "개";
-            reservesText.text = nowRequest.item.itemName + " " +
+        targetText.text = nowRequest.item.itemName + " " + nowRequest.amount + "개";
+        reservesText.text = nowRequest.item.itemName + " " +
                                 (amount < 0 ? "0" : amount) + "개";
-            print(slot.item);
-            for (int i = 0; i < ingredientImage.Length; i++)
-            {
-                ingredientImage[i].sprite = SpriteLoader.Instance.FindSprite(slot.item.itemSpriteName);
-                ingredientImage[i].SetNativeSize();
-                ingredientImage[i].gameObject.GetComponent<RectTransform>().localScale = ingredientImage[i].gameObject.GetComponent<RectTransform>().localScale * 3f;
-            }
-        }
-        catch (Exception e)
+        print(slot.item);
+        for (int i = 0; i < ingredientImage.Length; i++)
         {
-            print(e.Message);
+            ingredientImage[i].sprite = SpriteLoader.Instance.FindSprite(slot.item.itemSpriteName);
+            ingredientImage[i].SetNativeSize();
+            ingredientImage[i].gameObject.GetComponent<RectTransform>().localScale = ingredientImage[i].gameObject.GetComponent<RectTransform>().localScale * 3f;
         }
     }
 
