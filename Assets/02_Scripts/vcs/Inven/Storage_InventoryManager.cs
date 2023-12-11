@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using JetBrains.Annotations;
 using UnityEngine;
 
 public class Storage_InventoryManager : InventoryManager
@@ -55,6 +51,17 @@ public class Storage_InventoryManager : InventoryManager
     {
         ItemManager.Instance.AddItem(canSoup);
     }
+
+    /**
+     * <summary>
+     * 아이템 티어 순서대로 자동 정렬
+     * </summary>
+     */
+    public void SortByTier()
+    {
+        
+    }
+    
 
 
 
