@@ -11,8 +11,6 @@ public class PlayerController : Damageable
     Animator _animator;
 
     Transform _weaponTrm;
-    [SerializeField]
-    PlayerInputReader _inputReader;
 
 
     public float attackDelay;
@@ -38,16 +36,12 @@ public class PlayerController : Damageable
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
 
-        _inputReader.MoveEvent += Move;
-        _inputReader.DashEvent += Dash;
         _weaponTrm = transform.Find("Weapon");
         _moveSpeed = 5f;
     }
 
     private void OnDisable()
     {
-        _inputReader.MoveEvent -= Move;
-        _inputReader.DashEvent -= Dash;
     }
 
     private void Update()
