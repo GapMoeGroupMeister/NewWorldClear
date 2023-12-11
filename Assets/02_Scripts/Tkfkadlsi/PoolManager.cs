@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Tkfkadlsi
 {
     [System.Serializable]
-    public class PoolingObject
+    public class PoolingObject 
     {
         public string objectName;
         public int objectAmount;
@@ -13,20 +13,24 @@ namespace Tkfkadlsi
         public Transform poolLocation;
     }
 
-    public class PoolManager : MonoSingleton<PoolManager>
+    [CreateAssetMenu(fileName = "PoolingObjectList", menuName = "SO/PoolingObjectList")]
+    public class PoolingObjectList : ScriptableObject
     {
         public List<PoolingObject> poolingObjects = new List<PoolingObject>();
+    }
+
+    public class PoolManager : MonoSingleton<PoolManager>
+    {
         public Dictionary<string, Queue<GameObject>> pools = new Dictionary<string, Queue<GameObject>>();
+        public PoolingObjectList poolingObjectList;
         public bool readyPool = false;
         private void Awake()
         {
-            if (Instance == this)
-                DontDestroyOnLoad(gameObject);
-            else
+            if (Instance != this)
                 Destroy(gameObject);
 
 
-            foreach (PoolingObject @object in poolingObjects)
+            foreach (PoolingObject @object in poolingObjectList.poolingObjects)
             {
                 pools.Add(@object.objectName, new Queue<GameObject>());
 
@@ -48,7 +52,7 @@ namespace Tkfkadlsi
 
         private GameObject CreateObject(string objectName, Transform location = null)
         {
-            foreach (PoolingObject @object in poolingObjects)
+            foreach (PoolingObject @object in poolingObjectList.poolingObjects)
             {
                 if (@object.objectName == objectName)
                 {
