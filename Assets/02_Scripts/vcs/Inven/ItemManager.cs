@@ -175,6 +175,57 @@ public class ItemManager : MonoSingleton<ItemManager>
         return targetItem;
     }
 
+    /**
+     * <param name="itemSlot">
+     * 찾을 아이템 슬롯 (durability를 반영함)
+     * </param>
+     * <summary>
+     * 아이템의 개수를 세어 반환합니다
+     * </summary>
+     * <returns>
+     * 찾은 조건에 해당하는 아이템의 개수
+     * </returns>
+     */
+    public int CountItem(ItemSlot itemSlot)
+    {
+        int amount = 0;
+        foreach (ItemSlot slot in inventory)
+        {
+            if (slot.item == itemSlot.item && slot.durability == itemSlot.durability)
+            {
+                amount += slot.amount;
+            }
+        }
+
+        return amount;
+    }
+    
+    
+    /**
+     * <param name="item">
+     * 찾을 아이템
+     * </param>
+     * <summary>
+     * 아이템의 개수를 세어 반환합니다
+     * </summary>
+     * <returns>
+     * 찾은 조건에 해당하는 아이템의 개수
+     * </returns>
+     */
+    public int CountItem(Item item)
+    {
+        int amount = 0;
+        foreach (ItemSlot slot in inventory)
+        {
+            if (item == slot.item)
+            {
+                amount += slot.amount;
+            }
+        }
+
+        return amount;
+    }
+
     
     
     /**
