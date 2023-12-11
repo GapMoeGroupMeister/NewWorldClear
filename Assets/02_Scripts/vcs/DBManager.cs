@@ -35,6 +35,26 @@ public class DBManager : MonoBehaviour
     
     /**
      * <summary>
+     * 인게임 인벤토리 정보를 받아와 json파일로 저장함
+     * </summary>
+     */
+    public static void Save_InGameInventory(List<ItemSlot> inven)
+    {
+        EasyToJson.ListToJson(inven, "InGameInventory", true);
+    }
+    
+    /**
+     * <summary>
+     * json으로 저장된 인게임 인벤토리 정보를 불러와 반환해줌
+     * </summary>
+     */
+    public static List<ItemSlot> Get_InGameInventory()
+    {
+        return EasyToJson.ListFromJson<ItemSlot>("InGameInventory");
+    }
+    
+    /**
+     * <summary>
      * 인벤토리 정보를 받아와 json파일로 저장함
      * </summary>
      */
@@ -42,6 +62,7 @@ public class DBManager : MonoBehaviour
     {
         EasyToJson.ListToJson(inven, "inventory", true);
     }
+    
 
     /**
      * <summary>

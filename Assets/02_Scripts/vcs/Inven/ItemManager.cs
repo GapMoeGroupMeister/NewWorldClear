@@ -246,4 +246,24 @@ public class ItemManager : MonoSingleton<ItemManager>
     {
         DBManager.Save_Inventory(inventory);
     }
+    
+    
+    /**
+     * <summary>
+     * json에서 인게임 인벤토리 파일을 불러옴
+     * </summary>
+     */
+    public void LoadInGameInventoryFile()
+    {
+        inventory = DBManager.Get_InGameInventory();
+    }
+    /**
+     * <summary>
+     * 인게임 인벤토리 파일을 json으로 저장함
+     * </summary>
+     */
+    public void SaveInGameInventoryFile()
+    {
+        DBManager.Save_InGameInventory(inventory);
+    }
 }
