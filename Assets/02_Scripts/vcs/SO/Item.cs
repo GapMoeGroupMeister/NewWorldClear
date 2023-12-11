@@ -55,7 +55,7 @@ public class Item : ScriptableObject
 
    /**
     * <summary>
-    * 한 슬롯당 최대치
+    * 한 슬롯당 최대치, 내구도 제한을 가진 아이템은 이 값을 1로 설정 해야한다.
     * </summary>
     */
    public int SlotSetAmount;
