@@ -23,6 +23,9 @@ public class Weapon2 : MonoBehaviour, IPointerClickHandler
     [SerializeField] private Description descriptionScript;
     [SerializeField] private WeaponDescription2[] weaponDescription;
     [SerializeField] private Image weaponImage;
+
+    [SerializeField] private Image[] frameImages;
+    [SerializeField] private Sprite[] frameSprites;
     
     
     private int _randomIndex;
@@ -49,8 +52,8 @@ public class Weapon2 : MonoBehaviour, IPointerClickHandler
         description.SetActive(true);
         description.transform.DOScale(1f, 0.5f);
 
-        nameText.text = weaponDescription[_randomIndex].name;
-        descriptionText.text = weaponDescription[_randomIndex].isSoldOut ? "이미 구매한 무기입니다!" : weaponDescription[_randomIndex].description;
+        nameText.text = weaponDescription[_randomIndex].shopSO.itemName;
+        descriptionText.text = weaponDescription[_randomIndex].isSoldOut ? "이미 구매한 무기입니다!" : weaponDescription[_randomIndex].shopSO.description;
         descriptionScript.Weapon2 = this;
     }
 
@@ -62,19 +65,46 @@ public class Weapon2 : MonoBehaviour, IPointerClickHandler
     public void OnImageChanged()
     {
         _randomIndex = Random.Range(0, WeaponDescription.Length);
-        
-        
-        weaponImage.sprite = weaponDescription[_randomIndex].weaponIcon;
+
+        weaponImage.sprite = weaponDescription[_randomIndex].shopSO.itemIcon;
         weaponImage.SetNativeSize();
-        weaponNameText.text = weaponDescription[_randomIndex].name + "\n<size=25>" + weaponDescription[_randomIndex].price + "원</size>";
+        weaponNameText.text = weaponDescription[_randomIndex].shopSO.itemName + "\n<size=25>" + weaponDescription[_randomIndex].shopSO.price + "원</size>";
+
+        switch (weaponDescription[_randomIndex].shopSO.grade)
+        {
+            case 1:
+                foreach (var item in frameImages)
+                {
+                    item.sprite = frameSprites[0];
+                }
+                break;
+            case 2:
+                foreach (var item in frameImages)
+                {
+                    item.sprite = frameSprites[1];
+                }
+                break;
+            case 3:
+                foreach (var item in frameImages)
+                {
+                    item.sprite = frameSprites[2];
+                }
+                break;
+            case 4:
+                foreach (var item in frameImages)
+                {
+                    item.sprite = frameSprites[3];
+                }
+                break;
+            default:
+                throw new Exception("잘못된 등급입니다");
+        }
 
         foreach (var item in weaponDescription)
         {
             item.isSoldOut = false;
         }
         soldOut.SetActive(false);
-
-
     }
 }
 
@@ -85,18 +115,6 @@ public class Weapon2 : MonoBehaviour, IPointerClickHandler
 [Serializable]
 public class WeaponDescription2
 {
-    public string name;
-    [TextArea(3, 5)]
-    public string description;
-    public int price;
+    public ShopSO shopSO;
     public bool isSoldOut;
-    public Sprite weaponIcon;
-    public enum WeaponType
-    {
-        Normal,
-        Unique,
-        Epic,
-        Legendary
-    }
-    public WeaponType weaponType;
 }
