@@ -11,9 +11,14 @@ public class PlayerController : Damageable
     Animator _animator;
 
     Transform _weaponTrm;
+    [SerializeField]
+    PlayerInputReader _inputReader;
+
 
     public float attackDelay;
     public float attackDamage = 10;
+    public float dashCooltime;
+    public float dashElapsedTime = 0f;
     
 
     #region 얘네로 뭐하는지 정확히 알 수 없음
@@ -33,20 +38,27 @@ public class PlayerController : Damageable
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
 
+        _inputReader.MoveEvent += Move;
+        _inputReader.DashEvent += Dash;
         _weaponTrm = transform.Find("Weapon");
         _moveSpeed = 5f;
     }
 
+    private void OnDisable()
+    {
+        _inputReader.MoveEvent -= Move;
+        _inputReader.DashEvent -= Dash;
+    }
+
     private void Update()
     {
-        Move();
         WeaponRotate();
     }
 
-    private void Move()
+    public void Move(Vector2 value)
     {
         if (isStun) return;
-        _rigidbody.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized * _moveSpeed;
+        _rigidbody.velocity = value.normalized * _moveSpeed;
         _animator.SetFloat("Speed", _rigidbody.velocity.magnitude);
     }
 
@@ -64,6 +76,26 @@ public class PlayerController : Damageable
             transform.localScale = new Vector2(1, 1);
             _weaponTrm.localScale = Vector2.one;
         }
+    }
+
+    public void Dash()
+    {
+        if (dashElapsedTime > 0 || _rigidbody.velocity == Vector2.zero) return;
+        StartCoroutine(IEDash());
+    }
+
+    IEnumerator IEDash()
+    {
+        Vector2 prevDir = _rigidbody.velocity.normalized;
+        _rigidbody.velocity = prevDir * _moveSpeed * 5f;
+        isStun = true;
+        while (dashElapsedTime > 0)
+        {
+            dashElapsedTime -= Time.deltaTime;
+            yield return null;
+        }
+        isStun = false;
+        _rigidbody.velocity = Vector2.zero;
     }
 
 

@@ -1535,7 +1535,7 @@ MonoBehaviour:
   _enemyMask:
     serializedVersion: 2
     m_Bits: 8
-  testWeapon: {fileID: 11400000, guid: b6c087c889faa604ba52910fb81f807e, type: 2}
+  testWeapon: {fileID: 11400000, guid: a877b724788cd264c8f550da2f32d394, type: 2}
 --- !u!120 &937734467
 LineRenderer:
   serializedVersion: 2
@@ -1782,7 +1782,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.06158942, y: -0.07230055}
+  m_Offset: {x: 0.06158942, y: -0.6156258}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1793,7 +1793,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.48050666, y: 1.3052695}
+  m_Size: {x: 0.48050666, y: 0.21861899}
   m_EdgeRadius: 0
 --- !u!50 &1049123938
 Rigidbody2D:
@@ -1910,8 +1910,11 @@ MonoBehaviour:
   buffs: 0
   debuffs: 0
   _rigidbody: {fileID: 0}
+  _inputReader: {fileID: 11400000, guid: 9e0c6b47039ede541be9a1ee138bfefe, type: 2}
   attackDelay: 0
   attackDamage: 0
+  dashCooltime: 0
+  dashElapsedTime: 0
 --- !u!95 &1049123942
 Animator:
   serializedVersion: 5
