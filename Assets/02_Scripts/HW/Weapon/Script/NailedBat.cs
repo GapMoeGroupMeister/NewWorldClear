@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AluminiumBat : WeaponEvent
+public class NailedBat : WeaponEvent
 {
     public override void OnHit(Transform enemy)
     {
-        if (Random.Range(1, 101) <= 5)
-            enemy.GetComponent<Enemy_TEST>().AddDebuff(Debuffs.Stun, 1);
+        enemy.GetComponent<Enemy_TEST>().AddDebuff(Debuffs.Bleed, 0.5f);
     }
 
     public override void Passive()

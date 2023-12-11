@@ -5,8 +5,9 @@ using UnityEngine;
 
 public enum WeaponType
 {
-    LongRange,
-    ShortRange,
+    Gun,
+    Bow,
+    Swing
 }
 public enum AttackMotion
 {

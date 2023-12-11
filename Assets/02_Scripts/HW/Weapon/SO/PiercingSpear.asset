@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 49158c3b4635ef24395bc84ebb1cc3b3, type: 3}
-  m_Name: Chainsaw
+  m_Name: PiercingSpear
   m_EditorClassIdentifier: 
-  name: Chainsaw
-  weaponPrefab: {fileID: 4539990161198569956, guid: 150acd1e63771b445a9d33649313e61c, type: 3}
-  damage: 2
-  attackDelay: 0
+  name: Spaer
+  weaponPrefab: {fileID: 5451285432579555106, guid: 19ffc8aacd8908b42b7ed3238a37f008, type: 3}
+  damage: 10
+  attackDelay: 10
   weaponType: 1
-  attackMotion: 1
-  attackRange: {x: 2, y: 0.5}
+  attackMotion: 2
+  attackRange: {x: 3, y: 0.5}

@@ -6,10 +6,15 @@ using UnityEngine;
 using UnityEngine.Events;
 public class PlayerController : Damageable
 {
+    public static PlayerController Instance;
     public Rigidbody2D _rigidbody;
     Animator _animator;
 
     Transform _weaponTrm;
+
+    public float attackDelay;
+    public float attackDamage = 10;
+    
 
     #region 얘네로 뭐하는지 정확히 알 수 없음
     private float _maxStemina = 200f;
@@ -24,21 +29,12 @@ public class PlayerController : Damageable
 
     private void Awake()
     {
+        Instance = this;
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
 
         _weaponTrm = transform.Find("Weapon");
         _moveSpeed = 5f;
-    }
-
-    private void Start()
-    {
-        //Invoke("TestBuff", 2f);
-    }
-
-    private void TestBuff()
-    {
-        AddDebuff(Debuffs.Stun, 8f);
     }
 
     private void Update()
