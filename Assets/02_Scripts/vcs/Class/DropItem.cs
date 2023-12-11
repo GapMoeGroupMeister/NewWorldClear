@@ -1,5 +1,5 @@
 ﻿
-
+[System.Serializable]
 public class DropItem
 {
     // 딱히 안쓸 예정
