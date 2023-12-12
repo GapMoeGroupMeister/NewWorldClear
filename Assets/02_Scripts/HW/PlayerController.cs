@@ -11,12 +11,13 @@ public class PlayerController : Damageable
     Animator _animator;
 
     Transform _weaponTrm;
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of c6699ea (bug:ë²„ê·¸ë­‰íƒ±ì´)
 
     public float attackDelay;
     public float attackDamage = 10;
-    public float dashCooltime;
-    public float dashElapsedTime = 0f;
     
 
     #region ¾ê³×·Î ¹¹ÇÏ´ÂÁö Á¤È®È÷ ¾Ë ¼ö ¾øÀ½
@@ -40,19 +41,23 @@ public class PlayerController : Damageable
         _moveSpeed = 5f;
     }
 
+<<<<<<< HEAD
     private void OnDisable()
     {
     }
 
+=======
+>>>>>>> parent of c6699ea (bug:ë²„ê·¸ë­‰íƒ±ì´)
     private void Update()
     {
+        Move();
         WeaponRotate();
     }
 
-    public void Move(Vector2 value)
+    private void Move()
     {
         if (isStun) return;
-        _rigidbody.velocity = value.normalized * _moveSpeed;
+        _rigidbody.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized * _moveSpeed;
         _animator.SetFloat("Speed", _rigidbody.velocity.magnitude);
     }
 
@@ -70,26 +75,6 @@ public class PlayerController : Damageable
             transform.localScale = new Vector2(1, 1);
             _weaponTrm.localScale = Vector2.one;
         }
-    }
-
-    public void Dash()
-    {
-        if (dashElapsedTime > 0 || _rigidbody.velocity == Vector2.zero) return;
-        StartCoroutine(IEDash());
-    }
-
-    IEnumerator IEDash()
-    {
-        Vector2 prevDir = _rigidbody.velocity.normalized;
-        _rigidbody.velocity = prevDir * _moveSpeed * 5f;
-        isStun = true;
-        while (dashElapsedTime > 0)
-        {
-            dashElapsedTime -= Time.deltaTime;
-            yield return null;
-        }
-        isStun = false;
-        _rigidbody.velocity = Vector2.zero;
     }
 
 

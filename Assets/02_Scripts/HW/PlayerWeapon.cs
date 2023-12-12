@@ -52,7 +52,6 @@ public class PlayerWeapon : MonoBehaviour
 
     public void WeaponChange(WeaponSO weaponSO)
     {
-        print(1);
         if (_currentWeapon != null) Destroy(_currentWeapon);
         _currentWeapon = Instantiate(weaponSO.weaponPrefab, transform);
         _weaponPivot = _currentWeapon.transform.GetChild(0);
