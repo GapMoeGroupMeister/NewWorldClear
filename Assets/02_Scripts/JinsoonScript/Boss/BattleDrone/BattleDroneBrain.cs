@@ -1,3 +1,4 @@
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public enum BattleDroneState
@@ -20,17 +21,21 @@ public class BattleDroneBrain : MonoBehaviour
             state = value;
             if (state == BattleDroneState.MOVING && curSkill == null)
             {
+                Debug.Log(battleDroneSkills.Length);
                 curSkill = battleDroneSkills[Random.Range(0, battleDroneSkills.Length)];
             }
         }
     }
 
     private BossSkill[] battleDroneSkills;
-
+    private BattleDroneBossMove movement;
+ 
     [SerializeField] private float maxHp = 100;
     [SerializeField] private float attack = 10;
     [SerializeField] private float moveSpeed = 5;
     private float curHp = 0;
+    private float skillCool = 5;
+    private float skillCoolDown = 0;
 
     private Rigidbody2D rb;
     private Vector2 curMovingDir;
@@ -40,34 +45,30 @@ public class BattleDroneBrain : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        movement = GetComponent<BattleDroneBossMove>();
         battleDroneSkills = GetComponents<BossSkill>();
     }
 
     private void Update()
     {
+        if (skillCoolDown > 0) skillCoolDown -= Time.deltaTime;
+
         if (state == BattleDroneState.MOVING && curSkill.isAttacking == false)
         {
-            //rb.velocity = curMovingDir * moveSpeed; 
+            int i = Random.Range(0, battleDroneSkills.Length);
 
-            for (int i = 0; i < battleDroneSkills.Length; i++)
+            if (battleDroneSkills[i].AttackDesire() == true && battleDroneSkills[i] != curSkill && skillCoolDown <= 0)
             {
-                if (battleDroneSkills[i].AttackDesire() == true && battleDroneSkills[i] != curSkill)
-                {
-                    battleDroneSkills[i].UseSkill();
-                    curSkill = battleDroneSkills[i];
-                    State++;
-                    break;
-                }
+                curSkill = battleDroneSkills[i];
+                curSkill.UseSkill();
+                skillCoolDown = skillCool;
             }
-        }
-        else
-        {
-            rb.velocity = Vector2.zero;
         }
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
             GoNextState();
+            movement.MoveStart();
         }
     }
 

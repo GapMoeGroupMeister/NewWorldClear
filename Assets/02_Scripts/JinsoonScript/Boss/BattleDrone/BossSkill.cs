@@ -14,6 +14,11 @@ public abstract class BossSkill : MonoBehaviour
 
     public abstract bool AttackDesire();
 
+    private void Start()
+    {
+        isAttacking = false;
+    }
+
     protected virtual void Update()
     {
         if (skillCoolTimeDown > 0f)
