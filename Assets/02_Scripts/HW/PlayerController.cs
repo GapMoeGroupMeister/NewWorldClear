@@ -11,10 +11,6 @@ public class PlayerController : Damageable
     Animator _animator;
 
     Transform _weaponTrm;
-<<<<<<< HEAD
-
-=======
->>>>>>> parent of c6699ea (bug:버그뭉탱이)
 
     public float attackDelay;
     public float attackDamage = 10;
@@ -40,14 +36,6 @@ public class PlayerController : Damageable
         _weaponTrm = transform.Find("Weapon");
         _moveSpeed = 5f;
     }
-
-<<<<<<< HEAD
-    private void OnDisable()
-    {
-    }
-
-=======
->>>>>>> parent of c6699ea (bug:버그뭉탱이)
     private void Update()
     {
         Move();
