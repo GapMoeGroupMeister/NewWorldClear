@@ -18,11 +18,13 @@ public class InGame_InventoryManager : InventoryManager
 
     public override void SceneStart()
     {
-        throw new System.NotImplementedException();
+        ItemManager.Instance.LoadInGameInventoryFile();
+        Set_AllSlot();
     }
 
     public override void SceneExit()
     {
         // 인게임은 배낭이라는 독자적인 인벤토리를 가지고 있어야함
+        ItemManager.Instance.SaveInGameInventoryFile();
     }
 }
