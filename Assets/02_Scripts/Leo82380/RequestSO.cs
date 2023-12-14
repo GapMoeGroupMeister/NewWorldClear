@@ -4,7 +4,7 @@ using UnityEngine;
 public class RequestSO : ScriptableObject
 {
     public string request;
-    public Item item;
-    public int amount;
+    public int requestID;
+    public ItemSlot[] requests;
     public ItemSlot reward;
 }

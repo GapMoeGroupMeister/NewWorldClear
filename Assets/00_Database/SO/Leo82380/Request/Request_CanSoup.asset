@@ -12,9 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa507dc46812e324eb6d641b9b20f79d, type: 3}
   m_Name: Request_CanSoup
   m_EditorClassIdentifier: 
-  request: "\uC73C\uC5B5 \uBC30\uAC00 \uACE0\uD30C\uC694 \uC2DD\uB7C9\uC744 \uC8FC\uC138\uC694"
-  item: {fileID: 11400000, guid: 9436ae634a10bc24ca3807a4cc39822f, type: 2}
-  amount: 10
+  request: "\uBC25 \uB0B4\uB194"
+  requestID: 0
+  requests:
+  - item: {fileID: 11400000, guid: 9436ae634a10bc24ca3807a4cc39822f, type: 2}
+    amount: 100
+    durability: 0
+  - item: {fileID: 11400000, guid: 9436ae634a10bc24ca3807a4cc39822f, type: 2}
+    amount: 1
+    durability: 0
   reward:
     item: {fileID: 11400000, guid: 888a080889ad0ce41ae514bff30d799d, type: 2}
     amount: 100

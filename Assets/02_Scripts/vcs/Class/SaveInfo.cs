@@ -8,7 +8,7 @@ public class SaveInfo
     public int day;
     public string userName;
 
+    public int nowRequestId;
 
-    
-    
+
 }
