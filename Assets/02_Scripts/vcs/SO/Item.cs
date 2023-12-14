@@ -16,6 +16,13 @@ public class Item : ScriptableObject
 
    /**
     * <summary>
+    * 아이템 분류
+    * </summary>
+    */
+   public ItemType Type;
+
+   /**
+    * <summary>
     * 아이템 랭크, 1 ~ 4
     * </summary>
     */

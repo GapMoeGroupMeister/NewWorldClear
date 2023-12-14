@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Item_Money
   m_EditorClassIdentifier: 
   id: 1
+  Type: 2
+  Tier: 0
   itemName: "\uD654\uD3D0"
   itemSpriteName: Coin
   description: "\uD604\uC9C0\uC5D0\uC11C \uD1B5\uC6A9\uB418\uB294 \uD654\uD3D0\uC774\uB2E4. "
