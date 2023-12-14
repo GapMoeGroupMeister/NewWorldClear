@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49158c3b4635ef24395bc84ebb1cc3b3, type: 3}
+  m_Name: AluminiumBat
+  m_EditorClassIdentifier: 
+  name: AluminiumBat
+  weaponPrefab: {fileID: 621959678804712253, guid: 961a99f05ee0c514f8fcc8ddd60f6060, type: 3}
+  damage: 5
+  attackDelay: 1.3
+  weaponType: 1
+  attackMotion: 0
+  attackRange: {x: 3, y: 2}
