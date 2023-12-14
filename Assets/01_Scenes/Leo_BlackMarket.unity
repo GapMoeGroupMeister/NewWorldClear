@@ -2042,7 +2042,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.735849, g: 0.735849, b: 0.735849, a: 1}
+  m_Color: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4076,8 +4076,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4291348680
+  m_fontColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -7309,10 +7309,12 @@ MonoBehaviour:
   - {fileID: 120331512}
   requestAmountText1: {fileID: 1908832158}
   requestAmountText2: {fileID: 988984194}
-  giveAmountText1: {fileID: 4993069}
-  giveAmountText2: {fileID: 1273817427}
-  requestImage1: {fileID: 1515954035}
-  requestImage2: {fileID: 120331512}
+  giveAmountText:
+  - {fileID: 4993069}
+  - {fileID: 1273817427}
+  requestImage:
+  - {fileID: 1515954035}
+  - {fileID: 120331512}
   lackMaterial: {fileID: 2100000, guid: cbe4c66b0952f6d438f105d4fa6c650b, type: 2}
   duration: 0.5
 --- !u!1 &1665082786
