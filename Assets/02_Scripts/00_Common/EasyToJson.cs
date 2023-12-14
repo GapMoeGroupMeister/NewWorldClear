@@ -8,7 +8,7 @@ namespace EasyJson
     public static class EasyToJson
     {
         // 주소
-        private static string localPath = Application.dataPath + "/00_Database/Json/";
+        public static string localPath = Application.dataPath + "/00_Database/Json/";
         /**
          * <summary>
          * Json 파일로 저장
@@ -41,6 +41,12 @@ namespace EasyJson
         public static T FromJson<T>(string jsonFileName)
         {
             string path = localPath + jsonFileName + ".json";
+            if (!File.Exists(path))
+            {
+                Debug.Log("파일이 존재하지 않습니다.");
+                Debug.Log("기본값을 반환합니다.");
+                return default(T);
+            }
             string json = File.ReadAllText(path);
             T obj = JsonUtility.FromJson<T>(json);
             return obj;
@@ -81,7 +87,9 @@ namespace EasyJson
             string path = Path.Combine(localPath, jsonFileName + ".json");
             if (!File.Exists(path))
             {
-                File.WriteAllText(path, "[]");
+                Debug.Log("파일이 존재하지 않습니다.");
+                Debug.Log("기본값을 반환합니다.");
+                return default(List<T>);
             }
             string json = File.ReadAllText(path);
             List<T> obj = JsonConvert.DeserializeObject<List<T>>(json);
@@ -120,6 +128,12 @@ namespace EasyJson
         public static Dictionary<T, U> DictionaryFromJson<T, U>(string jsonFileName)
         {
             string path = localPath + jsonFileName + ".json";
+            if (!File.Exists(path))
+            {
+                Debug.Log("파일이 존재하지 않습니다.");
+                Debug.Log("기본값을 반환합니다.");
+                return default(Dictionary<T, U>);
+            }
             string json = File.ReadAllText(path);
             Dictionary<T, U> obj = JsonConvert.DeserializeObject<Dictionary<T, U>>(json);
             Debug.Log(json);
