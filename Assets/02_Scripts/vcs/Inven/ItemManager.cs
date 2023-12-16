@@ -156,7 +156,12 @@ public class ItemManager : MonoSingleton<ItemManager>
                 Sub(slot, item.SlotSetAmount);
             }
             ItemSlot? slot_ = FindItem(item);
-            Sub(slot_, amount);
+            if (slot_ == null)
+            {
+                Debug.Log("아이템이 인벤토리에 존재하지 않아 뺄수 없습니다");
+                return false;
+            }
+            return Sub(slot_, amount);
         }
         else
         {
@@ -170,7 +175,6 @@ public class ItemManager : MonoSingleton<ItemManager>
             return Sub(slot, amount);
         }
 
-        return false;
 
     }
 
