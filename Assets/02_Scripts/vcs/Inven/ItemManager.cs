@@ -108,7 +108,7 @@ public class ItemManager : MonoSingleton<ItemManager>
         }
 
         
-        itemSlot = FindItem(itemSlot);
+        itemSlot = FindItem(itemSlot.item);
         do
         {
             amount = Add(itemSlot, amount);

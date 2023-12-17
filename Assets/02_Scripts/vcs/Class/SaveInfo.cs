@@ -9,6 +9,4 @@ public class SaveInfo
     public string userName;
 
     public int nowRequestId;
-
-
 }

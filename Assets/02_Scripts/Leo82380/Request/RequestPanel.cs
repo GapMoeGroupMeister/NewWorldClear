@@ -147,8 +147,6 @@ public class RequestPanel : MonoBehaviour
         #nullable enable
         int? amount = FindItemSlot(nowRequest.requests[0].item)?.amount;
         requestPanel.transform.DOMoveY(0, duration).SetEase(ease);
-        print("a " + nowRequest.requests[0].item.itemSpriteName);
-        print("a " + nowRequest.requests[1].item.itemSpriteName);
         IngredientImageSetup(0, 0);
         IngredientImageSetup(1, 0);
         IngredientImageSetup(2, 1);
@@ -172,15 +170,13 @@ public class RequestPanel : MonoBehaviour
         if (ItemManager.Instance.CountItem(nowRequest.requests[0].item) > nowRequest.requests[0].amount &&
             ItemManager.Instance.CountItem(nowRequest.requests[1].item) > nowRequest.requests[1].amount)
         {
-            //print(ItemManager.Instance.SubItem(nowRequest.requests[0].item, nowRequest.requests[0].amount));
-            //print(ItemManager.Instance.SubItem(nowRequest.requests[1].item, nowRequest.requests[1].amount));
-                  if (ItemManager.Instance.SubItem(nowRequest.requests[0].item, nowRequest.requests[0].amount))
-                  {
-                      if (ItemManager.Instance.SubItem(nowRequest.requests[1].item, nowRequest.requests[1].amount))
-                      {
-                            StartCoroutine(OnRequestSuccess());
-                      }
-                  }
+            if (ItemManager.Instance.SubItem(nowRequest.requests[0].item, nowRequest.requests[0].amount)) 
+            { 
+                if (ItemManager.Instance.SubItem(nowRequest.requests[1].item, nowRequest.requests[1].amount)) 
+                { 
+                    StartCoroutine(OnRequestSuccess());
+                }
+            }
 
         }
         else
@@ -195,11 +191,13 @@ public class RequestPanel : MonoBehaviour
     {
         giveAmount[0] += nowRequest.requests[0].amount;
         giveAmount[1] += nowRequest.requests[1].amount;
+        
         RequestTextSetup();
         yield return new WaitForSeconds(0.5f);
         print(true);
         requestPanel.transform.DOMoveY(-10f, duration).SetEase(ease);
-        ingredientText.text = "감사합니다!\n<color=black><size=50>버튼을 눌러 돌아가기</size></color>";
+        ingredientText.text = $"감사합니다!\n<size=40>보상: {nowRequest.reward.item.itemName} {nowRequest.reward.amount}개</size>\n<color=black><size=50>버튼을 눌러 돌아가기</size></color>";
+        ItemManager.Instance.AddItem(nowRequest.reward, nowRequest.reward.amount);
         acceptButton.SetActive(false);
     }
     
