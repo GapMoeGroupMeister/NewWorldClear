@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using TMPro;
 using Unity.VisualScripting;
 
-public class RequestInventory : MonoBehaviour, IPointerClickHandler
+public class RequestInventory : MonoBehaviour
 {
     private RequestPanel requestPanel;
     private int requestID;
@@ -22,22 +22,5 @@ public class RequestInventory : MonoBehaviour, IPointerClickHandler
     {
         requestID = DBManager.Get_UserInfo().nowRequestId;
         nowRequest = requestList[requestID];
-    }
-
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        if (ItemManager.Instance.FindItem(nowRequest.requests[0].item) == null) return;
-        if (ItemManager.Instance.FindItem(nowRequest.requests[1].item) == null) return;
-        if (ItemManager.Instance.SubItem(nowRequest.requests[0].item, 0))
-        {
-            requestPanel.GiveAmount[0]++;
-            requestPanel.RequestTextSetup();
-        }
-        if (ItemManager.Instance.SubItem(nowRequest.requests[1].item, 0))
-        {
-            requestPanel.GiveAmount[1]++;
-            requestPanel.RequestTextSetup();
-        }
     }
 }
