@@ -10,5 +10,6 @@ public class ShopSO : ScriptableObject
     public int price;
     public Sprite itemIcon;
     public int grade;
+    public int shopSOID;
 }
 
