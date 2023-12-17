@@ -16,17 +16,8 @@ public class Storage_UIManager : MonoSingleton<Storage_UIManager>
     [SerializeField] private TextMeshProUGUI Text_ItemName;
 
     [SerializeField] private TextMeshProUGUI Text_Description;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField] private Gradient DurabilityColorGradient;
+    
 
     public void On_DescriptionUI()
     {
