@@ -58,7 +58,7 @@ public class Item : ScriptableObject
     * 내구도 최대치 제한
     * </summary>
     */
-   public float maxDurability;
+   public int maxDurability;
 
    /**
     * <summary>
