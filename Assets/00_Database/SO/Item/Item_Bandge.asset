@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67caa7b57f2c0b44a936db268ae0839d, type: 3}
   m_Name: Item_Bandge
   m_EditorClassIdentifier: 
-  id: 3
+  id: 2
   Type: 5
   Tier: 4
   itemName: "\uBD95\uB300"
