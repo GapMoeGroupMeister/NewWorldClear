@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   Type: 3
-  Tier: 0
+  Tier: 1
   itemName: "\uD1B5\uC870\uB9BC \uC2A4\uD29C"
   itemSpriteName: CanSoup
   description: "\uBA39\uC744\uB9CC\uD55C \uC2A4\uD29C\uC774\uB2E4"
