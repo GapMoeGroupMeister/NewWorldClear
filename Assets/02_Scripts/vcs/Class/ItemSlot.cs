@@ -22,7 +22,7 @@ public class ItemSlot
      * 아이템 내구도
      * </summary>
      */
-    public float durability;
+    public int durability;
 
     public ItemSlot()
     {
@@ -41,6 +41,13 @@ public class ItemSlot
         this.item = item;
         this.amount = amount;
         durability = item.maxDurability;
+    }
+    public ItemSlot(Item item, int amount, int durability)
+    {
+        
+        this.item = item;
+        this.amount = amount;
+        this.durability = durability;
     }
     
 }

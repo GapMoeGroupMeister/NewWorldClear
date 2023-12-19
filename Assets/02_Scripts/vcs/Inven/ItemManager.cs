@@ -108,7 +108,7 @@ public class ItemManager : MonoSingleton<ItemManager>
         }
 
         
-        itemSlot = FindItem(itemSlot);
+        itemSlot = FindItem(itemSlot.item);
         do
         {
             amount = Add(itemSlot, amount);
@@ -140,15 +140,42 @@ public class ItemManager : MonoSingleton<ItemManager>
     public bool SubItem(Item item, int amount)
     {
 
-        ItemSlot? slot = FindItem(item);
-        if (slot == null)
+        if (item.isLimited)
         {
-            Debug.Log("아이템이 인벤토리에 존재하지 않아 뺄수 없습니다");
-            return false;
+            if (CountItem(item) < amount)
+            {
+                Debug.Log("아이템이 작어서 뺄수 없습니다");
+                return false;
+            }
+            int count = amount / item.SlotSetAmount;
+            amount %= item.SlotSetAmount;
+            
+            for (int i = 0; i < count; i++)
+            {
+                ItemSlot? slot = FindItem(item);
+                Sub(slot, item.SlotSetAmount);
+            }
+            ItemSlot? slot_ = FindItem(item);
+            if (slot_ == null)
+            {
+                Debug.Log("아이템이 인벤토리에 존재하지 않아 뺄수 없습니다");
+                return false;
+            }
+            return Sub(slot_, amount);
+        }
+        else
+        {
+            ItemSlot? slot = FindItem(item);
+            if (slot == null)
+            {
+                Debug.Log("아이템이 인벤토리에 존재하지 않아 뺄수 없습니다");
+                return false;
+            }
+
+            return Sub(slot, amount);
         }
 
-        return Sub(slot, amount);
-        
+
     }
 
     /**
