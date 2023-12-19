@@ -10,13 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67caa7b57f2c0b44a936db268ae0839d, type: 3}
-  m_Name: Item_Wood.5
+  m_Name: Item_Parts
   m_EditorClassIdentifier: 
-  id: 5
-  Tier: 3
-  itemName: "\uBAA9\uC7AC"
-  itemSpriteName: Item_Wood
-  description: "\uAC01\uC885 \uC81C\uC791\uC5D0 \uC4F8\uBAA8 \uC788\uC744\uB4EF \uD558\uB2E4."
+  id: 4
+  Type: 4
+  Tier: 2
+  itemName: "\uBD80\uD488"
+  itemSpriteName: Parts
+  description: "\uAC01\uC885 \uC81C\uC791\uC5D0 \uC4F8\uBAA8 \uC788\uC744 \uAC83
+    \uAC19\uB2E4."
   isLimited: 1
-  maxDurability: 64
+  maxDurability: 32
   SlotSetAmount: 1
