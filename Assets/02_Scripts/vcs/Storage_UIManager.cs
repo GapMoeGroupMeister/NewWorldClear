@@ -35,7 +35,7 @@ public class Storage_UIManager : MonoSingleton<Storage_UIManager>
 
     public void Refresh_DescriptionUI(ItemSlot slot)
     {
-        Text_ItemType.text = slot.item.Type.ToString();
+        Text_ItemType.text = "["+ItemTypeConvert(slot.item.Type)+"]";
         Text_ItemName.text = slot.item.itemName;
         Text_Description.text = slot.item.description;
         if (slot.item.isLimited)
@@ -50,6 +50,34 @@ public class Storage_UIManager : MonoSingleton<Storage_UIManager>
         {
             durabilityGaugeObject.SetActive(false);
         }
+    }
+
+    private string ItemTypeConvert(ItemType type)
+    {
+        string result = "";
+        switch (type)
+        {
+            case ItemType.Weapon:
+                result = "무기";
+                break;
+            case ItemType.Gear:
+                result = "기어";
+                break;
+            case ItemType.Consumables:
+                result = "소모품";
+                break;
+            case ItemType.Grocery:
+                result = "식료품";
+                break;
+            case ItemType.Material:
+                result = "재료";
+                break;
+            case ItemType.Money:
+                result = "재화";
+                break;
+        }
+
+        return result;
     }
 
     

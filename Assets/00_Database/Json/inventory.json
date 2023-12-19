@@ -1,0 +1,19 @@
+[
+  {
+    "item": {
+      "id": 0,
+      "Type": 3,
+      "Tier": 1,
+      "itemName": "통조림 스튜",
+      "itemSpriteName": "CanSoup",
+      "description": "먹을만한 스튜이다",
+      "isLimited": true,
+      "maxDurability": 2,
+      "SlotSetAmount": 1,
+      "name": "Item_CanSoup",
+      "hideFlags": 0
+    },
+    "amount": 1,
+    "durability": 2
+  }
+]

@@ -53,7 +53,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler,  IPointerExitHandler
     {
         if (currentItem.isLimited)
         {
-            GuageFill.fillAmount = Mathf.Clamp(currentSlot.durability / currentItem.maxDurability, 0f, 1f);
+            GuageFill.fillAmount = Mathf.Clamp((float)currentSlot.durability / currentItem.maxDurability, 0f, 1f);
 
         }
         else
