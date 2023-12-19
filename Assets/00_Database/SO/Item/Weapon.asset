@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67caa7b57f2c0b44a936db268ae0839d, type: 3}
-  m_Name: Item_Parts.4
+  m_Name: Weapon
   m_EditorClassIdentifier: 
-  id: 4
-  Tier: 2
-  itemName: "\uBD80\uD488"
-  itemSpriteName: Item_Parts
-  description: "\uAC01\uC885 \uC81C\uC791\uC5D0 \uC4F8\uBAA8 \uC788\uC744 \uAC83
-    \uAC19\uB2E4."
-  isLimited: 1
-  maxDurability: 32
-  SlotSetAmount: 1
+  id: 0
+  Type: 0
+  Tier: 0
+  itemName: 
+  itemSpriteName: 
+  description: 
+  isLimited: 0
+  maxDurability: 0
+  SlotSetAmount: 0
