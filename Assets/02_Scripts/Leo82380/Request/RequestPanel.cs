@@ -8,21 +8,21 @@ using Random = UnityEngine.Random;
 
 public class RequestPanel : MonoBehaviour
 {
-    [Header("ingredients")] [SerializeField]
+    [Header("ingredients"), SerializeField]
     private Ease ease;
 
-    [Tooltip("요청할 재료가 뜨는 텍스트")] [SerializeField]
+    [Tooltip("요청할 재료가 뜨는 텍스트"), SerializeField]
     private TextMeshProUGUI ingredientText;
 
-    [Tooltip("요청할 재료들")] [SerializeField] private List<RequestSO> ingredients;
-    [Tooltip("의뢰인")] [SerializeField] private GameObject man;
+    [Tooltip("요청할 재료들"), SerializeField] private List<RequestSO> ingredients;
+    [Tooltip("의뢰인"), SerializeField] private GameObject man;
 
-    [Space] [Header("Request Setup")] [Tooltip("의뢰 수락 버튼")] [SerializeField]
+    [Space, Header("Request Setup"), Tooltip("의뢰 수락 버튼"), SerializeField]
     private GameObject acceptButton;
 
-    [Tooltip("의뢰 패널")] [SerializeField] private GameObject requestPanel;
+    [Tooltip("의뢰 패널"), SerializeField] private GameObject requestPanel;
 
-    [Tooltip("요청 아이템 이미지")] [SerializeField]
+    [Tooltip("요청 아이템 이미지"), SerializeField]
     private Image[] ingredientImage;
 
     // 의뢰 갯수 텍스트
@@ -40,6 +40,8 @@ public class RequestPanel : MonoBehaviour
     [SerializeField] private Material lackMaterial;
 
     [SerializeField] private float duration = 0.5f;
+    
+    [SerializeField] private GameObject requestFailPanel;
 
     private int count;
     private int day;
@@ -58,6 +60,7 @@ public class RequestPanel : MonoBehaviour
     private void Start()
     {
         saveInfo = DBManager.Get_UserInfo();
+        DBManager.Save_userInfo(saveInfo);
     }
 
     private void OnEnable()
@@ -158,6 +161,7 @@ public class RequestPanel : MonoBehaviour
         ingredientImage[imageIndex].sprite =
             SpriteLoader.Instance.FindSprite(nowRequest.requests[requestIndex].item.itemSpriteName);
         ingredientImage[imageIndex].SetNativeSize();
+        ingredientImage[imageIndex].transform.localScale = Vector3.one;
         ingredientImage[imageIndex].transform.localScale *= 0.8f;
         if (imageIndex is 1 or 3)
             ingredientImage[imageIndex].transform.localScale *= 0.7f;
@@ -165,10 +169,10 @@ public class RequestPanel : MonoBehaviour
 
     public void Pass()
     {
-        if (FindItemSlot(nowRequest.requests[0].item) == null) return;
-        if (FindItemSlot(nowRequest.requests[0].item) == null) return;
-        if (ItemManager.Instance.CountItem(nowRequest.requests[0].item) > nowRequest.requests[0].amount &&
-            ItemManager.Instance.CountItem(nowRequest.requests[1].item) > nowRequest.requests[1].amount)
+        print(ItemManager.Instance.CountItem(nowRequest.requests[0].item));
+        print(ItemManager.Instance.CountItem(nowRequest.requests[1].item));
+        if (ItemManager.Instance.CountItem(nowRequest.requests[0].item) >= nowRequest.requests[0].amount &&
+            ItemManager.Instance.CountItem(nowRequest.requests[1].item) >= nowRequest.requests[1].amount)
         {
             if (ItemManager.Instance.SubItem(nowRequest.requests[0].item, nowRequest.requests[0].amount)) 
             { 
@@ -177,13 +181,13 @@ public class RequestPanel : MonoBehaviour
                     StartCoroutine(OnRequestSuccess());
                 }
             }
+            // print(ItemManager.Instance.SubItem(nowRequest.requests[0].item, nowRequest.requests[0].amount));
+            // print(ItemManager.Instance.SubItem(nowRequest.requests[1].item, nowRequest.requests[1].amount));
 
         }
         else
         {
-            print(false);
-            print(nowRequest.requests[0].amount);
-            print(nowRequest.requests[1].amount);
+            StartCoroutine(OnRequestFail());
         }
     }
 
@@ -193,12 +197,21 @@ public class RequestPanel : MonoBehaviour
         giveAmount[1] += nowRequest.requests[1].amount;
         
         RequestTextSetup();
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         print(true);
         requestPanel.transform.DOMoveY(-10f, duration).SetEase(ease);
         ingredientText.text = $"감사합니다!\n<size=40>보상: {nowRequest.reward.item.itemName} {nowRequest.reward.amount}개</size>\n<color=black><size=50>버튼을 눌러 돌아가기</size></color>";
         ItemManager.Instance.AddItem(nowRequest.reward, nowRequest.reward.amount);
         acceptButton.SetActive(false);
+        giveAmount[0] = 0;
+        giveAmount[1] = 0;
+    }
+    
+    private IEnumerator OnRequestFail()
+    {
+        requestFailPanel.transform.DOMoveX(-9f, duration).SetEase(ease);
+        yield return new WaitForSeconds(2f);
+        requestFailPanel.transform.DOMoveX(-17f, duration).SetEase(ease);
     }
     
     private ItemSlot? FindItemSlot(Item item)
