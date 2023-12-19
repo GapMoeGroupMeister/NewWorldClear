@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 4
   Type: 4
-  Tier: 2
+  Tier: 4
   itemName: "\uBD80\uD488"
   itemSpriteName: Parts
   description: "\uAC01\uC885 \uC81C\uC791\uC5D0 \uC4F8\uBAA8 \uC788\uC744 \uAC83
     \uAC19\uB2E4."
-  isLimited: 1
-  maxDurability: 32
-  SlotSetAmount: 1
+  isLimited: 0
+  maxDurability: 0
+  SlotSetAmount: 32
