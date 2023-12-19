@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class InGame_InventoryManager : InventoryManager
 {
+    
+    [SerializeField] private ItemSlot defaultItem;
+    [SerializeField] private ItemSlot canSoup;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,4 +32,23 @@ public class InGame_InventoryManager : InventoryManager
         // 인게임은 배낭이라는 독자적인 인벤토리를 가지고 있어야함
         ItemManager.Instance.SaveInGameInventoryFile();
     }
+    
+    [ContextMenu("Debug_Refresh")]
+    private void DebugRefresh()
+    {
+        Refresh();
+    }
+
+    [ContextMenu("Debug_AddItem")]
+    private void DebugAddDefaultItem()
+    {
+        ItemManager.Instance.AddItem(defaultItem);
+    }
+    
+    [ContextMenu("Debug_AddCanSoupItem")]
+    private void DebugAddCanSoupItem()
+    {
+        ItemManager.Instance.AddItem(new ItemSlot(canSoup.item, canSoup.amount, canSoup.durability));
+    }
+
 }

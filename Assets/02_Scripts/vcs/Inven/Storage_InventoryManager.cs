@@ -49,9 +49,10 @@ public class Storage_InventoryManager : InventoryManager
     [ContextMenu("Debug_AddCanSoupItem")]
     private void DebugAddCanSoupItem()
     {
-        ItemManager.Instance.AddItem(canSoup);
+        ItemManager.Instance.AddItem(new ItemSlot(canSoup.item, canSoup.amount, canSoup.durability));
     }
-
+    
+        
     /**
      * <summary>
      * 아이템 티어 순서대로 자동 정렬
