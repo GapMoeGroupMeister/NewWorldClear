@@ -19,5 +19,5 @@ MonoBehaviour:
   grade: 2
   item:
     item: {fileID: 11400000, guid: 9436ae634a10bc24ca3807a4cc39822f, type: 2}
-    amount: 0
+    amount: 1
     durability: 0

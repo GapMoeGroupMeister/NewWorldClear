@@ -66,6 +66,7 @@ public class RequestPanel : MonoBehaviour
     private void OnEnable()
     {
         requestPanel.transform.position = new Vector3(0, -10f);
+        requestFailPanel.transform.position = new Vector3(-17f, 5f);
         RequestSetup();
     }
 
