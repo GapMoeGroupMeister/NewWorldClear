@@ -12,4 +12,5 @@ public class StorageSceneManager : MonoBehaviour
         _InventoryManager.SceneExit();
         SceneManager.LoadScene("StartScene");
     }
+    
 }

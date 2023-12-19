@@ -2717,11 +2717,11 @@ MonoBehaviour:
   slotPrefab: {fileID: 171938223386310512, guid: 70f82d77a63280042867dc5ecba476ff, type: 3}
   grid: {fileID: 951298582}
   defaultItem:
-    item: {fileID: 11400000, guid: 888a080889ad0ce41ae514bff30d799d, type: 2}
+    item: {fileID: 11400000, guid: 08d64fcd7eb72694f901eacfbb54cd89, type: 2}
     amount: 1
     durability: 0
   canSoup:
-    item: {fileID: 11400000, guid: 9436ae634a10bc24ca3807a4cc39822f, type: 2}
+    item: {fileID: 11400000, guid: 71dfa2a1af1e46b42be0c1f12877d34e, type: 2}
     amount: 1
     durability: 2
   isEditMode: 0

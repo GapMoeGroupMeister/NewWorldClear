@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 3
   Type: 5
-  Tier: 0
+  Tier: 4
   itemName: "\uBD95\uB300"
   itemSpriteName: Bandge
   description: "\uCE58\uB8CC\uC5D0 \uC88B\uC740 \uBD95\uB300\uC774\uB2E4."
