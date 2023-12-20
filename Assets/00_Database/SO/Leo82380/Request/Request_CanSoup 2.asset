@@ -15,13 +15,13 @@ MonoBehaviour:
   request: "\uBC25 \uC918"
   requestID: 1
   requests:
-  - item: {fileID: 11400000, guid: 9436ae634a10bc24ca3807a4cc39822f, type: 2}
+  - item: {fileID: 11400000, guid: 71dfa2a1af1e46b42be0c1f12877d34e, type: 2}
     amount: 1
     durability: 0
-  - item: {fileID: 11400000, guid: 9436ae634a10bc24ca3807a4cc39822f, type: 2}
+  - item: {fileID: 11400000, guid: 71dfa2a1af1e46b42be0c1f12877d34e, type: 2}
     amount: 1
     durability: 0
   reward:
-    item: {fileID: 11400000, guid: 888a080889ad0ce41ae514bff30d799d, type: 2}
+    item: {fileID: 11400000, guid: 43db0c6ca032b9a4abb5c0d23bce66b0, type: 2}
     amount: 1000
     durability: 0

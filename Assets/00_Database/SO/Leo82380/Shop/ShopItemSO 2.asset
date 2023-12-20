@@ -17,3 +17,7 @@ MonoBehaviour:
   price: 10
   itemIcon: {fileID: 21300000, guid: d276dbde241f3f1469cd1a47a8abe982, type: 3}
   grade: 3
+  item:
+    item: {fileID: 11400000, guid: 3d5a384b11c2ce040aeff8fb5ad56757, type: 2}
+    amount: 1
+    durability: 1
