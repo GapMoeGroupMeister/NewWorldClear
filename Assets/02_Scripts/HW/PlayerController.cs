@@ -21,6 +21,7 @@ public class PlayerController : Damageable
     public float dashCooltime;
     public float dashElapsedTime = 0f;
 
+    Item _gasMask;
 
     [SerializeField]
     GameObject _trail;
@@ -110,9 +111,10 @@ public class PlayerController : Damageable
         Destroy(trail, 1f);
     }
 
-    public void PoisonDamage()
+    public void FalloutDamage(float damageAmount)
     {
-        
+        if (ItemManager.Instance.FindItem(_gasMask) != null) return;
+        PoisonDamage(damageAmount);
     }
 
 
