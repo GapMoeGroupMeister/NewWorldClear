@@ -10,13 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67caa7b57f2c0b44a936db268ae0839d, type: 3}
-  m_Name: Item_Bandge.3
+  m_Name: Item_Parts
   m_EditorClassIdentifier: 
   id: 3
-  Tier: 0
-  itemName: "\uBD95\uB300"
-  itemSpriteName: Item_Bandge
-  description: "\uCE58\uB8CC\uC5D0 \uC88B\uC740 \uBD95\uB300\uC774\uB2E4."
-  isLimited: 1
-  maxDurability: 2
-  SlotSetAmount: 1
+  Type: 4
+  Tier: 4
+  itemName: "\uBD80\uD488"
+  itemSpriteName: Parts
+  description: "\uAC01\uC885 \uC81C\uC791\uC5D0 \uC4F8\uBAA8 \uC788\uC744 \uAC83
+    \uAC19\uB2E4."
+  isLimited: 0
+  maxDurability: 0
+  SlotSetAmount: 32
