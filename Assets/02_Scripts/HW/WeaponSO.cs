@@ -19,6 +19,7 @@ public enum AttackMotion
 public class WeaponSO : ScriptableObject
 {
     public string name;
+    public int id;
     public GameObject weaponPrefab;
     public float damage;
     public float attackDelay;
