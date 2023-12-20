@@ -34,11 +34,6 @@ public class PlayerStatus
 	 */
 	public int levelHealth;
 
-	/**
-	 * <summary>
-	 * Hp 최대치 계산 메서드
-	 * </summary>
-	 */
 	public static int Calc_HealthMax(int level)
 	{
 		int max = level * 5 + 100;
