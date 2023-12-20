@@ -87,7 +87,9 @@ public class DBManager : MonoBehaviour
             return saveData;
         }
 
-        return null;
+        SaveInfo userInfo = new SaveInfo();
+        Save_userInfo(userInfo);
+        return userInfo;
 
     }
     

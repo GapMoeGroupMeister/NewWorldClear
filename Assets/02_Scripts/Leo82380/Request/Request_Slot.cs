@@ -31,7 +31,7 @@ public class Request_Slot : MonoBehaviour
 
         
         SetItemIcon();
-        SetGuage();
+        SetGauge();
         ItemAmount.text = currentSlot.amount.ToString();
     }
 
@@ -46,11 +46,11 @@ public class Request_Slot : MonoBehaviour
         
     }
 
-    private void SetGuage()
+    private void SetGauge()
     {
         if (currentItem.isLimited)
         {
-            GuageFill.fillAmount = Mathf.Clamp(currentSlot.durability / currentItem.maxDurability, 0f, 1f);
+            GuageFill.fillAmount = Mathf.Clamp((float)currentSlot.durability / currentItem.maxDurability, 0f, 1f);
 
         }
         else

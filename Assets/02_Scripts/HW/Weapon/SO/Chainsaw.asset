@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Chainsaw
   m_EditorClassIdentifier: 
   name: Chainsaw
+  id: 0
   weaponPrefab: {fileID: 4539990161198569956, guid: 150acd1e63771b445a9d33649313e61c, type: 3}
   damage: 2
-  attackDelay: 0.05
-  weaponType: 1
+  attackDelay: 0
+  weaponType: 2
   attackMotion: 1
   attackRange: {x: 2, y: 0.5}

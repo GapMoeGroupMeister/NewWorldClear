@@ -56,11 +56,12 @@ public class Weapon2 : MonoBehaviour, IPointerClickHandler
         nameText.text = weaponDescription[_randomIndex].shopSO.itemName;
         descriptionText.text = weaponDescription[_randomIndex].isSoldOut ? "이미 구매한 무기입니다!" : weaponDescription[_randomIndex].shopSO.description;
         descriptionScript.Weapon2 = this;
+        nowShopSO = weaponDescription[_randomIndex].shopSO;
     }
     
-    public int GetShopSO_ID()
+    public WeaponDescription2 GetWeaponDescription()
     {
-        return nowShopSO.shopSOID;
+        return weaponDescription[_randomIndex];
     }
     
     
