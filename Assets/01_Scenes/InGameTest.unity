@@ -1130,6 +1130,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotPrefab: {fileID: 171938223386310512, guid: 70f82d77a63280042867dc5ecba476ff, type: 3}
   grid: {fileID: 597678463}
+  defaultItem:
+    item: {fileID: 0}
+    amount: 0
+    durability: 0
+  canSoup:
+    item: {fileID: 0}
+    amount: 0
+    durability: 0
 --- !u!4 &450255348
 Transform:
   m_ObjectHideFlags: 0
@@ -1715,7 +1723,7 @@ MonoBehaviour:
   m_RendererIndex: -1
   m_VolumeLayerMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 33
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 0
@@ -2062,6 +2070,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effect: {fileID: 5751605556177575960, guid: 6e119c4ce8be96b46b0b7e4d9e9b0cc7, type: 3}
+  bulletPrefab: {fileID: 0}
   _enemyMask:
     serializedVersion: 2
     m_Bits: 8
@@ -2397,6 +2406,11 @@ MonoBehaviour:
   buffs: 0
   debuffs: 0
   _rigidbody: {fileID: 0}
+  attackDelay: 0
+  attackDamage: 10
+  dashCooltime: 0
+  dashElapsedTime: 0
+  _trail: {fileID: 0}
 --- !u!95 &1049123942
 Animator:
   serializedVersion: 5
@@ -3492,10 +3506,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -3512,7 +3526,7 @@ Canvas:
   m_GameObject: {fileID: 1501211625}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 511871756}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -4465,7 +4479,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2060425807
 RectTransform:
   m_ObjectHideFlags: 0
