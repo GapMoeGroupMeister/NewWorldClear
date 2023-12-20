@@ -2,6 +2,32 @@ using System;
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// 디버프들을 담은 enum.
+/// </summary>
+public enum Debuffs
+{
+    None = 0,
+    Bleed = 1,
+    Slow = 2,
+    Stun = 4,
+    Subdue = 8,
+    Poison = 16
+}
+
+/// <summary>
+/// 버프들을 담은 enum.
+/// </summary>
+public enum Buffs
+{
+    None = 0,
+    Fast = 1,
+    Generation = 2,
+    PowerUp = 4,
+    ThinSheild = 8,
+}
+
+
 public abstract class Damageable : MonoBehaviour
 {
     protected float _currentHp = 100f;
@@ -14,40 +40,10 @@ public abstract class Damageable : MonoBehaviour
     public bool thinSheild = false;
     
 
-    /// <summary>
-    /// 디버프들을 담은 enum.
-    /// </summary>
-    public enum Debuffs
-    {
-        None = 0,
-        Bleed = 1,
-        Slow = 2,
-        Stun = 4,
-        Subdue = 8,
-        Poison = 16
-    }
-
-    /// <summary>
-    /// 버프들을 담은 enum.
-    /// </summary>
-    public enum Buffs
-    {
-        None = 0,
-        Fast = 1,
-        Generation = 2,
-        PowerUp = 4,
-        ThinSheild = 8,
-    }
+    
 
     public Buffs buffs = Buffs.None;
     public Debuffs debuffs = Debuffs.None;
-
-    /// <summary>
-    /// Damageable을 상속한 개체에게 원하는 버프를 주는 함수
-    /// </summary>
-    /// <param name="buff">원하는 버프</param>
-    /// <param name="coolTime">버프의 쿨타임</param>
-    /// 
     public virtual void HitDamage(float damage)
     {
         _currentHp -= damage;
@@ -70,7 +66,14 @@ public abstract class Damageable : MonoBehaviour
         if (_currentHp <= 0)
         {
             Die();
- 
+        }
+    }
+    public virtual void CriticalDamage(float damage, float percent)
+    {
+        _currentHp -= damage * (100 / percent);
+        if (_currentHp <= 0)
+        {
+            Die();
         }
     }
 
@@ -78,31 +81,38 @@ public abstract class Damageable : MonoBehaviour
     {
         print("죽음");
     }
-
-    public void AddBuff(Buffs buff, float coolTime)
+    #region Buff & Debuff
+    /// <summary>
+    /// 가독성을 ㅈ박았을수도 있지만 amount는 각 버프와 디버프에 따라 다르게 작용한다. 신속이나 구속같은 경우엔 amount가 감소,증가하는 %로 작용하고 다른것은 미정이다. 알아서해라
+    /// 기본값은 0이다.
+    /// </summary>
+    /// <param name="buff"></param>
+    /// <param name="coolTime"></param>
+    /// <param name="amount"></param>
+    public void AddBuff(Buffs buff, float coolTime, float amount = 0)
     {
         if (buff == Buffs.None) return;
         buffs |= buff;
         StopCoroutine("IE" + typeof(Buffs).GetEnumName(buff));
-        StartCoroutine("IE" + typeof(Buffs).GetEnumName(buff), coolTime);
+        StartCoroutine("IE" + typeof(Buffs).GetEnumName(buff), new float[] {coolTime, amount});
     }
 
-    public void AddDebuff(Debuffs debuff, float coolTime)
+    public void AddDebuff(Debuffs debuff, float coolTime, float amount = 0)
     {
         if (debuff == Debuffs.None) return;
         debuffs |= debuff;
         StopCoroutine("IE" + typeof(Debuffs).GetEnumName(debuff));
-        StartCoroutine("IE" + typeof(Debuffs).GetEnumName(debuff), coolTime);
+        StartCoroutine("IE" + typeof(Debuffs).GetEnumName(debuff), new float[] {coolTime, amount});
     }
 
-    IEnumerator IEBleed(float coolTime)
+    IEnumerator IEBleed(float[] values)
     {
-        float cool = coolTime;
+        float cool = values[0];
         float delay = 0.5f;
         float elasped = 0f;
         while (cool > 0)
         {
-            if ((debuffs &= Debuffs.Bleed) != Debuffs.Bleed)
+            if ((debuffs &= Debuffs.Bleed) != Debuffs.Bleed && cool != Mathf.Infinity)
                 break;
             cool -= Time.deltaTime;
             elasped += Time.deltaTime;
@@ -116,15 +126,15 @@ public abstract class Damageable : MonoBehaviour
         debuffs -= Debuffs.Bleed;
     }
 
-    IEnumerator IESlow(float coolTime)
+    IEnumerator IESlow(float[] values)
     {
         float prevSpeed = _moveSpeed;
-        float cool = coolTime;
+        float cool = values[0];
         while (cool > 0)
         {
-            if ((debuffs &= Debuffs.Slow) != Debuffs.Slow)
+            if ((debuffs &= Debuffs.Slow) != Debuffs.Slow && cool != Mathf.Infinity)
                 break;
-            float addSpeed = prevSpeed - 2;
+            float addSpeed = prevSpeed * (100 / values[1]);
             if (addSpeed != _moveSpeed) prevSpeed = _moveSpeed;
             _moveSpeed = addSpeed;
             cool -= Time.deltaTime;
@@ -134,12 +144,12 @@ public abstract class Damageable : MonoBehaviour
         _moveSpeed = prevSpeed;
     }
 
-    IEnumerator IEStun(float coolTime)
+    IEnumerator IEStun(float[] values)
     {
-        float cool = coolTime;
+        float cool = values[0];
         while (cool > 0)
         {
-            if ((debuffs &= Debuffs.Stun) != Debuffs.Stun)
+            if ((debuffs &= Debuffs.Stun) != Debuffs.Stun && cool != Mathf.Infinity)
                 break;
             isStun = true;
             cool -= Time.deltaTime;
@@ -149,12 +159,12 @@ public abstract class Damageable : MonoBehaviour
         isStun = false;
     }
 
-    IEnumerator IESubdue(float coolTime)
+    IEnumerator IESubdue(float[] values)
     {
-        float cool = coolTime;
+        float cool = values[0];
         while (cool > 0)
         {
-            if ((debuffs &= Debuffs.Subdue) != Debuffs.Subdue)
+            if ((debuffs &= Debuffs.Subdue) != Debuffs.Subdue && cool != Mathf.Infinity)
                 break;
             isSubdue = true;
             cool -= Time.deltaTime;
@@ -164,14 +174,14 @@ public abstract class Damageable : MonoBehaviour
         isSubdue = false;
     }
 
-    IEnumerator IEPoison(float coolTime)
+    IEnumerator IEPoison(float[] values)
     {
-        float cool = coolTime;
+        float cool = values[0];
         float delay = 0.5f;
         float elasped = 0f;
         while (cool > 0)
         {
-            if ((debuffs &= Debuffs.Poison) != Debuffs.Poison)
+            if ((debuffs &= Debuffs.Poison) != Debuffs.Poison && cool != Mathf.Infinity)
                 break;
             cool -= Time.deltaTime;
             elasped += Time.deltaTime;
@@ -186,18 +196,17 @@ public abstract class Damageable : MonoBehaviour
     }
 
     #region Buff Coroutines
-    IEnumerator IEFast(float coolTime)
+    IEnumerator IEFast(float[] values)
     {
         float prevSpeed = _moveSpeed;
-        float cool = coolTime;
+        float cool = values[0];
         while (cool > 0)
         {
-            if ((buffs &= Buffs.Fast) != Buffs.Fast)
+            if ((buffs &= Buffs.Fast) != Buffs.Fast && cool != Mathf.Infinity)
                 break;
-            float addSpeed = prevSpeed + 3;
+            float addSpeed = prevSpeed + (prevSpeed * (100 / values[1]));
             if (addSpeed != _moveSpeed) prevSpeed = _moveSpeed;
             _moveSpeed = addSpeed;
-            print(_moveSpeed);
             cool -= Time.deltaTime;
             yield return null;
         }
@@ -205,14 +214,14 @@ public abstract class Damageable : MonoBehaviour
         _moveSpeed = prevSpeed;
     }
 
-    IEnumerator IEGeneration (float coolTime)
+    IEnumerator IEGeneration (float[] values)
     {
-        float cool = coolTime;
+        float cool = values[0];
         float delay = 0.5f;
         float elasped = 0f;
         while(cool > 0)
         {
-            if ((buffs &= Buffs.Generation) != Buffs.Generation)
+            if ((buffs &= Buffs.Generation) != Buffs.Generation && cool != Mathf.Infinity)
                 break;
             cool -= Time.deltaTime;
             elasped += Time.deltaTime;
@@ -226,13 +235,13 @@ public abstract class Damageable : MonoBehaviour
         buffs -= Buffs.Generation;
     }
 
-    IEnumerator IEPowerUp(float coolTime)
+    IEnumerator IEPowerUp(float[] values)
     {
         float prevdamage = damage;
-        float cool = coolTime;
+        float cool = values[0];
         while (cool > 0)
         {
-            if ((buffs &= Buffs.PowerUp) != Buffs.PowerUp)
+            if ((buffs &= Buffs.PowerUp) != Buffs.PowerUp && cool != Mathf.Infinity)
                 break;
             float addDamage = prevdamage + (prevdamage * 0.5f);
             if (addDamage != damage) prevdamage = damage;
@@ -244,12 +253,12 @@ public abstract class Damageable : MonoBehaviour
         damage = prevdamage;
     }
 
-    IEnumerator IEThinSheld(float coolTime)
+    IEnumerator IEThinSheld(float[] values)
     {
-        float cool = coolTime;
+        float cool = values[0];
         while (cool > 0)
         {
-            if ((buffs &= Buffs.ThinSheild) != Buffs.ThinSheild)
+            if ((buffs &= Buffs.ThinSheild) != Buffs.ThinSheild && cool != Mathf.Infinity)
                 break;
             thinSheild = true;
             cool -= Time.deltaTime;
@@ -258,5 +267,6 @@ public abstract class Damageable : MonoBehaviour
         buffs -= Buffs.ThinSheild;
         thinSheild = false;
     }
+    #endregion
     #endregion
 }
