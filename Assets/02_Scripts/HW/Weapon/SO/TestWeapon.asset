@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: TestWeapon
   m_EditorClassIdentifier: 
   name: GUUN
-  desc: Very powerful.
-  weaponSprite: {fileID: 21300000, guid: 556a7a0b7be92af4db3d116a83e975a1, type: 3}
+  weaponPrefab: {fileID: 1892756524502613958, guid: fa99b22d6cd8aeb4ea819a29da89ac1f, type: 3}
   damage: 10
-  attackDelay: 5
+  attackDelay: 2
   weaponType: 0
+  attackMotion: 1
   attackRange: {x: 7, y: 0}

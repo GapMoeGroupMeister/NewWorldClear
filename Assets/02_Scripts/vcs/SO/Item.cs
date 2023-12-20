@@ -16,6 +16,13 @@ public class Item : ScriptableObject
 
    /**
     * <summary>
+    * 아이템 분류
+    * </summary>
+    */
+   public ItemType Type;
+
+   /**
+    * <summary>
     * 아이템 랭크, 1 ~ 4
     * </summary>
     */
@@ -51,11 +58,11 @@ public class Item : ScriptableObject
     * 내구도 최대치 제한
     * </summary>
     */
-   public float maxDurability;
+   public int maxDurability;
 
    /**
     * <summary>
-    * 한 슬롯당 최대치
+    * 한 슬롯당 최대치, 내구도 제한을 가진 아이템은 이 값을 1로 설정 해야한다.
     * </summary>
     */
    public int SlotSetAmount;

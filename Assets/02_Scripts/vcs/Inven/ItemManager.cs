@@ -70,7 +70,7 @@ public class ItemManager : MonoSingleton<ItemManager>
      */
     public void AddItem(ItemSlot itemSlot)
     {
-        AddItem(new ItemSlot(itemSlot.item, itemSlot.amount), itemSlot.amount);
+        AddItem(itemSlot, itemSlot.amount);
         
     }
     
@@ -83,7 +83,19 @@ public class ItemManager : MonoSingleton<ItemManager>
      */
     public void AddItem(ItemSlot itemSlot, int amount)
     {
-        if (FindItem(itemSlot.item) == null)
+        // 내구도 제한이 있는 아이템을 추가 할 시 그냥 싹다 하나하나 더함
+        if (itemSlot.item.isLimited)
+        {
+            for (int i = 0; i < amount; i++)
+            {
+                inventory.Add(itemSlot);
+            }
+
+            return;
+        }
+
+        print("CountItem : "+CountItem(itemSlot.item));
+        if (CountItem(itemSlot.item) <= 0)
         {
             print("Null임");
             inventory.Add(new ItemSlot(itemSlot.item));
@@ -94,6 +106,7 @@ public class ItemManager : MonoSingleton<ItemManager>
         {
             return;
         }
+
         
         itemSlot = FindItem(itemSlot.item);
         do
@@ -106,7 +119,8 @@ public class ItemManager : MonoSingleton<ItemManager>
             }
         
         } while (amount > 0);
-        
+
+        print("이까지 오긴 오냐?");
     }
 
     /**
@@ -126,23 +140,50 @@ public class ItemManager : MonoSingleton<ItemManager>
     public bool SubItem(Item item, int amount)
     {
 
-        ItemSlot? slot = FindItem(item);
-        if (slot == null)
+        if (item.isLimited)
         {
-            Debug.Log("아이템이 인벤토리에 존재하지 않아 뺄수 없습니다");
-            return false;
+            if (CountItem(item) < amount)
+            {
+                Debug.Log("아이템이 작어서 뺄수 없습니다");
+                return false;
+            }
+            int count = amount / item.SlotSetAmount;
+            amount %= item.SlotSetAmount;
+            
+            for (int i = 0; i < count; i++)
+            {
+                ItemSlot? slot = FindItem(item);
+                Sub(slot, item.SlotSetAmount);
+            }
+            ItemSlot? slot_ = FindItem(item);
+            if (slot_ == null)
+            {
+                Debug.Log("아이템이 인벤토리에 존재하지 않아 뺄수 없습니다");
+                return false;
+            }
+            return Sub(slot_, amount);
+        }
+        else
+        {
+            ItemSlot? slot = FindItem(item);
+            if (slot == null)
+            {
+                Debug.Log("아이템이 인벤토리에 존재하지 않아 뺄수 없습니다");
+                return false;
+            }
+
+            return Sub(slot, amount);
         }
 
-        return Sub(slot, amount);
-        
+
     }
 
     /**
      * <summary>
      * 인벤토리에서 아이템을 찾아주는 메서드
      * </summary>
-     * <param name="itemName">
-     * 찾을 아이템의 이름
+     * <param name="item">
+     * 찾을 아이템
      * </param>
      * <returns>
      * 해당하는 아이템 슬롯을 반환함
@@ -151,7 +192,7 @@ public class ItemManager : MonoSingleton<ItemManager>
     [CanBeNull]
     public ItemSlot FindItem(Item item)
     {
-        ItemSlot targetItem = new ItemSlot(){amount = -1};
+       
         for (int i = 0; i < inventory.Count; i++)
         {
             ItemSlot slot = inventory[i];
@@ -166,13 +207,102 @@ public class ItemManager : MonoSingleton<ItemManager>
 
             if (slot.item == item)
             {
-                targetItem = slot;
+                return slot;
                 break;
             }
             
         }
         
-        return targetItem;
+        return null;
+    }
+    
+    /**
+     * <summary>
+     * 인벤토리에서 아이템을 찾아주는 메서드
+     * </summary>
+     * <param name="itemSlot">
+     * 찾을 아이템 슬롯
+     * </param>
+     * <returns>
+     * 해당하는 아이템 슬롯을 반환함
+     * </returns>
+     */
+    [CanBeNull]
+    public ItemSlot FindItem(ItemSlot itemSlot)
+    {
+        ItemSlot targetItem = new ItemSlot(){amount = -1};
+        for (int i = 0; i < inventory.Count; i++)
+        {
+            ItemSlot slot = inventory[i];
+
+            if (slot.amount <= 0)
+            {
+                inventory.Remove(slot);
+                i--;
+                continue;
+            }
+            
+
+            if (slot.item == itemSlot.item && slot.durability == itemSlot.durability)
+            {
+                return slot;
+                break;
+            }
+            
+        }
+        
+        return null;
+    }
+
+    /**
+     * <param name="itemSlot">
+     * 찾을 아이템 슬롯 (durability를 반영함)
+     * </param>
+     * <summary>
+     * 아이템의 개수를 세어 반환합니다
+     * </summary>
+     * <returns>
+     * 찾은 조건에 해당하는 아이템의 개수
+     * </returns>
+     */
+    public int CountItem(ItemSlot itemSlot)
+    {
+        int amount = 0;
+        foreach (ItemSlot slot in inventory)
+        {
+            if (slot.item == itemSlot.item && slot.durability == itemSlot.durability)
+            {
+                amount += slot.amount;
+            }
+        }
+
+        return amount;
+    }
+    
+    
+    /**
+     * <param name="item">
+     * 찾을 아이템
+     * </param>
+     * <summary>
+     * 아이템의 개수를 세어 반환합니다
+     * </summary>
+     * <returns>
+     * 찾은 조건에 해당하는 아이템의 개수
+     * </returns>
+     */
+    public int CountItem(Item item)
+    {
+        int amount = 0;
+        foreach (ItemSlot slot in inventory)
+        {
+            if (item == slot.item)
+            {
+                amount += slot.amount;
+            }
+        }
+
+        return amount;
     }
 
     
@@ -194,5 +324,25 @@ public class ItemManager : MonoSingleton<ItemManager>
     public void SaveInventoryFile()
     {
         DBManager.Save_Inventory(inventory);
+    }
+    
+    
+    /**
+     * <summary>
+     * json에서 인게임 인벤토리 파일을 불러옴
+     * </summary>
+     */
+    public void LoadInGameInventoryFile()
+    {
+        inventory = DBManager.Get_InGameInventory();
+    }
+    /**
+     * <summary>
+     * 인게임 인벤토리 파일을 json으로 저장함
+     * </summary>
+     */
+    public void SaveInGameInventoryFile()
+    {
+        DBManager.Save_InGameInventory(inventory);
     }
 }

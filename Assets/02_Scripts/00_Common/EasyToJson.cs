@@ -8,7 +8,7 @@ namespace EasyJson
     public static class EasyToJson
     {
         // 주소
-        private static string localPath = Application.dataPath + "/00_Database/Json/";
+        public static string localPath = Application.dataPath + "/00_Database/Json/";
         /**
          * <summary>
          * Json 파일로 저장
@@ -41,6 +41,11 @@ namespace EasyJson
         public static T FromJson<T>(string jsonFileName)
         {
             string path = localPath + jsonFileName + ".json";
+            if (!File.Exists(path))
+            {
+                Debug.Log("파일이 존재하지 않습니다.");
+                return default;
+            }
             string json = File.ReadAllText(path);
             T obj = JsonUtility.FromJson<T>(json);
             return obj;
@@ -79,10 +84,6 @@ namespace EasyJson
         public static List<T> ListFromJson<T>(string jsonFileName)
         {
             string path = Path.Combine(localPath, jsonFileName + ".json");
-            if (!File.Exists(path))
-            {
-                File.WriteAllText(path, "[]");
-            }
             string json = File.ReadAllText(path);
             List<T> obj = JsonConvert.DeserializeObject<List<T>>(json);
             return obj;

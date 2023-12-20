@@ -3,72 +3,69 @@ using System.Collections.Generic;
 using UnityEngine;
 using Tkfkadlsi;
 
-public class Dust : MonoBehaviour
+public class Dust : Enemy
 {
-    private PlayerController target;
     private Rigidbody2D rigid;
     private TrailRenderer trailRenderer;
     private SpriteRenderer spriteRenderer;
     private GameObject skill2WarningObject;
+    private GameObject skill2ShieldObject;
+    private PolygonCollider2D skill2AreaCollider;
+    private CircleCollider2D circleCollider2D;
+    public PlayerController playerController;
     [SerializeField] private GameObject skill3Blind;
     [SerializeField] private float dashM;
     [Range(0f, 360f)] [SerializeField] private float skill2Angle;
-
-    public EnemyData data;
+    [SerializeField] private float skill1Damage;
+    public float skill2Damage;
 
     private bool checkTarget = false;
     private bool isSkillActive = false;
     private bool dustShield = false;
+    private bool isDashing = false;
 
-    public float hp;
-    public float atk;
-    public float def;
-    public float spd;
-    public float atkCycle;
-    public float range;
-
-    private void Awake()
+    public override void Awake()
     {
-        target = FindObjectOfType<PlayerController>();
+        SetState();
+        SetStatus();
+        base.Awake();
         rigid = this.GetComponent<Rigidbody2D>();
         trailRenderer = this.GetComponent<TrailRenderer>();
         spriteRenderer = this.GetComponent<SpriteRenderer>();
+        circleCollider2D = this.GetComponent<CircleCollider2D>();
         skill2WarningObject = transform.GetChild(0).gameObject;
-        SetStatus();
-
-        skill2WarningObject.SetActive(false);
-        skill3Blind.SetActive(false);
-        trailRenderer.enabled = false;
+        skill2ShieldObject = transform.GetChild(1).gameObject;
+        skill2AreaCollider = transform.GetChild(2).GetComponent<PolygonCollider2D>();
     }
 
     private void Start()
     {
-        StartCoroutine(SkillStart());
+        playerController = target.GetComponent<PlayerController>();
+        skill2WarningObject.SetActive(false);
+        skill2ShieldObject.SetActive(false);
+        skill2AreaCollider.enabled = false;
+        skill3Blind.SetActive(false);
+        trailRenderer.enabled = false;
+
+        StartCoroutine(SkillDelay());
     }
 
-    private Vector2 AngleToDir(float angle)
+    public override void Update()
     {
-        float radian = (angle - 90) * Mathf.Deg2Rad;
-        return new Vector2(Mathf.Cos(radian), Mathf.Sin(radian));
-    }
-    private void Update()
-    {
-        
-
         if (isSkillActive) return;
+        ChoiceState();
+        if (currentState == State.Attack) return;
 
-        if (checkTarget)
+        if (currentState == State.Move)
             Moveing();
-        else if (!checkTarget)
-            DetectTarget();
     }
 
-    public void Hit(float damage)
+    public override void Hit(float damage)
     {
         if (dustShield)
         {
             int rand = Random.Range(0, 10);
-            if(rand < 3)
+            if (rand < 3)
             {
                 return;
             }
@@ -76,6 +73,13 @@ public class Dust : MonoBehaviour
 
         hp -= damage;
         if (hp < 0) Dead();
+    }
+
+    public override void SetState()
+    {
+        idleState = new DustIdleState(this);
+        moveState = new DustMoveState(this);
+        attackState = new DustAttackState(this);
     }
 
     private void SetStatus()
@@ -91,47 +95,32 @@ public class Dust : MonoBehaviour
     private void Moveing()
     {
         if (isSkillActive) return;
-
-        Vector2 dir = target.transform.position - transform.position;
-
-        rigid.MovePosition(rigid.position += dir.normalized * spd * Time.deltaTime);
-
-
-        float angle = Mathf.Atan2(target._rigidbody.position.y - rigid.position.y, target._rigidbody.position.x - rigid.position.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(playerController._rigidbody.position.y - rigid.position.y, playerController._rigidbody.position.x - rigid.position.x) * Mathf.Rad2Deg;
         this.transform.rotation = Quaternion.AngleAxis(angle + 90, Vector3.forward);
-    }
-
-    private void DetectTarget()
-    {
-        if(data.DetectRange >= Vector2.Distance(transform.position, target.transform.position))
-        {
-            checkTarget = true;
-        }
-    }
-
-    private IEnumerator SkillStart()
-    {
-        yield return new WaitUntil(() => checkTarget == true);
-        StartCoroutine(SkillDelay());
     }
 
     private IEnumerator SkillDelay()
     {
-        float t = Random.Range(atkCycle, atkCycle*3);
+        float t = Random.Range(atkCycle, atkCycle * 3);
         yield return new WaitForSeconds(t);
-        float sk = Random.Range(1, 4);
+        float sk = Random.Range(0, 100);
 
-        switch (sk)
+        if (CanAttackPlayer)
         {
-            case 1:
-                StartCoroutine(Skill1());
-                break;
-            case 2:
-                StartCoroutine(Skill2());
-                break;
-            case 3:
-                StartCoroutine(Skill3());
-                break;
+            yield return new WaitUntil(() => CanAttackPlayer == false);
+        }
+
+        if (sk < 10)
+        {
+            StartCoroutine(Skill2());
+        }
+        else if (sk < 50)
+        {
+            StartCoroutine(Skill1());
+        }
+        else
+        {
+            StartCoroutine(Skill3());
         }
 
         isSkillActive = true;
@@ -140,30 +129,31 @@ public class Dust : MonoBehaviour
     private IEnumerator Skill1()
     {
         trailRenderer.enabled = true;
-        for(int i = 0; i < 3; i++)
+        isDashing = true;
+        for (int i = 0; i < 3; i++)
         {
-            Vector2 dir = target._rigidbody.position - rigid.position;
+            Vector2 dir = playerController._rigidbody.position - rigid.position;
             dir = dir.normalized * dashM;
             yield return StartCoroutine(MoveLerp(0.125f, rigid.position + dir));
+            skill2AreaCollider.enabled = true;
             yield return new WaitForSeconds(0.25f);
+            skill2AreaCollider.enabled = false;
         }
+        isDashing = false;
         trailRenderer.enabled = false;
         SkillExit();
     }
 
     private IEnumerator Skill2()
     {
-        float lookingAngle = transform.rotation.eulerAngles.z;  //캐릭터가 바라보는 방향의 각도
-        Vector3 rightDir = AngleToDir(lookingAngle + skill2Angle * 0.5f);
-        Vector3 leftDir = AngleToDir(lookingAngle - skill2Angle * 0.5f);
-        Vector3 lookDir = AngleToDir(lookingAngle);
-
-        Debug.DrawRay(transform.position, rightDir * 5, Color.blue);
-        Debug.DrawRay(transform.position, leftDir * 5, Color.blue);
-        Debug.DrawRay(transform.position, lookDir * 5, Color.cyan);
+        skill2WarningObject.SetActive(true);
+        yield return StartCoroutine(ColorLerp(new Color(1, 0, 0, 0), new Color(1, 0, 0, 1), 3));
+        skill2WarningObject.SetActive(false);
 
         StartCoroutine(Skill2_DustShieldOn());
+        skill2AreaCollider.enabled = true;
         yield return new WaitForSeconds(0.25f);
+        skill2AreaCollider.enabled = false;
         SkillExit();
     }
 
@@ -171,7 +161,9 @@ public class Dust : MonoBehaviour
     private IEnumerator Skill2_DustShieldOn()
     {
         dustShield = true;
+        skill2ShieldObject.SetActive(true);
         yield return new WaitForSeconds(20f);
+        skill2ShieldObject.SetActive(false);
         dustShield = false;
     }
 
@@ -179,17 +171,19 @@ public class Dust : MonoBehaviour
     {
         skill3Blind.SetActive(true);
         skill3Blind.transform.position = transform.position + (Vector3.down * 2);
+        circleCollider2D.isTrigger = true;
         yield return StartCoroutine(MoveLerp(1.5f, rigid.position + Vector2.down * 2));
         spriteRenderer.enabled = false;
         skill3Blind.SetActive(false);
         yield return new WaitForSeconds(1);
-        rigid.position = target._rigidbody.position;
+        rigid.position = playerController._rigidbody.position;
         yield return new WaitForSeconds(1);
         skill3Blind.SetActive(true);
         skill3Blind.transform.position = transform.position;
         spriteRenderer.enabled = true;
         yield return StartCoroutine(MoveLerp(0.5f, rigid.position + Vector2.up * 2));
         skill3Blind.SetActive(false);
+        circleCollider2D.isTrigger = false;
         SkillExit();
     }
 
@@ -201,10 +195,9 @@ public class Dust : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject == target)
+        if (collision.gameObject == target && isDashing)
         {
-            PlayerController playerController = target.GetComponent<PlayerController>();
-            playerController.HitDamage(atk);
+            playerController.HitDamage(skill1Damage);
         }
     }
 
@@ -213,7 +206,7 @@ public class Dust : MonoBehaviour
         float t = 0;
         Vector2 startPos = transform.position;
 
-        while(t < lerpTime)
+        while (t < lerpTime)
         {
             rigid.position = Vector2.Lerp(startPos, endPos, t / lerpTime);
 
@@ -229,7 +222,7 @@ public class Dust : MonoBehaviour
         float t = 0;
         SpriteRenderer skill2WarningObjectSpriteRenderer = skill2WarningObject.GetComponent<SpriteRenderer>();
 
-        while(t < lerpTime)
+        while (t < lerpTime)
         {
             skill2WarningObjectSpriteRenderer.color = Color.Lerp(startColor, endColor, t / lerpTime);
 
@@ -240,8 +233,82 @@ public class Dust : MonoBehaviour
         skill2WarningObjectSpriteRenderer.color = endColor;
     }
 
-    private void Dead()
+    public override void Dead()
     {
-        Destroy(gameObject);
+        throw new System.NotImplementedException();
+    }
+
+    public class DustIdleState : StateBase
+    {
+        public DustIdleState(Enemy initenemy) : base(initenemy) { }
+
+        public override void OnStateEnter()
+        {
+
+        }
+
+        public override void OnStateExit()
+        {
+
+        }
+
+        public override void OnStateUpdate()
+        {
+
+        }
+    }
+
+    public class DustMoveState : StateBase
+    {
+        public DustMoveState(Enemy initenemy) : base(initenemy) { }
+
+        public override void OnStateEnter()
+        {
+
+        }
+
+        public override void OnStateExit()
+        {
+
+        }
+
+        public override void OnStateUpdate()
+        {
+            Vector3 moveDir = Vector3.zero;
+            moveDir = enemy.target.transform.position - enemy.transform.position;
+            moveDir = moveDir.normalized;
+            enemy.transform.position += moveDir * enemy.spd * Time.deltaTime;
+        }
+    }
+
+    public class DustAttackState : StateBase
+    {
+        public DustAttackState(Enemy initenemy) : base(initenemy) { }
+
+        private float cycle;
+
+        public override void OnStateEnter()
+        {
+            cycle = enemy.atkCycle;
+        }
+
+        public override void OnStateExit()
+        {
+
+        }
+
+        public override void OnStateUpdate()
+        {
+            cycle -= Time.deltaTime;
+
+
+
+            if (cycle < 0)
+            {
+                PlayerController playerController = enemy.target.GetComponent<PlayerController>();
+                playerController.HitDamage(enemy.atk);
+                cycle = enemy.atkCycle;
+            }
+        }
     }
 }

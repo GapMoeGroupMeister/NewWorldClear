@@ -18,7 +18,7 @@ public class SpriteLoader : MonoSingleton<SpriteLoader>
         AssetBundle bundle = AssetBundle.LoadFromFile("Assets/AssetBundles/itemicon");
         spriteBase = bundle.LoadAllAssets<Sprite>();
 
-        
+
     }
     [CanBeNull]
     public Sprite FindSprite(string spriteName)
@@ -34,9 +34,9 @@ public class SpriteLoader : MonoSingleton<SpriteLoader>
             {
                 return sprite;
             }
-            
+
         }
-        
+
         return null;
     }
 

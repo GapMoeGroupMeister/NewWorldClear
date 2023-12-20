@@ -30,6 +30,7 @@ public class Weapon2 : MonoBehaviour, IPointerClickHandler
     
     private int _randomIndex;
     private Image _image;
+    private ShopSO nowShopSO;
 
     public GameObject SoldOut => soldOut;
     public WeaponDescription2[] WeaponDescription => weaponDescription;
@@ -55,7 +56,15 @@ public class Weapon2 : MonoBehaviour, IPointerClickHandler
         nameText.text = weaponDescription[_randomIndex].shopSO.itemName;
         descriptionText.text = weaponDescription[_randomIndex].isSoldOut ? "이미 구매한 무기입니다!" : weaponDescription[_randomIndex].shopSO.description;
         descriptionScript.Weapon2 = this;
+        nowShopSO = weaponDescription[_randomIndex].shopSO;
     }
+    
+    public WeaponDescription2 GetWeaponDescription()
+    {
+        return weaponDescription[_randomIndex];
+    }
+    
+    
 
     /**
      * <summary>
@@ -108,7 +117,8 @@ public class Weapon2 : MonoBehaviour, IPointerClickHandler
     }
 }
 
-/** <summary>
+/**
+ * <summary>
  * 무기 설명 클래스
  * </summary>
  */

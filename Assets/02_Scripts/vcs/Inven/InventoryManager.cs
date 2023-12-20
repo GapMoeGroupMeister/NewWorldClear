@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -37,8 +36,9 @@ public abstract class InventoryManager : MonoBehaviour
     protected void Set_AllSlot()
     {
         List<ItemSlot> inventory = ItemManager.Instance.inventory;
-        if (inventory.Count <= 0)
+        if (inventory == null || inventory.Count <= 0)
         {
+            ItemManager.Instance.inventory = new List<ItemSlot>();
             return;
 
         }
