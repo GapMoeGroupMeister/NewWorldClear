@@ -70,6 +70,11 @@ public class RequestPanel : MonoBehaviour
         RequestSetup();
     }
 
+    /**
+     * <summary>
+     * 의뢰를 설정함
+     * </summary>
+     */
     public void RequestSetup()
     {
         day++;
@@ -106,6 +111,11 @@ public class RequestPanel : MonoBehaviour
         RequestMaterialSetup(1);
     }
 
+    /**
+     * <summary>
+     * 요청 아이템의 보유 갯수를 확인하고 부족하면 빨간색으로, 충분하면 초록색으로 표시함
+     * </summary>
+     */
     private void RequestMaterialSetup(int index)
     {
         if (giveAmount[index] >= nowRequest.requests[index].amount)
@@ -170,21 +180,14 @@ public class RequestPanel : MonoBehaviour
 
     public void Pass()
     {
-        print(ItemManager.Instance.CountItem(nowRequest.requests[0].item));
-        print(ItemManager.Instance.CountItem(nowRequest.requests[1].item));
         if (ItemManager.Instance.CountItem(nowRequest.requests[0].item) >= nowRequest.requests[0].amount &&
             ItemManager.Instance.CountItem(nowRequest.requests[1].item) >= nowRequest.requests[1].amount)
         {
-            if (ItemManager.Instance.SubItem(nowRequest.requests[0].item, nowRequest.requests[0].amount)) 
+            if (ItemManager.Instance.SubItem(nowRequest.requests[0].item, nowRequest.requests[0].amount) &&
+                ItemManager.Instance.SubItem(nowRequest.requests[1].item, nowRequest.requests[1].amount)) 
             { 
-                if (ItemManager.Instance.SubItem(nowRequest.requests[1].item, nowRequest.requests[1].amount)) 
-                { 
-                    StartCoroutine(OnRequestSuccess());
-                }
+                StartCoroutine(OnRequestSuccess());
             }
-            // print(ItemManager.Instance.SubItem(nowRequest.requests[0].item, nowRequest.requests[0].amount));
-            // print(ItemManager.Instance.SubItem(nowRequest.requests[1].item, nowRequest.requests[1].amount));
-
         }
         else
         {
