@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: AluminiumBat
   m_EditorClassIdentifier: 
   name: AluminiumBat
+  id: 0
   weaponPrefab: {fileID: 621959678804712253, guid: 961a99f05ee0c514f8fcc8ddd60f6060, type: 3}
   damage: 45
-  attackDelay: 0
-  weaponType: 1
+  attackDelay: 0.7
+  weaponType: 2
   attackMotion: 0
   attackRange: {x: 3, y: 2}

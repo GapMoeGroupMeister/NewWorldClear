@@ -112,7 +112,7 @@ public abstract class Damageable : MonoBehaviour
         float elasped = 0f;
         while (cool > 0)
         {
-            if ((debuffs &= Debuffs.Bleed) != Debuffs.Bleed)
+            if ((debuffs &= Debuffs.Bleed) != Debuffs.Bleed && cool != Mathf.Infinity)
                 break;
             cool -= Time.deltaTime;
             elasped += Time.deltaTime;
@@ -132,7 +132,7 @@ public abstract class Damageable : MonoBehaviour
         float cool = values[0];
         while (cool > 0)
         {
-            if ((debuffs &= Debuffs.Slow) != Debuffs.Slow)
+            if ((debuffs &= Debuffs.Slow) != Debuffs.Slow && cool != Mathf.Infinity)
                 break;
             float addSpeed = prevSpeed * (100 / values[1]);
             if (addSpeed != _moveSpeed) prevSpeed = _moveSpeed;
@@ -149,7 +149,7 @@ public abstract class Damageable : MonoBehaviour
         float cool = values[0];
         while (cool > 0)
         {
-            if ((debuffs &= Debuffs.Stun) != Debuffs.Stun)
+            if ((debuffs &= Debuffs.Stun) != Debuffs.Stun && cool != Mathf.Infinity)
                 break;
             isStun = true;
             cool -= Time.deltaTime;
@@ -164,7 +164,7 @@ public abstract class Damageable : MonoBehaviour
         float cool = values[0];
         while (cool > 0)
         {
-            if ((debuffs &= Debuffs.Subdue) != Debuffs.Subdue)
+            if ((debuffs &= Debuffs.Subdue) != Debuffs.Subdue && cool != Mathf.Infinity)
                 break;
             isSubdue = true;
             cool -= Time.deltaTime;
@@ -181,7 +181,7 @@ public abstract class Damageable : MonoBehaviour
         float elasped = 0f;
         while (cool > 0)
         {
-            if ((debuffs &= Debuffs.Poison) != Debuffs.Poison)
+            if ((debuffs &= Debuffs.Poison) != Debuffs.Poison && cool != Mathf.Infinity)
                 break;
             cool -= Time.deltaTime;
             elasped += Time.deltaTime;
@@ -202,7 +202,7 @@ public abstract class Damageable : MonoBehaviour
         float cool = values[0];
         while (cool > 0)
         {
-            if ((buffs &= Buffs.Fast) != Buffs.Fast)
+            if ((buffs &= Buffs.Fast) != Buffs.Fast && cool != Mathf.Infinity)
                 break;
             float addSpeed = prevSpeed + (prevSpeed * (100 / values[1]));
             if (addSpeed != _moveSpeed) prevSpeed = _moveSpeed;
@@ -221,7 +221,7 @@ public abstract class Damageable : MonoBehaviour
         float elasped = 0f;
         while(cool > 0)
         {
-            if ((buffs &= Buffs.Generation) != Buffs.Generation)
+            if ((buffs &= Buffs.Generation) != Buffs.Generation && cool != Mathf.Infinity)
                 break;
             cool -= Time.deltaTime;
             elasped += Time.deltaTime;
@@ -241,7 +241,7 @@ public abstract class Damageable : MonoBehaviour
         float cool = values[0];
         while (cool > 0)
         {
-            if ((buffs &= Buffs.PowerUp) != Buffs.PowerUp)
+            if ((buffs &= Buffs.PowerUp) != Buffs.PowerUp && cool != Mathf.Infinity)
                 break;
             float addDamage = prevdamage + (prevdamage * 0.5f);
             if (addDamage != damage) prevdamage = damage;
@@ -258,7 +258,7 @@ public abstract class Damageable : MonoBehaviour
         float cool = values[0];
         while (cool > 0)
         {
-            if ((buffs &= Buffs.ThinSheild) != Buffs.ThinSheild)
+            if ((buffs &= Buffs.ThinSheild) != Buffs.ThinSheild && cool != Mathf.Infinity)
                 break;
             thinSheild = true;
             cool -= Time.deltaTime;

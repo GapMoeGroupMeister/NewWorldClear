@@ -1535,7 +1535,7 @@ MonoBehaviour:
   _enemyMask:
     serializedVersion: 2
     m_Bits: 8
-  testWeapon: {fileID: 11400000, guid: b6c087c889faa604ba52910fb81f807e, type: 2}
+  testWeapon: {fileID: 11400000, guid: 4def8fc4f7dd5a24a93a169911a2ded1, type: 2}
 --- !u!120 &937734467
 LineRenderer:
   serializedVersion: 2

@@ -110,6 +110,11 @@ public class PlayerController : Damageable
         Destroy(trail, 1f);
     }
 
+    public void PoisonDamage()
+    {
+        
+    }
+
 
     #region Stat Change functions
     public void ChangeHP(float amount)
