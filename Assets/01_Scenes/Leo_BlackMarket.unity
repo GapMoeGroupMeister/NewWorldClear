@@ -4431,12 +4431,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: 73353260f9c55624b9a9e8d47fcebc6b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8c4ad509accfef8438a462dcf07d6635, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 19.2, y: 10.8}
+  m_Size: {x: 42.666668, y: 24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -4452,7 +4452,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.426, y: 0.426, z: 0.426}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -5545,13 +5545,13 @@ MonoBehaviour:
   weaponNameText: {fileID: 1178017602}
   descriptionScript: {fileID: 1564695902}
   weaponDescription:
-  - shopSO: {fileID: 11400000, guid: a801cbb1ebe2e834d88cb4c69d6371a3, type: 2}
+  - shopSO: {fileID: 11400000, guid: e37edcad83618eb45a01282acf54a02a, type: 2}
     isSoldOut: 0
-  - shopSO: {fileID: 11400000, guid: 3357ad4f2b33c134480998859f014373, type: 2}
+  - shopSO: {fileID: 11400000, guid: 450831cb02a75704bb4068cebde9dffc, type: 2}
     isSoldOut: 0
-  - shopSO: {fileID: 11400000, guid: 50a30fc08454b6241b16f9092a06c654, type: 2}
+  - shopSO: {fileID: 11400000, guid: 373ffccd469d4c044bc8a09d2fddd7bc, type: 2}
     isSoldOut: 0
-  - shopSO: {fileID: 11400000, guid: c40620683d2b0f24e89f0cddf0d0bee3, type: 2}
+  - shopSO: {fileID: 11400000, guid: e9010b0b4e29a9d40ab5740c7973e3bf, type: 2}
     isSoldOut: 0
   weaponImage: {fileID: 638625702}
   frameImages:
@@ -7086,13 +7086,13 @@ MonoBehaviour:
   weaponNameText: {fileID: 463234932}
   descriptionScript: {fileID: 1564695902}
   weaponDescription:
-  - shopSO: {fileID: 11400000, guid: a801cbb1ebe2e834d88cb4c69d6371a3, type: 2}
+  - shopSO: {fileID: 11400000, guid: e37edcad83618eb45a01282acf54a02a, type: 2}
     isSoldOut: 0
-  - shopSO: {fileID: 11400000, guid: 3357ad4f2b33c134480998859f014373, type: 2}
+  - shopSO: {fileID: 11400000, guid: 450831cb02a75704bb4068cebde9dffc, type: 2}
     isSoldOut: 0
-  - shopSO: {fileID: 11400000, guid: 50a30fc08454b6241b16f9092a06c654, type: 2}
+  - shopSO: {fileID: 11400000, guid: 373ffccd469d4c044bc8a09d2fddd7bc, type: 2}
     isSoldOut: 0
-  - shopSO: {fileID: 11400000, guid: c40620683d2b0f24e89f0cddf0d0bee3, type: 2}
+  - shopSO: {fileID: 11400000, guid: e9010b0b4e29a9d40ab5740c7973e3bf, type: 2}
     isSoldOut: 0
   weaponImage: {fileID: 826231520}
   frameImages:
@@ -7785,13 +7785,13 @@ MonoBehaviour:
   weaponNameText: {fileID: 1089485100}
   descriptionScript: {fileID: 1564695902}
   weaponDescription:
-  - shopSO: {fileID: 11400000, guid: a801cbb1ebe2e834d88cb4c69d6371a3, type: 2}
+  - shopSO: {fileID: 11400000, guid: e37edcad83618eb45a01282acf54a02a, type: 2}
     isSoldOut: 0
-  - shopSO: {fileID: 11400000, guid: 3357ad4f2b33c134480998859f014373, type: 2}
+  - shopSO: {fileID: 11400000, guid: 450831cb02a75704bb4068cebde9dffc, type: 2}
     isSoldOut: 0
-  - shopSO: {fileID: 11400000, guid: 50a30fc08454b6241b16f9092a06c654, type: 2}
+  - shopSO: {fileID: 11400000, guid: 373ffccd469d4c044bc8a09d2fddd7bc, type: 2}
     isSoldOut: 0
-  - shopSO: {fileID: 11400000, guid: c40620683d2b0f24e89f0cddf0d0bee3, type: 2}
+  - shopSO: {fileID: 11400000, guid: e9010b0b4e29a9d40ab5740c7973e3bf, type: 2}
     isSoldOut: 0
   weaponImage: {fileID: 265772082}
   frameImages:
@@ -9637,13 +9637,13 @@ MonoBehaviour:
   weaponNameText: {fileID: 1788361912}
   descriptionScript: {fileID: 1564695902}
   weaponDescription:
-  - shopSO: {fileID: 11400000, guid: a801cbb1ebe2e834d88cb4c69d6371a3, type: 2}
+  - shopSO: {fileID: 11400000, guid: e37edcad83618eb45a01282acf54a02a, type: 2}
     isSoldOut: 0
-  - shopSO: {fileID: 11400000, guid: 3357ad4f2b33c134480998859f014373, type: 2}
+  - shopSO: {fileID: 11400000, guid: 450831cb02a75704bb4068cebde9dffc, type: 2}
     isSoldOut: 0
-  - shopSO: {fileID: 11400000, guid: 50a30fc08454b6241b16f9092a06c654, type: 2}
+  - shopSO: {fileID: 11400000, guid: 373ffccd469d4c044bc8a09d2fddd7bc, type: 2}
     isSoldOut: 0
-  - shopSO: {fileID: 11400000, guid: c40620683d2b0f24e89f0cddf0d0bee3, type: 2}
+  - shopSO: {fileID: 11400000, guid: e9010b0b4e29a9d40ab5740c7973e3bf, type: 2}
     isSoldOut: 0
   weaponImage: {fileID: 1906533697}
   frameImages:
