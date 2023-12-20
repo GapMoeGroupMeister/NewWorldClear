@@ -20,7 +20,6 @@ public class PlayerWeapon : MonoBehaviour
 
     Transform _weaponPivot;
 
-    LineRenderer _lineRenderer;
     PlayerController _playerController;
 
     [SerializeField]
@@ -33,7 +32,6 @@ public class PlayerWeapon : MonoBehaviour
     private void Awake()
     {
         _playerController = FindObjectOfType<PlayerController>();
-        _lineRenderer = GetComponent<LineRenderer>();
     }
 
     private void Start()
@@ -69,7 +67,6 @@ public class PlayerWeapon : MonoBehaviour
         else if (_weaponType.Equals(WeaponType.Gun))
         {
             StopCoroutine(LongWeaponAttack(0));
-            _lineRenderer.enabled = false;
         }
 
         _weaponType = weaponSO.weaponType;
@@ -81,7 +78,6 @@ public class PlayerWeapon : MonoBehaviour
         else if (_weaponType.Equals(WeaponType.Gun))
         {
             StartCoroutine(LongWeaponAttack(_attackDelay));
-            _lineRenderer.enabled = true;
         }
     }
     
