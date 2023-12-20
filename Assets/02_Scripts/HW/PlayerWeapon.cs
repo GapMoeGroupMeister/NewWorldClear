@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Sockets;
 using UnityEngine;
 
 public class PlayerWeapon : MonoBehaviour
@@ -13,8 +14,10 @@ public class PlayerWeapon : MonoBehaviour
     private WeaponEvent _weaponEvent;
 
     public GameObject effect;
+    public GameObject bulletPrefab;
 
-    Transform _nearestEnemy;
+    private GameObject _currentWeapon;
+
     Transform _weaponPivot;
 
     LineRenderer _lineRenderer;
@@ -44,63 +47,44 @@ public class PlayerWeapon : MonoBehaviour
         {
             WeaponChange(testWeapon);
         }
-        if (_weaponType == WeaponType.LongRange)
-        {
-            Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, _attackRange.x, _enemyMask);
-            if (enemies.Length > 0)
-            {
-                float distance = float.MaxValue;
-                foreach (Collider2D col in enemies)
-                {
-                    if (Vector2.Distance(transform.position, col.transform.position) < distance)
-                    {
-                        distance = Vector2.Distance(transform.position, col.transform.position);
-                        _nearestEnemy = col.transform;
-                    }
-                }
-                _lineRenderer.SetPosition(0, transform.position);
-                _lineRenderer.SetPosition(1, _nearestEnemy.position);
-            }
-            else
-            {
-                _nearestEnemy = null;
-            }
-        }
+
     }
 
     public void WeaponChange(WeaponSO weaponSO)
     {
-        GameObject weapon = Instantiate(weaponSO.weaponPrefab, transform);
-        _weaponPivot = weapon.transform.GetChild(0);
-        _playerController.damage = weaponSO.damage;
+        if (_currentWeapon != null) Destroy(_currentWeapon);
+        _currentWeapon = Instantiate(weaponSO.weaponPrefab, transform);
+        _weaponPivot = _currentWeapon.transform.GetChild(0);
+        _playerController.damage = _playerController.attackDamage;
+        _playerController.damage += (_playerController.attackDamage / weaponSO.damage);
         _attackDelay = weaponSO.attackDelay;
         _attackRange = weaponSO.attackRange;
         _attackMotion = weaponSO.attackMotion;
-        _weaponEvent = (WeaponEvent)WeaponEventManager.Instance.GetComponent(weapon.name);
+        _weaponEvent = (WeaponEvent)WeaponEventManager.Instance.GetComponent(_currentWeapon.name);
 
-        if (_weaponType.Equals(WeaponType.ShortRange))
+        if (_weaponType.Equals(WeaponType.Swing))
         {
-            StopCoroutine("ShortWeaponAttack");
+            StopCoroutine(ShortWeaponAttack(0));
         }
-        else if (_weaponType.Equals(WeaponType.LongRange))
+        else if (_weaponType.Equals(WeaponType.Gun))
         {
-            StopCoroutine("LongWeaponAttack");
+            StopCoroutine(LongWeaponAttack(0));
             _lineRenderer.enabled = false;
         }
 
         _weaponType = weaponSO.weaponType;
 
-        if (_weaponType.Equals(WeaponType.ShortRange))
+        if (_weaponType.Equals(WeaponType.Swing))
         {
-            StartCoroutine("ShortWeaponAttack", _attackDelay);
+            StartCoroutine(ShortWeaponAttack(_attackDelay));
         }
-        else if (_weaponType.Equals(WeaponType.LongRange))
+        else if (_weaponType.Equals(WeaponType.Gun))
         {
-            StartCoroutine("LongWeaponAttack", _attackDelay);
+            StartCoroutine(LongWeaponAttack(_attackDelay));
             _lineRenderer.enabled = true;
         }
     }
-
+    
     public void AttackMotionPlay()
     {
         switch (_attackMotion)
@@ -131,9 +115,9 @@ public class PlayerWeapon : MonoBehaviour
             float angle = Mathf.Atan2(dir.y, dir.x);
             AttackMotionPlay();
             Collider2D[] enemies = Physics2D.OverlapBoxAll(attackRange, _attackRange, angle * Mathf.Rad2Deg, _enemyMask);
-            //GameObject obj = Instantiate(effect, attackRange, Quaternion.Euler(0, 0, angle * Mathf.Rad2Deg));
-            //obj.transform.localScale = _attackRange;
-            //Destroy(obj, 0.5f);
+            GameObject obj = Instantiate(effect, attackRange, Quaternion.Euler(0, 0, angle * Mathf.Rad2Deg));
+            obj.transform.localScale = _attackRange;
+            Destroy(obj, 0.5f);
             if (enemies.Length > 0)
             {
                 foreach (Collider2D col in enemies)
@@ -153,9 +137,11 @@ public class PlayerWeapon : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(delay);
-            yield return new WaitUntil(() => _playerController.isStun);
-            if (_nearestEnemy != null)
-                _nearestEnemy.GetComponent<Enemy_TEST>().Damage(_playerController.damage);
+            yield return new WaitUntil(() => !_playerController.isStun);
+            Vector2 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.Euler(new Vector3(0,0,angle)));
+            bullet.GetComponent<Bullet>().dir = dir;
         }
     }
 }

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Fist
   m_EditorClassIdentifier: 
   name: Fist
-  desc: iwannagohome
-  weaponSprite: {fileID: 0}
+  weaponPrefab: {fileID: 0}
   damage: 10
-  attackDelay: 2
+  attackDelay: 0
   weaponType: 1
+  attackMotion: 0
   attackRange: {x: 2, y: 2}

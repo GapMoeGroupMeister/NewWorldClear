@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49158c3b4635ef24395bc84ebb1cc3b3, type: 3}
+  m_Name: PiercingSpear
+  m_EditorClassIdentifier: 
+  name: Spaer
+  weaponPrefab: {fileID: 5451285432579555106, guid: 19ffc8aacd8908b42b7ed3238a37f008, type: 3}
+  damage: 10
+  attackDelay: 10
+  weaponType: 1
+  attackMotion: 2
+  attackRange: {x: 3, y: 0.5}
