@@ -12,7 +12,7 @@ namespace Tkfkadlsi
         Attack
     }
 
-    public abstract class Enemy : MonoBehaviour
+    public abstract class Enemy : Damageable
     {
         public EnemyData data;
         public Animator anim;
@@ -20,6 +20,7 @@ namespace Tkfkadlsi
 
         public State currentState;
         public FSM fsm;
+
 
         public float def;
         public float atkDelay;
@@ -53,6 +54,7 @@ namespace Tkfkadlsi
         public abstract void SetState();
 
         public abstract void Update();
+
         public virtual void ChoiceState()
         {
             switch (currentState)

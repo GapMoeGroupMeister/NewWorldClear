@@ -23,9 +23,9 @@ namespace Tkfkadlsi
 
         public override void Hit(float damage)
         {
-            hp -= damage;
+            _currentHp -= damage;
 
-            if (hp < 0)
+            if (_currentHp < 0)
                 Dead();
         }
 
@@ -34,6 +34,7 @@ namespace Tkfkadlsi
             idleState = new TestEnemtIdleState(this);
             moveState = new TestEnemyMoveState(this);
             attackState = new TestEnemyAttackState(this);
+            
         }
 
         public class TestEnemtIdleState : StateBase
@@ -75,7 +76,7 @@ namespace Tkfkadlsi
                 Vector3 moveDir = Vector3.zero;
                 moveDir = enemy.target.transform.position - enemy.transform.position;
                 moveDir = moveDir.normalized;
-                enemy.transform.position += moveDir * enemy.spd * Time.deltaTime;
+                enemy.transform.position += moveDir * enemy._moveSpeed * Time.deltaTime;
             }
         }
 
@@ -104,7 +105,7 @@ namespace Tkfkadlsi
                 if (cycle < 0)
                 {
                     PlayerController playerController = enemy.target.GetComponent<PlayerController>();
-                    playerController.HitDamage(enemy.atk);
+                    playerController.HitDamage(enemy.damage);
                     cycle = enemy.atkDelay;
                 }
             }
