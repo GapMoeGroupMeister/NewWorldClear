@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Tkfkadlsi
 {
-    public class NormalEnemy : Enemy
+    public class TestEnemy : Enemy
     {
         public override void Awake()
         {
@@ -31,14 +31,14 @@ namespace Tkfkadlsi
 
         public override void SetState()
         {
-            idleState = new NormalEnemyIdleState(this);
-            moveState = new NormalEnemyMoveState(this);
-            attackState = new NormalEnemyAttackState(this);
+            idleState = new TestEnemtIdleState(this);
+            moveState = new TestEnemyMoveState(this);
+            attackState = new TestEnemyAttackState(this);
         }
 
-        public class NormalEnemyIdleState : StateBase
+        public class TestEnemtIdleState : StateBase
         {
-            public NormalEnemyIdleState(Enemy initenemy) : base(initenemy) { }
+            public TestEnemtIdleState(Enemy initenemy) : base(initenemy) { }
 
             public override void OnStateEnter()
             {
@@ -56,9 +56,9 @@ namespace Tkfkadlsi
             }
         }
 
-        public class NormalEnemyMoveState : StateBase
+        public class TestEnemyMoveState : StateBase
         {
-            public NormalEnemyMoveState(Enemy initenemy) : base(initenemy) { }
+            public TestEnemyMoveState(Enemy initenemy) : base(initenemy) { }
 
             public override void OnStateEnter()
             {
@@ -79,15 +79,15 @@ namespace Tkfkadlsi
             }
         }
 
-        public class NormalEnemyAttackState : StateBase
+        public class TestEnemyAttackState : StateBase
         {
-            public NormalEnemyAttackState(Enemy initenemy) : base(initenemy) { }
+            public TestEnemyAttackState(Enemy initenemy) : base(initenemy) { }
 
             private float cycle;
 
             public override void OnStateEnter()
             {
-                cycle = enemy.atkCycle;
+                cycle = enemy.atkDelay;
             }
 
             public override void OnStateExit()
@@ -105,7 +105,7 @@ namespace Tkfkadlsi
                 {
                     PlayerController playerController = enemy.target.GetComponent<PlayerController>();
                     playerController.HitDamage(enemy.atk);
-                    cycle = enemy.atkCycle;
+                    cycle = enemy.atkDelay;
                 }
             }
         }
