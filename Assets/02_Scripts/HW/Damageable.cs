@@ -35,8 +35,8 @@ public abstract class Damageable : MonoBehaviour
     public float _maxHp = 100f;
     public float _moveSpeed;
     public float damage;
+    public float painfulAmount = 0f;
     public bool isStun = false;
-    public bool isPainful = false;
     public bool isSubdue = false;
     public bool thinSheild = false;
 
@@ -224,6 +224,7 @@ public abstract class Damageable : MonoBehaviour
     IEnumerator IEPainful(float[] values)
     {
         float cool = values[0];
+        float amount = values[1];
         while (cool > 0)
         {
             if (cool == Mathf.Infinity)
@@ -234,11 +235,12 @@ public abstract class Damageable : MonoBehaviour
             if ((debuffs &= Debuffs.Painful) != Debuffs.Painful)
                 break;
             isPainful = true;
+            painfulAmount = amount;
             cool -= Time.deltaTime;
             yield return null;
         }
         debuffs -= Debuffs.Painful;
-        isPainful = false;
+        painfulAmount = 0;
     }
 
     #region Buff Coroutines
