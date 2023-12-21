@@ -5243,6 +5243,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1955093582}
     m_Modifications:
+    - target: {fileID: -7749330740032674004, guid: e84cf86c79bc2a446a18810735e54f9d, type: 3}
+      propertyPath: selectedAction.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7749330740032674004, guid: e84cf86c79bc2a446a18810735e54f9d, type: 3}
+      propertyPath: selectedAction.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1293402952503854941, guid: e84cf86c79bc2a446a18810735e54f9d, type: 3}
       propertyPath: m_Name
       value: SkillTreeNode
