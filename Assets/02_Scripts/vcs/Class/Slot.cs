@@ -21,14 +21,11 @@ public abstract class Slot : MonoBehaviour
         if (ItemImage == null)
         {
            ItemImage = transform.GetChild(0).GetComponent<Image>();
-
         }
-
         if (GaugeFill == null)
         {
             GaugeFill = transform.Find("ConditionGauge").transform.Find("GaugeFill").GetComponent<Image>();
         }
-
         if (ItemAmount == null)
         {
             ItemAmount = transform.Find("AmountBG").transform.Find("AmountText").GetComponent<TextMeshProUGUI>();

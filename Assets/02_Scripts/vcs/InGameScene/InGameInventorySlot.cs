@@ -1,33 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class InGameInventorySlot : MonoBehaviour
+public class InGameInventorySlot : Slot
 {
-    [SerializeField]
-    private Image ItemImage;
-    [SerializeField]
-    private Image GuageFill;
-    [SerializeField]
-    private TextMeshProUGUI ItemAmount;
-
-    [SerializeField]
-    private ItemSlot currentSlot;
-
-    private Item currentItem;
-
-    private void Awake()
-    {
-        
-        
-        ItemImage = transform.GetChild(0).GetComponent<Image>();
-        GuageFill = transform.Find("ConditionGuage").transform.Find("GuageFill").GetComponent<Image>();
-        ItemAmount = transform.Find("AmountBG").transform.Find("AmountText").GetComponent<TextMeshProUGUI>();
-    }
-    
-    public void SetSlot(ItemSlot slotInfo)
+    public override void SetSlot(ItemSlot slotInfo)
     {
         currentSlot = slotInfo;
         currentItem = slotInfo.item;
@@ -38,25 +13,25 @@ public class InGameInventorySlot : MonoBehaviour
         ItemAmount.text = currentSlot.amount.ToString();
     }
 
-    private void SetItemIcon()
+    protected override void SetItemIcon()
     {
         if (ItemImage == null) return;
-        //ItemImage.sprite = ;
+        ItemImage.sprite = SpriteLoader.Instance.FindSprite(currentItem.itemSpriteName);
         ItemImage.SetNativeSize();
         
         
     }
 
-    private void SetGauge()
+    protected override void SetGauge()
     {
         if (currentItem.isLimited)
         {
-            GuageFill.fillAmount = Mathf.Clamp((float)currentSlot.durability / currentItem.maxDurability, 0f, 1f);
+            GaugeFill.fillAmount = Mathf.Clamp((float)currentSlot.durability / currentItem.maxDurability, 0f, 1f);
 
         }
         else
         {
-            GuageFill.fillAmount = 1;
+            GaugeFill.fillAmount = 1;
         }
     }
 }

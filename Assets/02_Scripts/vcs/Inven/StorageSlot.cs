@@ -4,9 +4,6 @@ using UnityEngine.EventSystems;
 
 public class StorageSlot : Slot, IPointerEnterHandler,  IPointerExitHandler
 {
-    
-
-
     public override void SetSlot(ItemSlot slotInfo)
     {
         currentSlot = slotInfo;
@@ -21,6 +18,7 @@ public class StorageSlot : Slot, IPointerEnterHandler,  IPointerExitHandler
     protected override void SetItemIcon()
     {
         if (ItemImage == null) return;
+        
         ItemImage.SetNativeSize();
         
         

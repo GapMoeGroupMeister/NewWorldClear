@@ -1129,7 +1129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d71e339d56d96b4998edc933ed4eaa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotPrefab: {fileID: 171938223386310512, guid: 70f82d77a63280042867dc5ecba476ff, type: 3}
+  slotPrefab: {fileID: 171938223386310512, guid: afc7f05926e46f74bb6d2e85dc465a2f, type: 3}
   grid: {fileID: 597678463}
   defaultItem:
     item: {fileID: 11400000, guid: 43db0c6ca032b9a4abb5c0d23bce66b0, type: 2}
@@ -1182,7 +1182,7 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: ed80afed-7aad-494b-8028-5cb4f373eaec
+  m_DefaultActionMap: GameControl
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1 &486668838

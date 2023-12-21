@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5197555937245723936}
   - component: {fileID: 6225289354117986876}
   m_Layer: 5
-  m_Name: Slot
+  m_Name: StorageSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemImage: {fileID: 0}
-  GuageFill: {fileID: 0}
+  GaugeFill: {fileID: 0}
   ItemAmount: {fileID: 0}
   currentSlot:
     item: {fileID: 0}
@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 4813059555920949231}
   - component: {fileID: 7545066232958439091}
   m_Layer: 5
-  m_Name: GuageFill
+  m_Name: GaugeFill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -394,7 +394,7 @@ GameObject:
   - component: {fileID: 2632787193297922740}
   - component: {fileID: 3189124250339280130}
   m_Layer: 5
-  m_Name: GuageBG
+  m_Name: GaugeBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -467,7 +467,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8045870699459048006}
   m_Layer: 5
-  m_Name: ConditionGuage
+  m_Name: ConditionGauge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

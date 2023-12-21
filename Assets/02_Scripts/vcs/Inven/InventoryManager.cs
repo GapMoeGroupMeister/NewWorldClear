@@ -59,8 +59,18 @@ public abstract class InventoryManager : MonoBehaviour
     protected void Set_Slot(ItemSlot itemSlot)
     {
         GameObject slot = Instantiate(slotPrefab, grid);
+        
         slot.GetComponent<Slot>().SetSlot(itemSlot);
-
+        // if (slot.GetComponent<InGameInventorySlot>())
+        // {
+        //     slot.GetComponent<InGameInventorySlot>().SetSlot(itemSlot);
+        // }else if (slot.GetComponent<StorageSlot>())
+        // {
+        //     slot.GetComponent<StorageSlot>().SetSlot(itemSlot);
+        // }
+        
+        
+        
     }
     
     
