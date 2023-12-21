@@ -5,57 +5,55 @@ using UnityEngine;
 
 namespace Tkfkadlsi
 {
-    public class Enemy : MonoBehaviour
+    public enum State
     {
-        private enum State
-        {
-            Idle,
-            Move,
-            Attack
-        }
+        Idle,
+        Move,
+        Attack
+    }
 
+    public abstract class Enemy : MonoBehaviour
+    {
         public EnemyData data;
         public Animator anim;
         public GameObject target;
 
-        private State currentState;
-        private FSM fsm;
+        public State currentState;
+        public FSM fsm;
 
-        public float hp;
-        public float atk;
         public float def;
-        public float spd;
-        public float atkCycle;
+        public float atkDelay;
         public float range;
 
-        private bool CanAttackPlayer = false;
+        public bool CanAttackPlayer = false;
 
-        private void Start()
+        public StateBase idleState;
+        public StateBase moveState;
+        public StateBase attackState;
+
+        public virtual void Awake()
         {
             target = FindObjectOfType<PlayerController>().gameObject;
-            anim = this.GetComponent<Animator>();
             currentState = State.Idle;
-            fsm = new FSM(new IdleState(this));
+            fsm = new FSM(idleState);
 
             SetStatus();
         }
 
         private void SetStatus()
         {
-            hp = data.DefaultHP;
-            atk = data.DefaultATK;
+            _currentHp = data.DefaultHP;
+            damage = data.DefaultATK;
             def = data.DefaultDEF;
-            spd = data.DefaultSPD;
-            atkCycle = data.AttackCycle;
+            _moveSpeed = data.DefaultSPD;
+            atkDelay = data.AttackCycle;
             range = data.DetectRange;
         }
 
-        private void Update()
-        {
-            SetState();
-        }
+        public abstract void SetState();
 
-        private void SetState()
+        public abstract void Update();
+        public virtual void ChoiceState()
         {
             switch (currentState)
             {
@@ -63,56 +61,55 @@ namespace Tkfkadlsi
                     if (CanSeePlayer())
                     {
                         if (CanAttackPlayer)
-                            ChangeState(State.Attack);
+                            ChangeState(State.Attack, attackState);
                         else
-                            ChangeState(State.Move);
+                            ChangeState(State.Move, moveState);
                     }
                     break;
                 case State.Move:
                     if (CanSeePlayer())
                     {
                         if (CanAttackPlayer)
-                            ChangeState(State.Attack);
+                            ChangeState(State.Attack, attackState);
                     }
                     else
                     {
-                        ChangeState(State.Idle);
+                        ChangeState(State.Idle, idleState);
                     }
                     break;
                 case State.Attack:
                     if (CanSeePlayer())
                     {
                         if (!CanAttackPlayer)
-                            ChangeState(State.Move);
+                            ChangeState(State.Move, moveState);
                     }
                     else
                     {
-                        ChangeState(State.Idle);
+                        ChangeState(State.Idle, idleState);
                     }
                     break;
             }
-
             fsm.UpdateState();
         }
 
-        private void ChangeState(State nextState)
+        private void ChangeState(State nextState, StateBase state)
         {
             currentState = nextState;
             switch (currentState)
             {
                 case State.Idle:
-                    fsm.ChangeState(new IdleState(this));
+                    fsm.ChangeState(state);
                     break;
                 case State.Move:
-                    fsm.ChangeState(new MoveState(this));
+                    fsm.ChangeState(state);
                     break;
                 case State.Attack:
-                    fsm.ChangeState(new AttackState(this));
+                    fsm.ChangeState(state);
                     break;
             }
         }
 
-        private bool CanSeePlayer()
+        protected bool CanSeePlayer()
         {
             if(Vector2.Distance(target.transform.position, this.transform.position) <= data.DetectRange)
             {
@@ -123,7 +120,7 @@ namespace Tkfkadlsi
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if(collision.collider.gameObject == target)
+            if(collision.collider.CompareTag("Player"))
             {
                 CanAttackPlayer = true;
             }
@@ -131,23 +128,14 @@ namespace Tkfkadlsi
 
         private void OnCollisionExit2D(Collision2D collision)
         {
-            if(collision.collider.gameObject == target)
+            if(collision.collider.CompareTag("Player"))
             {
                 CanAttackPlayer = false;
             }
         }
 
-        public void Hit(float damage)
-        {
-            hp -= damage;
+        public abstract void Hit(float damage);
 
-
-            if (hp < 0) Dead();
-        }
-
-        private void Dead()
-        {
-            Destroy(gameObject);
-        }
+        public abstract void Dead();
     }
 }

@@ -22,10 +22,11 @@ public class Description : MonoBehaviour
      */
     public void Buy()
     {
-        if (Weapon2.WeaponDescription[Weapon2.RandomIndex].isSoldOut) return;
+        if (Weapon2.GetWeaponDescription().isSoldOut) return;
 
         Weapon2.SoldOut.SetActive(true);
-        Weapon2.WeaponDescription[Weapon2.RandomIndex].isSoldOut = true;
+        Weapon2.GetWeaponDescription().isSoldOut = true;
+        ItemManager.Instance.AddItem(Weapon2.GetWeaponDescription().shopSO.item, 1);
 
         Cancel();
     }
