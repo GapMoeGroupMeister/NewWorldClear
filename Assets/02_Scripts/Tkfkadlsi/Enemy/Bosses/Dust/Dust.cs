@@ -1,161 +1,165 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Tkfkadlsi;
 
-public class Dust : MonoBehaviour
+
+namespace Tkfkadlsi
 {
-    public EnemyData dustData;
-    public Animator animator;
-    public PlayerController target;
 
-    public DustsCenter dustsCenter;
-    public DustAttack dustAttack;
-    public DustSkill_One skill_One;
-    public DustSkill_Three skill_Three;
-
-    public float hp;
-    public float atk;
-    public float def;
-    public float speed;
-    public float atkDelay;
-    public float range;
-
-    public DustState currentState;
-
-    private int attackCount = 0;
-    public int AttackCount
+    public class Dust : MonoBehaviour
     {
-        get
+        public EnemyData dustData;
+        public Animator animator;
+        public PlayerController target;
+
+        public DustsCenter dustsCenter;
+        public DustAttack dustAttack;
+        public DustSkill_One skill_One;
+        public DustSkill_Three skill_Three;
+
+        public float hp;
+        public float atk;
+        public float def;
+        public float speed;
+        public float atkDelay;
+        public float range;
+
+        public DustState currentState;
+
+        private int attackCount = 0;
+        public int AttackCount
         {
-            return attackCount;
-        }
-        set
-        {
-            if (value < 0) return;
-            attackCount = value;
+            get
+            {
+                return attackCount;
+            }
+            set
+            {
+                if (value < 0) return;
+                attackCount = value;
 
-            Skills_Condition();
-        }
-    }
-
-    public enum DustState
-    {
-        NotDetect,
-        Idle,
-        Attack,
-        Skill_1,
-        Skill_2,
-        Skill_3
-    }
-
-    private void Awake()
-    {
-        ResetStat();
-        
-        currentState = DustState.NotDetect;
-        dustsCenter = this.GetComponentInParent<DustsCenter>();
-        dustAttack = this.GetComponent<DustAttack>();
-        skill_One = this.GetComponent<DustSkill_One>();
-        skill_Three = this.GetComponent<DustSkill_Three>();
-    }
-
-    private void ResetStat()
-    {
-        hp = dustData.DefaultHP;
-        atk = dustData.DefaultATK;
-        def = dustData.DefaultDEF;
-        speed = dustData.DefaultSPD;
-        atkDelay = dustData.AttackCycle;
-        range = dustData.DetectRange;
-    }
-
-    private void Update()
-    {
-        if (currentState == DustState.NotDetect) return;
-
-        if(currentState == DustState.Idle && Time.deltaTime > Random.Range(0.000f, 3.000f))
-        {
-            dustAttack.AttackStart();
-        }
-    }
-
-    public void Hit(float damage)
-    {
-        damage -= def;
-        if (damage < 0) return;
-        hp -= damage;
-
-        if (hp < 0)
-            Dead();
-    }
-
-    private void Dead()
-    {
-        Destroy(gameObject);
-    }
-
-    private void Skills_Condition()
-    {
-        if (Skill_Three_Condition())
-        {
-            skill_Three.StartSkill_Three();
-            return;
-        }
-        if (Skill_One_Condition())
-        {
-            skill_One.StartSkill_One();
-            return;
+                Skills_Condition();
+            }
         }
 
-    }
-
-    private bool Skill_One_Condition()
-    {
-        if (attackCount < 4) return false;
-
-        float rand = Random.Range(0.00f, 1.00f);
-
-        if(rand <= 0.33f)
+        public enum DustState
         {
-            return true;
+            NotDetect,
+            Idle,
+            Attack,
+            Skill_1,
+            Skill_2,
+            Skill_3
         }
-        else
+
+        private void Awake()
         {
-            return false;
+            ResetStat();
+
+            currentState = DustState.NotDetect;
+            dustsCenter = this.GetComponentInParent<DustsCenter>();
+            dustAttack = this.GetComponent<DustAttack>();
+            skill_One = this.GetComponent<DustSkill_One>();
+            skill_Three = this.GetComponent<DustSkill_Three>();
         }
-    }
 
-    private bool Skill_Two_Condition()
-    {
-        if (attackCount < 6) return false;
-
-        float rand = Random.Range(0.00f, 1.00f);
-
-        if(rand <= 0.25f)
+        private void ResetStat()
         {
-            return true;
+            hp = dustData.DefaultHP;
+            atk = dustData.DefaultATK;
+            def = dustData.DefaultDEF;
+            speed = dustData.DefaultSPD;
+            atkDelay = dustData.AttackCycle;
+            range = dustData.DetectRange;
         }
-        else
+
+        private void Update()
         {
-            return false;
+            if (currentState == DustState.NotDetect) return;
+
+            if (currentState == DustState.Idle && Time.deltaTime > Random.Range(0.000f, 3.000f))
+            {
+                dustAttack.AttackStart();
+            }
         }
-    }
 
-    private bool Skill_Three_Condition()
-    {
-        if ((target.transform.position - dustsCenter.transform.position).magnitude > 6f) return true;
-        if (attackCount < 5) return false;
-
-        float rand = Random.Range(0.00f, 1.00f);
-
-        if(rand < 0.33f)
+        public void Hit(float damage)
         {
-            return true;
+            damage -= def;
+            if (damage < 0) return;
+            hp -= damage;
+
+            if (hp < 0)
+                Dead();
         }
-        else
+
+        private void Dead()
         {
-            return false;
+            Destroy(gameObject);
+        }
+
+        private void Skills_Condition()
+        {
+            if (Skill_Three_Condition())
+            {
+                skill_Three.StartSkill_Three();
+                return;
+            }
+            if (Skill_One_Condition())
+            {
+                skill_One.StartSkill_One();
+                return;
+            }
+
+        }
+
+        private bool Skill_One_Condition()
+        {
+            if (attackCount < 4) return false;
+
+            float rand = Random.Range(0.00f, 1.00f);
+
+            if (rand <= 0.33f)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private bool Skill_Two_Condition()
+        {
+            if (attackCount < 6) return false;
+
+            float rand = Random.Range(0.00f, 1.00f);
+
+            if (rand <= 0.25f)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private bool Skill_Three_Condition()
+        {
+            if ((target.transform.position - dustsCenter.transform.position).magnitude > 6f) return true;
+            if (attackCount < 5) return false;
+
+            float rand = Random.Range(0.00f, 1.00f);
+
+            if (rand < 0.33f)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
