@@ -17,12 +17,8 @@ public class StorageSlot : Slot, IPointerEnterHandler,  IPointerExitHandler
 
     protected override void SetItemIcon()
     {
-        if (ItemImage == null) return;
-        
         ItemImage.sprite = SpriteLoader.Instance.FindSprite(currentItem.itemSpriteName);
-        ItemImage.SetNativeSize();
-        
-        
+        ItemImage.SetNativeSize();   
     }
 
     protected override void SetGauge()
