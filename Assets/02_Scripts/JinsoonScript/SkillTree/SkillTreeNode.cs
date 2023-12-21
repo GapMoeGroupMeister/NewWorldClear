@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using DG.Tweening;
 using UnityEngine.Events;
+using TMPro;
 
 public class SkillTreeNode : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler, IPointerUpHandler, IPointerExitHandler
 {
@@ -12,11 +13,12 @@ public class SkillTreeNode : MonoBehaviour, IPointerEnterHandler, IPointerDownHa
     public SkillTreeNode lastSkillTreeNode;
     public UnityEvent selectedAction;
 
-    private SkillTreeHolder skillTreeHolder = null;
-    private Transform connecterTrm = null;
-    private Image connecter = null;
-    private Transform selectedTrm = null;
-    private Image framImage = null;
+    private SkillTreeHolder skillTreeHolder;
+    private Transform connecterTrm;
+    private Image connecter;
+    private Transform selectedTrm;
+    private Transform text;
+    private Image framImage;
 
     private float maxProgress = 50;
     private float curProgress = 0f;
@@ -31,6 +33,7 @@ public class SkillTreeNode : MonoBehaviour, IPointerEnterHandler, IPointerDownHa
     public bool IsSelected => isSelected;
 
     public int index { get; private set; }
+    public int RequireCoin => requireCoin;
 
     private void Awake()
     {
@@ -39,6 +42,16 @@ public class SkillTreeNode : MonoBehaviour, IPointerEnterHandler, IPointerDownHa
         connecter = connecterTrm.Find("connecterFill").GetComponent<Image>();
         framImage = transform.Find("Frame").GetComponent<Image>();
         selectedTrm = transform.Find("Selected");
+        text = transform.Find("Text");
+
+        Image[] image = text.GetComponentsInChildren<Image>();
+        TextMeshProUGUI txt = text.GetComponentInChildren<TextMeshProUGUI>();
+
+        foreach (Image i in image)
+        {
+            i.color = new Color(i.color.r, i.color.g, i.color.b, 0);
+        }
+        txt.color = new Color(txt.color.r, txt.color.g, txt.color.b, 0);
 
         RectTransform connecterRectTrm = connecterTrm.GetComponent<RectTransform>();
         Vector3 connecterPos = connecterRectTrm.position;
@@ -62,7 +75,7 @@ public class SkillTreeNode : MonoBehaviour, IPointerEnterHandler, IPointerDownHa
             return;
         }
 
-        if(lastSkillTreeNode == null|| lastSkillTreeNode.IsSelected == true)
+        if (lastSkillTreeNode == null || lastSkillTreeNode.IsSelected == true)
         {
             if (isLoading == true)
             {
@@ -79,7 +92,7 @@ public class SkillTreeNode : MonoBehaviour, IPointerEnterHandler, IPointerDownHa
                 }
             }
         }
-        
+
 
         if (isLoadingCancel == true)
         {
@@ -117,12 +130,41 @@ public class SkillTreeNode : MonoBehaviour, IPointerEnterHandler, IPointerDownHa
     }
 
 
+    private void TextOn()
+    {
+        Sequence seq = DOTween.Sequence();
+
+        Image[] image = text.GetComponentsInChildren<Image>();
+        TextMeshProUGUI txt = text.GetComponentInChildren<TextMeshProUGUI>();
+
+        foreach(Image i in image)
+        {
+            seq.Join(i.DOFade(1, 0.5f));
+        }
+        seq.Join(txt.DOFade(1, 0.5f));
+    }
+    private void TextOff()
+    {
+        Sequence seq = DOTween.Sequence();
+
+        Image[] image = text.GetComponentsInChildren<Image>();
+        TextMeshProUGUI txt = text.GetComponentInChildren<TextMeshProUGUI>();
+
+        foreach (Image i in image)
+        {
+            seq.Join(i.DOFade(0, 0.5f));
+        }
+        seq.Join(txt.DOFade(0, 0.5f));
+    }
+
+
     public void OnCheck()
     {
         if (isLoading || isSelected || isLoadingCancel) return;
         isChecking = true;
         framImage.fillAmount = 1f;
         connecter.fillAmount = 1f;
+        TextOn();
     }
     public void OnEndCheck()
     {
@@ -140,6 +182,7 @@ public class SkillTreeNode : MonoBehaviour, IPointerEnterHandler, IPointerDownHa
         isChecking = false;
         framImage.fillAmount = 0f;
         connecter.fillAmount = 0f;
+        TextOff();
     }
 
     public void Load()
