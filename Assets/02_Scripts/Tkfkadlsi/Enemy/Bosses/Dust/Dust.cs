@@ -62,7 +62,9 @@ public class Dust : Enemy
 
     public override void Hit(float damage)
     {
-        if (dustShield)
+        if (currentState == DustState.NotDetect) return;
+
+        if(currentState == DustState.Idle && Time.deltaTime > Random.Range(0.000f, 3.000f))
         {
             int rand = Random.Range(0, 10);
             if (rand < 3)
@@ -70,9 +72,6 @@ public class Dust : Enemy
                 return;
             }
         }
-
-        hp -= damage;
-        if (hp < 0) Dead();
     }
 
     public override void SetState()
@@ -84,15 +83,15 @@ public class Dust : Enemy
 
     private void SetStatus()
     {
-        hp = data.DefaultHP;
-        atk = data.DefaultATK;
-        def = data.DefaultDEF;
-        spd = data.DefaultSPD;
-        atkCycle = data.AttackCycle;
-        range = data.DetectRange;
+        damage -= def;
+        if (damage < 0) return;
+        hp -= damage;
+
+        if (hp < 0)
+            Dead();
     }
 
-    private void Moveing()
+    private void Dead()
     {
         if (isSkillActive) return;
         float angle = Mathf.Atan2(playerController._rigidbody.position.y - rigid.position.y, playerController._rigidbody.position.x - rigid.position.x) * Mathf.Rad2Deg;
@@ -187,11 +186,7 @@ public class Dust : Enemy
         SkillExit();
     }
 
-    private void SkillExit()
-    {
-        isSkillActive = false;
-        StartCoroutine(SkillDelay());
-    }
+        float rand = Random.Range(0.00f, 1.00f);
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -208,26 +203,25 @@ public class Dust : Enemy
 
         while (t < lerpTime)
         {
-            rigid.position = Vector2.Lerp(startPos, endPos, t / lerpTime);
-
-            t += Time.deltaTime;
-            yield return null;
+            return false;
         }
-
-        rigid.position = endPos;
     }
 
-    private IEnumerator ColorLerp(Color startColor, Color endColor, float lerpTime)
+    private bool Skill_Three_Condition()
     {
-        float t = 0;
-        SpriteRenderer skill2WarningObjectSpriteRenderer = skill2WarningObject.GetComponent<SpriteRenderer>();
+        if ((target.transform.position - dustsCenter.transform.position).magnitude > 6f) return true;
+        if (attackCount < 5) return false;
 
         while (t < lerpTime)
         {
             skill2WarningObjectSpriteRenderer.color = Color.Lerp(startColor, endColor, t / lerpTime);
-
-            t += Time.deltaTime;
-            yield return null;
+        if(rand < 0.33f)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
 
         skill2WarningObjectSpriteRenderer.color = endColor;

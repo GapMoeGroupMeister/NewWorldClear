@@ -16,6 +16,6 @@ MonoBehaviour:
   defaultHP: 1000
   defaultATK: 10
   defaultDEF: 2
-  defaultSPD: 2
+  defaultSPD: 8
   attackCycle: 1.25
   detectRange: 25
