@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 1041177132
+CRC: 1317315002
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 74a23d10a50ddaa38999421dfed3da68
+    Hash: e7e8dd06794b3d180a33d4c8a60fe051
   TypeTreeHash:
     serializedVersion: 2
     Hash: 2d8df09e698f722ada1caa03d3413830
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 74a23d10a50ddaa38999421dfed3da68
+    Hash: e7e8dd06794b3d180a33d4c8a60fe051
 HashAppended: 0
 ClassTypes:
 - Class: 28
@@ -19,5 +19,8 @@ ClassTypes:
 SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/03_Texture/00_Sprite/ItemIcon/Coin.Png
+- Assets/03_Texture/00_Sprite/ItemIcon/Wood.Png
+- Assets/03_Texture/00_Sprite/ItemIcon/Bandge.Png
+- Assets/03_Texture/00_Sprite/ItemIcon/Parts.Png
 - Assets/03_Texture/00_Sprite/ItemIcon/CanSoup.Png
 Dependencies: []

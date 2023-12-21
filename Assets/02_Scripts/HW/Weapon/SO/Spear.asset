@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Spear
   m_EditorClassIdentifier: 
   name: Spaer
+  id: 0
   weaponPrefab: {fileID: 5451285432579555106, guid: 19ffc8aacd8908b42b7ed3238a37f008, type: 3}
   damage: 5
   attackDelay: 1
-  weaponType: 1
+  weaponType: 2
   attackMotion: 2
   attackRange: {x: 3, y: 0.5}
