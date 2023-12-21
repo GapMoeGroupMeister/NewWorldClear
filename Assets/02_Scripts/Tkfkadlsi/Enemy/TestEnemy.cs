@@ -34,7 +34,7 @@ namespace Tkfkadlsi
             idleState = new TestEnemtIdleState(this);
             moveState = new TestEnemyMoveState(this);
             attackState = new TestEnemyAttackState(this);
-            
+
         }
 
         public class TestEnemtIdleState : StateBase
@@ -43,17 +43,17 @@ namespace Tkfkadlsi
 
             public override void OnStateEnter()
             {
-                
+
             }
 
             public override void OnStateExit()
             {
-                
+
             }
 
             public override void OnStateUpdate()
             {
-                
+
             }
         }
 
@@ -63,12 +63,12 @@ namespace Tkfkadlsi
 
             public override void OnStateEnter()
             {
-                
+
             }
 
             public override void OnStateExit()
             {
-                
+
             }
 
             public override void OnStateUpdate()
@@ -93,7 +93,7 @@ namespace Tkfkadlsi
 
             public override void OnStateExit()
             {
-                
+
             }
 
             public override void OnStateUpdate()
