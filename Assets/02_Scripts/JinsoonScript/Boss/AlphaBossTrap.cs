@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System.Linq.Expressions;
 
 public class AlphaBossTrap : MonoBehaviour
 {
@@ -41,6 +42,9 @@ public class AlphaBossTrap : MonoBehaviour
         if(collision.TryGetComponent<PlayerController>(out PlayerController p))
         {
             //대충 기절, 데미지 주고
+            StopCoroutine("FadeOutRoutine");
+            Debug.Log("덫에걸린...");
+            sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1); 
         }
         
     }

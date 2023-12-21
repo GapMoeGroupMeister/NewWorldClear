@@ -66,4 +66,15 @@ public class BattleDronePoisonPool : BossSkill
 
         battleDroneBrain.State = BattleDroneState.EXIT;
     }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        if (UnityEditor.Selection.activeGameObject == gameObject)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(transform.position, attackRange);
+        }
+    }
+#endif
 }

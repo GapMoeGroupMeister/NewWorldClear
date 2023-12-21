@@ -59,6 +59,7 @@ public class BattleDroneBrain : MonoBehaviour
 
             if (battleDroneSkills[i].AttackDesire() == true && battleDroneSkills[i] != curSkill && skillCoolDown <= 0)
             {
+                movement.MoveStop();
                 curSkill = battleDroneSkills[i];
                 curSkill.UseSkill();
                 skillCoolDown = skillCool;

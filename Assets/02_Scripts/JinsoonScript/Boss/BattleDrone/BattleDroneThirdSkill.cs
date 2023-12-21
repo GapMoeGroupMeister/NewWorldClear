@@ -79,4 +79,15 @@ public class BattleDroneThirdSkill : BossSkill
         skillCoolTimeDown = skillCoolTime;
         battleDroneBrain.State = BattleDroneState.EXIT;
     }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        if (UnityEditor.Selection.activeGameObject == gameObject)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, attackRange);
+        }
+    }
+#endif
 }

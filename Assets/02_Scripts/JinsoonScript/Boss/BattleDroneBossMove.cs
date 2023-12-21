@@ -49,18 +49,52 @@ public class BattleDroneBossMove : MonoBehaviour
     {
         if (moveDir.x > 0.1f)
         {
-            anim.SetBool("MoveLeft", true);
-            anim.SetBool("MoveRight", false);
-        }
-        else if (moveDir.x < -0.1f)
-        {
             anim.SetBool("MoveLeft", false);
             anim.SetBool("MoveRight", true);
         }
-        else
+        else if (moveDir.x < -0.1f)
         {
-            anim.SetBool("MoveLeft", false);
+            anim.SetBool("MoveLeft", true);
             anim.SetBool("MoveRight", false);
         }
+        //else
+        //{
+        //    anim.SetBool("MoveLeft", false);
+        //    anim.SetBool("MoveRight", false);
+        //}
+    }
+        
+    public void MoveStop()
+    {
+        if (anim.GetBool("MoveLeft") == true)
+        {
+            StartCoroutine("StopWhenMoveLeft");
+        }
+        else if (anim.GetBool("MoveRight") == true)
+        {
+            StartCoroutine("StopWhenMoveRight");
+        }
+    }
+
+    IEnumerator StopWhenMoveLeft()
+    {
+        anim.SetBool("MoveRight", true);
+        anim.SetBool("MoveLeft", false);
+        yield return new WaitForSeconds(0.4f);
+        anim.SetBool("MoveRight", false);
+        anim.SetBool("MoveLeft", true);
+        yield return new WaitForSeconds(0.2f);
+        anim.SetBool("MoveLeft", false);
+    }
+
+    IEnumerator StopWhenMoveRight()
+    {
+        anim.SetBool("MoveRight", false);
+        anim.SetBool("MoveLeft", true);
+        yield return new WaitForSeconds(0.4f);
+        anim.SetBool("MoveRight", true);
+        anim.SetBool("MoveLeft", false);
+        yield return new WaitForSeconds(0.2f);
+        anim.SetBool("MoveRight", false);
     }
 }
