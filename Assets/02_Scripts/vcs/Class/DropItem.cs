@@ -1,4 +1,6 @@
-﻿public class DropItem
+﻿
+[System.Serializable]
+public class DropItem
 {
     // 딱히 안쓸 예정
     public string itemName;
