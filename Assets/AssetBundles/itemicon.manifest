@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 1353213586
+CRC: 1317315002
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: ebe86bdec130248ff974e4fe74a15ef2
+    Hash: e7e8dd06794b3d180a33d4c8a60fe051
   TypeTreeHash:
     serializedVersion: 2
     Hash: 2d8df09e698f722ada1caa03d3413830
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: ebe86bdec130248ff974e4fe74a15ef2
+    Hash: e7e8dd06794b3d180a33d4c8a60fe051
 HashAppended: 0
 ClassTypes:
 - Class: 28
@@ -22,5 +22,5 @@ Assets:
 - Assets/03_Texture/00_Sprite/ItemIcon/Wood.Png
 - Assets/03_Texture/00_Sprite/ItemIcon/Bandge.Png
 - Assets/03_Texture/00_Sprite/ItemIcon/Parts.Png
-- Assets/03_Texture/00_Sprite/ItemIcon/Canfood.Png
+- Assets/03_Texture/00_Sprite/ItemIcon/CanSoup.Png
 Dependencies: []

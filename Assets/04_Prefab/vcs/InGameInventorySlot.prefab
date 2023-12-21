@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemImage: {fileID: 3427571471333040957}
-  GuageFill: {fileID: 7545066232958439091}
+  GaugeFill: {fileID: 7545066232958439091}
   ItemAmount: {fileID: 8565166901685479755}
   currentSlot:
     item: {fileID: 0}

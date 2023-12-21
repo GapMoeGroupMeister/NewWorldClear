@@ -7,6 +7,18 @@ public class DropItemObject : DropObject
 {
     [SerializeField] private DropItem _dropItem;
 
+    private SpriteRenderer _spriteRenderer;
+
+    private void Awake()
+    {
+        _spriteRenderer = transform.Find("ItemImg").GetComponent<SpriteRenderer>();
+    }
+
+    private void Start()
+    {
+        _spriteRenderer.sprite = SpriteLoader.Instance.FindSprite(_dropItem.item.itemSpriteName);
+    }
+
     private void Update()
     {
         Update_Check();
