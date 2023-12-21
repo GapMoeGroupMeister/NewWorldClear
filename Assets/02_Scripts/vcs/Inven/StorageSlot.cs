@@ -19,6 +19,7 @@ public class StorageSlot : Slot, IPointerEnterHandler,  IPointerExitHandler
     {
         if (ItemImage == null) return;
         
+        ItemImage.sprite = SpriteLoader.Instance.FindSprite(currentItem.itemSpriteName);
         ItemImage.SetNativeSize();
         
         
