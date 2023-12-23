@@ -21,7 +21,7 @@ public class LootManager : MonoSingleton<LootManager>
     }
     /**
      * <param name="generatePos">
-     * 아이템 구슬을 생성할 위치
+     * 경험치 구슬을 생성할 위치
      * </param>
      * <param name="power">
      * 생성위치에서 랜덤하게 퍼져나갈 세기
@@ -30,7 +30,24 @@ public class LootManager : MonoSingleton<LootManager>
      * 경험치구슬을 생성하는 메서드
      * </summary>
      */
-    public void GenerateExp(Vector2 generatePos, float power)
+    public void GenerateExp(int expAmount, Vector2 generatePos, float power)
+    {
+        
+    }
+    
+    
+    /**
+     * <param name="generatePos">
+     * 아이템 드롭템을 생성할 위치
+     * </param>
+     * <param name="power">
+     * 생성위치에서 랜덤하게 퍼져나갈 세기
+     * </param>
+     * <summary>
+     * 아이템 드롭템을 생성하는 메서드
+     * </summary>
+     */
+    public void GenerateItem(DropItem dropItem, Vector2 generatePos, float power)
     {
         
     }
