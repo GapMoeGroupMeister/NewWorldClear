@@ -16,7 +16,7 @@ public class DropItemObject : DropObject
 
     private void Start()
     {
-        _spriteRenderer.sprite = SpriteLoader.Instance.FindSprite(_dropItem.item.itemSpriteName);
+        SetInfo(_dropItem);
     }
 
     private void Update()
@@ -28,6 +28,13 @@ public class DropItemObject : DropObject
     {
         
         GetItem();
+    }
+
+    public void SetInfo(DropItem dropItem)
+    {
+        _dropItem = dropItem;
+        _spriteRenderer.sprite = SpriteLoader.Instance.FindSprite(_dropItem.item.itemSpriteName);
+
     }
 
 
