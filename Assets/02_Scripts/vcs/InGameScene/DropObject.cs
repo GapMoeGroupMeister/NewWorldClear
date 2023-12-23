@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using EaseFunc;
+
 
 public abstract class DropObject : MonoBehaviour
 {
