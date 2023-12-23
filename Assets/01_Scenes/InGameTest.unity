@@ -1586,6 +1586,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &559466724
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 559466725}
+  m_Layer: 0
+  m_Name: PoolParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &559466725
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559466724}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1274791356}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &597678462
 GameObject:
   m_ObjectHideFlags: 0
@@ -2953,7 +2985,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DropItemPrefab: {fileID: 3348980477757333453, guid: 785c49e711411a34083b3440c15df4b6, type: 3}
-  DropExpPrefab: {fileID: 7288092007980465769, guid: 051e68f22327d024cae74e99ef15e571, type: 3}
+  DropExp1Prefab: {fileID: 0}
+  DropExp5Prefab: {fileID: 0}
+  DropExp10Prefab: {fileID: 0}
+  DropExp50Prefab: {fileID: 0}
   DebugPos: {fileID: 1223461595}
   debugItem:
     itemName: 
@@ -2970,7 +3005,7 @@ MonoBehaviour:
     item: {fileID: 11400000, guid: 7e92d52e4d17ad54c96f56b7d5009401, type: 2}
     amount: 1
     mass: 0
-  debugPower: 1
+  debugPower: 3
 --- !u!4 &1092052063
 Transform:
   m_ObjectHideFlags: 0
@@ -3467,6 +3502,37 @@ MonoBehaviour:
   debuffs: 0
   _playerTrm: {fileID: 0}
   speed: 1
+--- !u!1 &1274791355
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1274791356}
+  m_Layer: 0
+  m_Name: Exp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1274791356
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274791355}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 559466725}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1281577508
 GameObject:
   m_ObjectHideFlags: 0
@@ -4385,6 +4451,52 @@ MonoBehaviour:
   debuffs: 0
   _playerTrm: {fileID: 0}
   speed: 1
+--- !u!1 &1785189235
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1785189237}
+  - component: {fileID: 1785189236}
+  m_Layer: 0
+  m_Name: PoolManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1785189236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785189235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 753a17a0fa4bb8c44a148485492bb080, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolingObjectList: {fileID: 11400000, guid: 0ab74078c09046e4785b5bd7ebbc3ed6, type: 2}
+  readyPool: 0
+--- !u!4 &1785189237
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785189235}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1899156175
 GameObject:
   m_ObjectHideFlags: 0
@@ -5072,4 +5184,6 @@ SceneRoots:
   - {fileID: 450255348}
   - {fileID: 1673050913}
   - {fileID: 1092052063}
+  - {fileID: 1785189237}
   - {fileID: 1223461595}
+  - {fileID: 559466725}
