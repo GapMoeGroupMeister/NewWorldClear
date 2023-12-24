@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 126208156376577088}
   - component: {fileID: 6816535561843088622}
   m_Layer: 0
-  m_Name: ItemImg
+  m_Name: ExpImg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -134,4 +134,7 @@ MonoBehaviour:
   followSpeed: 1
   curveSensitive: 0
   isTargeted: 0
+  PickUpAction:
+    m_PersistentCalls:
+      m_Calls: []
   ExpAmount: 0

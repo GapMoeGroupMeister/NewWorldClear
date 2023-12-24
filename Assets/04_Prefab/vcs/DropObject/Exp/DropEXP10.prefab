@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 126208156376577088}
   - component: {fileID: 6816535561843088622}
   m_Layer: 0
-  m_Name: ItemImg
+  m_Name: ExpImg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f9c67a1b4784cad4889daa78ef577dfe, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d0b657aa015d932498c3e8a0dd29c5ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -134,4 +134,7 @@ MonoBehaviour:
   followSpeed: 1
   curveSensitive: 0
   isTargeted: 0
+  PickUpAction:
+    m_PersistentCalls:
+      m_Calls: []
   ExpAmount: 0
