@@ -48,12 +48,34 @@ public class LootManager : MonoSingleton<LootManager>
         int exp10 = NumberByUnit(ref exp1, 10);
         int exp5 = NumberByUnit(ref exp1, 5);
         
+        void Generate(GameObject expPrefab)
+        {
+            DropExpObject dropExpObject = Instantiate(expPrefab, generatePos, Quaternion.identity).GetComponent<DropExpObject>();
+            Vector2 randomPosition = Random.insideUnitCircle.normalized;
+            dropExpObject.AddForce(randomPosition, power);
+        }
         //PoolManager.Instance.GetObject()
+        for (int i = 0; i < exp1; i++)
+        {
+            Generate(DropExp1Prefab);
+        }
+        for (int i = 0; i < exp5; i++)
+        {
+            Generate(DropExp5Prefab);
+        }
+        for (int i = 0; i < exp10; i++)
+        {
+            Generate(DropExp10Prefab);
+        }
+        for (int i = 0; i < exp50; i++)
+        {
+            Generate(DropExp50Prefab);
+        }
         
-        DropItemObject dropItemObject = Instantiate(DropItemPrefab, generatePos, Quaternion.identity).GetComponent<DropItemObject>();
-        Vector2 randomPosition = Random.insideUnitCircle.normalized;
-        dropItemObject.AddForce(randomPosition, power);
+        
     }
+
+    
 
     /**
      * <param name="num">
@@ -105,5 +127,7 @@ public class LootManager : MonoSingleton<LootManager>
         GenerateItem(debugItem,DebugPos.position, debugPower);
         GenerateItem(debugItem2,DebugPos.position, debugPower);
         GenerateItem(debugItem3,DebugPos.position, debugPower);
+        GenerateExp(87, DebugPos.position, debugPower);
     }
+    
 }
