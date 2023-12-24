@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class LootManager : MonoSingleton<LootManager>
 {
@@ -20,9 +22,14 @@ public class LootManager : MonoSingleton<LootManager>
     [SerializeField] private DropItem debugItem3;
 
     [SerializeField] private float debugPower;
-    
-    
-    
+
+    public LevelManager _LevelSystem { get; private set; }
+
+    private void Awake()
+    {
+        _LevelSystem = FindObjectOfType<LevelManager>();
+    }
+
     /**
      * <param name="generatePos">
      * 경험치 구슬을 생성할 위치

@@ -110,7 +110,7 @@ Transform:
   m_GameObject: {fileID: 7288092007980465769}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.941, y: -1.566, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -129,12 +129,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78f1c78f97ac46538c7cce1d4814ae44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectRange: 0.5
+  detectRange: 2.5
   isStatic: 0
-  followSpeed: 1
-  curveSensitive: 0
+  followSpeed: 4
+  curveSensitive: 5
   isTargeted: 0
   PickUpAction:
     m_PersistentCalls:
       m_Calls: []
-  ExpAmount: 0
+  ExpAmount: 5
