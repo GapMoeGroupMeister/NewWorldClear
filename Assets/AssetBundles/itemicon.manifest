@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 341976842
+CRC: 3383533323
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: c94a43b500f9db9a22723553307cdeaf
+    Hash: a3aa4a9d9a036feaaf22a2f5a45f6407
   TypeTreeHash:
     serializedVersion: 2
     Hash: 2d8df09e698f722ada1caa03d3413830
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: c94a43b500f9db9a22723553307cdeaf
+    Hash: a3aa4a9d9a036feaaf22a2f5a45f6407
 HashAppended: 0
 ClassTypes:
 - Class: 28
@@ -18,9 +18,14 @@ ClassTypes:
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
+- Assets/03_Texture/00_Sprite/ItemIcon/Branch.png
 - Assets/03_Texture/00_Sprite/ItemIcon/Ammo.png
+- Assets/03_Texture/00_Sprite/ItemIcon/CanSoup_PineApple.png
+- Assets/03_Texture/00_Sprite/ItemIcon/SandStone.png
+- Assets/03_Texture/00_Sprite/ItemIcon/Coal.png
 - Assets/03_Texture/00_Sprite/ItemIcon/Money.png
 - Assets/03_Texture/00_Sprite/ItemIcon/RottenWood.png
+- Assets/03_Texture/00_Sprite/ItemIcon/Stone.png
 - Assets/03_Texture/00_Sprite/ItemIcon/Wood.png
 - Assets/03_Texture/00_Sprite/ItemIcon/CableBundle.png
 - Assets/03_Texture/00_Sprite/ItemIcon/Parts.png
