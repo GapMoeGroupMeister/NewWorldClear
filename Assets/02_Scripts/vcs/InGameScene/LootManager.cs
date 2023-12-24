@@ -1,14 +1,20 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class LootManager : MonoSingleton<LootManager>
 {
-
+    [Header("DropItemPrefab")]
     [SerializeField] private GameObject DropItemPrefab;
-    [SerializeField] private GameObject DropExpPrefab;
+    [Header("DropExpPrefabs")]
+    [SerializeField] private GameObject DropExp1Prefab;
+    [SerializeField] private GameObject DropExp5Prefab;
+    [SerializeField] private GameObject DropExp10Prefab;
+    [SerializeField] private GameObject DropExp50Prefab;
 
-
+    [Header("Debug")]
     [SerializeField] private Transform DebugPos;
 
     [SerializeField] private DropItem debugItem;
@@ -16,9 +22,14 @@ public class LootManager : MonoSingleton<LootManager>
     [SerializeField] private DropItem debugItem3;
 
     [SerializeField] private float debugPower;
-    
-    
-    
+
+    public LevelManager _LevelSystem { get; private set; }
+
+    private void Awake()
+    {
+        _LevelSystem = FindObjectOfType<LevelManager>();
+    }
+
     /**
      * <param name="generatePos">
      * 경험치 구슬을 생성할 위치
@@ -32,7 +43,37 @@ public class LootManager : MonoSingleton<LootManager>
      */
     public void GenerateExp(int expAmount, Vector2 generatePos, float power)
     {
+        int exp1 = expAmount;
+        int exp50 = NumberByUnit(ref exp1, 50);
+        int exp10 = NumberByUnit(ref exp1, 10);
+        int exp5 = NumberByUnit(ref exp1, 5);
         
+        //PoolManager.Instance.GetObject()
+        
+        DropItemObject dropItemObject = Instantiate(DropItemPrefab, generatePos, Quaternion.identity).GetComponent<DropItemObject>();
+        Vector2 randomPosition = Random.insideUnitCircle.normalized;
+        dropItemObject.AddForce(randomPosition, power);
+    }
+
+    /**
+     * <param name="num">
+     * 남은 값 (ref 참조형태)
+     * </param>
+     * <param name="unit">
+     * num값을 나누는 단위
+     * </param>
+     * <summary>
+     * 입력받은 num값을 단위로 나누어 반환하고 나머지를 저장하는 메서드
+     * </summary>
+     * <returns>
+     * 단위로 나눈 값을 반환
+     * </returns>
+     */
+    private int NumberByUnit(ref int num, int unit)
+    {
+        int numByUnit = num / unit;
+        num %= unit;
+        return numByUnit;
     }
     
     /**

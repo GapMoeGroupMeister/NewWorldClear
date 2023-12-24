@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
-using EaseFunc;
 using UnityEngine.Events;
 
 
@@ -19,7 +18,8 @@ public abstract class DropObject : MonoBehaviour
 
     [SerializeField]
     protected bool isTargeted;
-
+    [Space(20f)]
+    [Tooltip("아이템을 주울때 실행되는 이벤트 액션")]
     public UnityEvent PickUpAction;
 
     

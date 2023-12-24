@@ -45,11 +45,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb8ad37db5c24b3d887cfc0026470fbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectRange: 0.5
+  detectRange: 1.5
   isStatic: 0
-  followSpeed: 1
+  followSpeed: 4
   curveSensitive: 0
   isTargeted: 0
+  PickUpAction:
+    m_PersistentCalls:
+      m_Calls: []
   _dropItem:
     itemName: Money
     item: {fileID: 11400000, guid: 43db0c6ca032b9a4abb5c0d23bce66b0, type: 2}
