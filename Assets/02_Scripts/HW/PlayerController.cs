@@ -21,6 +21,10 @@ public class PlayerController : Damageable
     public float dashCooltime;
     public float dashElapsedTime = 0f;
 
+    public bool isThirsty = false;
+    public bool isHungry = false;
+
+    Item _gasMask;
 
     [SerializeField]
     GameObject _trail;
@@ -99,7 +103,7 @@ public class PlayerController : Damageable
         }
     }
 
-    public void MakeTrail()
+    private void MakeTrail()
     {
         GameObject trail = Instantiate(_trail, transform.position, Quaternion.identity);
         Sprite cs = _spriteRenderer.sprite;
@@ -110,9 +114,15 @@ public class PlayerController : Damageable
         Destroy(trail, 1f);
     }
 
-    public void PoisonDamage()
+    public void FalloutDamage(float damageAmount)
     {
-        
+        if (ItemManager.Instance.FindItem(_gasMask) != null) return;
+        PoisonDamage(damageAmount);
+    }
+
+    public void RecoveryHP(float amount)
+    {
+        _currentHp = amount * (1f -  painfulAmount / 100f);
     }
 
 

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 6e0ae9014622e9d48a12fb43034a8e88
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - ClickSFX: {instanceID: 0}
+  - masterMixer: {fileID: 24100000, guid: 6d47b968bb1ad4e49b1d3669e8a7a282, type: 2}
+  - audioSlider_Master: {instanceID: 0}
+  - audioSlider_BGM: {instanceID: 0}
+  - audioSlider_SFX: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
