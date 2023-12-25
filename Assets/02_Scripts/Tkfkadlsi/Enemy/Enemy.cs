@@ -43,6 +43,7 @@ namespace Tkfkadlsi
 
         private void SetStatus()
         {
+            _maxHp = data.DefaultHP;
             _currentHp = data.DefaultHP;
             damage = data.DefaultATK;
             def = data.DefaultDEF;
@@ -139,5 +140,10 @@ namespace Tkfkadlsi
         public abstract void Hit(float damage);
 
         public abstract void Dead();
+
+        public void Reward()
+        {
+            LootManager.Instance.GenerateReward(data.Reward, transform.position, 1);
+        }
     }
 }
