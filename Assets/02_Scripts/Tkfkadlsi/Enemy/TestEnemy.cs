@@ -18,7 +18,7 @@ namespace Tkfkadlsi
 
         public override void Dead()
         {
-            
+            Reward();
             Destroy(gameObject);
         }
 
@@ -74,10 +74,10 @@ namespace Tkfkadlsi
 
             public override void OnStateUpdate()
             {
-                Vector3 moveDir = Vector3.zero;
-                moveDir = enemy.target.transform.position - enemy.transform.position;
-                moveDir = moveDir.normalized;
-                enemy.transform.position += moveDir * enemy._moveSpeed * Time.deltaTime;
+                Vector3 direction = new Vector3();
+
+                direction = enemy.target.transform.position - enemy.transform.position;
+                enemy.transform.position += direction * enemy._moveSpeed * Time.deltaTime;
             }
         }
 
