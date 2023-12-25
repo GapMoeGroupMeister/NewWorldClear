@@ -104,5 +104,24 @@ public class DBManager : MonoBehaviour
     }
     
     
+    /**
+     * <summary>
+     * 오디오 세팅 정보를 받아와 Json으로 저장함
+     * </summary>
+     */
+    public static void Save_AudioSetting(AudioSetting audioSetting)
+    {
+        EasyToJson.ToJson(audioSetting, "AudioSetting", true);
+    }
+    
+    /**
+     * <summary>
+     * json으로 저장된 오디오 세팅 정보를 불러와 반환해줌
+     * </summary>
+     */
+    public static AudioSetting Get_AudioSetting()
+    {
+        return EasyToJson.FromJson<AudioSetting>("AudioSetting");
+    }
     
 }
