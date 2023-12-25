@@ -18,6 +18,7 @@ namespace Tkfkadlsi
 
         public override void Dead()
         {
+            
             Destroy(gameObject);
         }
 
