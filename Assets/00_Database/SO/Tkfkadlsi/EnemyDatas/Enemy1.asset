@@ -19,3 +19,10 @@ MonoBehaviour:
   defaultSPD: 3
   attackCycle: 0.5
   detectRange: 15
+  reward:
+    expAmount: 0
+    DropItems:
+    - itemName: 
+      item: {fileID: 0}
+      amount: 0
+      mass: 0

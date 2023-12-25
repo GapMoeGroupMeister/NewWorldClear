@@ -10,10 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: EnemyPoolingList
-  m_EditorClassIdentifier: Assembly-CSharp:Tkfkadlsi:PoolingObjectList
-  poolingObjects:
-  - objectName: Enemy1
-    objectAmount: 10
-    objectPrefab: {fileID: 3363199156923919705, guid: fce2c5951e43e554ea57d5bc9dbada90, type: 3}
-    poolLocation: {fileID: 0}
+  m_Name: InGamePool
+  m_EditorClassIdentifier: Assembly-CSharp::PoolingObjectList
+  poolingObjects: []
