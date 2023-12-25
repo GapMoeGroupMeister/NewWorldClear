@@ -20955,7 +20955,7 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: KeyboardAndMouse
+  m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -21004,7 +21004,7 @@ MonoBehaviour:
   debuffs: 0
   _rigidbody: {fileID: 0}
   attackDelay: 0
-  attackDamage: 0
+  attackDamage: 10
   dashCooltime: 0
   dashElapsedTime: 0
   isThirsty: 0
@@ -23889,7 +23889,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68e9e4a6bdc3d594a893a441d43e25ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effect: {fileID: 5751605556177575960, guid: 6e119c4ce8be96b46b0b7e4d9e9b0cc7, type: 3}
+  _attackEffect: {fileID: 0}
   bulletPrefab: {fileID: 2426796008045179832, guid: 67b67f8ab9133014e896708670b79a19, type: 3}
   _enemyMask:
     serializedVersion: 2
