@@ -1,3 +1,4 @@
+using System;
 using EasyJson;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,15 +12,33 @@ public class StartScene_UIManager : MonoBehaviour
     
     [Space]
     [Header("Player Image")]
-    [SerializeField] private Sprite[] playerImage;
-    
-    private PlayerStatus _playerStatus;
+    [SerializeField] private Image playerImage;
+    [SerializeField] private Sprite[] playerImages;
 
     private void RefreshStatusGauge()
     {
-        _playerStatus = EasyToJson.FromJson<PlayerStatus>("playerStatus");
-        Gauge_Health.fillAmount = (float)_playerStatus.health / PlayerStatus.Calc_HealthMax(_playerStatus.levelHealth);
-        Gauge_Hungery.fillAmount = (float)_playerStatus.hungry / 100;
-        Gauge_Thirsty.fillAmount = (float)_playerStatus.thirsty / 100;
+        StatusManager.Instance.LoadPlayerStatus();
+        Gauge_Health.fillAmount = (float)StatusManager.Instance.PlayerStatus.health / PlayerStatus.Calc_HealthMax(StatusManager.Instance.PlayerStatus.levelHealth);
+        Gauge_Hungery.fillAmount = (float)StatusManager.Instance.PlayerStatus.hungry / 100;
+        Gauge_Thirsty.fillAmount = (float)StatusManager.Instance.PlayerStatus.thirsty / 100;
+    }
+
+    private void RefreshPlayerImage()
+    {
+        // Injured
+        if (Gauge_Health.fillAmount < 0.4f)
+        {
+            playerImage.sprite = playerImages[2];
+        }
+        // Despise
+        else if (Gauge_Hungery.fillAmount < 0.4f || Gauge_Thirsty.fillAmount < 0.4f)
+        {
+            playerImage.sprite = playerImages[1];
+        }
+        // default
+        else
+        {
+            playerImage.sprite = playerImages[0];
+        }
     }
 }

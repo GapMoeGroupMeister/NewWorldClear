@@ -10,19 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa507dc46812e324eb6d641b9b20f79d, type: 3}
-  m_Name: Request_CanSoup
+  m_Name: Request2
   m_EditorClassIdentifier: 
-  request: "\uC73C\uC5B4 \uBAB8\uC774 \uC544\uD30C\uC694 \uBD95\uB300\uC640 \uC2DD\uB7C9\uC744
-    \uC918\uC694"
-  requestID: 0
+  request: "\uBC25 \uC918"
+  requestID: 1
   requests:
   - item: {fileID: 11400000, guid: 71dfa2a1af1e46b42be0c1f12877d34e, type: 2}
     amount: 1
     durability: 0
-  - item: {fileID: 11400000, guid: 7e92d52e4d17ad54c96f56b7d5009401, type: 2}
+  - item: {fileID: 11400000, guid: 71dfa2a1af1e46b42be0c1f12877d34e, type: 2}
     amount: 1
     durability: 0
   reward:
     item: {fileID: 11400000, guid: 43db0c6ca032b9a4abb5c0d23bce66b0, type: 2}
-    amount: 100
+    amount: 1000
     durability: 0
