@@ -30,10 +30,9 @@ public enum Buffs
 
 public abstract class Damageable : MonoBehaviour
 {
-    protected float _currentHp = 100f;
-    protected float _maxHp = 100f;
-    [SerializeField]
-    protected float _moveSpeed;
+    public float _currentHp = 100f;
+    public float _maxHp = 100f;
+    public float _moveSpeed;
     public float damage;
     public bool isStun = false;
     public bool isSubdue = false;

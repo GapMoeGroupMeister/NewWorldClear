@@ -1,79 +1,61 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using UnityEngine.EventSystems;
 
-
-public class Slot : MonoBehaviour, IPointerEnterHandler,  IPointerExitHandler
+public abstract class Slot : MonoBehaviour
 {
-    public ItemSlot thisSlot;
+    [SerializeField]
+    protected Image ItemImage;
+    [SerializeField]
+    protected Image GaugeFill; 
+    [SerializeField]
+    protected TextMeshProUGUI ItemAmount;
+
+    [SerializeField]
+    protected ItemSlot currentSlot;
+
+    protected Item currentItem;
     
-    [SerializeField]
-    private Image ItemImage;
-    [SerializeField]
-    private Image GuageFill;
-    [SerializeField]
-    private TextMeshProUGUI ItemAmount;
-
-    [SerializeField]
-    private ItemSlot currentSlot;
-
-    private Item currentItem;
-
     private void Awake()
     {
-        
-        
-        ItemImage = transform.GetChild(0).GetComponent<Image>();
-        GuageFill = transform.Find("ConditionGuage").transform.Find("GuageFill").GetComponent<Image>();
-        ItemAmount = transform.Find("AmountBG").transform.Find("AmountText").GetComponent<TextMeshProUGUI>();
-    }
-
-
-    public void SetSlot(ItemSlot slotInfo)
-    {
-        currentSlot = slotInfo;
-        currentItem = slotInfo.item;
-
-        
-        SetItemIcon();
-        SetGauge();
-        ItemAmount.text = currentSlot.amount.ToString();
-    }
-
-    private void SetItemIcon()
-    {
-        if (ItemImage == null) return;
-        //ItemImage.sprite = ;
-        ItemImage.SetNativeSize();
-        
-        
-    }
-
-    private void SetGauge()
-    {
-        if (currentItem.isLimited)
+        if (ItemImage == null)
         {
-            GuageFill.fillAmount = Mathf.Clamp((float)currentSlot.durability / currentItem.maxDurability, 0f, 1f);
+           ItemImage = transform.GetChild(0).GetComponent<Image>();
+        }
+        if (GaugeFill == null)
+        {
+            GaugeFill = transform.Find("ConditionGauge").transform.Find("GaugeFill").GetComponent<Image>();
+        }
+        if (ItemAmount == null)
+        {
+            ItemAmount = transform.Find("AmountBG").transform.Find("AmountText").GetComponent<TextMeshProUGUI>();
 
         }
-        else
-        {
-            GuageFill.fillAmount = 1;
-        }
+        
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        Storage_UIManager.Instance.On_DescriptionUI();
-        Storage_UIManager.Instance.Refresh_DescriptionUI(currentSlot);
-    }
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        Storage_UIManager.Instance.Off_DescriptionUI();
-    }
+    /**
+     * <param name="slotInfo">
+     * 이 슬롯에 들어갈 ItemSlot정보
+     * </param>
+     * <summary>
+     * 슬롯을 설정해주는 메서드
+     * </summary>
+     */
+    public abstract void SetSlot(ItemSlot slotInfo);
     
+    /**
+     * <summary>
+     * 슬롯 아이콘을 생성해주는 메서드
+     * </summary>
+     */
+    protected abstract void SetItemIcon();
+    
+    /**
+     * <summary>
+     * 슬롯 아이템 내구도 게이지를 설정해주는 메서드
+     * </summary>
+     */
+    protected abstract void SetGauge();
+
 }

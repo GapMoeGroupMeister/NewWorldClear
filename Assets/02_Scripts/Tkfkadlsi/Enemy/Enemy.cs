@@ -12,7 +12,7 @@ namespace Tkfkadlsi
         Attack
     }
 
-    public abstract class Enemy : MonoBehaviour
+    public abstract class Enemy : Damageable
     {
         public EnemyData data;
         public Animator anim;
@@ -21,11 +21,9 @@ namespace Tkfkadlsi
         public State currentState;
         public FSM fsm;
 
-        public float hp;
-        public float atk;
+
         public float def;
-        public float spd;
-        public float atkCycle;
+        public float atkDelay;
         public float range;
 
         public bool CanAttackPlayer = false;
@@ -45,11 +43,11 @@ namespace Tkfkadlsi
 
         private void SetStatus()
         {
-            hp = data.DefaultHP;
-            atk = data.DefaultATK;
+            _currentHp = data.DefaultHP;
+            damage = data.DefaultATK;
             def = data.DefaultDEF;
-            spd = data.DefaultSPD;
-            atkCycle = data.AttackCycle;
+            _moveSpeed = data.DefaultSPD;
+            atkDelay = data.AttackCycle;
             range = data.DetectRange;
         }
 
@@ -124,7 +122,7 @@ namespace Tkfkadlsi
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if(collision.collider.gameObject == target)
+            if(collision.collider.CompareTag("Player"))
             {
                 CanAttackPlayer = true;
             }
@@ -132,7 +130,7 @@ namespace Tkfkadlsi
 
         private void OnCollisionExit2D(Collision2D collision)
         {
-            if(collision.collider.gameObject == target)
+            if(collision.collider.CompareTag("Player"))
             {
                 CanAttackPlayer = false;
             }
