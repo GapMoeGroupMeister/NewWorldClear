@@ -56,7 +56,7 @@ public class PlayerWeapon : MonoBehaviour
         _currentWeapon = Instantiate(weaponSO.weaponPrefab, transform);
         _weaponPivot = _currentWeapon.transform.GetChild(0);
         _playerController.damage = _playerController.attackDamage;
-        _playerController.damage += (_playerController.attackDamage / weaponSO.damage);
+        _playerController.damage += _playerController.attackDamage / 100 * 5;
         _attackDelay = weaponSO.attackDelay;
         _attackRange = weaponSO.attackRange;
         _attackMotion = weaponSO.attackMotion;

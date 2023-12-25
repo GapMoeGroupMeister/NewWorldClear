@@ -1,6 +1,1 @@
-{
-    "health": 10,
-    "hungry": 10,
-    "thirsty": 10,
-    "levelHealth": 0
-}
+{"health":50,"hungry":50,"thirsty":30,"levelHealth":0,"atk":10,"def":1,"stamina":200,"moveSpeed":1.0,"inventorySize":10}
