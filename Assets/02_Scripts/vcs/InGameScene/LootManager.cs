@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class LootManager : MonoSingleton<LootManager>
 {
@@ -14,12 +10,10 @@ public class LootManager : MonoSingleton<LootManager>
     [SerializeField] private GameObject DropExp10Prefab;
     [SerializeField] private GameObject DropExp50Prefab;
 
-    [Header("Debug")]
+    [Header("Debug")] 
+    [SerializeField] private Reward Debug_Reward;
+    
     [SerializeField] private Transform DebugPos;
-
-    [SerializeField] private DropItem debugItem;
-    [SerializeField] private DropItem debugItem2;
-    [SerializeField] private DropItem debugItem3;
 
     [SerializeField] private float debugPower;
 
@@ -120,14 +114,21 @@ public class LootManager : MonoSingleton<LootManager>
         dropItemObject.AddForce(randomPosition, power);
         
     }
+
+    public void GenerateReward(Reward reward, Vector2 generatePos, float power = 1)
+    {
+        GenerateExp(reward.expAmount, generatePos, power);
+        foreach (DropItem dropItem in reward.DropItems)
+        {
+            GenerateItem(dropItem, generatePos, power);
+        }
+    }
+    
     
     [ContextMenu("Debug_GenerateItem")]
     public void DebugGen()
     {
-        GenerateItem(debugItem,DebugPos.position, debugPower);
-        GenerateItem(debugItem2,DebugPos.position, debugPower);
-        GenerateItem(debugItem3,DebugPos.position, debugPower);
-        GenerateExp(87, DebugPos.position, debugPower);
+        GenerateReward(Debug_Reward, DebugPos.position, debugPower);
     }
     
 }
