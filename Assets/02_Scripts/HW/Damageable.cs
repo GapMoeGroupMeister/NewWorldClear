@@ -39,9 +39,7 @@ public abstract class Damageable : MonoBehaviour
     public bool isStun = false;
     public bool isSubdue = false;
     public bool thinSheild = false;
-
-
-
+    
 
     public Buffs buffs = Buffs.None;
     public Debuffs debuffs = Debuffs.None;
@@ -234,7 +232,6 @@ public abstract class Damageable : MonoBehaviour
             }
             if ((debuffs &= Debuffs.Painful) != Debuffs.Painful)
                 break;
-            isPainful = true;
             painfulAmount = amount;
             cool -= Time.deltaTime;
             yield return null;

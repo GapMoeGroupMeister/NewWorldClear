@@ -21,6 +21,9 @@ public class PlayerController : Damageable
     public float dashCooltime;
     public float dashElapsedTime = 0f;
 
+    public bool isThirsty = false;
+    public bool isHungry = false;
+
     Item _gasMask;
 
     [SerializeField]
