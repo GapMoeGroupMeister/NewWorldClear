@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 21406417cdcf1984daa512d16f93d62e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - DropItemPrefab: {fileID: 3348980477757333453, guid: 785c49e711411a34083b3440c15df4b6, type: 3}
+  - DropExp1Prefab: {fileID: 7288092007980465769, guid: 1ea4d275845ea434588cd04d2eda12a9, type: 3}
+  - DropExp5Prefab: {fileID: 7288092007980465769, guid: f8e18af8f44a75a4b939cf8cce2f89b0, type: 3}
+  - DropExp10Prefab: {fileID: 7288092007980465769, guid: 0597d0a683a9725488676b7d53eaa2db, type: 3}
+  - DropExp50Prefab: {fileID: 7288092007980465769, guid: 606cc91e65ff2d840b7bb87899179ebf, type: 3}
+  - DebugPos: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

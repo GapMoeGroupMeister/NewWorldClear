@@ -31,5 +31,11 @@ namespace Tkfkadlsi
 
         [SerializeField] private float detectRange;
         public float DetectRange { get { return detectRange; } }
+
+        [SerializeField] private ItemSlot[] reward;
+        public ItemSlot[] Reward { get { return reward; } }
+
+        [SerializeField] private float rewardEXP;
+        public float RewardEXP { get { return rewardEXP; } }
     }
 }

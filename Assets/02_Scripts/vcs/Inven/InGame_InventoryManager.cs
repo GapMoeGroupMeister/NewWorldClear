@@ -12,6 +12,7 @@ public class InGame_InventoryManager : InventoryManager
 
     [SerializeField] private UIInfo InventoryUI;
 
+    [SerializeField] private int MaxSlots = 10;
 
     private void Update()
     {

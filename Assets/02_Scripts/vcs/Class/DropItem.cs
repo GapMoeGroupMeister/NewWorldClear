@@ -1,6 +1,6 @@
 ﻿
 [System.Serializable]
-public class DropItem
+public struct DropItem
 {
     // 딱히 안쓸 예정
     public string itemName;

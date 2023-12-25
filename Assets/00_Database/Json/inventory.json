@@ -15,5 +15,39 @@
     },
     "amount": 1,
     "durability": 2
+  },
+  {
+    "item": {
+      "id": 0,
+      "Type": 3,
+      "Tier": 3,
+      "itemName": "통조림 스튜",
+      "itemSpriteName": "CanSoup",
+      "description": "먹을만한 스튜이다",
+      "isLimited": true,
+      "maxDurability": 2,
+      "SlotSetAmount": 1,
+      "name": "Item_CanSoup",
+      "hideFlags": 0
+    },
+    "amount": 1,
+    "durability": 2
+  },
+  {
+    "item": {
+      "id": 3,
+      "Type": 4,
+      "Tier": 4,
+      "itemName": "부품",
+      "itemSpriteName": "Parts",
+      "description": "각종 제작에 쓸모 있을 것 같다.",
+      "isLimited": false,
+      "maxDurability": 0,
+      "SlotSetAmount": 32,
+      "name": "Item_Parts",
+      "hideFlags": 0
+    },
+    "amount": 1,
+    "durability": 0
   }
 ]

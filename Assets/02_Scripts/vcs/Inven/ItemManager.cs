@@ -88,7 +88,7 @@ public class ItemManager : MonoSingleton<ItemManager>
         {
             for (int i = 0; i < amount; i++)
             {
-                inventory.Add(itemSlot);
+                inventory.Add(new ItemSlot(itemSlot.item, 1, itemSlot.durability));
             }
 
             return;
