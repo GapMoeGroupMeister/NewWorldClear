@@ -115,6 +115,20 @@ public class LootManager : MonoSingleton<LootManager>
         
     }
 
+    /**
+     * <param name="reward">
+     * 보상 내용이 포함된 Reward 구조체
+     * </param>
+     * <param name="generatePos">
+     * 생성할 위치
+     * </param>
+     * <param name="power">
+     * 생성 위치에서 드롭템들이 퍼져나갈 세기
+     * </param>
+     * <summary>
+     * 필드에 Reward를 모두 생성해주는 메서드
+     * </summary>
+     */
     public void GenerateReward(Reward reward, Vector2 generatePos, float power = 1)
     {
         GenerateExp(reward.expAmount, generatePos, power);
