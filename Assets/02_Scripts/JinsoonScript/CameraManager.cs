@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
-public class CameraShakeManager : MonoBehaviour
+public class CameraManager : MonoBehaviour
 {
+    public static CameraManager Instance { get; private set; }
+
     [SerializeField]private CinemachineVirtualCamera playerCam;
     private CinemachineBasicMultiChannelPerlin channelPerlin;
 
@@ -22,6 +24,7 @@ public class CameraShakeManager : MonoBehaviour
         channelPerlin.m_FrequencyGain = frequency;
         StartCoroutine("ShakeRoutine");
     }
+
 
     IEnumerator ShakeRoutine()
     {
