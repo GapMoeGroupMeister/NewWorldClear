@@ -92,7 +92,6 @@ public abstract class Damageable : MonoBehaviour
     {
         if (buff == Buffs.None) return;
         buffs |= buff;
-        StopCoroutine("IE" + typeof(Buffs).GetEnumName(buff));
         StartCoroutine("IE" + typeof(Buffs).GetEnumName(buff), new float[] { coolTime, amount });
     }
 
@@ -100,13 +99,19 @@ public abstract class Damageable : MonoBehaviour
     {
         if (debuff == Debuffs.None) return;
         debuffs |= debuff;
-        StopCoroutine("IE" + typeof(Debuffs).GetEnumName(debuff));
         StartCoroutine("IE" + typeof(Debuffs).GetEnumName(debuff), new float[] { coolTime, amount });
+    }
+
+    public void DeleteBuffs(Buffs buff, Debuffs debuff)
+    {
+        StopCoroutine("IE" + typeof(Debuffs).GetEnumName(debuff));
+        StopCoroutine("IE" + typeof(Buffs).GetEnumName(buff));
     }
 
     IEnumerator IEBleed(float[] values)
     {
         float cool = values[0];
+        float damage = values[1];
         float delay = 0.5f;
         float elasped = 0f;
         while (cool > 0)
@@ -122,7 +127,7 @@ public abstract class Damageable : MonoBehaviour
             elasped += Time.deltaTime;
             if (elasped >= delay)
             {
-                BleedDamage(5f);
+                BleedDamage(damage);
                 elasped = 0;
             }
             yield return null;
