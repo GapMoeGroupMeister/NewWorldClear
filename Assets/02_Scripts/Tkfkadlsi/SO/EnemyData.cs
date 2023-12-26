@@ -28,9 +28,11 @@ namespace Tkfkadlsi
         [SerializeField] private float attackCycle;
         public float AttackCycle { get { return attackCycle; } }
 
-
         [SerializeField] private float detectRange;
         public float DetectRange { get { return detectRange; } }
+
+        [SerializeField] private float attackRange;
+        public float AttackRange { get { return attackRange; } }
 
         [SerializeField] private Reward reward;
         public Reward Reward { get { return reward; } }

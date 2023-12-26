@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8073570945778455141}
   - component: {fileID: 5846508808882062039}
   - component: {fileID: 6736882078899024858}
-  - component: {fileID: 1898441139473510677}
+  - component: {fileID: 6171884832937341491}
   m_Layer: 0
   m_Name: Enemy1
   m_TagString: Untagged
@@ -172,7 +172,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &1898441139473510677
+--- !u!114 &6171884832937341491
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -181,26 +181,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 3363199156923919705}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09cefd0611b5f764f886e0d6d2c4bae1, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e634997d58cbbc4fad3b6d3feb11de1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _currentHp: 100
   _maxHp: 100
-  _moveSpeed: 2
-  damage: 5
+  _moveSpeed: 0
+  damage: 0
+  painfulAmount: 0
   isStun: 0
   isSubdue: 0
   thinSheild: 0
   buffs: 0
   debuffs: 0
   data: {fileID: 11400000, guid: 2042ab592c3d345458b4aa6632768283, type: 2}
-  anim: {fileID: 0}
   target: {fileID: 0}
-  currentState: 0
-  def: 0
-  atkDelay: 0
-  range: 0
-  CanAttackPlayer: 0
+  attackObj: {fileID: 7161944922433878973, guid: 0d7144d5714686f4f9a1d0629b5b21c9, type: 3}
 --- !u!1 &4196720022934303999
 GameObject:
   m_ObjectHideFlags: 0
