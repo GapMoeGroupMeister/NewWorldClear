@@ -14,4 +14,9 @@ public class BattleDroneStatus : Damageable
         _moveSpeed = bossStatusSO.bossSpeed;
         damage = bossStatusSO.bossDamage;
     }
+
+    public override void Die()
+    {
+        throw new System.NotImplementedException();
+    }
 }

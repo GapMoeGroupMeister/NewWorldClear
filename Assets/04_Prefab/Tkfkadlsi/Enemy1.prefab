@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5846508808882062039}
   - component: {fileID: 6736882078899024858}
   - component: {fileID: 6171884832937341491}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Enemy1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,8 +184,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e634997d58cbbc4fad3b6d3feb11de1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentHp: 100
-  _maxHp: 100
+  _currentHp: 30
+  _maxHp: 30
   _moveSpeed: 0
   damage: 0
   painfulAmount: 0
@@ -206,7 +206,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5838339925864071411}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: AttackArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
