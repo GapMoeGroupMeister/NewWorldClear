@@ -6,6 +6,7 @@ public class Katana : WeaponEvent
 {
     public override void OnHit(Transform enemy)
     {
+        enemy.GetComponent<Enemy_TEST>().AddDebuff(Debuffs.Bleed, 3, 10);
         if(Random.Range(0, 101) <= 30)
             enemy.GetComponent<Enemy_TEST>().AddDebuff(Debuffs.Slow, 1, 50);
     }

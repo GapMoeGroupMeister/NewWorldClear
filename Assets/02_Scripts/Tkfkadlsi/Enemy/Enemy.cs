@@ -18,6 +18,7 @@ namespace Tkfkadlsi
         public GameObject target;
 
         [SerializeField] protected GameObject attackObj;
+        protected Animator animator;
         protected EnemyState currentState;
         protected bool canSeePlayer = false;
         protected bool canAttackPlayer = false;
@@ -105,11 +106,28 @@ namespace Tkfkadlsi
         }
         public IEnumerator Hit_Delay()
         {
+            isAttacking = false;
             currentState = EnemyState.Hit;
             yield return new WaitForSeconds(0.5f);
             currentState = EnemyState.Idle;
         }
-        public abstract void Hit(float damage);
+        public override void HitDamage(float damage)
+        {
+            StartCoroutine(Hit_Delay());
+
+            base.HitDamage(damage);
+
+            if (!animator) return;
+            animator.SetTrigger("Hit");
+        }
+        public override void BleedDamage(float damage)
+        {
+            base.BleedDamage(damage);
+        }
+        public override void CriticalDamage(float damage, float percent)
+        {
+            base.CriticalDamage(damage, percent);
+        }
         public abstract void Dead();
     }
 }

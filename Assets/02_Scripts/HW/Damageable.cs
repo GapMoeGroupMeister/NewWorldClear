@@ -46,40 +46,22 @@ public abstract class Damageable : MonoBehaviour
     public virtual void HitDamage(float damage)
     {
         _currentHp -= damage;
-        if (_currentHp <= 0)
-        {
-            Die();
-        }
     }
     public virtual void BleedDamage(float damage)
     {
         _currentHp -= damage;
-        if (_currentHp <= 0)
-        {
-            Die();
-        }
     }
     public virtual void PoisonDamage(float damage)
     {
         _currentHp -= damage;
-        if (_currentHp <= 0)
-        {
-            Die();
-        }
     }
     public virtual void CriticalDamage(float damage, float percent)
     {
         _currentHp -= damage * (100 / percent);
-        if (_currentHp <= 0)
-        {
-            Die();
-        }
     }
 
-    private void Die()
-    {
-        print("죽음");
-    }
+    public abstract void Die();
+
     #region Buff & Debuff
     /// <summary>
     /// 가독성을 ㅈ박았을수도 있지만 amount는 각 버프와 디버프에 따라 다르게 작용한다. 신속이나 구속같은 경우엔 amount가 감소,증가하는 %로 작용하고 다른것은 미정이다. 알아서해라
@@ -92,7 +74,6 @@ public abstract class Damageable : MonoBehaviour
     {
         if (buff == Buffs.None) return;
         buffs |= buff;
-        StopCoroutine("IE" + typeof(Buffs).GetEnumName(buff));
         StartCoroutine("IE" + typeof(Buffs).GetEnumName(buff), new float[] { coolTime, amount });
     }
 
@@ -100,13 +81,19 @@ public abstract class Damageable : MonoBehaviour
     {
         if (debuff == Debuffs.None) return;
         debuffs |= debuff;
-        StopCoroutine("IE" + typeof(Debuffs).GetEnumName(debuff));
         StartCoroutine("IE" + typeof(Debuffs).GetEnumName(debuff), new float[] { coolTime, amount });
+    }
+
+    public void DeleteBuffs(Buffs buff, Debuffs debuff)
+    {
+        StopCoroutine("IE" + typeof(Debuffs).GetEnumName(debuff));
+        StopCoroutine("IE" + typeof(Buffs).GetEnumName(buff));
     }
 
     IEnumerator IEBleed(float[] values)
     {
         float cool = values[0];
+        float damage = values[1];
         float delay = 0.5f;
         float elasped = 0f;
         while (cool > 0)
@@ -122,7 +109,7 @@ public abstract class Damageable : MonoBehaviour
             elasped += Time.deltaTime;
             if (elasped >= delay)
             {
-                BleedDamage(5f);
+                BleedDamage(damage);
                 elasped = 0;
             }
             yield return null;

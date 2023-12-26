@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Tkfkadlsi
 {
 
-    public class Dust : MonoBehaviour
+    public class Dust : Damageable
     {
         public EnemyData dustData;
         public Animator animator;
@@ -15,32 +15,15 @@ namespace Tkfkadlsi
         public DustsCenter dustsCenter;
         public DustAttack dustAttack;
         public DustSkill_One skill_One;
+        public DustSkill_Two skill_Two;
         public DustSkill_Three skill_Three;
 
-        public float hp;
-        public float atk;
         public float def;
-        public float speed;
         public float atkDelay;
+        public float coolTime;
         public float range;
 
         public DustState currentState;
-
-        private int attackCount = 0;
-        public int AttackCount
-        {
-            get
-            {
-                return attackCount;
-            }
-            set
-            {
-                if (value < 0) return;
-                attackCount = value;
-
-                Skills_Condition();
-            }
-        }
 
         public enum DustState
         {
@@ -65,37 +48,40 @@ namespace Tkfkadlsi
 
         private void ResetStat()
         {
-            hp = dustData.DefaultHP;
-            atk = dustData.DefaultATK;
-            def = dustData.DefaultDEF;
-            speed = dustData.DefaultSPD;
+            _maxHp = dustData.DefaultHP;
+            _currentHp = dustData.DefaultHP;
+            damage = dustData.DefaultATK;
+            _moveSpeed = dustData.DefaultSPD;
             atkDelay = dustData.AttackCycle;
             range = dustData.DetectRange;
+            coolTime = 0;
         }
 
         private void Update()
         {
             if (currentState == DustState.NotDetect) return;
 
-            if (currentState == DustState.Idle && Time.deltaTime > Random.Range(0.000f, 3.000f))
+            if (Attack_Condition() && currentState == DustState.Idle)
             {
                 dustAttack.AttackStart();
             }
+
+            coolTime += Time.deltaTime;
         }
 
-        public void Hit(float damage)
-        {
-            damage -= def;
-            if (damage < 0) return;
-            hp -= damage;
 
-            if (hp < 0)
-                Dead();
-        }
-
-        private void Dead()
+        private bool Attack_Condition()
         {
-            Destroy(gameObject);
+            float currentDistance = Vector3.Distance(transform.position, target.transform.position);
+
+            if (currentDistance < 3.5f)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private void Skills_Condition()
@@ -110,12 +96,15 @@ namespace Tkfkadlsi
                 skill_One.StartSkill_One();
                 return;
             }
-
+            if (Skill_Two_Condition())
+            {
+                skill_Two.StartSkill_Two();
+                return;
+            }
         }
 
         private bool Skill_One_Condition()
         {
-            if (attackCount < 4) return false;
 
             float rand = Random.Range(0.00f, 1.00f);
 
@@ -131,7 +120,6 @@ namespace Tkfkadlsi
 
         private bool Skill_Two_Condition()
         {
-            if (attackCount < 6) return false;
 
             float rand = Random.Range(0.00f, 1.00f);
 
@@ -148,11 +136,10 @@ namespace Tkfkadlsi
         private bool Skill_Three_Condition()
         {
             if ((target.transform.position - dustsCenter.transform.position).magnitude > 6f) return true;
-            if (attackCount < 5) return false;
 
             float rand = Random.Range(0.00f, 1.00f);
 
-            if (rand < 0.33f)
+            if (rand < 0.1667f)
             {
                 return true;
             }
