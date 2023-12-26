@@ -10,7 +10,8 @@ namespace Tkfkadlsi
         {
             Idle,
             Move,
-            Attack
+            Attack,
+            Hit
         }
 
         public EnemyData data;
@@ -38,6 +39,7 @@ namespace Tkfkadlsi
         public void SetState()
         {
             if (isAttacking) return;
+            if (currentState == EnemyState.Hit) return;
 
             if (CanAttackPlayer())
                 currentState = EnemyState.Attack;
@@ -50,6 +52,7 @@ namespace Tkfkadlsi
         public void RunState()
         {
             if (isAttacking) return;
+            if (currentState == EnemyState.Hit) return;
 
             switch (currentState)
             {
@@ -99,6 +102,12 @@ namespace Tkfkadlsi
             isAttacking = true;
             yield return new WaitForSeconds(data.AttackCycle);
             isAttacking = false;
+        }
+        public IEnumerator Hit_Delay()
+        {
+            currentState = EnemyState.Hit;
+            yield return new WaitForSeconds(0.5f);
+            currentState = EnemyState.Idle;
         }
         public abstract void Hit(float damage);
         public abstract void Dead();

@@ -50,6 +50,7 @@ public class RequestPanel : MonoBehaviour
     private int[] giveAmount = new int[2];
     private int ID;
     private SaveInfo saveInfo;
+    private Request_InventoryManager inventoryManager;
 
     public int[] GiveAmount
     {
@@ -61,6 +62,7 @@ public class RequestPanel : MonoBehaviour
     {
         saveInfo = DBManager.Get_UserInfo();
         DBManager.Save_userInfo(saveInfo);
+        inventoryManager = FindObjectOfType<Request_InventoryManager>();
     }
 
     private void OnEnable()
@@ -89,7 +91,6 @@ public class RequestPanel : MonoBehaviour
             RequestTextSetUp();
             RequestSave();
             RequestTextSetup();
-
             acceptButton.SetActive(true);
         }
         else
@@ -161,6 +162,7 @@ public class RequestPanel : MonoBehaviour
         #nullable enable
         int? amount = FindItemSlot(nowRequest.requests[0].item)?.amount;
         requestPanel.transform.DOMoveY(0, duration).SetEase(ease);
+        inventoryManager.Refresh_Inven();
         IngredientImageSetup(0, 0);
         IngredientImageSetup(1, 0);
         IngredientImageSetup(2, 1);

@@ -9,17 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09c21cebde383634288bf6a7f376f5bf, type: 3}
-  m_Name: Dust
+  m_Script: {fileID: 11500000, guid: 2e77ec614e204934a9ea57e47e20c163, type: 3}
+  m_Name: FoodSO_CanSoup
   m_EditorClassIdentifier: 
-  enemyName: Dust
-  defaultHP: 1000
-  defaultATK: 10
-  defaultDEF: 2
-  defaultSPD: 8
-  attackCycle: 1.25
-  detectRange: 10
-  attackRange: 1
-  reward:
-    expAmount: 0
-    DropItems: []
+  foodID: 0
+  HP: 10
+  hunger: 20
+  thirsty: 0

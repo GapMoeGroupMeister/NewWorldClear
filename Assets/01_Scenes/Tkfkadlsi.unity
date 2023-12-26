@@ -231,13 +231,16 @@ GameObject:
   - component: {fileID: 134745592}
   - component: {fileID: 134745594}
   - component: {fileID: 134745591}
+  - component: {fileID: 134745597}
+  - component: {fileID: 134745596}
+  - component: {fileID: 134745595}
   m_Layer: 0
-  m_Name: 
+  m_Name: Dust
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &134745588
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -431,7 +434,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 908e5a928cb7c404ab441612608736e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dustData: {fileID: 0}
+  dustData: {fileID: 11400000, guid: 733de139302a9144790a6f06f2d179d0, type: 2}
   animator: {fileID: 0}
   target: {fileID: 0}
   dustsCenter: {fileID: 0}
@@ -528,6 +531,67 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &134745595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 134745587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0723f081fd6016478a14ce620e9ec56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &134745596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 134745587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f6bc073cfa5a6b4b8e85cf56eef4169, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &134745597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 134745587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e90a4e679d0816c46bbd69d476a4a004, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill_One_Damage: 0
 --- !u!1 &146732635
 GameObject:
   m_ObjectHideFlags: 0
@@ -1201,7 +1265,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1155310619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1548,7 +1612,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1741522255
 Transform:
   m_ObjectHideFlags: 0

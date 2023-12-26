@@ -13,6 +13,10 @@ namespace Tkfkadlsi
         private void Awake()
         {
             dust = this.GetComponent<Dust>();
+        }
+
+        private void Start()
+        {
             dustsCenter = dust.dustsCenter;
         }
 
