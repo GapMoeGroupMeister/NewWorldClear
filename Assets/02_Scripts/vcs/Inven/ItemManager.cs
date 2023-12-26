@@ -177,6 +177,45 @@ public class ItemManager : MonoSingleton<ItemManager>
 
 
     }
+    
+    /**
+     * <summary>
+     * 인벤토리에서 아이템을 찾아주는 메서드
+     * </summary>
+     * <param name="itemId">
+     * 찾을 아이템 id
+     * </param>
+     * <returns>
+     * 해당하는 아이템 슬롯을 반환함
+     * </returns>
+     */
+    [CanBeNull]
+    public ItemSlot FindItem(int itemId)
+    {
+       
+        for (int i = 0; i < inventory.Count; i++)
+        {
+            ItemSlot slot = inventory[i];
+
+            if (slot.amount <= 0)
+            {
+                inventory.Remove(slot);
+                i--;
+                continue;
+            }
+            
+
+            if (slot.item.id == itemId)
+            {
+                return slot;
+                break;
+            }
+            
+        }
+        
+        return null;
+    }
+
 
     /**
      * <summary>

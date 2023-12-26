@@ -4,7 +4,7 @@ using UnityEngine;
 public class FoodSO : ScriptableObject
 {
     public int foodID;
-    public float HP;
-    public float hunger;
-    public float thirsty;
+    public int HP;
+    public int hunger;
+    public int thirsty;
 }

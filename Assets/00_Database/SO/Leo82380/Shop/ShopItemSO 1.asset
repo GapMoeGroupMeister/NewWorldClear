@@ -15,7 +15,7 @@ MonoBehaviour:
   itemName: "\uC2DD\uB7C9"
   description: "\uBC25\uC774\uB2E4"
   price: 10
-  itemIcon: {fileID: 21300000, guid: f827f232643c277408c2b3ef271b46ed, type: 3}
+  itemIcon: {fileID: 21300000, guid: 6caf9dc569ef35e4aa1b31d2cd824cd7, type: 3}
   grade: 2
   item:
     item: {fileID: 11400000, guid: 71dfa2a1af1e46b42be0c1f12877d34e, type: 2}
