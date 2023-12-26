@@ -54,6 +54,7 @@ namespace Tkfkadlsi
 
         private void FinishSkill_One()
         {
+            dust.AttackCount = 0;
             dust.currentState = Dust.DustState.Idle;
         }
 

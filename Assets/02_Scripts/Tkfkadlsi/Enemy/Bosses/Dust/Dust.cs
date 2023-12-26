@@ -15,6 +15,7 @@ namespace Tkfkadlsi
         public DustsCenter dustsCenter;
         public DustAttack dustAttack;
         public DustSkill_One skill_One;
+        public DustSkill_Two skill_Two;
         public DustSkill_Three skill_Three;
 
         public float hp;
@@ -67,7 +68,6 @@ namespace Tkfkadlsi
         {
             hp = dustData.DefaultHP;
             atk = dustData.DefaultATK;
-            def = dustData.DefaultDEF;
             speed = dustData.DefaultSPD;
             atkDelay = dustData.AttackCycle;
             range = dustData.DetectRange;
@@ -110,7 +110,11 @@ namespace Tkfkadlsi
                 skill_One.StartSkill_One();
                 return;
             }
-
+            if (Skill_Two_Condition())
+            {
+                skill_Two.StartSkill_Two();
+                return;
+            }
         }
 
         private bool Skill_One_Condition()
@@ -152,7 +156,7 @@ namespace Tkfkadlsi
 
             float rand = Random.Range(0.00f, 1.00f);
 
-            if (rand < 0.33f)
+            if (rand < 0.1667f)
             {
                 return true;
             }

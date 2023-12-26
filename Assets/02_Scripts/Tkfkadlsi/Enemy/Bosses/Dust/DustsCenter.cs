@@ -45,7 +45,7 @@ namespace Tkfkadlsi
         {
             if (collision.CompareTag("Player"))
             {
-                if (dust.currentState != Dust.DustState.Skill_3)
+                if (dust.currentState == Dust.DustState.Idle)
                     dust.skill_Three.StartSkill_Three();
             }
         }

@@ -64,6 +64,8 @@ namespace Tkfkadlsi
         {
             dust.transform.localPosition = new Vector3(0, 4);
             dust.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+
+            dust.AttackCount = 0;
             dust.currentState = Dust.DustState.Idle;
         }
 
