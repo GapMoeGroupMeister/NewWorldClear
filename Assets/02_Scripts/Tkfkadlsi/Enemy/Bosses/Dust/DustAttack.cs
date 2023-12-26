@@ -13,6 +13,10 @@ namespace Tkfkadlsi
         private void Awake()
         {
             dust = this.GetComponent<Dust>();
+        }
+
+        private void Start()
+        {
             dustsCenter = dust.dustsCenter;
         }
 
@@ -25,10 +29,10 @@ namespace Tkfkadlsi
         private IEnumerator AttackMove()
         {
             StartCoroutine(CenterMoveLerp(0.75f));
-            yield return StartCoroutine(AttackMoveLerpEnter(dust.transform, 0.75f));
+            yield return StartCoroutine(AttackMoveLerpEnter(dust.transform, 0.1f));
 
             Attack();
-            yield return StartCoroutine(AttackMoveLerpFinish(dust.transform, 1.0f));
+            yield return StartCoroutine(AttackMoveLerpFinish(dust.transform, 0.75f));
 
             FinishAttack();
         }
@@ -40,15 +44,17 @@ namespace Tkfkadlsi
 
         private void FinishAttack()
         {
+            //dustsCenter.z = Random.Range(-180.0f, 180.0f);
+            //dustsCenter.transform.rotation = Quaternion.Euler(new Vector3(0, 0, dust.dustsCenter.z));
+
             dust.currentState = Dust.DustState.Idle;
-            dust.AttackCount++;
         }
 
         private IEnumerator AttackMoveLerpEnter(Transform trm, float moveTime)
         {
             float t = 0;
             Vector3 startpos = new Vector3(0, 4);
-            Vector3 endpos = new Vector3(0, 1);
+            Vector3 endpos = new Vector3(0, -1);
 
             while (t < moveTime)
             {
@@ -64,7 +70,7 @@ namespace Tkfkadlsi
         private IEnumerator AttackMoveLerpFinish(Transform trm, float moveTime)
         {
             float t = 0;
-            Vector3 startpos = new Vector3(0, 1);
+            Vector3 startpos = new Vector3(0, -1);
             Vector3 endpos = new Vector3(0, 4);
 
             while (t < moveTime)
@@ -87,6 +93,7 @@ namespace Tkfkadlsi
             while (t < moveTime)
             {
                 dustsCenter.transform.position = Vector3.Lerp(startPos, endPos, moveCurve.Evaluate(t / moveTime));
+                endPos = dust.target.transform.position;
 
                 t += Time.deltaTime;
                 yield return null;

@@ -6,8 +6,6 @@ namespace Tkfkadlsi
 {
     public class Enemy1 : Enemy
     {
-        Animator animator;
-
         private void Awake()
         {
             FindTarget();
@@ -48,17 +46,6 @@ namespace Tkfkadlsi
             if (!animator) return;
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("Enemy1Attack")) return;
             animator.SetTrigger("Attack");
-        }
-
-        public override void Hit(float damage)
-        {
-            _currentHp -= damage;
-
-            if (_currentHp <= 0)
-                Dead();
-                
-            if (!animator) return;
-            animator.SetTrigger("Hit");
         }
 
         public override void Dead()

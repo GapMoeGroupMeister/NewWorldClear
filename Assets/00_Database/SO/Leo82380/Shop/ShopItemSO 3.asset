@@ -15,7 +15,7 @@ MonoBehaviour:
   itemName: "\uD30C\uCE20"
   description: "\uD30C\uCE20"
   price: 100
-  itemIcon: {fileID: 21300000, guid: 5520efef964c2394b9af26730420c4c2, type: 3}
+  itemIcon: {fileID: 21300000, guid: bb1b05516f4239a41b6b3fad8ac0f394, type: 3}
   grade: 4
   item:
     item: {fileID: 11400000, guid: 08d64fcd7eb72694f901eacfbb54cd89, type: 2}
