@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e77ec614e204934a9ea57e47e20c163, type: 3}
-  m_Name: FoodSO
+  m_Name: FoodSO_CanSoup
   m_EditorClassIdentifier: 
-  foodID: 1
-  HP: 0
-  hunger: 0
+  foodID: 0
+  HP: 10
+  hunger: 20
   thirsty: 0
