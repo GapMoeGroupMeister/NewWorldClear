@@ -204,8 +204,15 @@ public class ItemManager : MonoSingleton<ItemManager>
                 continue;
             }
             
+            if (slot.durability <= 0 && slot.item.isLimited)
+            {
+                inventory.Remove(slot);
+                i--;
+                continue;
+            }
 
-            if (slot.item == item)
+
+            if (slot.item.id == item.id)
             {
                 return slot;
                 break;
@@ -242,8 +249,15 @@ public class ItemManager : MonoSingleton<ItemManager>
                 continue;
             }
             
+            if (slot.durability <= 0 && slot.item.isLimited)
+            {
+                inventory.Remove(slot);
+                i--;
+                continue;
+            }
+            
 
-            if (slot.item == itemSlot.item && slot.durability == itemSlot.durability)
+            if (slot.item.id == itemSlot.item.id && slot.durability == itemSlot.durability)
             {
                 return slot;
                 break;
@@ -296,7 +310,7 @@ public class ItemManager : MonoSingleton<ItemManager>
         int amount = 0;
         foreach (ItemSlot slot in inventory)
         {
-            if (item == slot.item)
+            if (item.id == slot.item.id)
             {
                 amount += slot.amount;
             }

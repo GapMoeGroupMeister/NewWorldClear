@@ -20,4 +20,4 @@ MonoBehaviour:
   description: "\uAC01\uC885 \uC81C\uC791\uC5D0 \uC4F8\uBAA8 \uC788\uC744\uB4EF \uD558\uB2E4."
   isLimited: 0
   maxDurability: 0
-  SlotSetAmount: 64
+  SlotSetAmount: 99999

@@ -9,28 +9,11 @@
       "description": "각종 제작에 쓸모 있을듯 하다.",
       "isLimited": false,
       "maxDurability": 0,
-      "SlotSetAmount": 64,
+      "SlotSetAmount": 99999,
       "name": "Item_Wood",
       "hideFlags": 0
     },
-    "amount": 1,
-    "durability": 0
-  },
-  {
-    "item": {
-      "id": 4,
-      "Type": 4,
-      "Tier": 3,
-      "itemName": "목재",
-      "itemSpriteName": "Wood",
-      "description": "각종 제작에 쓸모 있을듯 하다.",
-      "isLimited": false,
-      "maxDurability": 0,
-      "SlotSetAmount": 64,
-      "name": "Item_Wood",
-      "hideFlags": 0
-    },
-    "amount": 2,
+    "amount": 3,
     "durability": 0
   }
 ]
