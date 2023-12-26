@@ -56,9 +56,6 @@ namespace Tkfkadlsi
 
             if (_currentHp <= 0)
                 Dead();
-
-            if (!animator) return;
-            animator.SetTrigger("Hit");
         }
 
         public override void Dead()
