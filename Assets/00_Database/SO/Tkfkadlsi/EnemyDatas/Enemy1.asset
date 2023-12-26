@@ -19,6 +19,7 @@ MonoBehaviour:
   defaultSPD: 3
   attackCycle: 0.5
   detectRange: 15
+  attackRange: 1
   reward:
     expAmount: 0
     DropItems:
