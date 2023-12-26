@@ -6,9 +6,8 @@ public class PiercingSpear : WeaponEvent
 {
     public override void OnHit(Transform enemy)
     {
-        enemy.GetComponent<Enemy_TEST>().AddDebuff(Debuffs.Bleed, 0.5f);
-        if (Random.Range(0, 101) <= 50)
-            enemy.GetComponent<Enemy_TEST>().CriticalDamage(PlayerController.Instance.damage, 10);
+        enemy.GetComponent<Enemy_TEST>().AddDebuff(Debuffs.Slow, 3, 10);
+        enemy.GetComponent<Enemy_TEST>().AddDebuff(Debuffs.Bleed, 7, 20);
     }
 
     public override void Passive()
@@ -17,6 +16,7 @@ public class PiercingSpear : WeaponEvent
 
     public override void Skill(Transform enemy)
     {
+
     }
 
 }

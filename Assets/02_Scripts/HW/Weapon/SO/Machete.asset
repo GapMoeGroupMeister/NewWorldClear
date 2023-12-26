@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: Machete
   m_EditorClassIdentifier: 
   name: Machete
-  weaponPrefab: {fileID: 0}
+  id: 0
+  weaponPrefab: {fileID: 1992920239677047167, guid: 1234a00dc6c12af49b3c73d430e1f608, type: 3}
+  attackEffect: {fileID: 7262178268291671, guid: 5ee1c33140bd1024a95215f29ad45a9c, type: 3}
+  baseDamage: 50
   damage: 5
-  attackDelay: 20
+  attackDelay: 1.2
   weaponType: 2
   attackMotion: 0
   attackRange: {x: 3, y: 2}
