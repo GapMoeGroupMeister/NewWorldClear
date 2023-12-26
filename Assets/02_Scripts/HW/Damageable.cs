@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 
 /// <summary>
-/// µğ¹öÇÁµéÀ» ´ãÀº enum.
+/// ë””ë²„í”„ë“¤ì„ ë‹´ì€ enum.
 /// </summary>
 public enum Debuffs
 {
@@ -17,7 +17,7 @@ public enum Debuffs
 }
 
 /// <summary>
-/// ¹öÇÁµéÀ» ´ãÀº enum.
+/// ë²„í”„ë“¤ì„ ë‹´ì€ enum.
 /// </summary>
 public enum Buffs
 {
@@ -78,12 +78,12 @@ public abstract class Damageable : MonoBehaviour
 
     private void Die()
     {
-        print("Á×À½");
+        print("ì£½ìŒ");
     }
     #region Buff & Debuff
     /// <summary>
-    /// °¡µ¶¼ºÀ» ¤¸¹Ú¾ÒÀ»¼öµµ ÀÖÁö¸¸ amount´Â °¢ ¹öÇÁ¿Í µğ¹öÇÁ¿¡ µû¶ó ´Ù¸£°Ô ÀÛ¿ëÇÑ´Ù. ½Å¼ÓÀÌ³ª ±¸¼Ó°°Àº °æ¿ì¿£ amount°¡ °¨¼Ò,Áõ°¡ÇÏ´Â %·Î ÀÛ¿ëÇÏ°í ´Ù¸¥°ÍÀº ¹ÌÁ¤ÀÌ´Ù. ¾Ë¾Æ¼­ÇØ¶ó
-    /// ±âº»°ªÀº 0ÀÌ´Ù.
+    /// ê°€ë…ì„±ì„ ã…ˆë°•ì•˜ì„ìˆ˜ë„ ìˆì§€ë§Œ amountëŠ” ê° ë²„í”„ì™€ ë””ë²„í”„ì— ë”°ë¼ ë‹¤ë¥´ê²Œ ì‘ìš©í•œë‹¤. ì‹ ì†ì´ë‚˜ êµ¬ì†ê°™ì€ ê²½ìš°ì—” amountê°€ ê°ì†Œ,ì¦ê°€í•˜ëŠ” %ë¡œ ì‘ìš©í•˜ê³  ë‹¤ë¥¸ê²ƒì€ ë¯¸ì •ì´ë‹¤. ì•Œì•„ì„œí•´ë¼
+    /// ê¸°ë³¸ê°’ì€ 0ì´ë‹¤.
     /// </summary>
     /// <param name="buff"></param>
     /// <param name="coolTime"></param>

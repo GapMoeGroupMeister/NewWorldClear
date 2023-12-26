@@ -25,6 +25,12 @@ public class GameManager : MonoSingleton<GameManager>
     }
 
 
+
+    public void GameClear()
+    {
+        PlayerController.Instance.isStun = true;
+        
+    }
     // Update is called once per frame
     void Update()
     {
