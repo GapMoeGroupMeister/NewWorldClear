@@ -14,7 +14,6 @@ public class AlphaMaskStatus : Enemy
         curHp = maxHp;
     }
 
-
     public override void Hit(float damage)
     {
         curHp -= damage;
@@ -27,12 +26,18 @@ public class AlphaMaskStatus : Enemy
     {
         gameObject.SetActive(false);
     }
-    public override void SetState()
+
+    public override void On_Idle()
     {
 
     }
 
-    public override void Update()
+    public override void On_Move()
+    {
+
+    }
+
+    public override void On_Attack()
     {
 
     }
