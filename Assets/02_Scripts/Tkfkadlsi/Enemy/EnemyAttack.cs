@@ -17,7 +17,7 @@ namespace Tkfkadlsi
 
         private IEnumerator LifeTime()
         {
-            yield return new WaitForSeconds(enemy.data.AttackCycle);
+            yield return new WaitForSeconds(0.01f);
             Destroy(gameObject);
         }
 
