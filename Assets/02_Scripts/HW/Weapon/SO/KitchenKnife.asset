@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49158c3b4635ef24395bc84ebb1cc3b3, type: 3}
   m_Name: KitchenKnife
   m_EditorClassIdentifier: 
-  name: KitchenKnife
-  weaponPrefab: {fileID: 0}
+  name: Spaer
+  id: 0
+  weaponPrefab: {fileID: 7464259739720396242, guid: eb7a95d4291c69a4286a968da191c3e6, type: 3}
+  attackEffect: {fileID: 5751605556177575960, guid: 6e119c4ce8be96b46b0b7e4d9e9b0cc7, type: 3}
+  baseDamage: 50
   damage: 0
-  attackDelay: 0
+  attackDelay: 1
   weaponType: 2
-  attackMotion: 0
-  attackRange: {x: 0, y: 0}
+  attackMotion: 2
+  attackRange: {x: 1, y: 0.5}
