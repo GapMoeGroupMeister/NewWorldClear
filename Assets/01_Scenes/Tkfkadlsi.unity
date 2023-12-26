@@ -804,7 +804,7 @@ MonoBehaviour:
   _enemyMask:
     serializedVersion: 2
     m_Bits: 8
-  testWeapon: {fileID: 11400000, guid: 4def8fc4f7dd5a24a93a169911a2ded1, type: 2}
+  testWeapon: {fileID: 11400000, guid: 9c41a866d7cd1ca46b1dd7edb8a9b9af, type: 2}
 --- !u!1 &231035773
 GameObject:
   m_ObjectHideFlags: 0
