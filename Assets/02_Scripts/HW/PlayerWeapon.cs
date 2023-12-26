@@ -13,7 +13,7 @@ public class PlayerWeapon : MonoBehaviour
     private Vector2 _attackRange;
     private WeaponEvent _weaponEvent;
 
-    public GameObject effect;
+    public GameObject _attackEffect;
     public GameObject bulletPrefab;
 
     private GameObject _currentWeapon;
@@ -56,10 +56,11 @@ public class PlayerWeapon : MonoBehaviour
         _currentWeapon = Instantiate(weaponSO.weaponPrefab, transform);
         _weaponPivot = _currentWeapon.transform.GetChild(0);
         _playerController.damage = _playerController.attackDamage;
-        _playerController.damage += (_playerController.attackDamage / weaponSO.damage);
+        _playerController.damage += _playerController.attackDamage / 100 * 5;
         _attackDelay = weaponSO.attackDelay;
         _attackRange = weaponSO.attackRange;
         _attackMotion = weaponSO.attackMotion;
+        _attackEffect = weaponSO.attackEffect;
         _weaponEvent = (WeaponEvent)WeaponEventManager.Instance.GetComponent(_currentWeapon.name);
 
         if (_weaponType.Equals(WeaponType.Swing))
@@ -115,7 +116,7 @@ public class PlayerWeapon : MonoBehaviour
             float angle = Mathf.Atan2(dir.y, dir.x);
             AttackMotionPlay();
             Collider2D[] enemies = Physics2D.OverlapBoxAll(attackRange, _attackRange, angle * Mathf.Rad2Deg, _enemyMask);
-            GameObject obj = Instantiate(effect, attackRange, Quaternion.Euler(0, 0, angle * Mathf.Rad2Deg));
+            GameObject obj = Instantiate(_attackEffect, attackRange, Quaternion.Euler(0, 0, angle * Mathf.Rad2Deg));
             obj.transform.localScale = _attackRange;
             Destroy(obj, 0.5f);
             if (enemies.Length > 0)
