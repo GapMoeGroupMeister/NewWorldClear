@@ -21,7 +21,7 @@ public class WeaponSO : ScriptableObject
     public string name;
     public int id;
     public GameObject weaponPrefab;
-    public GameObject weaponEffect;
+    public GameObject attackEffect;
     public float damage;
     public float attackDelay;
     public WeaponType weaponType = WeaponType.Swing;

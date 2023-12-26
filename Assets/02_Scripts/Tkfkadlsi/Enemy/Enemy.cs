@@ -1,143 +1,115 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Tkfkadlsi
 {
-    public enum State
-    {
-        Idle,
-        Move,
-        Attack
-    }
-
     public abstract class Enemy : Damageable
     {
+        public enum EnemyState
+        {
+            Idle,
+            Move,
+            Attack,
+            Hit
+        }
+
         public EnemyData data;
-        public Animator anim;
         public GameObject target;
 
-        public State currentState;
-        public FSM fsm;
+        [SerializeField] protected GameObject attackObj;
+        protected EnemyState currentState;
+        protected bool canSeePlayer = false;
+        protected bool canAttackPlayer = false;
+        protected bool isAttacking = false;
 
-
-        public float def;
-        public float atkDelay;
-        public float range;
-
-        public bool CanAttackPlayer = false;
-
-        public StateBase idleState;
-        public StateBase moveState;
-        public StateBase attackState;
-
-        public virtual void Awake()
+        public void SetStat()
         {
-            target = FindObjectOfType<PlayerController>().gameObject;
-            currentState = State.Idle;
-            fsm = new FSM(idleState);
-
-            SetStatus();
-        }
-
-        private void SetStatus()
-        {
+            _maxHp = data.DefaultHP;
             _currentHp = data.DefaultHP;
             damage = data.DefaultATK;
-            def = data.DefaultDEF;
             _moveSpeed = data.DefaultSPD;
-            atkDelay = data.AttackCycle;
-            range = data.DetectRange;
         }
 
-        public abstract void SetState();
-
-        public abstract void Update();
-
-        public virtual void ChoiceState()
+        public void FindTarget()
         {
-            switch (currentState)
-            {
-                case State.Idle:
-                    if (CanSeePlayer())
-                    {
-                        if (CanAttackPlayer)
-                            ChangeState(State.Attack, attackState);
-                        else
-                            ChangeState(State.Move, moveState);
-                    }
-                    break;
-                case State.Move:
-                    if (CanSeePlayer())
-                    {
-                        if (CanAttackPlayer)
-                            ChangeState(State.Attack, attackState);
-                    }
-                    else
-                    {
-                        ChangeState(State.Idle, idleState);
-                    }
-                    break;
-                case State.Attack:
-                    if (CanSeePlayer())
-                    {
-                        if (!CanAttackPlayer)
-                            ChangeState(State.Move, moveState);
-                    }
-                    else
-                    {
-                        ChangeState(State.Idle, idleState);
-                    }
-                    break;
-            }
-            fsm.UpdateState();
+            target = FindObjectOfType<PlayerController>().gameObject;
         }
 
-        private void ChangeState(State nextState, StateBase state)
+        public void SetState()
         {
-            currentState = nextState;
+            if (isAttacking) return;
+            if (currentState == EnemyState.Hit) return;
+
+            if (CanAttackPlayer())
+                currentState = EnemyState.Attack;
+            else if (CanSeePlayer())
+                currentState = EnemyState.Move;
+            else
+                currentState = EnemyState.Idle;
+        }
+
+        public void RunState()
+        {
+            if (isAttacking) return;
+            if (currentState == EnemyState.Hit) return;
+
             switch (currentState)
             {
-                case State.Idle:
-                    fsm.ChangeState(state);
+                case EnemyState.Idle:
+                    On_Idle();
                     break;
-                case State.Move:
-                    fsm.ChangeState(state);
+                case EnemyState.Move:
+                    On_Move();
                     break;
-                case State.Attack:
-                    fsm.ChangeState(state);
+                case EnemyState.Attack:
+                    On_Attack();
                     break;
             }
         }
 
-        protected bool CanSeePlayer()
+        public bool CanSeePlayer()
         {
-            if (Vector2.Distance(target.transform.position, this.transform.position) <= data.DetectRange)
+            float distance = Vector2.Distance(target.transform.position, transform.position);
+            if (distance <= data.DetectRange)
             {
                 return true;
             }
-            return false;
-        }
-
-        private void OnCollisionEnter2D(Collision2D collision)
-        {
-            if (collision.collider.CompareTag("Player"))
+            else
             {
-                CanAttackPlayer = true;
+                return false;
             }
         }
 
-        private void OnCollisionExit2D(Collision2D collision)
+        public bool CanAttackPlayer()
         {
-            if (collision.collider.CompareTag("Player"))
+            float distance = Vector2.Distance(target.transform.position, transform.position);
+            if (distance <= data.AttackRange)
             {
-                CanAttackPlayer = false;
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 
+        public abstract void On_Idle();
+        public abstract void On_Move();
+        public abstract void On_Attack();
+        public IEnumerator Attack_Delay()
+        {
+            isAttacking = true;
+            yield return new WaitForSeconds(data.AttackCycle);
+            isAttacking = false;
+        }
+        public IEnumerator Hit_Delay()
+        {
+            currentState = EnemyState.Hit;
+            yield return new WaitForSeconds(0.5f);
+            currentState = EnemyState.Idle;
+        }
         public abstract void Hit(float damage);
-
         public abstract void Dead();
     }
 }
