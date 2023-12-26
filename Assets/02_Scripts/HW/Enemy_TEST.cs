@@ -43,4 +43,9 @@ public class Enemy_TEST : Damageable
     {
         throw new System.NotImplementedException();
     }
+
+    public override void Die()
+    {
+        throw new System.NotImplementedException();
+    }
 }

@@ -14,7 +14,7 @@ public class AlphaMaskStatus : Enemy
         curHp = maxHp;
     }
 
-    public override void Hit(float damage)
+    public void Hit(float damage)
     {
         curHp -= damage;
         if(curHp <= 0)
@@ -40,5 +40,10 @@ public class AlphaMaskStatus : Enemy
     public override void On_Attack()
     {
 
+    }
+
+    public override void Die()
+    {
+        throw new System.NotImplementedException();
     }
 }
