@@ -6,7 +6,7 @@ namespace Tkfkadlsi
 {
     public class EnemySpawner : MonoBehaviour
     {
-        public List<string> SpawnMobList;
+        public List<GameObject> SpawnMobList;
 
         [SerializeField] private List<Transform> spawnPoints;
         [SerializeField] private float spawnDelay;
@@ -19,7 +19,8 @@ namespace Tkfkadlsi
         public IEnumerator SpawnMonster()
         {
             int idx = Random.Range(0, SpawnMobList.Count);
-            GameObject spawnMob = PoolManager.Instance.GetObject(SpawnMobList[idx]);
+            //GameObject spawnMob = PoolManager.Instance.GetObject();
+            GameObject spawnMob = PoolManager.Get(SpawnMobList[idx]);
 
             idx = Random.Range(0, spawnPoints.Count);
             spawnMob.transform.position = spawnPoints[idx].position;

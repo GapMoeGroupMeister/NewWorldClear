@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: InGamePool
+  m_Name: New Pooling Object List
   m_EditorClassIdentifier: Assembly-CSharp::PoolingObjectList
   poolingObjects: []

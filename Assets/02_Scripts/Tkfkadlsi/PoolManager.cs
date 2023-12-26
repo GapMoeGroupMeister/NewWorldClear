@@ -1,152 +1,222 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using Object = UnityEngine.Object;
 
-[System.Serializable]
-public class PoolingObject
+public interface IPoolable
 {
-    public string objectName;
-    public int objectAmount;
-    public GameObject objectPrefab;
-    public Transform poolLocation;
+    public void OnSpawned();
+    public void OnDespawned();
 }
 
-public class PoolManager : MonoSingleton<PoolManager>
+public static class PoolManager
 {
-    public Dictionary<string, Queue<GameObject>> pools = new Dictionary<string, Queue<GameObject>>();
-    public PoolingObjectList poolingObjectList;
-    public bool readyPool = false;
-
-    private void Awake()
+    [RuntimeInitializeOnLoadMethod]
+    private static void Init()
     {
-        if (Instance != this)
-            Destroy(gameObject);
-
-
-        foreach (PoolingObject @object in poolingObjectList.poolingObjects)
-        {
-            pools.Add(@object.objectName, new Queue<GameObject>());
-
-            CreateObjectInPool(@object.objectName, @object.objectAmount, @object.objectPrefab, @object.poolLocation);
-        }
-
-        readyPool = true;
+        Application.quitting += () => { OnExiting?.Invoke(); };
+        SceneManager.sceneUnloaded += _ => { OnSceneUnloaded?.Invoke(); };
     }
 
-    private void CreateObjectInPool(string objectName, int count, GameObject objectPrefab, Transform location)
-    {
-        for (int i = 0; i < count; i++)
-        {
-            GameObject newObj = Instantiate(objectPrefab, location);
-            newObj.SetActive(false);
-            pools[objectName].Enqueue(newObj);
+    private static event Action OnExiting;
+    private static event Action OnSceneUnloaded;
 
+    /// <summary>
+    ///     오브젝트를 풀에서 가져옵니다.
+    /// </summary>
+    /// <param name="prefab">프리팹</param>
+    /// <param name="parent">부모</param>
+    /// <typeparam name="T">컴포넌트 타입</typeparam>
+    /// <returns>풀링된 오브젝트</returns>
+    public static T Get<T>(T prefab, Transform parent = null) where T : Object
+    {
+        var pool = Pool<T>.Instance;
+        var obj = pool.Get(prefab);
+
+        switch (obj)
+        {
+            case Component component:
+                component.transform.SetParent(parent, false);
+                break;
+            case GameObject gameObject:
+                gameObject.transform.SetParent(parent, false);
+                break;
+        }
+
+        return obj;
+    }
+
+    /// <summary>
+    ///     오브젝트를 풀에서 가져옵니다.
+    /// </summary>
+    /// <param name="prefab">프리팹</param>
+    /// <param name="position">위치</param>
+    /// <param name="rotation">회전</param>
+    /// <param name="parent">부모</param>
+    /// <typeparam name="T">컴포넌트 타입</typeparam>
+    /// <returns>풀링된 오브젝트</returns>
+    public static T Get<T>(T prefab, Vector3 position, Quaternion rotation, Transform parent = null) where T : Object
+    {
+        var pool = Pool<T>.Instance;
+        var obj = pool.Get(prefab);
+
+        switch (obj)
+        {
+            case Component component:
+                component.transform.SetParent(parent, false);
+                component.transform.position = position;
+                component.transform.rotation = rotation;
+                break;
+            case GameObject gameObject:
+                gameObject.transform.SetParent(parent, false);
+                gameObject.transform.position = position;
+                gameObject.transform.rotation = rotation;
+                break;
+        }
+
+        return obj;
+    }
+
+    /// <summary>
+    ///     오브젝트를 풀에 반환합니다.
+    /// </summary>
+    /// <param name="obj">반환할 오브젝트</param>
+    /// <typeparam name="T">컴포넌트 타입</typeparam>
+    public static void Release<T>(T obj) where T : Object
+    {
+        var pool = Pool<T>.Instance;
+        pool.Release(obj);
+    }
+
+    /// <summary>
+    ///     오브젝트를 풀에 미리 생성합니다.
+    /// </summary>
+    /// <param name="prefab">프리팹</param>
+    /// <param name="count">생성할 개수</param>
+    /// <typeparam name="T">컴포넌트 타입</typeparam>
+    public static void Preload<T>(T prefab, int count) where T : Object
+    {
+        var pool = Pool<T>.Instance;
+        for (var i = 0; i < count; i++)
+        {
+            var obj = pool.Get(prefab);
+            pool.Release(obj);
         }
     }
 
-    private GameObject CreateObject(string objectName, Transform location = null)
+    /// <summary>
+    ///     풀을 비웁니다.
+    /// </summary>
+    /// <typeparam name="T">컴포넌트 타입</typeparam>
+    /// <param name="prefab">프리팹</param>
+    public static void Clear<T>(T prefab) where T : Object
     {
-        foreach (PoolingObject @object in poolingObjectList.poolingObjects)
+        var pool = Pool<T>.Instance;
+        pool.Clear();
+    }
+
+    private class Pool<T> where T : Object
+    {
+        private readonly Dictionary<T, T> _prefabs = new();
+        private readonly Dictionary<T, Stack<T>> _stacks = new();
+        private readonly Dictionary<object, List<IPoolable>> _poolables = new();
+
+        static Pool()
         {
-            if (@object.objectName == objectName)
+            OnExiting += Instance.Clear;
+            OnSceneUnloaded += Instance.Clear;
+            Debug.Log("PoolManager Initialized - " + typeof(T));
+        }
+
+        public static Pool<T> Instance { get; } = new();
+
+        private GameObject GetGameObject(T prefab)
+        {
+            return prefab switch
             {
-                GameObject newObj = Instantiate(@object.objectPrefab, location);
-                return newObj;
+                GameObject @object => @object,
+                Component component => component.gameObject,
+                _ => null
+            };
+        }
+
+        public T Get(T prefab)
+        {
+            if (!_stacks.TryGetValue(prefab, out var stack))
+            {
+                stack = new Stack<T>();
+                _stacks.Add(prefab, stack);
             }
+
+            T obj;
+
+            if (stack.Count > 0)
+            {
+                obj = stack.Pop();
+                GetGameObject(obj).SetActive(true);
+            }
+            else
+            {
+                obj = Object.Instantiate(prefab);
+                _prefabs.Add(obj, prefab);
+
+                var gameObject = GetGameObject(obj);
+
+                if (gameObject != null && !_poolables.ContainsKey(gameObject))
+                {
+                    _poolables.Add(obj, new List<IPoolable>());
+                }
+
+                if (gameObject == null) return obj;
+
+                foreach (var poolable in gameObject.GetComponents<IPoolable>())
+                {
+                    _poolables[obj].Add(poolable);
+                }
+            }
+
+            foreach (var poolable in _poolables[obj])
+            {
+                poolable.OnSpawned();
+            }
+
+            return obj;
         }
 
-        return null;
-    }
-
-    public GameObject GetObject(string objectName)
-    {
-        if (!pools.ContainsKey(objectName)) return null;
-
-        if (pools[objectName].Count > 0)
+        public void Release(T obj)
         {
-            GameObject outObj = pools[objectName].Dequeue();
-            outObj.SetActive(true);
-            return outObj;
+            var gameObject = GetGameObject(obj);
+
+            if (!_prefabs.TryGetValue(obj, out var prefab))
+            {
+                Object.Destroy(gameObject);
+                return;
+            }
+
+            if (_poolables.TryGetValue(obj, out var poolables))
+            {
+                foreach (var poolable in poolables)
+                {
+                    poolable.OnDespawned();
+                }
+            }
+
+            if (gameObject != null) gameObject.SetActive(false);
+            _stacks[prefab].Push(obj);
         }
-        else
+
+        public void Clear()
         {
-            GameObject outObj = CreateObject(objectName);
-            outObj.SetActive(true);
-            return outObj;
+            foreach (var obj in _stacks.Values.SelectMany(stack => stack))
+            {
+                Object.Destroy(GetGameObject(obj));
+            }
+
+            _stacks.Clear();
+            _prefabs.Clear();
+            _poolables.Clear();
         }
-    }
-
-    public GameObject GetObject(string objectName, Vector3 position)
-    {
-        if (!pools.ContainsKey(objectName)) return null;
-
-        if (pools[objectName].Count > 0)
-        {
-            GameObject outObj = pools[objectName].Dequeue();
-            outObj.transform.position = position;
-            outObj.SetActive(true);
-            return outObj;
-        }
-        else
-        {
-            GameObject outObj = CreateObject(objectName);
-            outObj.transform.position = position;
-            outObj.SetActive(true);
-            return outObj;
-        }
-
-    }
-
-    public GameObject GetObject(string objectName, Vector3 position, Transform parent)
-    {
-        if (!pools.ContainsKey(objectName)) return null;
-
-        if (pools[objectName].Count > 0)
-        {
-            GameObject outObj = pools[objectName].Dequeue();
-            outObj.transform.SetParent(parent);
-            outObj.transform.position = position;
-            outObj.SetActive(true);
-            return outObj;
-        }
-        else
-        {
-            GameObject outObj = CreateObject(objectName, parent);
-            outObj.transform.SetParent(parent);
-            outObj.transform.position = position;
-            outObj.SetActive(true);
-            return outObj;
-        }
-    }
-
-    public GameObject GetObjectUI(string objectName, Vector3 position, Transform parent)
-    {
-        if (!pools.ContainsKey(objectName)) return null;
-
-        if (pools[objectName].Count > 0)
-        {
-            GameObject outObj = pools[objectName].Dequeue();
-            outObj.transform.SetParent(parent);
-            RectTransform rect = outObj.GetComponent<RectTransform>();
-            rect.anchoredPosition3D = position;
-            outObj.SetActive(true);
-            return outObj;
-        }
-        else
-        {
-            GameObject outObj = CreateObject(objectName, parent);
-            outObj.transform.SetParent(parent);
-            RectTransform rect = outObj.GetComponent<RectTransform>();
-            rect.anchoredPosition3D = position;
-            outObj.SetActive(true);
-            return outObj;
-        }
-    }
-
-    public void ReturnObject(string objectName, GameObject inObj)
-    {
-        inObj.SetActive(false);
-        inObj.transform.position = Vector3.zero;
-
-        pools[objectName].Enqueue(inObj);
     }
 }
