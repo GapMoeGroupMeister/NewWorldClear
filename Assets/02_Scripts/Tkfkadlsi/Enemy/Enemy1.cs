@@ -52,6 +52,8 @@ namespace Tkfkadlsi
 
         public override void Hit(float damage)
         {
+            isAttacking = false;
+            StartCoroutine(Hit_Delay());
             _currentHp -= damage;
 
             if (_currentHp <= 0)

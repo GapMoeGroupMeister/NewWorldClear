@@ -18,4 +18,8 @@ MonoBehaviour:
   defaultDEF: 2
   defaultSPD: 8
   attackCycle: 1.25
-  detectRange: 25
+  detectRange: 10
+  attackRange: 1
+  reward:
+    expAmount: 0
+    DropItems: []
