@@ -53,5 +53,6 @@ namespace Tkfkadlsi
             LootManager.Instance.GenerateReward(data.Reward, transform.position, 1);
             Destroy(gameObject);
         }
+
     }
 }
