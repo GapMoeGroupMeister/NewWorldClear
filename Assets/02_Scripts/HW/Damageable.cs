@@ -46,40 +46,22 @@ public abstract class Damageable : MonoBehaviour
     public virtual void HitDamage(float damage)
     {
         _currentHp -= damage;
-        if (_currentHp <= 0)
-        {
-            Die();
-        }
     }
     public virtual void BleedDamage(float damage)
     {
         _currentHp -= damage;
-        if (_currentHp <= 0)
-        {
-            Die();
-        }
     }
     public virtual void PoisonDamage(float damage)
     {
         _currentHp -= damage;
-        if (_currentHp <= 0)
-        {
-            Die();
-        }
     }
     public virtual void CriticalDamage(float damage, float percent)
     {
         _currentHp -= damage * (100 / percent);
-        if (_currentHp <= 0)
-        {
-            Die();
-        }
     }
 
-    private void Die()
-    {
-        print("죽음");
-    }
+    public abstract void Die();
+
     #region Buff & Debuff
     /// <summary>
     /// 가독성을 ㅈ박았을수도 있지만 amount는 각 버프와 디버프에 따라 다르게 작용한다. 신속이나 구속같은 경우엔 amount가 감소,증가하는 %로 작용하고 다른것은 미정이다. 알아서해라
