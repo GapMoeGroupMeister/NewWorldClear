@@ -57,7 +57,6 @@ namespace Tkfkadlsi
 
         private void FinishSKillTwo()
         {
-            dust.AttackCount = 0;
             dust.currentState = Dust.DustState.Idle;
         }
     }

@@ -24,7 +24,7 @@ namespace Tkfkadlsi
 
         private void Start()
         {
-            moveSpeed = dust.speed;
+            moveSpeed = dust._moveSpeed;
             dustDetectArea.radius = dust.range;
         }
 
@@ -36,7 +36,7 @@ namespace Tkfkadlsi
 
         private void Rotating()
         {
-            z += rotationSpeed * Time.deltaTime;
+            z += moveSpeed * Time.deltaTime;
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, z));
             dust.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
         }

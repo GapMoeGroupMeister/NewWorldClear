@@ -10,12 +10,6 @@ public class PoolingObject
     public Transform poolLocation;
 }
 
-[CreateAssetMenu(menuName = "SO/PoolingObjectList")]
-public class PoolingObjectList : ScriptableObject
-{
-    public List<PoolingObject> poolingObjects = new List<PoolingObject>();
-}
-
 public class PoolManager : MonoSingleton<PoolManager>
 {
     public Dictionary<string, Queue<GameObject>> pools = new Dictionary<string, Queue<GameObject>>();

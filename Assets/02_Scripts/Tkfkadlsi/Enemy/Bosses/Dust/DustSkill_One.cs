@@ -29,10 +29,10 @@ namespace Tkfkadlsi
         public void StartSkill_One()
         {
             dust.currentState = Dust.DustState.Skill_1;
-            StartCoroutine(Dashs());
+            StartCoroutine(SkillOne());
         }
 
-        private IEnumerator Dashs()
+        private IEnumerator SkillOne()
         {
             Vector3 dir = new Vector3();
             for (int i = 0; i < 3; i++)
@@ -54,7 +54,7 @@ namespace Tkfkadlsi
 
         private void FinishSkill_One()
         {
-            dust.AttackCount = 0;
+            dust.transform.localPosition = new Vector3(0, 4);
             dust.currentState = Dust.DustState.Idle;
         }
 
