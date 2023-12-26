@@ -129,5 +129,10 @@ namespace Tkfkadlsi
             base.CriticalDamage(damage, percent);
         }
         public abstract void Dead();
+
+        public override void Die()
+        {
+            
+        }
     }
 }
