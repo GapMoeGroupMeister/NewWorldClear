@@ -86,15 +86,32 @@ public class PlayerWeapon : MonoBehaviour
         }
     }
     
-    public void AttackMotionPlay()
+    public void AttackMotionPlay(Vector2 attackRange, float angle)
     {
+        print(angle);
         switch (_attackMotion)
         {
             case AttackMotion.Swing:
                 if (!(_weaponPivot.localRotation.eulerAngles.z >= 50f))
+                {
                     _weaponPivot.DOLocalRotate(new Vector3(0, 0, 181f), 0.2f);
+                    GameObject obj = Instantiate(_attackEffect, attackRange, Quaternion.Euler(0, 0, angle * Mathf.Rad2Deg));
+                    if(Mathf.Abs(angle) < 1.55f)
+                        obj.transform.localScale = _attackRange;
+                    else
+                        obj.transform.localScale = new Vector3(_attackRange.x, -_attackRange.y);
+                    Destroy(obj, 0.25f);
+                }
                 else
+                {
                     _weaponPivot.DOLocalRotate(new Vector3(0, 0, 0f), 0.2f);
+                    GameObject obj = Instantiate(_attackEffect, attackRange, Quaternion.Euler(0, 0, angle * Mathf.Rad2Deg));
+                    if (Mathf.Abs(angle) >= 1.55f)
+                        obj.transform.localScale = _attackRange;
+                    else
+                        obj.transform.localScale = new Vector3(_attackRange.x, -_attackRange.y);
+                    Destroy(obj, 0.25f);
+                }
                 break;
             case AttackMotion.Shake:
                 _weaponPivot.DOShakePosition(_attackDelay, 0.1f, 30, 90, false, false);
@@ -114,14 +131,8 @@ public class PlayerWeapon : MonoBehaviour
             Vector2 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
             Vector2 attackRange = transform.position + ((Vector3)dir.normalized * (_attackRange.x / 2));
             float angle = Mathf.Atan2(dir.y, dir.x);
-            AttackMotionPlay();
+            AttackMotionPlay(attackRange, angle);
             Collider2D[] enemies = Physics2D.OverlapBoxAll(attackRange, _attackRange, angle * Mathf.Rad2Deg, _enemyMask);
-            if(_attackEffect != null)
-            {
-                GameObject obj = Instantiate(_attackEffect, attackRange, Quaternion.Euler(0, 0, angle * Mathf.Rad2Deg));
-                obj.transform.localScale = _attackRange;
-                Destroy(obj, 0.5f);
-            }
             if (enemies.Length > 0)
             {
                 foreach (Collider2D col in enemies)

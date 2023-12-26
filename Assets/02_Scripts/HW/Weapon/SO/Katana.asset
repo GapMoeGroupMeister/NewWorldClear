@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Katana
   id: 0
-  weaponPrefab: {fileID: 8290536613686760934, guid: fc9872f5af927554688b593261130edd, type: 3}
+  weaponPrefab: {fileID: 580508065133754308, guid: fc9872f5af927554688b593261130edd, type: 3}
   attackEffect: {fileID: 7262178268291671, guid: 5ee1c33140bd1024a95215f29ad45a9c, type: 3}
   baseDamage: 50
   damage: 10

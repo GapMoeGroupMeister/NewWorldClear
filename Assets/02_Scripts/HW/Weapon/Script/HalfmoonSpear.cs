@@ -6,8 +6,8 @@ public class HalfmoonSpaer : WeaponEvent
 {
     public override void OnHit(Transform enemy)
     {
-        if (Random.Range(0, 101) <= 30)
-            enemy.GetComponent<Enemy_TEST>().CriticalDamage(PlayerController.Instance.damage, 10);
+        enemy.GetComponent<Enemy_TEST>().AddDebuff(Debuffs.Slow, 3, 5);
+        enemy.GetComponent<Enemy_TEST>().AddDebuff(Debuffs.Bleed, 3, 10);
     }
 
     public override void Passive()
