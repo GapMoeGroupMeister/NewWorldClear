@@ -37,6 +37,8 @@ namespace Tkfkadlsi
 
         public void SetState()
         {
+            if (isAttacking) return;
+
             if (CanAttackPlayer())
                 currentState = EnemyState.Attack;
             else if (CanSeePlayer())
@@ -47,6 +49,8 @@ namespace Tkfkadlsi
 
         public void RunState()
         {
+            if (isAttacking) return;
+
             switch (currentState)
             {
                 case EnemyState.Idle:

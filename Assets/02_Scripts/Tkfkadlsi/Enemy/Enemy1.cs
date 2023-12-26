@@ -24,6 +24,7 @@ namespace Tkfkadlsi
         public override void On_Idle()
         {
             if (!animator) return;
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Enemy1Idle")) return;
             animator.SetTrigger("Idle");
         }
 
@@ -33,18 +34,19 @@ namespace Tkfkadlsi
             transform.position += direction.normalized * _moveSpeed * Time.deltaTime;
 
             if (!animator) return;
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Enemy1Move")) return;
             animator.SetTrigger("Move");
         }
 
         public override void On_Attack()
         {
-            if (isAttacking) return;
             StartCoroutine(Attack_Delay());
 
             GameObject obj = Instantiate(attackObj, transform);
             obj.transform.position = transform.position;
 
             if (!animator) return;
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Enemy1Attack")) return;
             animator.SetTrigger("Attack");
         }
 

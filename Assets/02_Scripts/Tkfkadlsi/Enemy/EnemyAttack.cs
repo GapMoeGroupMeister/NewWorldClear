@@ -12,6 +12,13 @@ namespace Tkfkadlsi
         private void Awake()
         {
             enemy = GetComponentInParent<Enemy>();
+            StartCoroutine(LifeTime());
+        }
+
+        private IEnumerator LifeTime()
+        {
+            yield return new WaitForSeconds(enemy.data.AttackCycle);
+            Destroy(gameObject);
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
