@@ -19,7 +19,7 @@ public class AlphaMaskTrapSkill : BossSkill
         return true;
     }
 
-    private void Update()
+    protected override void Update()
     {
         if(Input.GetKeyDown(KeyCode.L))
         {
