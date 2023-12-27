@@ -15,11 +15,9 @@ public class PlayerWeapon : MonoBehaviour
 
     public GameObject _attackEffect;
     public GameObject bulletPrefab;
-
     private GameObject _currentWeapon;
 
     Transform _weaponPivot;
-
     WeaponSO _currentWeaponSO;
     LineRenderer _lineRenderer;
     PlayerController _playerController;
