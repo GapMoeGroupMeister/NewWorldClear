@@ -11,6 +11,7 @@ public class GameManager : MonoSingleton<GameManager>
 {
     [CanBeNull] public PlayerController _PlayerController { get; private set; }
     public SoundManager _SoundManager { get; private set; }
+    public LevelManager _LevelManager { get; private set; }
 
 
     public UnityEvent SceneStartEvent;
@@ -23,6 +24,8 @@ public class GameManager : MonoSingleton<GameManager>
     {
         _SoundManager = FindObjectOfType<SoundManager>();
         _PlayerController = FindObjectOfType<PlayerController>();
+        _LevelManager = FindObjectOfType<LevelManager>();
+
     }
 
     private void Start()
@@ -55,11 +58,6 @@ public class GameManager : MonoSingleton<GameManager>
         {
             Destroy(_PlayerController.gameObject);
         }
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void BackToStartScene()

@@ -5,17 +5,39 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum LevelUpOption
+{
+    Dam,
+    AtkSpd,
+    Spd,
+    MaxHp,
+    Heal
+}
+
 public class LevelManager : MonoBehaviour
 {
     public int level = 1;
     public int exp = 0;
     [SerializeField] private int ExpCoefficient = 10;
 
+    private int lvlUpStack = 0;
+
     [Header("UI")] [SerializeField] private Image ExpGauge;
     [SerializeField] private TextMeshProUGUI ExpAmountText;
     [SerializeField] private TextMeshProUGUI LevelText;
     [SerializeField] private int ExpMax;
 
+    [SerializeField] private UIInfo UI_LevelUp;
+    [SerializeField] private TextMeshProUGUI LevelBeforeAfter;
+
+    private LevelUpSelectSlot[] slots;
+
+    public int StatusEnforceLevel_Damage = 0;
+    public int StatusEnforceLevel_AttackSpeed = 0;
+    public int StatusEnforceLevel_Speed = 0;
+    public int StatusEnforceLevel_MaxHp = 0;
+    public int StatusEnforceLevel_ = 0;
+    
     private void Start()
     {
         ExpMax = CalcExpMax(level);
@@ -69,4 +91,11 @@ public class LevelManager : MonoBehaviour
         RefreshExp();
         IsLevelUp();
     }
+    
+    
+
+    
+
+
+
 }
