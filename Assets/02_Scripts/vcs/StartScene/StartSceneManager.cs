@@ -24,6 +24,6 @@ public class StartSceneManager : MonoBehaviour
 
     public void SceneMoveShop()
     {
-        //SceneManager.LoadScene();
+        SceneManager.LoadScene("Leo_BlackMarket");
     }
 }
