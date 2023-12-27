@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +24,11 @@ public abstract class Enemy : Damageable
     protected bool canAttackPlayer = false;
     protected bool isAttacking = false;
 
+    private void OnEnable()
+    {
+        SetStat();
+    }
+
     public void SetStat()
     {
         _maxHp = data.DefaultHP;
@@ -38,6 +44,12 @@ public abstract class Enemy : Damageable
 
     public void SetState()
     {
+        if(target == null)
+        {
+            currentState = EnemyState.Idle;
+            return;
+        }
+
         if (isAttacking) return;
         if (currentState == EnemyState.Hit) return;
 
@@ -140,7 +152,7 @@ public abstract class Enemy : Damageable
 
     public override void Die()
     {
-        LootManager.Instance.GenerateReward(data.Reward, transform.position, 4);
+        LootManager.Instance.GenerateReward(data.Reward, transform.position, 2);
         PoolManager.Release(gameObject);
     }
 }

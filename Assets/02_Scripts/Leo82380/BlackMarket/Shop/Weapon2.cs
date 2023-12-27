@@ -77,6 +77,7 @@ public class Weapon2 : MonoBehaviour, IPointerClickHandler
 
         weaponImage.sprite = weaponDescription[_randomIndex].shopSO.itemIcon;
         weaponImage.SetNativeSize();
+        weaponImage.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
         weaponNameText.text = weaponDescription[_randomIndex].shopSO.itemName + "\n<size=25>" + weaponDescription[_randomIndex].shopSO.price + "원</size>";
 
         switch (weaponDescription[_randomIndex].shopSO.grade)
