@@ -32,8 +32,6 @@ namespace Tkfkadlsi
 
         private IEnumerator SkillTwo()
         {
-            dust.animator.SetTrigger("Skill2Charge");
-            yield return StartCoroutine(ColorLerp(Color.clear, Color.red));
             dust.animator.SetTrigger("Skill2");
             skill2AttackRangeObject.SetActive(true);
             yield return new WaitForSeconds(1.125f);
