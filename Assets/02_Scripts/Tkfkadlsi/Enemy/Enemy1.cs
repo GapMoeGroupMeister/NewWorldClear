@@ -49,11 +49,11 @@ namespace Tkfkadlsi
 
             if(direction.x < 0)
             {
-                transform.localScale = new Vector3(left, 0);
+                transform.localScale = new Vector3(left, 1, 1);
             }
             else
             {
-                transform.localScale = new Vector3(right, 0);
+                transform.localScale = new Vector3(right, 1, 1);
             }
 
             if (!animator) return;
