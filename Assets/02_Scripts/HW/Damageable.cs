@@ -2,113 +2,114 @@ using System;
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// ë””ë²„í”„ë“¤ì„ ë‹´ì€ enum.
+/// </summary>
+public enum Debuffs
+{
+    None = 0,
+    Bleed = 1,
+    Slow = 2,
+    Stun = 4,
+    Subdue = 8,
+    Poison = 16,
+    Painful = 32
+}
+
+/// <summary>
+/// ë²„í”„ë“¤ì„ ë‹´ì€ enum.
+/// </summary>
+public enum Buffs
+{
+    None = 0,
+    Fast = 1,
+    Generation = 2,
+    PowerUp = 4,
+    ThinSheild = 8,
+}
+
+
 public abstract class Damageable : MonoBehaviour
 {
-    protected float _currentHp = 100f;
-    protected float _maxHp = 100f;
-    [SerializeField]
-    protected float _moveSpeed;
+    public float _currentHp = 100f;
+    public float _maxHp = 100f;
+    public float _moveSpeed;
     public float damage;
+    public float painfulAmount = 0f;
     public bool isStun = false;
     public bool isSubdue = false;
     public bool thinSheild = false;
     
 
-    /// <summary>
-    /// µğ¹öÇÁµéÀ» ´ãÀº enum.
-    /// </summary>
-    public enum Debuffs
-    {
-        None = 0,
-        Bleed = 1,
-        Slow = 2,
-        Stun = 4,
-        Subdue = 8,
-        Poison = 16
-    }
-
-    /// <summary>
-    /// ¹öÇÁµéÀ» ´ãÀº enum.
-    /// </summary>
-    public enum Buffs
-    {
-        None = 0,
-        Fast = 1,
-        Generation = 2,
-        PowerUp = 4,
-        ThinSheild = 8,
-    }
-
     public Buffs buffs = Buffs.None;
     public Debuffs debuffs = Debuffs.None;
-
-    /// <summary>
-    /// DamageableÀ» »ó¼ÓÇÑ °³Ã¼¿¡°Ô ¿øÇÏ´Â ¹öÇÁ¸¦ ÁÖ´Â ÇÔ¼ö
-    /// </summary>
-    /// <param name="buff">¿øÇÏ´Â ¹öÇÁ</param>
-    /// <param name="coolTime">¹öÇÁÀÇ ÄğÅ¸ÀÓ</param>
-    /// 
     public virtual void HitDamage(float damage)
     {
         _currentHp -= damage;
-        if (_currentHp <= 0)
-        {
-            Die();
-        }
     }
     public virtual void BleedDamage(float damage)
     {
         _currentHp -= damage;
-        if (_currentHp <= 0)
-        {
-            Die();
-        }
     }
     public virtual void PoisonDamage(float damage)
     {
         _currentHp -= damage;
-        if (_currentHp <= 0)
-        {
-            Die();
- 
-        }
     }
-
-    private void Die()
+    public virtual void CriticalDamage(float damage, float percent)
     {
-        print("Á×À½");
+        _currentHp -= damage * (100 / percent);
     }
 
-    public void AddBuff(Buffs buff, float coolTime)
+    public abstract void Die();
+
+    #region Buff & Debuff
+    /// <summary>
+    /// ê°€ë…ì„±ì„ ã…ˆë°•ì•˜ì„ìˆ˜ë„ ìˆì§€ë§Œ amountëŠ” ê° ë²„í”„ì™€ ë””ë²„í”„ì— ë”°ë¼ ë‹¤ë¥´ê²Œ ì‘ìš©í•œë‹¤. ì‹ ì†ì´ë‚˜ êµ¬ì†ê°™ì€ ê²½ìš°ì—” amountê°€ ê°ì†Œ,ì¦ê°€í•˜ëŠ” %ë¡œ ì‘ìš©í•˜ê³  ë‹¤ë¥¸ê²ƒì€ ë¯¸ì •ì´ë‹¤. ì•Œì•„ì„œí•´ë¼
+    /// ê¸°ë³¸ê°’ì€ 0ì´ë‹¤.
+    /// </summary>
+    /// <param name="buff"></param>
+    /// <param name="coolTime"></param>
+    /// <param name="amount"></param>
+    public void AddBuff(Buffs buff, float coolTime, float amount = 0)
     {
         if (buff == Buffs.None) return;
         buffs |= buff;
-        StopCoroutine("IE" + typeof(Buffs).GetEnumName(buff));
-        StartCoroutine("IE" + typeof(Buffs).GetEnumName(buff), coolTime);
+        StartCoroutine("IE" + typeof(Buffs).GetEnumName(buff), new float[] { coolTime, amount });
     }
 
-    public void AddDebuff(Debuffs debuff, float coolTime)
+    public void AddDebuff(Debuffs debuff, float coolTime, float amount = 0)
     {
         if (debuff == Debuffs.None) return;
         debuffs |= debuff;
-        StopCoroutine("IE" + typeof(Debuffs).GetEnumName(debuff));
-        StartCoroutine("IE" + typeof(Debuffs).GetEnumName(debuff), coolTime);
+        StartCoroutine("IE" + typeof(Debuffs).GetEnumName(debuff), new float[] { coolTime, amount });
     }
 
-    IEnumerator IEBleed(float coolTime)
+    public void DeleteBuffs(Buffs buff, Debuffs debuff)
     {
-        float cool = coolTime;
+        StopCoroutine("IE" + typeof(Debuffs).GetEnumName(debuff));
+        StopCoroutine("IE" + typeof(Buffs).GetEnumName(buff));
+    }
+
+    IEnumerator IEBleed(float[] values)
+    {
+        float cool = values[0];
+        float damage = values[1];
         float delay = 0.5f;
         float elasped = 0f;
         while (cool > 0)
         {
-            if ((debuffs &= Debuffs.Bleed) != Debuffs.Bleed)
+            if (cool == Mathf.Infinity)
+            {
+                yield return null;
+                continue;
+            }
+            if ((debuffs &= Debuffs.Bleed) != Debuffs.Bleed && cool != Mathf.Infinity)
                 break;
             cool -= Time.deltaTime;
             elasped += Time.deltaTime;
             if (elasped >= delay)
             {
-                BleedDamage(5f);
+                BleedDamage(damage);
                 elasped = 0;
             }
             yield return null;
@@ -116,15 +117,20 @@ public abstract class Damageable : MonoBehaviour
         debuffs -= Debuffs.Bleed;
     }
 
-    IEnumerator IESlow(float coolTime)
+    IEnumerator IESlow(float[] values)
     {
         float prevSpeed = _moveSpeed;
-        float cool = coolTime;
+        float cool = values[0];
         while (cool > 0)
         {
+            if (cool == Mathf.Infinity)
+            {
+                yield return null;
+                continue;
+            }
             if ((debuffs &= Debuffs.Slow) != Debuffs.Slow)
                 break;
-            float addSpeed = prevSpeed - 2;
+            float addSpeed = prevSpeed * (100 / values[1]);
             if (addSpeed != _moveSpeed) prevSpeed = _moveSpeed;
             _moveSpeed = addSpeed;
             cool -= Time.deltaTime;
@@ -134,26 +140,36 @@ public abstract class Damageable : MonoBehaviour
         _moveSpeed = prevSpeed;
     }
 
-    IEnumerator IEStun(float coolTime)
+    IEnumerator IEStun(float[] values)
     {
-        float cool = coolTime;
+        float cool = values[0];
         while (cool > 0)
         {
+            if (cool == Mathf.Infinity)
+            {
+                yield return null;
+                continue;
+            }
             if ((debuffs &= Debuffs.Stun) != Debuffs.Stun)
                 break;
             isStun = true;
             cool -= Time.deltaTime;
             yield return null;
         }
-        debuffs-= Debuffs.Stun;
+        debuffs -= Debuffs.Stun;
         isStun = false;
     }
 
-    IEnumerator IESubdue(float coolTime)
+    IEnumerator IESubdue(float[] values)
     {
-        float cool = coolTime;
+        float cool = values[0];
         while (cool > 0)
         {
+            if (cool == Mathf.Infinity)
+            {
+                yield return null;
+                continue;
+            }
             if ((debuffs &= Debuffs.Subdue) != Debuffs.Subdue)
                 break;
             isSubdue = true;
@@ -164,13 +180,18 @@ public abstract class Damageable : MonoBehaviour
         isSubdue = false;
     }
 
-    IEnumerator IEPoison(float coolTime)
+    IEnumerator IEPoison(float[] values)
     {
-        float cool = coolTime;
+        float cool = values[0];
         float delay = 0.5f;
         float elasped = 0f;
         while (cool > 0)
         {
+            if (cool == Mathf.Infinity)
+            {
+                yield return null;
+                continue;
+            }
             if ((debuffs &= Debuffs.Poison) != Debuffs.Poison)
                 break;
             cool -= Time.deltaTime;
@@ -185,19 +206,39 @@ public abstract class Damageable : MonoBehaviour
         debuffs -= Debuffs.Poison;
     }
 
-    #region Buff Coroutines
-    IEnumerator IEFast(float coolTime)
+    IEnumerator IEPainful(float[] values)
     {
-        float prevSpeed = _moveSpeed;
-        float cool = coolTime;
+        float cool = values[0];
+        float amount = values[1];
         while (cool > 0)
         {
-            if ((buffs &= Buffs.Fast) != Buffs.Fast)
+            if (cool == Mathf.Infinity)
+            {
+                yield return null;
+                continue;
+            }
+            if ((debuffs &= Debuffs.Painful) != Debuffs.Painful)
                 break;
-            float addSpeed = prevSpeed + 3;
+            painfulAmount = amount;
+            cool -= Time.deltaTime;
+            yield return null;
+        }
+        debuffs -= Debuffs.Painful;
+        painfulAmount = 0;
+    }
+
+    #region Buff Coroutines
+    IEnumerator IEFast(float[] values)
+    {
+        float prevSpeed = _moveSpeed;
+        float cool = values[0];
+        while (cool > 0)
+        {
+            if ((buffs &= Buffs.Fast) != Buffs.Fast && cool != Mathf.Infinity)
+                break;
+            float addSpeed = prevSpeed + (prevSpeed * (100 / values[1]));
             if (addSpeed != _moveSpeed) prevSpeed = _moveSpeed;
             _moveSpeed = addSpeed;
-            print(_moveSpeed);
             cool -= Time.deltaTime;
             yield return null;
         }
@@ -205,18 +246,18 @@ public abstract class Damageable : MonoBehaviour
         _moveSpeed = prevSpeed;
     }
 
-    IEnumerator IEGeneration (float coolTime)
+    IEnumerator IEGeneration(float[] values)
     {
-        float cool = coolTime;
+        float cool = values[0];
         float delay = 0.5f;
         float elasped = 0f;
-        while(cool > 0)
+        while (cool > 0)
         {
-            if ((buffs &= Buffs.Generation) != Buffs.Generation)
+            if ((buffs &= Buffs.Generation) != Buffs.Generation && cool != Mathf.Infinity)
                 break;
             cool -= Time.deltaTime;
             elasped += Time.deltaTime;
-            if(elasped >= delay)
+            if (elasped >= delay)
             {
                 _currentHp += 5f;
                 elasped = 0;
@@ -226,13 +267,13 @@ public abstract class Damageable : MonoBehaviour
         buffs -= Buffs.Generation;
     }
 
-    IEnumerator IEPowerUp(float coolTime)
+    IEnumerator IEPowerUp(float[] values)
     {
         float prevdamage = damage;
-        float cool = coolTime;
+        float cool = values[0];
         while (cool > 0)
         {
-            if ((buffs &= Buffs.PowerUp) != Buffs.PowerUp)
+            if ((buffs &= Buffs.PowerUp) != Buffs.PowerUp && cool != Mathf.Infinity)
                 break;
             float addDamage = prevdamage + (prevdamage * 0.5f);
             if (addDamage != damage) prevdamage = damage;
@@ -244,12 +285,12 @@ public abstract class Damageable : MonoBehaviour
         damage = prevdamage;
     }
 
-    IEnumerator IEThinSheld(float coolTime)
+    IEnumerator IEThinSheld(float[] values)
     {
-        float cool = coolTime;
+        float cool = values[0];
         while (cool > 0)
         {
-            if ((buffs &= Buffs.ThinSheild) != Buffs.ThinSheild)
+            if ((buffs &= Buffs.ThinSheild) != Buffs.ThinSheild && cool != Mathf.Infinity)
                 break;
             thinSheild = true;
             cool -= Time.deltaTime;
@@ -258,5 +299,6 @@ public abstract class Damageable : MonoBehaviour
         buffs -= Buffs.ThinSheild;
         thinSheild = false;
     }
+    #endregion
     #endregion
 }

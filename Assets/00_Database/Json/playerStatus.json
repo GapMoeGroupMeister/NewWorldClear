@@ -1,0 +1,11 @@
+{
+    "health": 90,
+    "hungry": 180,
+    "thirsty": 0,
+    "levelHealth": 0,
+    "atk": 10,
+    "def": 1,
+    "stamina": 200,
+    "moveSpeed": 1.0,
+    "inventorySize": 10
+}

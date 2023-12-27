@@ -92,9 +92,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4d0ac6c5967579409a3e3d0975f2d32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemImage: {fileID: 0}
-  GuageFill: {fileID: 0}
-  ItemAmount: {fileID: 0}
+  ItemImage: {fileID: 3626523906592989414}
+  GaugeFill: {fileID: 1867603889768654599}
+  ItemAmount: {fileID: 2867296631847994770}
   currentSlot:
     item: {fileID: 0}
     amount: 0

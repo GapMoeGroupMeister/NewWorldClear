@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class InGame_InventoryManager : InventoryManager
 {
@@ -8,18 +10,31 @@ public class InGame_InventoryManager : InventoryManager
     [SerializeField] private ItemSlot defaultItem;
     [SerializeField] private ItemSlot canSoup;
 
+    [SerializeField] private UIInfo InventoryUI;
 
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private int MaxSlots = 10;
+
+    private void Update()
     {
-        
+        RefreshForFrame();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnInventory()
     {
+        InventoryUI.MovePos();
         
     }
+    
+
+    private void RefreshForFrame()
+    {
+        if (InventoryUI.onOff)
+        {
+            Refresh();
+        }
+    }
+    
+
 
     public override void SceneStart()
     {

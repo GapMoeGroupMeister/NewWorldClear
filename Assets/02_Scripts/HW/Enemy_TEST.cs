@@ -16,6 +16,7 @@ public class Enemy_TEST : Damageable
     }
     void Update()
     {
+        if (isStun) return;
         transform.position = Vector2.MoveTowards(transform.position, _playerTrm.position, Time.deltaTime * speed);
     }
 
@@ -39,6 +40,11 @@ public class Enemy_TEST : Damageable
     }
 
     public override void PoisonDamage(float damage)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void Die()
     {
         throw new System.NotImplementedException();
     }

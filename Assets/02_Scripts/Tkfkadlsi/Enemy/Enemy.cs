@@ -2,144 +2,157 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Tkfkadlsi;
 
-namespace Tkfkadlsi
+public abstract class Enemy : Damageable
 {
-    public enum State
+    public enum EnemyState
     {
         Idle,
         Move,
-        Attack
+        Attack,
+        Hit
     }
 
-    public abstract class Enemy : MonoBehaviour
+    public EnemyData data;
+    public GameObject target;
+
+    [SerializeField] protected GameObject attackObj;
+    protected Animator animator;
+    protected EnemyState currentState;
+    protected bool canSeePlayer = false;
+    protected bool canAttackPlayer = false;
+    protected bool isAttacking = false;
+
+    private void OnEnable()
     {
-        public EnemyData data;
-        public Animator anim;
-        public GameObject target;
+        SetStat();
+    }
 
-        public State currentState;
-        public FSM fsm;
+    public void SetStat()
+    {
+        _maxHp = data.DefaultHP;
+        _currentHp = data.DefaultHP;
+        damage = data.DefaultATK;
+        _moveSpeed = data.DefaultSPD;
+    }
 
-        public float hp;
-        public float atk;
-        public float def;
-        public float spd;
-        public float atkCycle;
-        public float range;
+    public void FindTarget()
+    {
+        target = FindObjectOfType<PlayerController>().gameObject;
+    }
 
-        public bool CanAttackPlayer = false;
-
-        public StateBase idleState;
-        public StateBase moveState;
-        public StateBase attackState;
-
-        public virtual void Awake()
+    public void SetState()
+    {
+        if(target == null)
         {
-            target = FindObjectOfType<PlayerController>().gameObject;
-            currentState = State.Idle;
-            fsm = new FSM(idleState);
-
-            SetStatus();
+            currentState = EnemyState.Idle;
+            return;
         }
 
-        private void SetStatus()
+        if (isAttacking) return;
+        if (currentState == EnemyState.Hit) return;
+
+        if (CanAttackPlayer())
+            currentState = EnemyState.Attack;
+        else if (CanSeePlayer())
+            currentState = EnemyState.Move;
+        else
+            currentState = EnemyState.Idle;
+    }
+
+    public void RunState()
+    {
+        if (isAttacking) return;
+        if (currentState == EnemyState.Hit) return;
+
+        switch (currentState)
         {
-            hp = data.DefaultHP;
-            atk = data.DefaultATK;
-            def = data.DefaultDEF;
-            spd = data.DefaultSPD;
-            atkCycle = data.AttackCycle;
-            range = data.DetectRange;
+            case EnemyState.Idle:
+                On_Idle();
+                break;
+            case EnemyState.Move:
+                On_Move();
+                break;
+            case EnemyState.Attack:
+                On_Attack();
+                break;
         }
+    }
 
-        public abstract void SetState();
-
-        public abstract void Update();
-
-        public virtual void ChoiceState()
+    public bool CanSeePlayer()
+    {
+        float distance = Vector2.Distance(target.transform.position, transform.position);
+        if (distance <= data.DetectRange)
         {
-            switch (currentState)
-            {
-                case State.Idle:
-                    if (CanSeePlayer())
-                    {
-                        if (CanAttackPlayer)
-                            ChangeState(State.Attack, attackState);
-                        else
-                            ChangeState(State.Move, moveState);
-                    }
-                    break;
-                case State.Move:
-                    if (CanSeePlayer())
-                    {
-                        if (CanAttackPlayer)
-                            ChangeState(State.Attack, attackState);
-                    }
-                    else
-                    {
-                        ChangeState(State.Idle, idleState);
-                    }
-                    break;
-                case State.Attack:
-                    if (CanSeePlayer())
-                    {
-                        if (!CanAttackPlayer)
-                            ChangeState(State.Move, moveState);
-                    }
-                    else
-                    {
-                        ChangeState(State.Idle, idleState);
-                    }
-                    break;
-            }
-            fsm.UpdateState();
+            return true;
         }
-
-        private void ChangeState(State nextState, StateBase state)
+        else
         {
-            currentState = nextState;
-            switch (currentState)
-            {
-                case State.Idle:
-                    fsm.ChangeState(state);
-                    break;
-                case State.Move:
-                    fsm.ChangeState(state);
-                    break;
-                case State.Attack:
-                    fsm.ChangeState(state);
-                    break;
-            }
-        }
-
-        protected bool CanSeePlayer()
-        {
-            if(Vector2.Distance(target.transform.position, this.transform.position) <= data.DetectRange)
-            {
-                return true;
-            }
             return false;
         }
+    }
 
-        private void OnCollisionEnter2D(Collision2D collision)
+    public bool CanAttackPlayer()
+    {
+        float distance = Vector2.Distance(target.transform.position, transform.position);
+        if (distance <= data.AttackRange)
         {
-            if(collision.collider.gameObject == target)
-            {
-                CanAttackPlayer = true;
-            }
+            return true;
         }
-
-        private void OnCollisionExit2D(Collision2D collision)
+        else
         {
-            if(collision.collider.gameObject == target)
-            {
-                CanAttackPlayer = false;
-            }
+            return false;
         }
+    }
 
-        public abstract void Hit(float damage);
+    public abstract void On_Idle();
+    public abstract void On_Move();
+    public abstract void On_Attack();
 
-        public abstract void Dead();
+    public IEnumerator Attack_Delay()
+    {
+        isAttacking = true;
+        yield return new WaitForSeconds(data.AttackCycle);
+        isAttacking = false;
+    }
+
+    public IEnumerator Hit_Delay()
+    {
+        isAttacking = false;
+        currentState = EnemyState.Hit;
+        yield return new WaitForSeconds(0.5f);
+        currentState = EnemyState.Idle;
+    }
+
+    public override void HitDamage(float damage)
+    {
+        StartCoroutine(Hit_Delay());
+
+        base.HitDamage(damage);
+
+        if (!animator) return;
+        animator.SetTrigger("Hit");
+        if (_currentHp <= 0) Die();
+    }
+
+    public override void BleedDamage(float damage)
+    {
+        base.BleedDamage(damage);
+        if (_currentHp <= 0) Die();
+    }
+
+    public override void CriticalDamage(float damage, float percent)
+    {
+        base.CriticalDamage(damage, percent);
+        if (_currentHp <= 0) Die();
+    }
+
+    public abstract void Dead();
+
+    public override void Die()
+    {
+        LootManager.Instance.GenerateReward(data.Reward, transform.position, 2);
+        PoolManager.Release(gameObject);
     }
 }
