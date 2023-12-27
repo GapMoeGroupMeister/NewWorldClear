@@ -55,9 +55,9 @@ public class PlayerWeapon : MonoBehaviour
         if (_currentWeapon != null) Destroy(_currentWeapon);
         _currentWeapon = Instantiate(weaponSO.weaponPrefab, transform);
         _weaponPivot = _currentWeapon.transform.GetChild(0);
-        _playerController.damage = weaponSO.baseDamage;
-        _playerController.damage += weaponSO.baseDamage / 100 * weaponSO.damage;
-        _attackDelay = weaponSO.attackDelay;
+        _playerController.attackDamage = weaponSO.baseDamage + _playerController.levelUpDamage;
+        _playerController.attackDamage += weaponSO.baseDamage / 100 * weaponSO.damage;
+        _attackDelay = weaponSO.attackDelay * _playerController.levelUpDelay;
         _attackRange = weaponSO.attackRange;
         _attackMotion = weaponSO.attackMotion;
         _attackEffect = weaponSO.attackEffect;
@@ -147,7 +147,7 @@ public class PlayerWeapon : MonoBehaviour
                 }
                 foreach (Collider2D col in enemies)
                 {
-                    col.GetComponent<Enemy>().HitDamage(_playerController.damage);
+                    col.GetComponent<Enemy>().HitDamage(_playerController.attackDamage);
                     if (_weaponEvent != null)
                     {
                         _weaponEvent.OnHit(col.transform);

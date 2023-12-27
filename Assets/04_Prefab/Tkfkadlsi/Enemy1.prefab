@@ -77,7 +77,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -655773385
-  m_SortingLayer: 2
+  m_SortingLayer: 1
   m_SortingOrder: 33
   m_Sprite: {fileID: -1459219492, guid: 8333bd1357af4344aa580d6611071a7e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -198,6 +198,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 2042ab592c3d345458b4aa6632768283, type: 2}
   target: {fileID: 0}
   attackObj: {fileID: 7161944922433878973, guid: 0d7144d5714686f4f9a1d0629b5b21c9, type: 3}
+  spriteIsReverse: 1
 --- !u!1 &4196720022934303999
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,7 +301,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -655773385
-  m_SortingLayer: 2
+  m_SortingLayer: 1
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 5fe5e18018b7ecd45802cd48060fe5bb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.5019608}

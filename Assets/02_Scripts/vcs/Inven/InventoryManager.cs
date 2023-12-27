@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class InventoryManager : MonoBehaviour
-{
+{   
     [Tooltip("인벤슬롯 프리팹")]
     [SerializeField] protected GameObject slotPrefab;
 

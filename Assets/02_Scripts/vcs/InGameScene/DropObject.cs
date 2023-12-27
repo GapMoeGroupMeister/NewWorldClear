@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,7 +14,7 @@ public abstract class DropObject : MonoBehaviour
     [SerializeField] protected bool isStatic;
     [SerializeField] protected float followSpeed = 1f;
     [Range(1f, 5f)] [SerializeField] protected float curveSensitive;
-    protected Transform followTarget;
+    [CanBeNull] protected Transform followTarget;
     protected Vector2 currentDirection;
 
     [SerializeField]
@@ -70,6 +71,10 @@ public abstract class DropObject : MonoBehaviour
 
     protected void Follow()
     {
+        if (followTarget == null)
+        {
+            return;
+        }
         Vector2 targetDir = (followTarget.position - transform.position).normalized;
         currentDirection = (currentDirection * curveSensitive + targetDir).normalized;
         transform.position += (Vector3)currentDirection * Time.deltaTime * followSpeed;
@@ -89,7 +94,7 @@ public abstract class DropObject : MonoBehaviour
      */
     protected void CheckCollisionPlayer()
     {
-        Collider2D[] detected = Physics2D.OverlapCircleAll(transform.position, 0.12f);
+        Collider2D[] detected = Physics2D.OverlapCircleAll(transform.position, 0.3f);
         foreach (Collider2D target in detected)
         {
             if (target.CompareTag("Player"))

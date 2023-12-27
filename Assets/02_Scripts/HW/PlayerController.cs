@@ -15,8 +15,8 @@ public class PlayerController : Damageable
 
     Transform _weaponTrm;
 
-    public float attackDelay;
-    public float attackDamage = 10;
+    public float levelUpDelay;
+    public float levelUpDamage = 10;
 
     public float dashCooltime;
     public float dashElapsedTime = 0f;
@@ -152,6 +152,7 @@ public class PlayerController : Damageable
     public override void Die()
     {
         Destroy(gameObject);
+        GameManager.Instance.GameForcedExit();
     }
     #region Stat Change functions
     public void ChangeHP(float amount)

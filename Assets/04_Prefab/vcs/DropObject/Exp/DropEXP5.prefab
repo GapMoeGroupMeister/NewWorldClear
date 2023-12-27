@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78f1c78f97ac46538c7cce1d4814ae44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectRange: 0.5
+  detectRange: 1
   isStatic: 0
   followSpeed: 4
   curveSensitive: 5
