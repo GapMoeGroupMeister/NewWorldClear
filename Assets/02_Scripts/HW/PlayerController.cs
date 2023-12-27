@@ -151,7 +151,8 @@ public class PlayerController : Damageable
 
     public override void Die()
     {
-        Destroy(gameObject);
+        _animator.SetTrigger("Dead");
+        AddDebuff(Debuffs.Stun, Mathf.Infinity);
         GameManager.Instance.GameForcedExit();
     }
     #region Stat Change functions
