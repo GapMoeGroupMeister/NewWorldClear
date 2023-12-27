@@ -14,7 +14,7 @@ public class RequestPanel : MonoBehaviour
     [Tooltip("요청할 재료가 뜨는 텍스트"), SerializeField]
     private TextMeshProUGUI ingredientText;
 
-    [Tooltip("요청할 재료들"), SerializeField] private List<RequestSO> ingredients;
+    [Tooltip("요청할 재료들"), SerializeField] private List<RequestSO> requests;
     [Tooltip("의뢰인"), SerializeField] private GameObject man;
 
     [Space, Header("Request Setup"), Tooltip("의뢰 수락 버튼"), SerializeField]
@@ -86,8 +86,8 @@ public class RequestPanel : MonoBehaviour
         {
             man.SetActive(true);
             RequestPositionSetUp();
-            randomIndex = Random.Range(0, ingredients.Count);
-            nowRequest = ingredients[randomIndex];
+            randomIndex = Random.Range(0, requests.Count);
+            nowRequest = requests[randomIndex];
             RequestTextSetUp();
             RequestSave();
             RequestTextSetup();
@@ -143,8 +143,8 @@ public class RequestPanel : MonoBehaviour
     {
         var request = nowRequest.requests;
         ingredientText.text = nowRequest.request + "\n<size=40><color=#000000>목표: " + request[0].item.itemName + " " +
-                              ingredients[randomIndex].requests[0].amount + "개, " +
-                              request[1].item.itemName + ingredients[randomIndex].requests[1].amount
+                              requests[randomIndex].requests[0].amount + "개, " +
+                              request[1].item.itemName + requests[randomIndex].requests[1].amount
                               + "개</color></size>";
         requestAmountText1.text = "X" + request[0].amount;
         requestAmountText2.text = "X" + request[1].amount;
@@ -182,12 +182,6 @@ public class RequestPanel : MonoBehaviour
 
     public void Pass()
     {
-        
-        
-        print(ItemManager.Instance.CountItem(nowRequest.requests[0].item));
-        print(ItemManager.Instance.CountItem(nowRequest.requests[1].item));
-        print(nowRequest.requests[0].item.itemName);
-        print(nowRequest.requests[1].item.itemName);
         if (ItemManager.Instance.CountItem(nowRequest.requests[0].item) >= nowRequest.requests[0].amount &&
             ItemManager.Instance.CountItem(nowRequest.requests[1].item) >= nowRequest.requests[1].amount)
         {
