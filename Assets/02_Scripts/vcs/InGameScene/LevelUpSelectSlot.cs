@@ -48,8 +48,14 @@ public class LevelUpSelectSlot : MonoBehaviour
         GameManager.Instance._LevelManager.OffLevelUpDetailUI();
     }
 
-    private void Refresh(LevelUpOption levelUpOption)
+    /**
+     * <summary>
+     * 옵션을 랜덤으로 선택한다
+     * </summary>
+     */
+    public void SetOption()
     {
+        LevelUpOption levelUpOption = (LevelUpOption)Random.Range(0,4);
         currentLevelUpOption = levelUpOption;
         EdgeLight.SetActive(false);
         BtnLevel.text = LevelToString();

@@ -7,11 +7,11 @@ using UnityEngine.UI;
 
 public enum LevelUpOption
 {
-    Dam,
-    AtkSpd,
-    Spd,
-    MaxHp,
-    Heal
+    Dam = 0,
+    AtkSpd = 1,
+    Spd = 2,
+    MaxHp = 3,
+    Heal = 4
 }
 
 public class LevelManager : MonoBehaviour
@@ -90,12 +90,38 @@ public class LevelManager : MonoBehaviour
         exp -= ExpMax;
         level++;
         RefreshExp();
+        OnLevelUpDetailUI();
+        lvlUpStack++;
         IsLevelUp();
+        
+    }
+
+    public void OnLevelUpDetailUI()
+    {
+        UI_LevelUp.MoveOn();
+        NewLevelUpSlot();
     }
 
     public void OffLevelUpDetailUI()
     {
-        UI_LevelUp.MoveOff();
+        lvlUpStack--;
+        if (lvlUpStack <= 0)
+        {
+            UI_LevelUp.MoveOff();
+        }
+        else
+        {
+            OnLevelUpDetailUI();
+        }
+    }
+
+    [ContextMenu("DebugNewLevel")]
+    public void NewLevelUpSlot()
+    {
+        foreach (LevelUpSelectSlot slot in slots)
+        {
+            slot.SetOption();
+        }
     }
     
     
