@@ -84,28 +84,8 @@ namespace Tkfkadlsi
             }
         }
 
-        private void Skills_Condition()
-        {
-            if (Skill_Three_Condition())
-            {
-                skill_Three.StartSkill_Three();
-                return;
-            }
-            if (Skill_One_Condition())
-            {
-                skill_One.StartSkill_One();
-                return;
-            }
-            if (Skill_Two_Condition())
-            {
-                skill_Two.StartSkill_Two();
-                return;
-            }
-        }
-
         private bool Skill_One_Condition()
         {
-
             float rand = Random.Range(0.00f, 1.00f);
 
             if (rand <= 0.33f)
@@ -120,7 +100,6 @@ namespace Tkfkadlsi
 
         private bool Skill_Two_Condition()
         {
-
             float rand = Random.Range(0.00f, 1.00f);
 
             if (rand <= 0.25f)

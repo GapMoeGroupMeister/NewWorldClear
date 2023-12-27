@@ -15,7 +15,7 @@ MonoBehaviour:
   request: "\uBC25 \uC918"
   requestID: 1
   requests:
-  - item: {fileID: 11400000, guid: 71dfa2a1af1e46b42be0c1f12877d34e, type: 2}
+  - item: {fileID: 11400000, guid: 3d5a384b11c2ce040aeff8fb5ad56757, type: 2}
     amount: 1
     durability: 0
   - item: {fileID: 11400000, guid: 71dfa2a1af1e46b42be0c1f12877d34e, type: 2}
