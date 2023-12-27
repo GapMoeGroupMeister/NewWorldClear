@@ -1,7 +1,5 @@
 {
     "day": 0,
     "userName": "",
-    "isFirstPlay": false,
-    "adventureCount": 0,
-    "nowRequestId": 1
+    "nowRequestId": 2
 }
