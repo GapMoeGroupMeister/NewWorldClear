@@ -2461,7 +2461,7 @@ GameObject:
   - component: {fileID: 1388554599}
   - component: {fileID: 1388554602}
   m_Layer: 5
-  m_Name: Btn_Eat
+  m_Name: Btn_Use
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
