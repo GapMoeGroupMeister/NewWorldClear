@@ -38,6 +38,7 @@ public class GameManager : MonoSingleton<GameManager>
         GameOverEvent?.Invoke();
     }
 
+    [ContextMenu("DebugGameClear")]
     public void GameClearExit()
     {
         StopAll();
