@@ -500,7 +500,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 232773521
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: b3e42094a42571f4992ca69d9b3a70ea, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -20046,7 +20046,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 232773521
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: -5
   m_Sprite: {fileID: 21300000, guid: 5fe5e18018b7ecd45802cd48060fe5bb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.6431373}
@@ -20781,7 +20781,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 232773521
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 620522033, guid: 3b907eeb1d3c47f4791e854569a1d1e6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -20810,6 +20810,7 @@ Transform:
   - {fileID: 2049804836}
   - {fileID: 985138224}
   - {fileID: 1077444673}
+  - {fileID: 1434574653}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1160075112
@@ -21512,8 +21513,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1434574651}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.91, y: 3.57, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -21541,7 +21542,7 @@ Transform:
   - {fileID: 21947097}
   - {fileID: 919716516}
   - {fileID: 996200722}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1123978955}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1437179837
 GameObject:
@@ -43882,6 +43883,7 @@ SceneRoots:
   - {fileID: 1267420467}
   - {fileID: 908625787}
   - {fileID: 86353720}
+  - {fileID: 1048334185}
   - {fileID: 405757178}
   - {fileID: 494936132}
   - {fileID: 1489405188}
@@ -43896,6 +43898,4 @@ SceneRoots:
   - {fileID: 135074956}
   - {fileID: 679615037}
   - {fileID: 908847304}
-  - {fileID: 1048334185}
   - {fileID: 1840479392}
-  - {fileID: 1434574653}
