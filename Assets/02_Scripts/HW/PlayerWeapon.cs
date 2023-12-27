@@ -137,8 +137,13 @@ public class PlayerWeapon : MonoBehaviour
             {
                 if(enemies.Length >= 3)
                 {
-                    CameraManager.Instance.Shake(2, 1, 0.15f);
+                    CameraManager.Instance.Shake(4, 1, 0.15f);
                     TimeController.Instance.SetTimeFreeze(0.2f, 0, 0.1f);
+                }
+                else if(enemies.Length >= 6)
+                {
+                    CameraManager.Instance.Shake(4, 1, 0.2f);
+                    TimeController.Instance.SetTimeFreeze(0.1f, 0, 0.15f);
                 }
                 foreach (Collider2D col in enemies)
                 {
