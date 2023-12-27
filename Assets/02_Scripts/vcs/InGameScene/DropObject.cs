@@ -89,7 +89,7 @@ public abstract class DropObject : MonoBehaviour
      */
     protected void CheckCollisionPlayer()
     {
-        Collider2D[] detected = Physics2D.OverlapCircleAll(transform.position, 0.12f);
+        Collider2D[] detected = Physics2D.OverlapCircleAll(transform.position, 0.3f);
         foreach (Collider2D target in detected)
         {
             if (target.CompareTag("Player"))
