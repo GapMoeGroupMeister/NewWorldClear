@@ -53,6 +53,7 @@ namespace Tkfkadlsi
                 dustsCenter.z += 120f;
                 dustsCenter.transform.rotation = Quaternion.Euler(new Vector3(0, 0, dustsCenter.z));
                 dust.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                dustsCenter.transform.position = dust.target.transform.position;
             }
 
             FinishSkill_One();

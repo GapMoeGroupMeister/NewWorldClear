@@ -100,13 +100,16 @@ namespace Tkfkadlsi
         {
             if (currentState == DustState.NotDetect) return;
 
-            if(target.transform.position.y < transform.position.y)
+            if(currentState == DustState.Idle)
             {
-                transform.localScale = new Vector3(-1, 1, 1);
-            }
-            else
-            {
-                transform.localScale = new Vector3(1, 1, 1);
+                if(target.transform.position.y < transform.position.y)
+                {
+                    transform.localScale = new Vector3(-1.5f, 1.5f, 1.5f);
+                }
+                else
+                {
+                    transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+                }
             }
 
             if (Skill_Three_Condition())
@@ -149,7 +152,7 @@ namespace Tkfkadlsi
 
         private bool Skill_Two_Condition()
         {
-            if(skillOneCount >= 2)
+            if(skillOneCount >= 3)
             {
                 return true;
             }
