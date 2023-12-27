@@ -24,7 +24,7 @@ namespace Tkfkadlsi
         {
             if (collision.CompareTag("Player"))
             {
-                dust.target.HitDamage(dust.damage);
+                dust.target.HitDamage(dust.attackDamage);
             }
         }
     }

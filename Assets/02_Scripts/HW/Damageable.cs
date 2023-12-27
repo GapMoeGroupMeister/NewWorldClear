@@ -34,7 +34,7 @@ public abstract class Damageable : MonoBehaviour
     public float _currentHp = 100f;
     public float _maxHp = 100f;
     public float _moveSpeed;
-    public float damage;
+    public float attackDamage;
     public float painfulAmount = 0f;
     public bool isStun = false;
     public bool isSubdue = false;
@@ -269,20 +269,20 @@ public abstract class Damageable : MonoBehaviour
 
     IEnumerator IEPowerUp(float[] values)
     {
-        float prevdamage = damage;
+        float prevdamage = attackDamage;
         float cool = values[0];
         while (cool > 0)
         {
             if ((buffs &= Buffs.PowerUp) != Buffs.PowerUp && cool != Mathf.Infinity)
                 break;
             float addDamage = prevdamage + (prevdamage * 0.5f);
-            if (addDamage != damage) prevdamage = damage;
-            damage = addDamage;
+            if (addDamage != attackDamage) prevdamage = attackDamage;
+            attackDamage = addDamage;
             cool -= Time.deltaTime;
             yield return null;
         }
         buffs -= Buffs.PowerUp;
-        damage = prevdamage;
+        attackDamage = prevdamage;
     }
 
     IEnumerator IEThinSheld(float[] values)
