@@ -28,6 +28,7 @@ namespace Tkfkadlsi
 
         public void StartSkill_One()
         {
+            dust.AttackCount = 0;
             dust.currentState = Dust.DustState.Skill_1;
             StartCoroutine(SkillOne());
         }
@@ -56,6 +57,7 @@ namespace Tkfkadlsi
         {
             dust.transform.localPosition = new Vector3(0, 4);
             dust.currentState = Dust.DustState.Idle;
+            dust.SkillOneCount++;
         }
 
         private IEnumerator MoveLerp(Transform trm, Vector3 dir, float moveTime)
