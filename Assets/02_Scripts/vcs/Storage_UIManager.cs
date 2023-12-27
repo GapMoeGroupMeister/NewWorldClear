@@ -54,8 +54,8 @@ public class Storage_UIManager : MonoSingleton<Storage_UIManager>
             durabilityGaugeObject.SetActive(false);
         }
         
-        eatButton.SetActive(slot.item.Type == ItemType.Grocery);
-        foodDescription.SetActive(slot.item.Type == ItemType.Grocery);
+        eatButton.SetActive(slot.item.Type is ItemType.Grocery or ItemType.Consumables);
+        foodDescription.SetActive(slot.item.Type is ItemType.Grocery or ItemType.Consumables);
     }
 
     private string ItemTypeConvert(ItemType type)

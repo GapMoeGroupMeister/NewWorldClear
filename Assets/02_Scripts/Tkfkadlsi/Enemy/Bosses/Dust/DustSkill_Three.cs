@@ -32,7 +32,6 @@ namespace Tkfkadlsi
         private IEnumerator SkillThree()
         {
             Vector3 localPos = new Vector3(0, 4);
-            Quaternion localRot = Quaternion.Euler(0, 0, 0);
 
             dust.animator.SetTrigger("Skill3Down");
             yield return new WaitForSeconds(0.875f);
@@ -46,7 +45,7 @@ namespace Tkfkadlsi
                 transform.position = dust.target.transform.position + Vector3.right;
             }
 
-            transform.rotation = Quaternion.Euler(0, 0, 0);
+            dust.transform.rotation = Quaternion.Euler(0, 0, 0);
 
             dust.animator.SetTrigger("Skill3Up");
             yield return new WaitForSeconds(1.0f);
@@ -57,7 +56,7 @@ namespace Tkfkadlsi
             yield return new WaitForSeconds(0.875f);
 
             transform.localPosition = localPos;
-            transform.localRotation = localRot;
+            dust.transform.rotation = Quaternion.Euler(0, 0, 0);
             dustsCenter.transform.position = dust.target.transform.position;
             dust.animator.SetTrigger("Skill3Up");
             yield return new WaitForSeconds(1.0f);

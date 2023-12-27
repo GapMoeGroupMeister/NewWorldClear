@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: FoodSO_CanSoup
   m_EditorClassIdentifier: 
   foodID: 0
-  HP: 10
+  HP: 0
   hunger: 20
   thirsty: 0

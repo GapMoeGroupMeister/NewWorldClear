@@ -14,6 +14,11 @@ public class Description : MonoBehaviour
      * </summary>
      */
     public bool IsOn { get; private set; } = false;
+    /** <summary>
+     * money °¡Á®¿È
+     * </summary>
+     */
+    [SerializeField] private Item money;
 
     /**
      * <summary>
@@ -23,11 +28,16 @@ public class Description : MonoBehaviour
     public void Buy()
     {
         if (Weapon2.GetWeaponDescription().isSoldOut) return;
+        if (ItemManager.Instance.FindItem(money) == null) return;
+        if (ItemManager.Instance.FindItem(money).amount < Weapon2.GetWeaponDescription().shopSO.price) return;
 
         Weapon2.SoldOut.SetActive(true);
         Weapon2.GetWeaponDescription().isSoldOut = true;
+        
+        ItemManager.Instance.FindItem(money).amount -= Weapon2.GetWeaponDescription().shopSO.price;
         ItemManager.Instance.AddItem(Weapon2.GetWeaponDescription().shopSO.item, 1);
 
+        Weapon2.MoneyTextSetup();
         Cancel();
     }
 
