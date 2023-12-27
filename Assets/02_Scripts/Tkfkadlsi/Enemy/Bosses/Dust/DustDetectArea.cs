@@ -27,6 +27,7 @@ namespace Tkfkadlsi
         {
             if (collision.CompareTag("Player"))
             {
+                dust.animator.SetTrigger("Detect");
                 dust.skill_Three.StartSkill_Three();
                 dust.target = collision.gameObject.GetComponent<PlayerController>();
                 Destroy(gameObject);
