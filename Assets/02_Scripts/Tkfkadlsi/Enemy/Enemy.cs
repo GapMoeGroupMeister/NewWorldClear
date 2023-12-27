@@ -44,6 +44,12 @@ public abstract class Enemy : Damageable
 
     public void SetState()
     {
+        if(target == null)
+        {
+            currentState = EnemyState.Idle;
+            return;
+        }
+
         if (isAttacking) return;
         if (currentState == EnemyState.Hit) return;
 
