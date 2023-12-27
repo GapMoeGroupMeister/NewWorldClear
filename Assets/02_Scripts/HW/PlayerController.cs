@@ -152,6 +152,7 @@ public class PlayerController : Damageable
     public override void Die()
     {
         Destroy(gameObject);
+        GameManager.Instance.GameForcedExit();
     }
     #region Stat Change functions
     public void ChangeHP(float amount)
