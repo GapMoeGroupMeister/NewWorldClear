@@ -89,7 +89,7 @@ namespace Tkfkadlsi
         {
             _maxHp = dustData.DefaultHP;
             _currentHp = dustData.DefaultHP;
-            damage = dustData.DefaultATK;
+            attackDamage = dustData.DefaultATK;
             _moveSpeed = dustData.DefaultSPD;
             atkDelay = dustData.AttackCycle;
             range = dustData.DetectRange;

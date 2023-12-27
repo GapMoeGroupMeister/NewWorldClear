@@ -26,7 +26,7 @@ namespace Tkfkadlsi
             if (collision.CompareTag("Player"))
             {
                 PlayerController playerController = enemy.target.GetComponent<PlayerController>();
-                playerController.HitDamage(enemy.damage);
+                playerController.HitDamage(enemy.attackDamage);
             }
         }
     }
