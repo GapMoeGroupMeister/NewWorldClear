@@ -12,7 +12,7 @@ public class BattleDroneStatus : Damageable
     {
         _maxHp = bossStatusSO.bossHp;
         _moveSpeed = bossStatusSO.bossSpeed;
-        damage = bossStatusSO.bossDamage;
+        attackDamage = bossStatusSO.bossDamage;
     }
 
     public override void Die()

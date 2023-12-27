@@ -33,7 +33,7 @@ public abstract class Enemy : Damageable
     {
         _maxHp = data.DefaultHP;
         _currentHp = data.DefaultHP;
-        damage = data.DefaultATK;
+        attackDamage = data.DefaultATK;
         _moveSpeed = data.DefaultSPD;
     }
 
