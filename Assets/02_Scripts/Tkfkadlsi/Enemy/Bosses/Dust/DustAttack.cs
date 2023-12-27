@@ -31,21 +31,25 @@ namespace Tkfkadlsi
             StartCoroutine(CenterMoveLerp(0.75f));
             yield return StartCoroutine(AttackMoveLerpEnter(dust.transform, 0.1f));
 
-            Attack();
+            yield return StartCoroutine(Attack());
+
             yield return StartCoroutine(AttackMoveLerpFinish(dust.transform, 0.75f));
 
             FinishAttack();
         }
 
-        private void Attack()
+        private IEnumerator Attack()
         {
-
+            dust.animator.SetTrigger("Attack");
+            Instantiate(dust.dustAttackObject, transform);
+            yield return new WaitForSeconds(0.875f);
         }
 
         private void FinishAttack()
         {
             //dustsCenter.z = Random.Range(-180.0f, 180.0f);
             //dustsCenter.transform.rotation = Quaternion.Euler(new Vector3(0, 0, dust.dustsCenter.z));
+            dust.animator.SetTrigger("Move");
             dust.currentState = Dust.DustState.Idle;
             dust.AttackCount++;
         }
@@ -54,7 +58,7 @@ namespace Tkfkadlsi
         {
             float t = 0;
             Vector3 startpos = new Vector3(0, 4);
-            Vector3 endpos = new Vector3(0, -1);
+            Vector3 endpos = new Vector3(0, 1);
 
             while (t < moveTime)
             {
@@ -70,7 +74,7 @@ namespace Tkfkadlsi
         private IEnumerator AttackMoveLerpFinish(Transform trm, float moveTime)
         {
             float t = 0;
-            Vector3 startpos = new Vector3(0, -1);
+            Vector3 startpos = new Vector3(0, 1);
             Vector3 endpos = new Vector3(0, 4);
 
             while (t < moveTime)

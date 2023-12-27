@@ -8,6 +8,7 @@ namespace Tkfkadlsi
     public class DustSkill_One : MonoBehaviour
     {
         [SerializeField] private float skill_One_Damage;
+        [SerializeField] private AnimationCurve skill_One_Curve;
         private TrailRenderer trailRenderer;
         private Dust dust;
         private DustsCenter dustsCenter;
@@ -35,19 +36,23 @@ namespace Tkfkadlsi
 
         private IEnumerator SkillOne()
         {
+            yield return new WaitForSeconds(1.0f);
+            dust.animator.SetTrigger("Skill1");
+            yield return new WaitForSeconds(0.375f);
             Vector3 dir = new Vector3();
             for (int i = 0; i < 3; i++)
             {
                 dir = dust.target.transform.position - dust.transform.position;
                 dir = dir.normalized;
-                yield return new WaitForSeconds(0.25f);
+                yield return new WaitForSeconds(0.125f);
                 trailRenderer.enabled = true;
                 circleCollider.isTrigger = true;
-                yield return StartCoroutine(MoveLerp(dust.transform, dir * 8, 0.125f));
+                yield return StartCoroutine(MoveLerp(dust.transform, dir * 8, 0.5f));
                 trailRenderer.enabled = false;
                 circleCollider.isTrigger = false;
                 dustsCenter.z += 120f;
                 dustsCenter.transform.rotation = Quaternion.Euler(new Vector3(0, 0, dustsCenter.z));
+                dust.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
             }
 
             FinishSkill_One();
@@ -56,6 +61,7 @@ namespace Tkfkadlsi
         private void FinishSkill_One()
         {
             dust.transform.localPosition = new Vector3(0, 4);
+            dust.animator.SetTrigger("Move");
             dust.currentState = Dust.DustState.Idle;
             dust.SkillOneCount++;
         }
@@ -68,7 +74,7 @@ namespace Tkfkadlsi
 
             while (t < moveTime)
             {
-                trm.position = Vector3.Lerp(startpos, endpos, t / moveTime);
+                trm.position = Vector3.Lerp(startpos, endpos, skill_One_Curve.Evaluate(t / moveTime));
 
                 t += Time.deltaTime;
                 yield return null;

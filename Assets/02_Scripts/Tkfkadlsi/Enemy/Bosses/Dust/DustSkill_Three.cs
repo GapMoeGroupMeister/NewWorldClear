@@ -33,7 +33,9 @@ namespace Tkfkadlsi
         {
             Vector3 localPos = new Vector3(0, 4);
             Quaternion localRot = Quaternion.Euler(0, 0, 0);
-            yield return StartCoroutine(ColorLerp(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), 1.0f));
+
+            dust.animator.SetTrigger("Skill3Down");
+            yield return new WaitForSeconds(0.875f);
 
             if (dust.target.transform.localScale.x == 1)
             {
@@ -45,42 +47,36 @@ namespace Tkfkadlsi
             }
 
             transform.rotation = Quaternion.Euler(0, 0, 0);
-            yield return StartCoroutine(ColorLerp(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), 0.25f));
-            Attack();
-            yield return StartCoroutine(ColorLerp(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), 1.0f));
+
+            dust.animator.SetTrigger("Skill3Up");
+            yield return new WaitForSeconds(1.0f);
+
+            yield return StartCoroutine(Attack());
+
+            dust.animator.SetTrigger("Skill3Down");
+            yield return new WaitForSeconds(0.875f);
+
             transform.localPosition = localPos;
             transform.localRotation = localRot;
             dustsCenter.transform.position = dust.target.transform.position;
-            yield return StartCoroutine(ColorLerp(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), 0.25f));
+            dust.animator.SetTrigger("Skill3Up");
+            yield return new WaitForSeconds(1.0f);
             Finish_SkillThree();
         }
 
-        private void Attack()
+        private IEnumerator Attack()
         {
-
+            dust.animator.SetTrigger("Attack");
+            Instantiate(dust.dustAttackObject, transform);
+            yield return new WaitForSeconds(0.875f);
         }
 
         private void Finish_SkillThree()
         {
             dust.transform.localPosition = new Vector3(0, 4);
             dust.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
-
+            dust.animator.SetTrigger("Move");
             dust.currentState = Dust.DustState.Idle;
-        }
-
-        private IEnumerator ColorLerp(Color StartColor, Color EndColor, float lerpTime)
-        {
-            float t = 0;
-
-            while (t < lerpTime)
-            {
-                dustSpriteRenderer.color = Color.Lerp(StartColor, EndColor, t / lerpTime);
-
-                t += Time.deltaTime;
-                yield return null;
-            }
-
-            dustSpriteRenderer.color = EndColor;
         }
     }
 }
