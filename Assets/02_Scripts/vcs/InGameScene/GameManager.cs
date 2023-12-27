@@ -12,7 +12,7 @@ public class GameManager : MonoSingleton<GameManager>
     [CanBeNull] public PlayerController _PlayerController { get; private set; }
     public SoundManager _SoundManager { get; private set; }
     public LevelManager _LevelManager { get; private set; }
-
+    public InGameUIManager _UIManager { get; private set; }
 
     public UnityEvent SceneStartEvent;
     [Space(20)]
@@ -23,6 +23,7 @@ public class GameManager : MonoSingleton<GameManager>
     private void Awake()
     {
         _SoundManager = FindObjectOfType<SoundManager>();
+        _UIManager = FindObjectOfType<InGameUIManager>();
         _PlayerController = FindObjectOfType<PlayerController>();
         _LevelManager = FindObjectOfType<LevelManager>();
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class LevelUpSelectSlot : MonoBehaviour
 {
@@ -11,6 +12,13 @@ public class LevelUpSelectSlot : MonoBehaviour
     [SerializeField] private TextMeshProUGUI BtnOption;
     [SerializeField] private GameObject EdgeLight;
 
+    private void Awake()
+    {
+        BtnLevel = transform.Find("Level").GetComponent<TextMeshProUGUI>();
+        BtnOption = transform.Find("OptionName").GetComponent<TextMeshProUGUI>();
+        EdgeLight = transform.Find("MaskColor").gameObject;
+
+    }
 
 
     public void Select()
@@ -37,34 +45,22 @@ public class LevelUpSelectSlot : MonoBehaviour
                 break;
         }
 
+        GameManager.Instance._LevelManager.OffLevelUpDetailUI();
     }
 
-    private void RefreshTxt(LevelUpOption levelUpOption)
+    private void Refresh(LevelUpOption levelUpOption)
     {
         currentLevelUpOption = levelUpOption;
-        BtnLevel.text = levelUpOption.ToString();
-        BtnOption.text = OptionToString(levelUpOption);
-        switch (currentLevelUpOption)
-        {
-            case LevelUpOption.Dam:
-                
-                break;
-            case LevelUpOption.Heal:
-                break;
-            case LevelUpOption.Spd:
-                break;
-            case LevelUpOption.AtkSpd:
-                break;
-            case LevelUpOption.MaxHp:
-                break;
-        }
+        EdgeLight.SetActive(false);
+        BtnLevel.text = LevelToString();
+        BtnOption.text = OptionToString();
         
     }
 
-    private string OptionToString(LevelUpOption levelUpOption)
+    private string OptionToString()
     {
         string result = "";
-        switch (levelUpOption)
+        switch (currentLevelUpOption)
         {
             case LevelUpOption.Dam:
                 result = "+ 공격력";
@@ -83,6 +79,41 @@ public class LevelUpSelectSlot : MonoBehaviour
                 break;
         }
 
+        return result;
+    }
+    
+    private string LevelToString()
+    {
+        int level = 0;
+        
+        switch (currentLevelUpOption)
+        {
+            case LevelUpOption.Dam:
+                level = GameManager.Instance._LevelManager.StatusEnforceLevel_Damage;
+                break;
+            case LevelUpOption.Heal:
+                level = -1;
+                break;
+            case LevelUpOption.Spd:
+                level = GameManager.Instance._LevelManager.StatusEnforceLevel_Speed;
+                break;
+            case LevelUpOption.AtkSpd:
+                level = GameManager.Instance._LevelManager.StatusEnforceLevel_AttackSpeed;
+                break;
+            case LevelUpOption.MaxHp:
+                level = GameManager.Instance._LevelManager.StatusEnforceLevel_MaxHp;
+                break;
+        }
+
+        string result = level.ToString();
+        if (level >= 20)
+        {
+            result += "<color=\"orange\">Max</color>";
+            EdgeLight.SetActive(true);
+        }else if (level == -1)
+        {
+            result = "<size=54>즉시사용</size>";
+        }
         return result;
     }
     

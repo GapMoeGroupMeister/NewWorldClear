@@ -30,6 +30,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private UIInfo UI_LevelUp;
     [SerializeField] private TextMeshProUGUI LevelBeforeAfter;
 
+    [SerializeField]
     private LevelUpSelectSlot[] slots;
 
     public int StatusEnforceLevel_Damage = 0;
@@ -90,6 +91,11 @@ public class LevelManager : MonoBehaviour
         level++;
         RefreshExp();
         IsLevelUp();
+    }
+
+    public void OffLevelUpDetailUI()
+    {
+        UI_LevelUp.MoveOff();
     }
     
     
