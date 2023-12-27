@@ -46,8 +46,8 @@ namespace Tkfkadlsi
         {
             //dustsCenter.z = Random.Range(-180.0f, 180.0f);
             //dustsCenter.transform.rotation = Quaternion.Euler(new Vector3(0, 0, dust.dustsCenter.z));
-
             dust.currentState = Dust.DustState.Idle;
+            dust.AttackCount++;
         }
 
         private IEnumerator AttackMoveLerpEnter(Transform trm, float moveTime)

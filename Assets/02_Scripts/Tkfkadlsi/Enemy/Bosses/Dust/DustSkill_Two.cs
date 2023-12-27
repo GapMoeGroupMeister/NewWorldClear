@@ -25,6 +25,7 @@ namespace Tkfkadlsi
 
         public void StartSkill_Two()
         {
+            dust.SkillOneCount = 0;
             dust.currentState = Dust.DustState.Skill_2;
             StartCoroutine(SkillTwo());
         }
