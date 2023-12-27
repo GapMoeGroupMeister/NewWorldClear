@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1063728973927166688}
-  - component: {fileID: 426881160724182207}
   - component: {fileID: -9025336726716758989}
+  - component: {fileID: 7398648916655088599}
   m_Layer: 0
   m_Name: DustAttack
   m_TagString: Untagged
@@ -33,18 +33,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &426881160724182207
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8208032282108335386}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85a63856133fe3442b12f91bbe94634d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!60 &-9025336726716758989
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -89,8 +77,20 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0.1}
-      - {x: 1, y: 0.5}
-      - {x: 1, y: -0.5}
-      - {x: 0, y: -0.1}
+    - - {x: 0, y: 0.2}
+      - {x: 0.8, y: 0.3}
+      - {x: 0.8, y: -0.3}
+      - {x: 0, y: -0.2}
   m_UseDelaunayMesh: 0
+--- !u!114 &7398648916655088599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8208032282108335386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82435bb0daaa571469cd284907cf3b85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

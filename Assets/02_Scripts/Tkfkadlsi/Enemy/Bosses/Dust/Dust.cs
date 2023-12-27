@@ -18,6 +18,8 @@ namespace Tkfkadlsi
         public DustSkill_Two skill_Two;
         public DustSkill_Three skill_Three;
 
+        public GameObject dustAttackObject;
+
         public float def;
         public float atkDelay;
         public float range;
@@ -76,8 +78,10 @@ namespace Tkfkadlsi
 
             currentState = DustState.NotDetect;
             dustsCenter = this.GetComponentInParent<DustsCenter>();
+            animator = this.GetComponent<Animator>();
             dustAttack = this.GetComponent<DustAttack>();
             skill_One = this.GetComponent<DustSkill_One>();
+            skill_Two = this.GetComponent<DustSkill_Two>();
             skill_Three = this.GetComponent<DustSkill_Three>();
         }
 
@@ -85,7 +89,7 @@ namespace Tkfkadlsi
         {
             _maxHp = dustData.DefaultHP;
             _currentHp = dustData.DefaultHP;
-            damage = dustData.DefaultATK;
+            attackDamage = dustData.DefaultATK;
             _moveSpeed = dustData.DefaultSPD;
             atkDelay = dustData.AttackCycle;
             range = dustData.DetectRange;
@@ -95,6 +99,20 @@ namespace Tkfkadlsi
         private void Update()
         {
             if (currentState == DustState.NotDetect) return;
+
+            if(target.transform.position.y < transform.position.y)
+            {
+                transform.localScale = new Vector3(-1, 1, 1);
+            }
+            else
+            {
+                transform.localScale = new Vector3(1, 1, 1);
+            }
+
+            if (Skill_Three_Condition())
+            {
+                skill_Three.StartSkill_Three();
+            }
 
             if (Attack_Condition() && currentState == DustState.Idle)
             {
@@ -132,6 +150,20 @@ namespace Tkfkadlsi
         private bool Skill_Two_Condition()
         {
             if(skillOneCount >= 2)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private bool Skill_Three_Condition()
+        {
+            float currentDistance = Vector3.Distance(transform.position, target.transform.position);
+
+            if (currentDistance > 10f && currentState == DustState.Idle)
             {
                 return true;
             }

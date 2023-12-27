@@ -20,6 +20,7 @@ public class PlayerWeapon : MonoBehaviour
 
     Transform _weaponPivot;
 
+    WeaponSO _currentWeaponSO;
     LineRenderer _lineRenderer;
     PlayerController _playerController;
 
@@ -43,21 +44,29 @@ public class PlayerWeapon : MonoBehaviour
 
     private void Update()
     {
+        LevelUp();
         if (Input.GetKeyDown(KeyCode.F) && testWeapon != null && !_playerController.isStun)
         {
             WeaponChange(testWeapon);
         }
+    }
 
+    public void LevelUp()
+    {
+        _playerController.attackDamage = _currentWeaponSO.baseDamage + _playerController.levelUpDamage;
+        _playerController.attackDamage += _currentWeaponSO.baseDamage / 100 * _currentWeaponSO.damage;
+        _attackDelay = _currentWeaponSO.attackDelay * _playerController.levelUpDelay;
     }
 
     public void WeaponChange(WeaponSO weaponSO)
     {
         if (_currentWeapon != null) Destroy(_currentWeapon);
+        _currentWeaponSO = weaponSO;
         _currentWeapon = Instantiate(weaponSO.weaponPrefab, transform);
         _weaponPivot = _currentWeapon.transform.GetChild(0);
-        _playerController.damage = weaponSO.baseDamage;
-        _playerController.damage += weaponSO.baseDamage / 100 * weaponSO.damage;
-        _attackDelay = weaponSO.attackDelay;
+        _playerController.attackDamage = weaponSO.baseDamage + _playerController.levelUpDamage;
+        _playerController.attackDamage += weaponSO.baseDamage / 100 * weaponSO.damage;
+        _attackDelay = weaponSO.attackDelay * _playerController.levelUpDelay;
         _attackRange = weaponSO.attackRange;
         _attackMotion = weaponSO.attackMotion;
         _attackEffect = weaponSO.attackEffect;
@@ -147,7 +156,7 @@ public class PlayerWeapon : MonoBehaviour
                 }
                 foreach (Collider2D col in enemies)
                 {
-                    col.GetComponent<Enemy>().HitDamage(_playerController.damage);
+                    col.GetComponent<Enemy>().HitDamage(_playerController.attackDamage);
                     if (_weaponEvent != null)
                     {
                         _weaponEvent.OnHit(col.transform);
