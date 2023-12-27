@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,6 +23,11 @@ public abstract class Enemy : Damageable
     protected bool canSeePlayer = false;
     protected bool canAttackPlayer = false;
     protected bool isAttacking = false;
+
+    private void OnEnable()
+    {
+        SetStat();
+    }
 
     public void SetStat()
     {
@@ -140,7 +146,7 @@ public abstract class Enemy : Damageable
 
     public override void Die()
     {
-        LootManager.Instance.GenerateReward(data.Reward, transform.position, 4);
+        LootManager.Instance.GenerateReward(data.Reward, transform.position, 2);
         PoolManager.Release(gameObject);
     }
 }
