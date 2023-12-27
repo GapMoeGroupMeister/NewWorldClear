@@ -6,11 +6,27 @@ namespace Tkfkadlsi
 {
     public class Enemy1 : Enemy
     {
+        [SerializeField] private bool spriteIsReverse;
+
+        private float left;
+        private float right;
+
         private void Awake()
         {
             FindTarget();
             SetStat();
             animator = GetComponent<Animator>();
+
+            if (spriteIsReverse)
+            {
+                left = 1;
+                right = -1;
+            }
+            else
+            {
+                left = -1;
+                right = 1;
+            }
         }
 
         private void Update()
@@ -30,6 +46,15 @@ namespace Tkfkadlsi
         {
             Vector3 direction = target.transform.position - transform.position;
             transform.position += direction.normalized * _moveSpeed * Time.deltaTime;
+
+            if(direction.x < 0)
+            {
+                transform.localScale = new Vector3(left, 0);
+            }
+            else
+            {
+                transform.localScale = new Vector3(right, 0);
+            }
 
             if (!animator) return;
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("Enemy1Move")) return;
