@@ -111,5 +111,21 @@ namespace Tkfkadlsi
                 return false;
             }
         }
+
+        private bool Skill_Three_Condition()
+        {
+            if ((target.transform.position - dustsCenter.transform.position).magnitude > 6f) return true;
+
+            float rand = Random.Range(0.00f, 1.00f);
+
+            if (rand < 0.1667f)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

@@ -7,7 +7,7 @@ public enum WeaponType
 {
     Gun,
     Bow,
-    Swing
+    Else
 }
 public enum AttackMotion
 {
@@ -22,9 +22,10 @@ public class WeaponSO : ScriptableObject
     public int id;
     public GameObject weaponPrefab;
     public GameObject attackEffect;
+    public float baseDamage;
     public float damage;
     public float attackDelay;
-    public WeaponType weaponType = WeaponType.Swing;
+    public WeaponType weaponType = WeaponType.Else;
     public AttackMotion attackMotion;
     public Vector2 attackRange; //원거리의 경우엔 Vector2 값중 x값만 받아와 사용함.
 }

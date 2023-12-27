@@ -125,7 +125,34 @@ public class PlayerController : Damageable
         _currentHp = amount * (1f -  painfulAmount / 100f);
     }
 
+    public override void HitDamage(float damage)
+    {
+        base.HitDamage(damage);
+        if (_currentHp <= 0) Die();
+    }
 
+    public override void PoisonDamage(float damage)
+    {
+        base.HitDamage(damage);
+        if (_currentHp <= 0) Die();
+    }
+
+    public override void BleedDamage(float damage)
+    {
+        base.HitDamage(damage);  
+        if (_currentHp <= 0) Die();
+    }
+
+    public override void CriticalDamage(float damage, float percent)
+    {
+        base.CriticalDamage(damage, percent);
+        if (_currentHp <= 0) Die();
+    }
+
+    public override void Die()
+    {
+        Destroy(gameObject);
+    }
     #region Stat Change functions
     public void ChangeHP(float amount)
     {

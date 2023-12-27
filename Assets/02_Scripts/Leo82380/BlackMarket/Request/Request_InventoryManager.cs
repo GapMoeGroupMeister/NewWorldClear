@@ -49,4 +49,9 @@ public class Request_InventoryManager : InventoryManager
         slot.GetComponent<Request_Slot>().SetSlot(itemSlot);
 
     }
+
+    public void Refresh_Inven()
+    {
+        Refresh();
+    }
 }

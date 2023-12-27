@@ -15,15 +15,14 @@ MonoBehaviour:
   enemyName: Enemy1
   defaultHP: 10
   defaultATK: 5
-  defaultDEF: 1
   defaultSPD: 3
   attackCycle: 0.5
   detectRange: 15
   attackRange: 1
   reward:
-    expAmount: 0
+    expAmount: 2
     DropItems:
     - itemName: 
-      item: {fileID: 0}
-      amount: 0
+      item: {fileID: 11400000, guid: 43db0c6ca032b9a4abb5c0d23bce66b0, type: 2}
+      amount: 2
       mass: 0

@@ -5,13 +5,17 @@ using UnityEngine;
 
 public class StatusManager : MonoSingleton<StatusManager>
 {
-    private PlayerStatus playerStatus;
-    
-    public PlayerStatus PlayerStatus => playerStatus;
+    [SerializeField] private PlayerStatus playerStatus;
+
+    public PlayerStatus PlayerStatus
+    {
+        get => playerStatus;
+        set => playerStatus = value;
+    }
 
     public void SavePlayerStatus()
     {
-        EasyToJson.ToJson(playerStatus, "playerStatus");
+        EasyToJson.ToJson(playerStatus, "playerStatus", true);
     }
     
     public void LoadPlayerStatus()
