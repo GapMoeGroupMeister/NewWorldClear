@@ -175,13 +175,19 @@ public class RequestPanel : MonoBehaviour
             SpriteLoader.Instance.FindSprite(nowRequest.requests[requestIndex].item.itemSpriteName);
         ingredientImage[imageIndex].SetNativeSize();
         ingredientImage[imageIndex].transform.localScale = Vector3.one;
-        ingredientImage[imageIndex].transform.localScale *= 0.8f;
+        ingredientImage[imageIndex].transform.localScale *= 1.2f;
         if (imageIndex is 1 or 3)
-            ingredientImage[imageIndex].transform.localScale *= 0.7f;
+            ingredientImage[imageIndex].transform.localScale *= .7f;
     }
 
     public void Pass()
     {
+        
+        
+        print(ItemManager.Instance.CountItem(nowRequest.requests[0].item));
+        print(ItemManager.Instance.CountItem(nowRequest.requests[1].item));
+        print(nowRequest.requests[0].item.itemName);
+        print(nowRequest.requests[1].item.itemName);
         if (ItemManager.Instance.CountItem(nowRequest.requests[0].item) >= nowRequest.requests[0].amount &&
             ItemManager.Instance.CountItem(nowRequest.requests[1].item) >= nowRequest.requests[1].amount)
         {
