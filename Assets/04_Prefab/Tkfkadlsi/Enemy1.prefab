@@ -191,7 +191,7 @@ MonoBehaviour:
   painfulAmount: 0
   isStun: 0
   isSubdue: 0
-  thinSheild: 0
+  thinSheild: 1
   buffs: 0
   debuffs: 0
   data: {fileID: 11400000, guid: 2042ab592c3d345458b4aa6632768283, type: 2}
