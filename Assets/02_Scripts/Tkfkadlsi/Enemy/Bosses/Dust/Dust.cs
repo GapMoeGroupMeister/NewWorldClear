@@ -20,8 +20,43 @@ namespace Tkfkadlsi
 
         public float def;
         public float atkDelay;
-        public float coolTime;
         public float range;
+
+        private float attackCount;
+        private float skillOneCount;
+
+        public float AttackCount
+        {
+            get
+            {
+                return attackCount;
+            }
+
+            set
+            {
+                attackCount = value;
+                if (Skill_One_Condition())
+                {
+                    skill_One.StartSkill_One();
+                }
+            }
+        }
+
+        public float SkillOneCount
+        {
+            get
+            {
+                return skillOneCount;
+            }
+            set
+            {
+                skillOneCount = value;
+                if (Skill_Two_Condition())
+                {
+                    skill_Two.StartSkill_Two();
+                }
+            }
+        }
 
         public DustState currentState;
 
@@ -54,7 +89,7 @@ namespace Tkfkadlsi
             _moveSpeed = dustData.DefaultSPD;
             atkDelay = dustData.AttackCycle;
             range = dustData.DetectRange;
-            coolTime = 0;
+            attackCount = 0;
         }
 
         private void Update()
@@ -65,8 +100,6 @@ namespace Tkfkadlsi
             {
                 dustAttack.AttackStart();
             }
-
-            coolTime += Time.deltaTime;
         }
 
 
@@ -84,31 +117,9 @@ namespace Tkfkadlsi
             }
         }
 
-        private void Skills_Condition()
-        {
-            if (Skill_Three_Condition())
-            {
-                skill_Three.StartSkill_Three();
-                return;
-            }
-            if (Skill_One_Condition())
-            {
-                skill_One.StartSkill_One();
-                return;
-            }
-            if (Skill_Two_Condition())
-            {
-                skill_Two.StartSkill_Two();
-                return;
-            }
-        }
-
         private bool Skill_One_Condition()
         {
-
-            float rand = Random.Range(0.00f, 1.00f);
-
-            if (rand <= 0.33f)
+            if(attackCount >= 3)
             {
                 return true;
             }
@@ -120,26 +131,7 @@ namespace Tkfkadlsi
 
         private bool Skill_Two_Condition()
         {
-
-            float rand = Random.Range(0.00f, 1.00f);
-
-            if (rand <= 0.25f)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        private bool Skill_Three_Condition()
-        {
-            if ((target.transform.position - dustsCenter.transform.position).magnitude > 6f) return true;
-
-            float rand = Random.Range(0.00f, 1.00f);
-
-            if (rand < 0.1667f)
+            if(skillOneCount >= 2)
             {
                 return true;
             }
@@ -151,7 +143,8 @@ namespace Tkfkadlsi
 
         public override void Die()
         {
-            throw new System.NotImplementedException();
+            LootManager.Instance.GenerateReward(dustData.Reward, transform.position, 4);
+            Destroy(gameObject);
         }
     }
 }

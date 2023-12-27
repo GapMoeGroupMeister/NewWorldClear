@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
-public class CameraManager : MonoBehaviour
+public class CameraManager : MonoSingleton<CameraManager>
 {
-    public static CameraManager Instance { get; private set; }
-
     [SerializeField]private CinemachineVirtualCamera playerCam;
     private CinemachineBasicMultiChannelPerlin channelPerlin;
 

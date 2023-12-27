@@ -30,7 +30,7 @@ namespace Tkfkadlsi
 
         private void Update()
         {
-            if (dust.currentState != Dust.DustState.Idle && dust.currentState != Dust.DustState.Attack) return;
+            if (dust.currentState != Dust.DustState.Idle) return;
             Rotating();
         }
 

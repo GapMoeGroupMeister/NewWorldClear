@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 291e2b46602ca8140bd8438c47b3aabe, type: 3}
-  m_Name: New Pooling Object List
+  m_Name: EnemyList
   m_EditorClassIdentifier: 
   poolingObjects:
   - objectName: Enemy1

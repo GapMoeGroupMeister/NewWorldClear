@@ -457,7 +457,6 @@ MonoBehaviour:
   skill_Three: {fileID: 0}
   def: 0
   atkDelay: 0
-  coolTime: 0
   range: 0
   currentState: 0
 --- !u!58 &134745592
@@ -1900,7 +1899,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b16070e8b7be964fa47f9f2ad57c304, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 15
+  rotationSpeed: 30
   moveSpeed: 0
   z: 0
 --- !u!58 &1741522257

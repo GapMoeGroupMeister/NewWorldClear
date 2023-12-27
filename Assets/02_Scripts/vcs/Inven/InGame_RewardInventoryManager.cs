@@ -20,6 +20,7 @@ public class InGame_RewardInventoryManager : InventoryManager
         {
             ItemManager.Instance.AddItem(slot, slot.amount);
         }
+        Set_AllSlot();
         SaveInventory();
     }
     
