@@ -27,6 +27,7 @@ public class LevelUpSelectSlot : MonoBehaviour
         {
             case LevelUpOption.Dam:
                 GameManager.Instance._PlayerController.damage += (8 + Random.Range(1, 3));
+                GameManager.Instance._LevelManager.StatusEnforceLevel_Damage++;
                 break;
             case LevelUpOption.Heal:
                 float max = GameManager.Instance._PlayerController._maxHp;
@@ -36,12 +37,18 @@ public class LevelUpSelectSlot : MonoBehaviour
                 break;
             case LevelUpOption.Spd:
                 GameManager.Instance._PlayerController._moveSpeed += 0.3f;
+                GameManager.Instance._LevelManager.StatusEnforceLevel_Speed++;
+
                 break;
             case LevelUpOption.AtkSpd:
                 GameManager.Instance._PlayerController.attackDelay -= 0.05f;
+                GameManager.Instance._LevelManager.StatusEnforceLevel_AttackSpeed++;
+
                 break;
             case LevelUpOption.MaxHp:
                 GameManager.Instance._PlayerController._maxHp += (8 + Random.Range(1, 9));
+                GameManager.Instance._LevelManager.StatusEnforceLevel_MaxHp++;
+
                 break;
         }
 
@@ -55,7 +62,7 @@ public class LevelUpSelectSlot : MonoBehaviour
      */
     public void SetOption()
     {
-        LevelUpOption levelUpOption = (LevelUpOption)Random.Range(0,4);
+        LevelUpOption levelUpOption = (LevelUpOption)Random.Range(0,5);
         currentLevelUpOption = levelUpOption;
         EdgeLight.SetActive(false);
         BtnLevel.text = LevelToString();
@@ -72,7 +79,7 @@ public class LevelUpSelectSlot : MonoBehaviour
                 result = "+ 공격력";
                 break;
             case LevelUpOption.Heal:
-                result = "체력 50% 즉시회복";
+                result = "<size=54>체력 50% 즉시회복</size>";
                 break;
             case LevelUpOption.Spd:
                 result = "+ 이동 속도";

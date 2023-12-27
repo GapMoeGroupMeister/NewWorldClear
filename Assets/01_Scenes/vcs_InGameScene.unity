@@ -15201,7 +15201,7 @@ MonoBehaviour:
   - {fileID: 21947097}
   - {fileID: 919716516}
   - {fileID: 996200722}
-  spawnDelay: 1
+  spawnDelay: 0.5
   MobParents: {fileID: 1945593536}
 --- !u!4 &1434574653
 Transform:
