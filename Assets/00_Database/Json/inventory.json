@@ -32,5 +32,22 @@
     },
     "amount": 44,
     "durability": 0
+  },
+  {
+    "item": {
+      "id": 2,
+      "Type": 5,
+      "Tier": 4,
+      "itemName": "붕대",
+      "itemSpriteName": "Bandage",
+      "description": "치료에 좋은 붕대이다.",
+      "isLimited": false,
+      "maxDurability": 1,
+      "SlotSetAmount": 99999,
+      "name": "Item_Bandage",
+      "hideFlags": 0
+    },
+    "amount": 8,
+    "durability": 0
   }
 ]

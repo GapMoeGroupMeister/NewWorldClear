@@ -1,6 +1,6 @@
 {
-    "health": 90,
-    "hungry": 180,
+    "health": 590,
+    "hungry": 0,
     "thirsty": 0,
     "levelHealth": 0,
     "atk": 10,
