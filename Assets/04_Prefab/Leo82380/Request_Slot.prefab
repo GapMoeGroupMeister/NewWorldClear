@@ -114,6 +114,9 @@ MonoBehaviour:
   requestList:
   - {fileID: 11400000, guid: ab51a43b7f096d74a9414936f2c5ed86, type: 2}
   - {fileID: 11400000, guid: 4477bb204349ee244a77c271d0779573, type: 2}
+  - {fileID: 11400000, guid: e7cc632cbb40e704888d032797f96471, type: 2}
+  - {fileID: 11400000, guid: 86d70a8340b93f14aa40d937181cb4e0, type: 2}
+  - {fileID: 11400000, guid: 331f4bd97bc25da49a7a487e7785ae36, type: 2}
 --- !u!1 &158125779241297077
 GameObject:
   m_ObjectHideFlags: 0
