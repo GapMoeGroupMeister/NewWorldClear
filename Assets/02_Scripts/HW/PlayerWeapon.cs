@@ -55,8 +55,8 @@ public class PlayerWeapon : MonoBehaviour
         if (_currentWeapon != null) Destroy(_currentWeapon);
         _currentWeapon = Instantiate(weaponSO.weaponPrefab, transform);
         _weaponPivot = _currentWeapon.transform.GetChild(0);
-        _playerController.damage = _playerController.attackDamage;
-        _playerController.damage += _playerController.attackDamage / 100 * 5;
+        _playerController.damage = weaponSO.baseDamage;
+        _playerController.damage += weaponSO.baseDamage / 100 * weaponSO.damage;
         _attackDelay = weaponSO.attackDelay;
         _attackRange = weaponSO.attackRange;
         _attackMotion = weaponSO.attackMotion;
@@ -135,6 +135,11 @@ public class PlayerWeapon : MonoBehaviour
             Collider2D[] enemies = Physics2D.OverlapBoxAll(attackRange, _attackRange, angle * Mathf.Rad2Deg, _enemyMask);
             if (enemies.Length > 0)
             {
+                if(enemies.Length >= 3)
+                {
+                    CameraManager.Instance.Shake(2, 1, 0.3f);
+                    TimeController.Instance.SetTimeFreeze(0.5f, 0, 0.1f);
+                }
                 foreach (Collider2D col in enemies)
                 {
                     col.GetComponent<Enemy>().HitDamage(_playerController.damage);
