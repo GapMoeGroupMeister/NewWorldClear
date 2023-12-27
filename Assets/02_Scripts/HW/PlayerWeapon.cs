@@ -74,11 +74,11 @@ public class PlayerWeapon : MonoBehaviour
 
         if (_weaponType.Equals(WeaponType.Else))
         {
-            StopCoroutine(ShortWeaponAttack(0));
+            StopCoroutine(ShortWeaponAttack());
         }
         else if (_weaponType.Equals(WeaponType.Gun))
         {
-            StopCoroutine(LongWeaponAttack(0));
+            StopCoroutine(LongWeaponAttack());
             _lineRenderer.enabled = false;
         }
 
@@ -86,11 +86,11 @@ public class PlayerWeapon : MonoBehaviour
 
         if (_weaponType.Equals(WeaponType.Else))
         {
-            StartCoroutine(ShortWeaponAttack(_attackDelay));
+            StartCoroutine(ShortWeaponAttack());
         }
         else if (_weaponType.Equals(WeaponType.Gun))
         {
-            StartCoroutine(LongWeaponAttack(_attackDelay));
+            StartCoroutine(LongWeaponAttack());
             _lineRenderer.enabled = true;
         }
     }
@@ -131,11 +131,11 @@ public class PlayerWeapon : MonoBehaviour
         }
     }
 
-    IEnumerator ShortWeaponAttack(float delay)
+    IEnumerator ShortWeaponAttack()
     {
         while (true)
         {
-            yield return new WaitForSeconds(delay);
+            yield return new WaitForSeconds(_attackDelay);
             yield return new WaitUntil(() => !_playerController.isStun);
             Vector2 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
             Vector2 attackRange = transform.position + ((Vector3)dir.normalized * (_attackRange.x / 2));
@@ -166,11 +166,11 @@ public class PlayerWeapon : MonoBehaviour
         }
     }
 
-    IEnumerator LongWeaponAttack(float delay)
+    IEnumerator LongWeaponAttack()
     {
         while (true)
         {
-            yield return new WaitForSeconds(delay);
+            yield return new WaitForSeconds(_attackDelay);
             yield return new WaitUntil(() => !_playerController.isStun);
             Vector2 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
