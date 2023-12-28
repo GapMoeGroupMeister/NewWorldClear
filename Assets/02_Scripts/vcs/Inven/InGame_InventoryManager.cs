@@ -41,6 +41,8 @@ public class InGame_InventoryManager : InventoryManager
         ItemManager.Instance.LoadInGameInventoryFile();
         Set_AllSlot();
     }
+    
+    
 
     public override void SceneExit()
     {
