@@ -65,20 +65,21 @@ public class PlayerController : Damageable
 
     private void OnMovement(InputValue value)
     {
-        if (isStun) return;
-        _rigidbody.velocity = value.Get<Vector2>() * _moveSpeed;
-        _animator.SetFloat("Speed", _rigidbody.velocity.magnitude);
+        if (!isStun)
+        {
+            _rigidbody.velocity = value.Get<Vector2>() * _moveSpeed;
+            _animator.SetFloat("Speed", _rigidbody.velocity.magnitude);
+        }
     }
 
     private void OnDash()
     {
-        if ((dashElapsedTime > 0 || _rigidbody.velocity == Vector2.zero) && isStun && isDash) return;
+        if ((dashElapsedTime > 0 || _rigidbody.velocity == Vector2.zero) || isStun || isDash) return;
         StartCoroutine(IEDash());
     }
 
     IEnumerator IEDash()
     {
-        if (isDash) yield break;
         Vector2 prevDir = _rigidbody.velocity.normalized;
         _strikeColl.enabled = false;
         dashElapsedTime = 0.1f;
@@ -88,6 +89,7 @@ public class PlayerController : Damageable
         while (dashElapsedTime > 0)
         {
             dashElapsedTime -= Time.deltaTime;
+            MakeTrail();
             yield return null;
         }
         _strikeColl.enabled = true;
