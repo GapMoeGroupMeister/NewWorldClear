@@ -53,6 +53,7 @@ public class Weapon2 : MonoBehaviour, IPointerClickHandler
     private void OnEnable()
     {
         _saveInfo = DBManager.Get_UserInfo();
+        MoneyTextSetup();
     }
 
     public void OnPointerClick(PointerEventData eventData)

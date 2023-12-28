@@ -1,16 +1,12 @@
 using EasyJson;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class StatusManager : MonoSingleton<StatusManager>
 {
-    [SerializeField] private PlayerStatus playerStatus;
+    [SerializeField] [CanBeNull] private PlayerStatus playerStatus;
 
-    public PlayerStatus PlayerStatus
-    {
-        get => playerStatus;
-        set => playerStatus = value;
-    }
-
+    public PlayerStatus PlayerStatus;
     public void SavePlayerStatus()
     {
         EasyToJson.ToJson(playerStatus, "playerStatus", true);
@@ -19,5 +15,10 @@ public class StatusManager : MonoSingleton<StatusManager>
     public void LoadPlayerStatus()
     {
         playerStatus = EasyToJson.FromJson<PlayerStatus>("playerStatus");
+        if (playerStatus == null)
+        {
+            playerStatus = new PlayerStatus();
+            SavePlayerStatus();
+        }
     }
 }

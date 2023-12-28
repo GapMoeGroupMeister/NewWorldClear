@@ -38,7 +38,7 @@ public class StartSceneTakeSlot : Slot, IPointerClickHandler
 
     protected override void SetItemIcon()
     {
-        ItemImage.sprite = SpriteLoader.Instance.FindSprite(currentItem.itemSpriteName);
+        ItemImage.sprite = SpriteLoader.FindSprite(currentItem.itemSpriteName);
         ItemImage.SetNativeSize();
     }
 }

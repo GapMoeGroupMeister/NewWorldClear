@@ -15,7 +15,7 @@ public class InGameInventorySlot : Slot
 
     protected override void SetItemIcon()
     {
-        ItemImage.sprite = SpriteLoader.Instance.FindSprite(currentItem.itemSpriteName);
+        ItemImage.sprite = SpriteLoader.FindSprite(currentItem.itemSpriteName);
         ItemImage.SetNativeSize();
         
         

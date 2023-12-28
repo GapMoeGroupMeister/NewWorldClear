@@ -31,4 +31,9 @@ public class StartSceneManager : MonoBehaviour
     {
         SceneManager.LoadScene("InGameScene");
     }
+
+    public void SceneMoveLab()
+    {
+        SceneManager.LoadScene("JinsoonScene_SkillTree");
+    }
 }

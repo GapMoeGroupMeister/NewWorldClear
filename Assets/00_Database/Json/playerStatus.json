@@ -1,8 +1,8 @@
 {
     "health": 100,
-    "hungry": 90,
-    "thirsty": 90,
-    "levelHealth": 0,
+    "hungry": 100,
+    "thirsty": 100,
+    "levelHealth": 1,
     "atk": 10,
     "def": 1,
     "stamina": 200,

@@ -24,6 +24,7 @@ public class IntroSceneUIManager : MonoBehaviour
         _pressText = transform.Find("Press");
         _blackPanel = transform.Find("BlackPanel").GetComponent<Image>();
         _finalAnswerTrm = _blackPanel.transform.Find("Image");
+        Screen.SetResolution(1920, 1080, FullScreenMode.FullScreenWindow);
     }
 
     private void Start()
@@ -46,7 +47,6 @@ public class IntroSceneUIManager : MonoBehaviour
     {
         _saveInfo = DBManager.Get_UserInfo();
         _day = _saveInfo.day + 1;
-        _saveInfo.isFirstPlay = true;
     }
 
     public void FinishEnter()

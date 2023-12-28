@@ -2,10 +2,10 @@ using System;
 using JetBrains.Annotations;
 using UnityEngine;
 
-public class SpriteLoader : MonoSingleton<SpriteLoader>
+public class SpriteLoader : MonoBehaviour
 {
 
-    public Sprite[] spriteBase;
+    public static Sprite[] spriteBase;
 
     private void Awake()
     {
@@ -13,7 +13,7 @@ public class SpriteLoader : MonoSingleton<SpriteLoader>
     }
 
     [ContextMenu("Custom/SpriteLoad")]
-    public void Load()
+    public static void Load()
     {
         AssetBundle bundle = AssetBundle.LoadFromFile("Assets/AssetBundles/itemicon");
         spriteBase = bundle.LoadAllAssets<Sprite>();
@@ -21,7 +21,7 @@ public class SpriteLoader : MonoSingleton<SpriteLoader>
 
     }
     [CanBeNull]
-    public Sprite FindSprite(string spriteName)
+    public static Sprite FindSprite(string spriteName)
     {
         if (spriteBase == null)
         {
@@ -40,7 +40,7 @@ public class SpriteLoader : MonoSingleton<SpriteLoader>
     }
 
     [ContextMenu("Custom/SpriteCheckLoad")]
-    public void LoadCheck()
+    public static void LoadCheck()
     {
         Debug.Log("spriteBase,Length: "+spriteBase.Length);
         foreach (Sprite sprite in spriteBase)

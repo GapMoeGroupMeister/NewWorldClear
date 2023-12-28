@@ -23178,6 +23178,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnMobList:
   - {fileID: 3363199156923919705, guid: fce2c5951e43e554ea57d5bc9dbada90, type: 3}
+  - {fileID: 3363199156923919705, guid: 46d6cfda9645edf4dad488b243bbce51, type: 3}
   spawnPoints:
   - {fileID: 1103197203}
   - {fileID: 520491432}
@@ -26926,7 +26927,7 @@ MonoBehaviour:
   _enemyMask:
     serializedVersion: 2
     m_Bits: 8
-  testWeapon: {fileID: 11400000, guid: 9c41a866d7cd1ca46b1dd7edb8a9b9af, type: 2}
+  testWeapon: {fileID: 11400000, guid: c31690265849b594b9fc9fb24dcd1b0b, type: 2}
 --- !u!1 &2095433582
 GameObject:
   m_ObjectHideFlags: 0
@@ -118221,7 +118222,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c759903e654cbe4c8db060ae913a1ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteBase: []
 --- !u!4 &2143796638
 Transform:
   m_ObjectHideFlags: 0
