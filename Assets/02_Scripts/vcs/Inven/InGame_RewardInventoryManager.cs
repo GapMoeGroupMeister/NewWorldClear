@@ -23,6 +23,11 @@ public class InGame_RewardInventoryManager : InventoryManager
         Set_AllSlot();
         SaveInventory();
     }
+
+    public void SetSlots()
+    {
+        Set_AllSlot();
+    }
     
     
 
