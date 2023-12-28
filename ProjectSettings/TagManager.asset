@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - PlayerItemGetRange
   layers:
   - Default
   - TransparentFX
@@ -11,7 +12,7 @@ TagManager:
   - Enemy_TEST
   - Water
   - UI
-  - 
+  - Obstacles
   - 
   - 
   - 
@@ -38,9 +39,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Ground
+    uniqueID: 641668539
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Object
+    uniqueID: 3639193911
+    locked: 0
   - name: Player
     uniqueID: 232773521
+    locked: 0
+  - name: Particle
+    uniqueID: 568035943
     locked: 0

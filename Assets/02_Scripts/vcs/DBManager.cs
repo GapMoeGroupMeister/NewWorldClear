@@ -1,27 +1,10 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using System.IO;
-using System.Linq;
 using EasyJson;
 
 public class DBManager : MonoBehaviour
 {
-
     private string _inventoryPath;
-    private static string _userInfoPath;
-
-
-    private void Awake()
-    {
-        _userInfoPath = Path.Combine(EasyToJson.localPath, "userInfo.json");
-    }
-    
-    
-
-    
     
     /**
      * <summary>
@@ -30,7 +13,13 @@ public class DBManager : MonoBehaviour
      */
     public static List<ItemSlot> Get_Inventory()
     {
-        return EasyToJson.ListFromJson<ItemSlot>("inventory");
+        List<ItemSlot> inven = EasyToJson.ListFromJson<ItemSlot>("inventory");
+        if (inven == null)
+        {
+            inven = new List<ItemSlot>();
+            Save_Inventory(inven);
+        }
+        return inven;
     }
     
     /**
@@ -50,7 +39,15 @@ public class DBManager : MonoBehaviour
      */
     public static List<ItemSlot> Get_InGameInventory()
     {
-        return EasyToJson.ListFromJson<ItemSlot>("InGameInventory");
+        
+        List<ItemSlot> inven = EasyToJson.ListFromJson<ItemSlot>("InGameInventory");
+        if (inven == null)
+        {
+            inven = new List<ItemSlot>();
+            Save_InGameInventory(inven);
+        }
+
+        return inven;
     }
     
     /**
@@ -104,5 +101,31 @@ public class DBManager : MonoBehaviour
     }
     
     
+    /**
+     * <summary>
+     * 오디오 세팅 정보를 받아와 Json으로 저장함
+     * </summary>
+     */
+    public static void Save_AudioSetting(AudioSetting audioSetting)
+    {
+        EasyToJson.ToJson(audioSetting, "AudioSetting", true);
+    }
+    
+    /**
+     * <summary>
+     * json으로 저장된 오디오 세팅 정보를 불러와 반환해줌
+     * </summary>
+     */
+    public static AudioSetting Get_AudioSetting()
+    {
+        AudioSetting audioSetting = EasyToJson.FromJson<AudioSetting>("AudioSetting");
+        if (audioSetting == null)
+        {
+            audioSetting = new AudioSetting();
+            Save_AudioSetting(audioSetting);
+        }
+
+        return audioSetting;
+    }
     
 }

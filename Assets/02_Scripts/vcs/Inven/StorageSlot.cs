@@ -2,8 +2,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 
-public class StorageSlot : Slot, IPointerEnterHandler,  IPointerExitHandler
+public class StorageSlot : Slot, IPointerClickHandler//,  IPointerExitHandler
 {
+    private bool isOn;
     public override void SetSlot(ItemSlot slotInfo)
     {
         currentSlot = slotInfo;
@@ -17,7 +18,7 @@ public class StorageSlot : Slot, IPointerEnterHandler,  IPointerExitHandler
 
     protected override void SetItemIcon()
     {
-        ItemImage.sprite = SpriteLoader.Instance.FindSprite(currentItem.itemSpriteName);
+        ItemImage.sprite = SpriteLoader.FindSprite(currentItem.itemSpriteName);
         ItemImage.SetNativeSize();   
     }
 
@@ -34,14 +35,24 @@ public class StorageSlot : Slot, IPointerEnterHandler,  IPointerExitHandler
         }
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    public void OnPointerClick(PointerEventData eventData)
     {
-        Storage_UIManager.Instance.On_DescriptionUI();
-        Storage_UIManager.Instance.Refresh_DescriptionUI(currentSlot);
+        if (!isOn)
+        {
+            isOn = true;
+            Storage_UIManager.Instance.On_DescriptionUI();
+            Storage_UIManager.Instance.Refresh_DescriptionUI(currentSlot);
+            FoodManager.Instance.Slot = currentSlot;
+            FoodManager.Instance.FoodDescription_Update();
+        }
+        else
+        {
+            isOn = false;
+            Storage_UIManager.Instance.Off_DescriptionUI();
+        }
     }
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        Storage_UIManager.Instance.Off_DescriptionUI();
-    }
-    
+    // public void OnPointerExit(PointerEventData eventData)
+    // {
+    //     Storage_UIManager.Instance.Off_DescriptionUI();
+    // }
 }

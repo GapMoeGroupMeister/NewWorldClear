@@ -11,6 +11,8 @@ public class SkillTreeHolder : MonoBehaviour
     [SerializeField] private SkillTreeNode[,] skillTreeNodes;
     [SerializeField] private TextMeshProUGUI coinTmp = null;
 
+    private bool canLoadNode = false;
+
     public int SkillTreeCoin { get; private set; }
 
 
@@ -49,6 +51,7 @@ public class SkillTreeHolder : MonoBehaviour
     {
         Queue<SkillTreeNode> skillTrees = new Queue<SkillTreeNode>();
         SkillTreeNode curSkillTreeNode = skillTreeNode;
+        int coin = 0;
         skillTrees.Enqueue(curSkillTreeNode);
 
         while (curSkillTreeNode.lastSkillTreeNode != null)
@@ -61,8 +64,17 @@ public class SkillTreeHolder : MonoBehaviour
         while (skillTrees.TryDequeue(out SkillTreeNode node))
         {
             node.OnCheck();
+
+            coin += node.IsSelected ? 0 : node.RequireCoin;
         }
+
+        Debug.Log(coin);
+
+        if (coin > SkillTreeCoin) canLoadNode = false;
+        else canLoadNode = true;
     }
+
+
     public void CheckCancelAll(SkillTreeNode skillTreeNode)
     {
         Queue<SkillTreeNode> skillTrees = new Queue<SkillTreeNode>();
@@ -84,6 +96,8 @@ public class SkillTreeHolder : MonoBehaviour
 
     public void LoadAll(SkillTreeNode skillTreeNode)
     {
+        if (canLoadNode == false) return;
+
         Queue<SkillTreeNode> skillTrees = new Queue<SkillTreeNode>();
         SkillTreeNode curSkillTreeNode = skillTreeNode;
         skillTrees.Enqueue(curSkillTreeNode);

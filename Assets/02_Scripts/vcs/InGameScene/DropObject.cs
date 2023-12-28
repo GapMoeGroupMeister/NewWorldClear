@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections;
+using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.Events;
+
 
 public abstract class DropObject : MonoBehaviour
 {
@@ -11,12 +14,14 @@ public abstract class DropObject : MonoBehaviour
     [SerializeField] protected bool isStatic;
     [SerializeField] protected float followSpeed = 1f;
     [Range(1f, 5f)] [SerializeField] protected float curveSensitive;
-    protected Transform followTarget;
+    [CanBeNull] protected Transform followTarget;
     protected Vector2 currentDirection;
 
     [SerializeField]
     protected bool isTargeted;
-
+    [Space(20f)]
+    [Tooltip("아이템을 주울때 실행되는 이벤트 액션")]
+    public UnityEvent PickUpAction;
 
     
 
@@ -56,7 +61,7 @@ public abstract class DropObject : MonoBehaviour
 
         foreach (Collider2D collider in hits)
         {
-            if (collider.CompareTag("Player"))
+            if (collider.CompareTag("PlayerItemGetRange"))
             {
                 followTarget = collider.transform;
                 isTargeted = true;
@@ -66,6 +71,10 @@ public abstract class DropObject : MonoBehaviour
 
     protected void Follow()
     {
+        if (followTarget == null)
+        {
+            return;
+        }
         Vector2 targetDir = (followTarget.position - transform.position).normalized;
         currentDirection = (currentDirection * curveSensitive + targetDir).normalized;
         transform.position += (Vector3)currentDirection * Time.deltaTime * followSpeed;
@@ -85,13 +94,36 @@ public abstract class DropObject : MonoBehaviour
      */
     protected void CheckCollisionPlayer()
     {
-        Collider2D[] detected = Physics2D.OverlapCircleAll(transform.position, 0.12f);
+        Collider2D[] detected = Physics2D.OverlapCircleAll(transform.position, 0.3f);
         foreach (Collider2D target in detected)
         {
             if (target.CompareTag("Player"))
             {
+                PickUpAction?.Invoke();
                 Get();
             }
         }
+    }
+    
+    /**
+     * <summary>
+     * 입력된 방향으로 날아가게 한다
+     * </summary>
+     */
+    public void AddForce(Vector2 dir, float power)
+    {
+        StartCoroutine(ForceRoutine(dir, power));
+    }
+
+    private IEnumerator ForceRoutine(Vector2 dir, float power)
+    {
+        float before = power;
+        while (power > 0)
+        {
+            transform.Translate(dir * power * Time.deltaTime);
+            power -= before * Time.deltaTime;
+            yield return null;
+        }
+        
     }
 }

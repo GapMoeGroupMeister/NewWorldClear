@@ -21,10 +21,9 @@ public class DropItem
 
     /**
      * <summary>
-     * 질량, 끌려오는 속도에 관여함
+     * 드롭 확률
      * </summary>
      */
-    public float mass;
-
+    public float percentage = 100f;
 
 }

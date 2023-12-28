@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class InventoryManager : MonoBehaviour
-{
+{   
     [Tooltip("인벤슬롯 프리팹")]
     [SerializeField] protected GameObject slotPrefab;
 
@@ -33,6 +33,7 @@ public abstract class InventoryManager : MonoBehaviour
         Set_AllSlot();
         
     }
+
     protected void Set_AllSlot()
     {
         List<ItemSlot> inventory = ItemManager.Instance.inventory;
@@ -40,7 +41,6 @@ public abstract class InventoryManager : MonoBehaviour
         {
             ItemManager.Instance.inventory = new List<ItemSlot>();
             return;
-
         }
         
         foreach (ItemSlot _slot in inventory)

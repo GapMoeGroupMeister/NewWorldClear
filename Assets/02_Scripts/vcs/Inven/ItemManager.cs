@@ -88,7 +88,7 @@ public class ItemManager : MonoSingleton<ItemManager>
         {
             for (int i = 0; i < amount; i++)
             {
-                inventory.Add(itemSlot);
+                inventory.Add(new ItemSlot(itemSlot.item, 1, itemSlot.durability));
             }
 
             return;
@@ -177,6 +177,45 @@ public class ItemManager : MonoSingleton<ItemManager>
 
 
     }
+    
+    /**
+     * <summary>
+     * 인벤토리에서 아이템을 찾아주는 메서드
+     * </summary>
+     * <param name="itemId">
+     * 찾을 아이템 id
+     * </param>
+     * <returns>
+     * 해당하는 아이템 슬롯을 반환함
+     * </returns>
+     */
+    [CanBeNull]
+    public ItemSlot FindItem(int itemId)
+    {
+       
+        for (int i = 0; i < inventory.Count; i++)
+        {
+            ItemSlot slot = inventory[i];
+
+            if (slot.amount <= 0)
+            {
+                inventory.Remove(slot);
+                i--;
+                continue;
+            }
+            
+
+            if (slot.item.id == itemId)
+            {
+                return slot;
+                break;
+            }
+            
+        }
+        
+        return null;
+    }
+
 
     /**
      * <summary>
@@ -204,8 +243,15 @@ public class ItemManager : MonoSingleton<ItemManager>
                 continue;
             }
             
+            if (slot.durability <= 0 && slot.item.isLimited)
+            {
+                inventory.Remove(slot);
+                i--;
+                continue;
+            }
 
-            if (slot.item == item)
+
+            if (slot.item.id == item.id)
             {
                 return slot;
                 break;
@@ -242,8 +288,15 @@ public class ItemManager : MonoSingleton<ItemManager>
                 continue;
             }
             
+            if (slot.durability <= 0 && slot.item.isLimited)
+            {
+                inventory.Remove(slot);
+                i--;
+                continue;
+            }
+            
 
-            if (slot.item == itemSlot.item && slot.durability == itemSlot.durability)
+            if (slot.item.id == itemSlot.item.id && slot.durability == itemSlot.durability)
             {
                 return slot;
                 break;
@@ -296,7 +349,7 @@ public class ItemManager : MonoSingleton<ItemManager>
         int amount = 0;
         foreach (ItemSlot slot in inventory)
         {
-            if (item == slot.item)
+            if (item.id == slot.item.id)
             {
                 amount += slot.amount;
             }
@@ -314,7 +367,16 @@ public class ItemManager : MonoSingleton<ItemManager>
      */
     public void LoadInventoryFile()
     {
-        inventory = DBManager.Get_Inventory();
+        try
+        {
+            inventory = DBManager.Get_Inventory();
+        }
+        catch (System.Exception e)
+        {
+            Debug.Log("인벤토리 파일이 없습니다");
+            inventory = new List<ItemSlot>();
+            inventory = DBManager.Get_Inventory();
+        }
     }
     /**
      * <summary>

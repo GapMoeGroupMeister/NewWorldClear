@@ -12,7 +12,7 @@ class WeaponMarketManagerEditor : Editor
         GUILayout.Space(20f);
         if (GUILayout.Button("무기 변경"))
         {
-            weaponMarketManager.WeaponChange();
+            weaponMarketManager.ItemChange();
         }
     }
 }

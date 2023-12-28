@@ -24,6 +24,16 @@ public class StartSceneManager : MonoBehaviour
 
     public void SceneMoveShop()
     {
-        //SceneManager.LoadScene();
+        SceneManager.LoadScene("Leo_BlackMarket");
+    }
+
+    public void SceneMoveInGame()
+    {
+        SceneManager.LoadScene("InGameScene");
+    }
+
+    public void SceneMoveLab()
+    {
+        SceneManager.LoadScene("JinsoonScene_SkillTree");
     }
 }

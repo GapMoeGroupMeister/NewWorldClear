@@ -6,6 +6,7 @@ using TMPro;
 using DG.Tweening;
 using Tkfkadlsi;
 using UnityEditor;
+using UnityEngine.Serialization;
 
 
 public class Storage_UIManager : MonoSingleton<Storage_UIManager>
@@ -20,6 +21,8 @@ public class Storage_UIManager : MonoSingleton<Storage_UIManager>
     [SerializeField] private TextMeshProUGUI Text_Description;
     [SerializeField] private Gradient DurabilityColorGradient;
     
+    [SerializeField] private GameObject eatButton;
+    [SerializeField] private GameObject foodDescription;
 
     public void On_DescriptionUI()
     {
@@ -50,6 +53,9 @@ public class Storage_UIManager : MonoSingleton<Storage_UIManager>
         {
             durabilityGaugeObject.SetActive(false);
         }
+        
+        eatButton.SetActive(slot.item.Type is ItemType.Grocery or ItemType.Consumables);
+        foodDescription.SetActive(slot.item.Type is ItemType.Grocery or ItemType.Consumables);
     }
 
     private string ItemTypeConvert(ItemType type)
@@ -79,6 +85,4 @@ public class Storage_UIManager : MonoSingleton<Storage_UIManager>
 
         return result;
     }
-
-    
 }
