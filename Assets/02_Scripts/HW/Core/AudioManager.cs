@@ -9,11 +9,6 @@ public class AudioManager : MonoSingleton<AudioManager>
     
     public AudioClip[] clips;
 
-    private void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
-
     /// <summary>
     /// 0 : Null (Nothing)
     /// 1 : FunkShop

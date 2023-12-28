@@ -26,7 +26,7 @@ public class LevelUpSelectSlot : MonoBehaviour
         switch (currentLevelUpOption)
         {
             case LevelUpOption.Dam:
-                GameManager.Instance._PlayerController.damage += (8 + Random.Range(1, 3));
+                GameManager.Instance._PlayerController.levelUpDamage += (8 + Random.Range(1, 3));
                 GameManager.Instance._LevelManager.StatusEnforceLevel_Damage++;
                 break;
             case LevelUpOption.Heal:
@@ -41,7 +41,7 @@ public class LevelUpSelectSlot : MonoBehaviour
 
                 break;
             case LevelUpOption.AtkSpd:
-                GameManager.Instance._PlayerController.attackDelay -= 0.05f;
+                GameManager.Instance._PlayerController.levelUpDelay -= 0.05f;
                 GameManager.Instance._LevelManager.StatusEnforceLevel_AttackSpeed++;
 
                 break;
