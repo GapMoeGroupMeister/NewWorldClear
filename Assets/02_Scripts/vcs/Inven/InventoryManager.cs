@@ -41,7 +41,6 @@ public abstract class InventoryManager : MonoBehaviour
         {
             ItemManager.Instance.inventory = new List<ItemSlot>();
             return;
-
         }
         
         foreach (ItemSlot _slot in inventory)

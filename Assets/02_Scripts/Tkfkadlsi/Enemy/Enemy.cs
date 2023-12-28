@@ -116,13 +116,32 @@ public abstract class Enemy : Damageable
     {
         isAttacking = false;
         currentState = EnemyState.Hit;
-        yield return new WaitForSeconds(0.5f);
+
+        float knockBackTime = 0.5f;
+        float t = 0;
+
+        Vector3 knockBackDirection = target.transform.position - transform.position;
+
+        knockBackDirection = -knockBackDirection.normalized;
+
+        Vector3 startPos = transform.position;
+        Vector3 endPos = transform.position + knockBackDirection;
+
+        while (t < knockBackTime)
+        {
+            transform.position = Vector3.Lerp(startPos, endPos, t / knockBackTime);
+
+            t += Time.deltaTime;
+            yield return null;
+        }
+
         currentState = EnemyState.Idle;
     }
 
     public override void HitDamage(float damage)
     {
-        StartCoroutine(Hit_Delay());
+        StopCoroutine("Hit_Delay");
+        StartCoroutine("Hit_Delay");
 
         base.HitDamage(damage);
 

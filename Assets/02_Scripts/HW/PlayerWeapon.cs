@@ -68,7 +68,7 @@ public class PlayerWeapon : MonoBehaviour
         _attackRange = weaponSO.attackRange;
         _attackMotion = weaponSO.attackMotion;
         _attackEffect = weaponSO.attackEffect;
-        //_weaponEvent = (WeaponEvent)WeaponEventManager.Instance.GetComponent(_currentWeapon.name);
+        _weaponEvent = _currentWeapon.GetComponent<WeaponEvent>();
 
         if (_weaponType.Equals(WeaponType.Else))
         {
@@ -153,7 +153,7 @@ public class PlayerWeapon : MonoBehaviour
                 }
                 foreach (Collider2D col in enemies)
                 {
-                    col.GetComponent<Enemy>().HitDamage(_playerController.attackDamage);
+                    col.GetComponent<Damageable>().HitDamage(_playerController.attackDamage);
                     if (_weaponEvent != null)
                     {
                         _weaponEvent.OnHit(col.transform);

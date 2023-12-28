@@ -3,7 +3,10 @@
   <component name="Encoding" addBOMForNewFiles="with BOM under Windows, with no BOM otherwise">
     <file url="file://$PROJECT_DIR$/Assets/02_Scripts/HW/Damageable.cs" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/Assets/02_Scripts/HW/PlayerController.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/02_Scripts/Leo82380/BlackMarket/DefaultCanvas.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/02_Scripts/Leo82380/BlackMarket/Request/Request.cs" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/Assets/02_Scripts/Leo82380/BlackMarket/Shop/Description.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/02_Scripts/Leo82380/BlackMarket/Shop/WeaponShop.cs" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/Assets/02_Scripts/Leo82380/DefaultCanvas.cs" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/Assets/02_Scripts/Leo82380/Request/Request.cs" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/Assets/02_Scripts/Leo82380/Shop/Description.cs" charset="x-windows-949" />

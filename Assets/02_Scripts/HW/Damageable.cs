@@ -86,15 +86,17 @@ public abstract class Damageable : MonoBehaviour
 
     public void DeleteBuffs(Buffs buff, Debuffs debuff)
     {
+        buffs -= buff;
+        debuffs -= debuff;
         StopCoroutine("IE" + typeof(Debuffs).GetEnumName(debuff));
         StopCoroutine("IE" + typeof(Buffs).GetEnumName(buff));
     }
 
-    IEnumerator IEBleed(float[] values)
+    public IEnumerator IEBleed(float[] values)
     {
         float cool = values[0];
         float damage = values[1];
-        float delay = 0.5f;
+        float delay = 1f;
         float elasped = 0f;
         while (cool > 0)
         {
@@ -117,7 +119,7 @@ public abstract class Damageable : MonoBehaviour
         debuffs -= Debuffs.Bleed;
     }
 
-    IEnumerator IESlow(float[] values)
+    public IEnumerator IESlow(float[] values)
     {
         float prevSpeed = _moveSpeed;
         float cool = values[0];
@@ -140,7 +142,7 @@ public abstract class Damageable : MonoBehaviour
         _moveSpeed = prevSpeed;
     }
 
-    IEnumerator IEStun(float[] values)
+    public IEnumerator IEStun(float[] values)
     {
         float cool = values[0];
         while (cool > 0)
@@ -160,7 +162,7 @@ public abstract class Damageable : MonoBehaviour
         isStun = false;
     }
 
-    IEnumerator IESubdue(float[] values)
+    public IEnumerator IESubdue(float[] values)
     {
         float cool = values[0];
         while (cool > 0)
@@ -180,7 +182,7 @@ public abstract class Damageable : MonoBehaviour
         isSubdue = false;
     }
 
-    IEnumerator IEPoison(float[] values)
+    public IEnumerator IEPoison(float[] values)
     {
         float cool = values[0];
         float delay = 0.5f;
@@ -206,7 +208,7 @@ public abstract class Damageable : MonoBehaviour
         debuffs -= Debuffs.Poison;
     }
 
-    IEnumerator IEPainful(float[] values)
+    public IEnumerator IEPainful(float[] values)
     {
         float cool = values[0];
         float amount = values[1];
@@ -228,7 +230,7 @@ public abstract class Damageable : MonoBehaviour
     }
 
     #region Buff Coroutines
-    IEnumerator IEFast(float[] values)
+    public IEnumerator IEFast(float[] values)
     {
         float prevSpeed = _moveSpeed;
         float cool = values[0];
@@ -246,7 +248,7 @@ public abstract class Damageable : MonoBehaviour
         _moveSpeed = prevSpeed;
     }
 
-    IEnumerator IEGeneration(float[] values)
+    public IEnumerator IEGeneration(float[] values)
     {
         float cool = values[0];
         float delay = 0.5f;
@@ -267,7 +269,7 @@ public abstract class Damageable : MonoBehaviour
         buffs -= Buffs.Generation;
     }
 
-    IEnumerator IEPowerUp(float[] values)
+    public IEnumerator IEPowerUp(float[] values)
     {
         float prevdamage = attackDamage;
         float cool = values[0];
@@ -285,7 +287,7 @@ public abstract class Damageable : MonoBehaviour
         attackDamage = prevdamage;
     }
 
-    IEnumerator IEThinSheld(float[] values)
+    public IEnumerator IEThinSheld(float[] values)
     {
         float cool = values[0];
         while (cool > 0)

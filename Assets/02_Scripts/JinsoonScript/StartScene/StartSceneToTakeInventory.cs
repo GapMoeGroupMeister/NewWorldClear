@@ -34,10 +34,36 @@ public class StartSceneToTakeInventory : MonoBehaviour, IPointerClickHandler
 
     public void SetItem(ItemSlot itemSlot)
     {
+        foreach (ItemSlot s in inventory)
+        {
+            if (s.item.id == itemSlot.item.id)                           //같은 아이템이 있고
+            {
+                int itemNum = s.amount + itemSlot.amount;
+                if (itemNum > s.item.SlotSetAmount)      //그 아이템의 칸당 소지 수 보다 인벤토리의 아이템 수 
+                {
+                    s.amount = s.item.SlotSetAmount;
+
+                    itemSlot.amount = itemNum - s.item.SlotSetAmount;
+                    inventory.Add(itemSlot);
+                    GameObject sl = Instantiate(slotPrefab, grid);
+
+                    sl.GetComponent<Slot>().SetSlot(itemSlot);
+                }
+                else                                    //그렇지 않다면
+                {
+                    s.amount = itemNum;
+                }
+
+                Refresh();
+                return;
+            }
+        }
+
         inventory.Add(itemSlot);
         GameObject slot = Instantiate(slotPrefab, grid);
 
         slot.GetComponent<Slot>().SetSlot(itemSlot);
+        Refresh();
     }
 
     public void Delete_Inven()
@@ -51,5 +77,50 @@ public class StartSceneToTakeInventory : MonoBehaviour, IPointerClickHandler
     public void OnStartGame()
     {
         DBManager.Save_InGameInventory(inventory);
+    }
+
+    private void Refresh()
+    {
+        List<ItemSlot> slotToRemove = new List<ItemSlot>();
+        Delete_Inven();
+
+        if (inventory == null || inventory.Count <= 0)
+        {
+            ItemManager.Instance.inventory = new List<ItemSlot>();
+            return;
+        }
+
+        foreach (ItemSlot _slot in inventory)
+        {
+            Item thisItem = _slot.item;
+
+            if (thisItem == null || _slot.amount <= 0)
+            {
+                slotToRemove.Add(_slot);
+                continue;
+            }
+
+            GameObject slot = Instantiate(slotPrefab, grid);
+            slot.GetComponent<Slot>().SetSlot(_slot);
+        }
+
+        foreach (ItemSlot _slot in slotToRemove)
+        {
+            inventory.Remove(_slot);
+        }
+
+        DBManager.Save_InGameInventory(inventory);
+    }
+
+    internal void SubItem(ItemSlot curSelectItemSlot, int amount)
+    {
+        foreach (ItemSlot _slot in inventory)
+        {
+            if(_slot == curSelectItemSlot)
+            {
+                _slot.amount -= amount;
+            }
+        }
+        Refresh();
     }
 }

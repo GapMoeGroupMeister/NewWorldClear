@@ -6,9 +6,11 @@ public class Katana : WeaponEvent
 {
     public override void OnHit(Transform enemy)
     {
-        enemy.GetComponent<Enemy_TEST>().AddDebuff(Debuffs.Bleed, 3, 10);
+        Damageable d = enemy.GetComponent<Damageable>();
+        d.DeleteBuffs(Buffs.None, Debuffs.Bleed);
+        d.AddDebuff(Debuffs.Bleed, 3, 10);
         if(Random.Range(0, 101) <= 30)
-            enemy.GetComponent<Enemy_TEST>().AddDebuff(Debuffs.Slow, 1, 50);
+            d.AddDebuff(Debuffs.Slow, 1, 50);
     }
 
     public override void Passive()

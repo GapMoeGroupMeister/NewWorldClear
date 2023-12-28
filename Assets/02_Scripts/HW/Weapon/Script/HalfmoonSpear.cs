@@ -6,8 +6,10 @@ public class HalfmoonSpaer : WeaponEvent
 {
     public override void OnHit(Transform enemy)
     {
-        enemy.GetComponent<Enemy_TEST>().AddDebuff(Debuffs.Slow, 3, 5);
-        enemy.GetComponent<Enemy_TEST>().AddDebuff(Debuffs.Bleed, 3, 10);
+        Damageable d = enemy.GetComponent<Damageable>();
+        d.DeleteBuffs(Buffs.None, Debuffs.Bleed);
+        d.AddDebuff(Debuffs.Bleed, 3, 10);
+        d.AddDebuff(Debuffs.Slow, 3, 5);
     }
 
     public override void Passive()
