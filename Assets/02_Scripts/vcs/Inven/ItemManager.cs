@@ -367,7 +367,16 @@ public class ItemManager : MonoSingleton<ItemManager>
      */
     public void LoadInventoryFile()
     {
-        inventory = DBManager.Get_Inventory();
+        try
+        {
+            inventory = DBManager.Get_Inventory();
+        }
+        catch (System.Exception e)
+        {
+            Debug.Log("인벤토리 파일이 없습니다");
+            inventory = new List<ItemSlot>();
+            inventory = DBManager.Get_Inventory();
+        }
     }
     /**
      * <summary>
