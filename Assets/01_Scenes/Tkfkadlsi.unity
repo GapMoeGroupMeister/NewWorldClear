@@ -670,7 +670,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6ed1c8f2e1b77b4693135e5427de212, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skill2Damage: 25
+  skill2Damage: 40
   skill2AttackObject: {fileID: 100004, guid: 757df604761b8ef42831192c70ee1099, type: 3}
 --- !u!1 &146732635
 GameObject:
