@@ -59,6 +59,7 @@ public class PlayerController : Damageable
     }
     private void Update()
     {
+        if (isStun) return;
         WeaponRotate();
     }
 
@@ -161,9 +162,9 @@ public class PlayerController : Damageable
     public override void Die()
     {
         if (isDie) return;
-        isDie = true;
-        _animator.SetTrigger("Dead");
         isStun = true;
+        _animator.SetTrigger("Dead");
+        isDie = true;
         GameManager.Instance.GameForcedExit();
     }
     #region Stat Change functions
