@@ -17,6 +17,7 @@ public class LootManager : MonoSingleton<LootManager>
 
     [SerializeField] private float debugPower;
 
+    [SerializeField] private DropItem[] HiddenItem;
     public LevelManager _LevelSystem { get; private set; }
 
     private void Awake()
@@ -37,7 +38,7 @@ public class LootManager : MonoSingleton<LootManager>
      */
     public void GenerateExp(int expAmount, Vector2 generatePos, float power)
     {
-        int exp1 = expAmount;
+        int exp1 = (int)(expAmount * GameManager.Instance.Phase);
         int exp50 = NumberByUnit(ref exp1, 50);
         int exp10 = NumberByUnit(ref exp1, 10);
         int exp5 = NumberByUnit(ref exp1, 5);
@@ -108,10 +109,15 @@ public class LootManager : MonoSingleton<LootManager>
      */
     public void GenerateItem(DropItem dropItem, Vector2 generatePos, float power = 1)
     {
-        DropItemObject dropItemObject = Instantiate(DropItemPrefab, generatePos, Quaternion.identity).GetComponent<DropItemObject>();
-        dropItemObject.SetInfo(dropItem);
-        Vector2 randomPosition = Random.insideUnitCircle.normalized;
-        dropItemObject.AddForce(randomPosition, power);
+        if (Random.Range(0f, 100f) < dropItem.percentage)
+        {
+            DropItemObject dropItemObject = Instantiate(DropItemPrefab, generatePos, Quaternion.identity).GetComponent<DropItemObject>();
+            dropItemObject.SetInfo(dropItem);
+            Vector2 randomPosition = Random.insideUnitCircle.normalized;
+            dropItemObject.AddForce(randomPosition, power);
+        }
+        
+        SpawnHiddenReward(generatePos);
         
     }
 
@@ -139,10 +145,46 @@ public class LootManager : MonoSingleton<LootManager>
     }
     
     
+    /**
+     * <param name="reward">
+     * 보상 내용이 포함된 Reward 구조체
+     * </param>
+     * <param name="generatePos">
+     * 생성할 위치
+     * </param>
+     * <param name="power">
+     * 생성 위치에서 드롭템들이 퍼져나갈 세기
+     * </param>
+     * <summary>
+     * 필드에 Reward를 모두 생성해주는 메서드
+     * </summary>
+     */
+    public void GenerateRandomReward(Reward reward, Vector2 generatePos, float power = 1)
+    {
+        GenerateExp(reward.expAmount, generatePos, power);
+        foreach (DropItem dropItem in reward.DropItems)
+        {
+            GenerateItem(dropItem, generatePos, power);
+        }
+    }
+    
     [ContextMenu("Debug_GenerateItem")]
     public void DebugGen()
     {
         GenerateReward(Debug_Reward, DebugPos.position, debugPower);
     }
-    
+
+    private void SpawnHiddenReward(Vector2 pos)
+    {
+        foreach (DropItem dropItem in HiddenItem)
+        {
+            if (Random.Range(0f, 100f) < dropItem.percentage)
+            {
+                GenerateItem(dropItem, pos, 0);
+            }
+        }
+    }
+
+
+
 }

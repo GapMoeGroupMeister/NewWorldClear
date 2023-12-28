@@ -13,6 +13,7 @@ public class GameManager : MonoSingleton<GameManager>
     public SoundManager _SoundManager { get; private set; }
     public LevelManager _LevelManager { get; private set; }
     public InGameUIManager _UIManager { get; private set; }
+    public ItemGetRange _ItemGetRange { get; private set; }
 
     public UnityEvent SceneStartEvent;
     [Space(20)]
@@ -20,12 +21,20 @@ public class GameManager : MonoSingleton<GameManager>
     public UnityEvent GameOverEvent;
     public UnityEvent GameClearEvent;
 
+
+    public bool isGameOver;
+    public float Phase = 1f;
+
+    private float playTime = 0;
+    
+    
     private void Awake()
     {
         _SoundManager = FindObjectOfType<SoundManager>();
         _UIManager = FindObjectOfType<InGameUIManager>();
         _PlayerController = FindObjectOfType<PlayerController>();
         _LevelManager = FindObjectOfType<LevelManager>();
+        _ItemGetRange = _PlayerController.transform.Find("ItemGetRange").GetComponent<ItemGetRange>();
 
     }
 
@@ -34,20 +43,35 @@ public class GameManager : MonoSingleton<GameManager>
         SceneStartEvent?.Invoke();
     }
 
-    
+    private void Update()
+    {
+        CountPlayTime();
+        
+        
+    }
+
     public void GameForcedExit()
     {
-        StopAll();
-        GameExitEvent?.Invoke();
-        GameOverEvent?.Invoke();
+        if (!isGameOver)
+        {
+            isGameOver = true;
+            StopAll();
+            GameExitEvent?.Invoke();
+            GameOverEvent?.Invoke();
+        }
     }
 
     [ContextMenu("DebugGameClear")]
     public void GameClearExit()
     {
-        StopAll();
-        GameExitEvent?.Invoke();
-        GameClearEvent?.Invoke();
+        if (!isGameOver)
+        {
+            isGameOver = true;
+            StopAll();
+            GameExitEvent?.Invoke();
+            GameClearEvent?.Invoke();
+        }
+
     }
     
     
@@ -57,6 +81,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         if (FindObjectOfType<PlayerController>())
         {
+            _PlayerController.isStun = true;
             //Destroy(_PlayerController.gameObject);
         }
     }
@@ -64,6 +89,13 @@ public class GameManager : MonoSingleton<GameManager>
     public void BackToStartScene()
     {
         SceneManager.LoadScene("StartScene");
+    }
+
+    private void CountPlayTime()
+    {
+        playTime += Time.deltaTime;
+        Phase = 1 + (playTime * 0.01f);
+
     }
     
     

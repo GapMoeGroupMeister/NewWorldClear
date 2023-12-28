@@ -13,6 +13,9 @@ public class InGameUIManager : MonoBehaviour
     private bool isEscLock;
     private bool OnAudioSetting;
     [SerializeField] private Image HpGauge;
+
+    [SerializeField] private GameObject ExitPanel;
+    [SerializeField] private Image ExitGauge;
     
     public void OnEsc()
     {
@@ -52,6 +55,19 @@ public class InGameUIManager : MonoBehaviour
         float t = PlayerController.Instance._currentHp / PlayerController.Instance._maxHp;
         t = Mathf.Clamp(t, 0f, 1f);
         HpGauge.fillAmount = t;
+    }
+
+    public void RefreshExitGauge(float t)
+    {
+        if (t == 0)
+        {
+            ExitPanel.SetActive(false);
+        }
+        else
+        {
+            ExitPanel.SetActive(true);
+        }
+        ExitGauge.fillAmount = Mathf.Clamp(t, 0f, 1f);
     }
         
 }
