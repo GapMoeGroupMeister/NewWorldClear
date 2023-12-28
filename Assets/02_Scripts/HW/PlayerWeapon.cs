@@ -153,7 +153,7 @@ public class PlayerWeapon : MonoBehaviour
                 }
                 foreach (Collider2D col in enemies)
                 {
-                    col.GetComponent<Enemy>().HitDamage(_playerController.attackDamage);
+                    col.GetComponent<Damageable>().HitDamage(_playerController.attackDamage);
                     if (_weaponEvent != null)
                     {
                         _weaponEvent.OnHit(col.transform);

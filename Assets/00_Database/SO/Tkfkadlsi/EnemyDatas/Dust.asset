@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Dust
   defaultHP: 1000
-  defaultATK: 10
+  defaultATK: 15
   defaultSPD: 8
   attackCycle: 1.25
   detectRange: 5
