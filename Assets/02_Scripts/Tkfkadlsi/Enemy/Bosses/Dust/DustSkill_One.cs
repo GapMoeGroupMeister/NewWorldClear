@@ -47,13 +47,12 @@ namespace Tkfkadlsi
                 yield return new WaitForSeconds(0.125f);
                 trailRenderer.enabled = true;
                 circleCollider.isTrigger = true;
+                dustsCenter.transform.position = dust.target.transform.position;
                 yield return StartCoroutine(MoveLerp(dust.transform, dir * 8, 0.5f));
                 trailRenderer.enabled = false;
                 circleCollider.isTrigger = false;
-                dustsCenter.z += 120f;
                 dustsCenter.transform.rotation = Quaternion.Euler(new Vector3(0, 0, dustsCenter.z));
                 dust.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
-                dustsCenter.transform.position = dust.target.transform.position;
             }
 
             FinishSkill_One();
