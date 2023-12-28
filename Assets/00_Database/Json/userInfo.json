@@ -3,5 +3,6 @@
     "userName": "",
     "isFirstPlay": false,
     "adventureCount": 0,
-    "nowRequestId": 4
+    "nowRequestId": 2,
+    "nowDay": 0
 }
