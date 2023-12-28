@@ -24,6 +24,8 @@ namespace Tkfkadlsi
         public float atkDelay;
         public float range;
 
+        private SpriteRenderer spriteRenderer;
+
         private float attackCount;
         private float skillOneCount;
 
@@ -83,6 +85,7 @@ namespace Tkfkadlsi
             skill_One = this.GetComponent<DustSkill_One>();
             skill_Two = this.GetComponent<DustSkill_Two>();
             skill_Three = this.GetComponent<DustSkill_Three>();
+            spriteRenderer = this.GetComponent<SpriteRenderer>();
         }
 
         private void ResetStat()
@@ -178,22 +181,61 @@ namespace Tkfkadlsi
 
         public override void HitDamage(float damage)
         {
+            damage -= def;
+            if (damage < 0) damage = 0.1f;
+
+            StartCoroutine(HitSprite());
             base.HitDamage(damage);
+            if (_currentHp <= 0) Die();
         }
 
         public override void CriticalDamage(float damage, float percent)
         {
+            damage -= def;
+            if (damage < 0) damage = 0.1f;
+
+            StartCoroutine(HitSprite());
             base.CriticalDamage(damage, percent);
+            if (_currentHp <= 0) Die();
         }
 
         public override void BleedDamage(float damage)
         {
+            damage -= def;
+            if (damage < 0) damage = 0.1f;
+
+            StartCoroutine(HitSprite());
             base.BleedDamage(damage);
+            if (_currentHp <= 0) Die();
         }
 
         public override void PoisonDamage(float damage)
         {
+            damage -= def;
+            if (damage < 0) damage = 0.1f;
+
+            StartCoroutine(HitSprite());
             base.PoisonDamage(damage);
+            if (_currentHp <= 0) Die();
+        }
+
+        private IEnumerator HitSprite()
+        {
+            float hitTime = 0.125f;
+            float t = 0;
+
+            Color startColor = Color.red;
+            Color endColor = Color.white;
+
+            while(t < hitTime)
+            {
+                spriteRenderer.color = Color.Lerp(startColor, endColor, t / hitTime);
+
+                t += Time.deltaTime;
+                yield return null;
+            }
+
+            spriteRenderer.color = endColor;
         }
 
         public override void Die()

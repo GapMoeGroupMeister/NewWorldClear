@@ -6,12 +6,16 @@ namespace Tkfkadlsi
 {
     public class DustNormalAttack : MonoBehaviour
     {
+        PolygonCollider2D polygonCollider;
         Dust dust;
+        IEnumerator enumerator;
 
         private void Awake()
         {
             dust = GetComponentInParent<Dust>();
-            StartCoroutine(LifeTime());
+            polygonCollider = this.GetComponent<PolygonCollider2D>();
+            enumerator = LifeTime();
+            StartCoroutine(enumerator);
         }
 
         private IEnumerator LifeTime()
@@ -24,7 +28,10 @@ namespace Tkfkadlsi
         {
             if (collision.CompareTag("Player"))
             {
+                polygonCollider.enabled = false;
                 dust.target.HitDamage(dust.attackDamage);
+                dust.target.DeleteBuffs(Buffs.None, Debuffs.Bleed);
+                dust.target.AddDebuff(Debuffs.Bleed, 3, 5);
             }
         }
     }

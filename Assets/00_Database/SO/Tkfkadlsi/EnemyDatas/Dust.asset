@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Dust
   m_EditorClassIdentifier: 
   enemyName: Dust
-  defaultHP: 1000
+  defaultHP: 3000
   defaultATK: 15
   defaultSPD: 8
   attackCycle: 1.25
