@@ -23,6 +23,7 @@ public class PlayerController : Damageable
 
     public bool isThirsty = false;
     public bool isHungry = false;
+    public bool isDie = false;
 
     Item _gasMask;
 
@@ -150,6 +151,8 @@ public class PlayerController : Damageable
 
     public override void Die()
     {
+        if (isDie) return;
+        isDie = true;
         _animator.SetTrigger("Dead");
         isStun = true;
         GameManager.Instance.GameForcedExit();
