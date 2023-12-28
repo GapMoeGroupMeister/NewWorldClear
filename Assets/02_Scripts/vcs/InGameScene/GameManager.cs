@@ -23,6 +23,11 @@ public class GameManager : MonoSingleton<GameManager>
 
 
     public bool isGameOver;
+    public float Phase = 1f;
+
+    private float playTime = 0;
+    
+    
     private void Awake()
     {
         _SoundManager = FindObjectOfType<SoundManager>();
@@ -38,12 +43,18 @@ public class GameManager : MonoSingleton<GameManager>
         SceneStartEvent?.Invoke();
     }
 
-    
+    private void Update()
+    {
+        CountPlayTime();
+        
+        
+    }
+
     public void GameForcedExit()
     {
         if (!isGameOver)
         {
-            
+            isGameOver = true;
             StopAll();
             GameExitEvent?.Invoke();
             GameOverEvent?.Invoke();
@@ -55,6 +66,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         if (!isGameOver)
         {
+            isGameOver = true;
             StopAll();
             GameExitEvent?.Invoke();
             GameClearEvent?.Invoke();
@@ -77,6 +89,13 @@ public class GameManager : MonoSingleton<GameManager>
     public void BackToStartScene()
     {
         SceneManager.LoadScene("StartScene");
+    }
+
+    private void CountPlayTime()
+    {
+        playTime += Time.deltaTime;
+        Phase = 1 + (playTime * 0.01f);
+
     }
     
     

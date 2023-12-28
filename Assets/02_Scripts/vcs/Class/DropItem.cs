@@ -1,6 +1,6 @@
 ﻿
 [System.Serializable]
-public struct DropItem
+public class DropItem
 {
     // 딱히 안쓸 예정
     public string itemName;
@@ -21,10 +21,9 @@ public struct DropItem
 
     /**
      * <summary>
-     * 질량, 끌려오는 속도에 관여함
+     * 드롭 확률
      * </summary>
      */
-    public float mass;
-
+    public float percentage = 100f;
 
 }

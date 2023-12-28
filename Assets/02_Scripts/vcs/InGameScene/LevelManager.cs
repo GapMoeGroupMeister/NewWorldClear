@@ -11,7 +11,8 @@ public enum LevelUpOption
     AtkSpd = 1,
     Spd = 2,
     MaxHp = 3,
-    Heal = 4
+    Heal = 4,
+    EpdRg = 5
 }
 
 public class LevelManager : MonoBehaviour
@@ -37,6 +38,7 @@ public class LevelManager : MonoBehaviour
     public int StatusEnforceLevel_AttackSpeed = 0;
     public int StatusEnforceLevel_Speed = 0;
     public int StatusEnforceLevel_MaxHp = 0;
+    public int StatusEnforceLevel_ExpandRange = 0;
     public int StatusEnforceLevel_ = 0;
     
     private void Start()
