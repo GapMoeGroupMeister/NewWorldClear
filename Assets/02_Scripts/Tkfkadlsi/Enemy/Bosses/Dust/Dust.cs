@@ -176,6 +176,26 @@ namespace Tkfkadlsi
             }
         }
 
+        public override void HitDamage(float damage)
+        {
+            base.HitDamage(damage);
+        }
+
+        public override void CriticalDamage(float damage, float percent)
+        {
+            base.CriticalDamage(damage, percent);
+        }
+
+        public override void BleedDamage(float damage)
+        {
+            base.BleedDamage(damage);
+        }
+
+        public override void PoisonDamage(float damage)
+        {
+            base.PoisonDamage(damage);
+        }
+
         public override void Die()
         {
             LootManager.Instance.GenerateReward(dustData.Reward, transform.position, 4);
