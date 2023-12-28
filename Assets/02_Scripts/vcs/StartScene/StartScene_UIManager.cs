@@ -26,6 +26,13 @@ public class StartScene_UIManager : MonoBehaviour
     [SerializeField] private Image fadeImage;
     [SerializeField] private TMP_Text dayFadeText;
 
+
+    private void OnEnable()
+    {
+        StatusManager.Instance.LoadPlayerStatus();
+        RefreshStatusGauge();
+    }
+
     private void RefreshStatusGauge()
     {
         StatusManager.Instance.LoadPlayerStatus();

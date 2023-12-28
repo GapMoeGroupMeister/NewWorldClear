@@ -1,7 +1,7 @@
 {
-    "health": 100,
-    "hungry": 90,
-    "thirsty": 90,
+    "health": 0,
+    "hungry": 0,
+    "thirsty": 0,
     "levelHealth": 0,
     "atk": 10,
     "def": 1,

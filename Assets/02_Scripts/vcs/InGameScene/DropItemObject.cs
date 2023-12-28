@@ -33,7 +33,7 @@ public class DropItemObject : DropObject
     public void SetInfo(DropItem dropItem)
     {
         _dropItem = dropItem;
-        _spriteRenderer.sprite = SpriteLoader.Instance.FindSprite(_dropItem.item.itemSpriteName);
+        _spriteRenderer.sprite = SpriteLoader.FindSprite(_dropItem.item.itemSpriteName);
 
     }
 

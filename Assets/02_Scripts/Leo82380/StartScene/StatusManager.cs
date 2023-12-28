@@ -1,9 +1,10 @@
 using EasyJson;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class StatusManager : MonoSingleton<StatusManager>
 {
-    [SerializeField] private PlayerStatus playerStatus;
+    [SerializeField] [CanBeNull] private PlayerStatus playerStatus;
 
     public PlayerStatus PlayerStatus
     {
@@ -19,5 +20,10 @@ public class StatusManager : MonoSingleton<StatusManager>
     public void LoadPlayerStatus()
     {
         playerStatus = EasyToJson.FromJson<PlayerStatus>("playerStatus");
+        if (playerStatus == null)
+        {
+            playerStatus = new PlayerStatus();
+            SavePlayerStatus();
+        }
     }
 }

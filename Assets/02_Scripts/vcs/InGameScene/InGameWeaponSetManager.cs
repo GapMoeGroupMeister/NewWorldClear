@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using EasyJson;
 using UnityEngine;
 
@@ -25,6 +23,10 @@ public class InGameWeaponSetManager : MonoBehaviour
     public void SetWeapon()
     {
         thisWeaponItem = EasyToJson.FromJson<ItemSlot>("InGameWeapon");
+        if (thisWeaponItem == null)
+        {
+            return;
+        }
         foreach (WeaponSO weapon in weapons)
         {
             if (weapon.id == thisWeaponItem.item.id)

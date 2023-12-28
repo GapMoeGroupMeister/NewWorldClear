@@ -11,28 +11,28 @@ public class PlayerStatus
 	 * Max값은
 	 * </summary>
 	 */
-	public int health;
+	public int health = 100;
 	/**
 	 * <summary>
 	 * 플레이어의 포만감
 	 * Max: 100
 	 * </summary>
 	 */
-	public int hungry;
+	public int hungry = 100;
 	/**
 	 * <summary>
 	 * 플레이어의 갈증
 	 * Max: 100
 	 * </summary>
 	 */
-	public int thirsty;
+	public int thirsty = 100;
 
 	/**
 	 * <summary>
 	 * 체력 레벨
 	 * </summary>
 	 */
-	public int levelHealth;
+	public int levelHealth = 1;
 
 	/**
 	 * <summary>
@@ -71,6 +71,7 @@ public class PlayerStatus
 		int max = level * 5 + 100;
 		return max;
 	}
+
 
 
 

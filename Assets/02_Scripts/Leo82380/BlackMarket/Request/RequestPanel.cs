@@ -186,7 +186,7 @@ public class RequestPanel : MonoBehaviour
     private void IngredientImageSetup(int imageIndex, int requestIndex)
     {
         ingredientImage[imageIndex].sprite =
-            SpriteLoader.Instance.FindSprite(nowRequest.requests[requestIndex].item.itemSpriteName);
+            SpriteLoader.FindSprite(nowRequest.requests[requestIndex].item.itemSpriteName);
         ingredientImage[imageIndex].SetNativeSize();
         ingredientImage[imageIndex].transform.localScale = Vector3.one;
         ingredientImage[imageIndex].transform.localScale *= 1.2f;

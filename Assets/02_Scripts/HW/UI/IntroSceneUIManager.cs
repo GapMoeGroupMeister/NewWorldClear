@@ -46,7 +46,6 @@ public class IntroSceneUIManager : MonoBehaviour
     {
         _saveInfo = DBManager.Get_UserInfo();
         _day = _saveInfo.day + 1;
-        _saveInfo.isFirstPlay = true;
     }
 
     public void FinishEnter()

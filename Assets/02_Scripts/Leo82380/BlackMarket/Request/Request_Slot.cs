@@ -25,7 +25,7 @@ public class Request_Slot : Slot
 
     protected override void SetItemIcon()
     {
-        Sprite sprite = SpriteLoader.Instance.FindSprite(currentSlot.item.itemSpriteName);
+        Sprite sprite = SpriteLoader.FindSprite(currentSlot.item.itemSpriteName);
         ItemImage.sprite = sprite;
         if(sprite == null)
             print("null임");
