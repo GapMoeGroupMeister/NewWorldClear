@@ -43,6 +43,10 @@ public class RequestPanel : MonoBehaviour
     
     [SerializeField] private GameObject requestFailPanel;
 
+    // 보유 돈
+    [SerializeField] private Item moneySO;
+    [SerializeField] private TMP_Text moneyText;
+
     private int count;
     private int day;
     private int randomIndex;
@@ -70,6 +74,7 @@ public class RequestPanel : MonoBehaviour
         requestPanel.transform.position = new Vector3(0, -10f);
         requestFailPanel.transform.position = new Vector3(-17f, 5f);
         RequestSetup();
+        MoneyTextSetup();
     }
 
     /**
@@ -79,9 +84,7 @@ public class RequestPanel : MonoBehaviour
      */
     public void RequestSetup()
     {
-        day++;
-        if (day > 3)
-            day = 1;
+        day = saveInfo.day;
         if (day % 3 == 0)
         {
             man.SetActive(true);
@@ -104,6 +107,17 @@ public class RequestPanel : MonoBehaviour
         }
 
         print(day);
+    }
+    
+    private void MoneyTextSetup()
+    {
+        ItemSlot moneySlot = ItemManager.Instance.FindItem(moneySO);
+        if (moneySlot != null)
+            moneyText.text = "보유 돈: " + moneySlot.amount;
+        else
+        {
+            moneyText.text = "보유 돈: 0";
+        }
     }
 
     public void RequestTextSetup()
@@ -211,6 +225,7 @@ public class RequestPanel : MonoBehaviour
         acceptButton.SetActive(false);
         giveAmount[0] = 0;
         giveAmount[1] = 0;
+        MoneyTextSetup();
     }
     
     private IEnumerator OnRequestFail()

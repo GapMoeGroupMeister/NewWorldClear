@@ -33,6 +33,7 @@ public abstract class InventoryManager : MonoBehaviour
         Set_AllSlot();
         
     }
+
     protected void Set_AllSlot()
     {
         List<ItemSlot> inventory = ItemManager.Instance.inventory;
@@ -40,7 +41,6 @@ public abstract class InventoryManager : MonoBehaviour
         {
             ItemManager.Instance.inventory = new List<ItemSlot>();
             return;
-
         }
         
         foreach (ItemSlot _slot in inventory)

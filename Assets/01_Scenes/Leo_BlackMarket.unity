@@ -2520,7 +2520,7 @@ RectTransform:
   m_Father: {fileID: 646663005}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3258,7 +3258,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &754768529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5483,10 +5483,10 @@ RectTransform:
   - {fileID: 695582918}
   m_Father: {fileID: 968025933}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -450}
-  m_SizeDelta: {x: 200, y: 200}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1157072495
 MonoBehaviour:
@@ -5562,6 +5562,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c2cabbc7c8f26b54cad119c6f66c1845, type: 3}
   - {fileID: 21300000, guid: 86ced538b46bbdd41ba2f7759371bf71, type: 3}
   - {fileID: 21300000, guid: 8433a91582f2077469a8c6b7304c6ced, type: 3}
+  moneySO: {fileID: 11400000, guid: 43db0c6ca032b9a4abb5c0d23bce66b0, type: 2}
+  moneyText: {fileID: 116494864}
 --- !u!114 &1157072498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6752,7 +6754,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1443575860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7024,10 +7026,10 @@ RectTransform:
   - {fileID: 2105166860}
   m_Father: {fileID: 968025933}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 500, y: -450}
-  m_SizeDelta: {x: 200, y: 200}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1469519711
 MonoBehaviour:
@@ -7103,6 +7105,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c2cabbc7c8f26b54cad119c6f66c1845, type: 3}
   - {fileID: 21300000, guid: 86ced538b46bbdd41ba2f7759371bf71, type: 3}
   - {fileID: 21300000, guid: 8433a91582f2077469a8c6b7304c6ced, type: 3}
+  moneySO: {fileID: 11400000, guid: 43db0c6ca032b9a4abb5c0d23bce66b0, type: 2}
+  moneyText: {fileID: 116494864}
 --- !u!114 &1469519714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7723,10 +7727,10 @@ RectTransform:
   - {fileID: 952896698}
   m_Father: {fileID: 968025933}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 500, y: -50}
-  m_SizeDelta: {x: 200, y: 200}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1539927807
 MonoBehaviour:
@@ -7802,6 +7806,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c2cabbc7c8f26b54cad119c6f66c1845, type: 3}
   - {fileID: 21300000, guid: 86ced538b46bbdd41ba2f7759371bf71, type: 3}
   - {fileID: 21300000, guid: 8433a91582f2077469a8c6b7304c6ced, type: 3}
+  moneySO: {fileID: 11400000, guid: 43db0c6ca032b9a4abb5c0d23bce66b0, type: 2}
+  moneyText: {fileID: 116494864}
 --- !u!114 &1539927810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8044,6 +8050,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b38cb6d88532774ba312c07b67275df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  money: {fileID: 11400000, guid: 43db0c6ca032b9a4abb5c0d23bce66b0, type: 2}
 --- !u!114 &1564695903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8250,6 +8257,8 @@ MonoBehaviour:
   lackMaterial: {fileID: 2100000, guid: cbe4c66b0952f6d438f105d4fa6c650b, type: 2}
   duration: 0.5
   requestFailPanel: {fileID: 328231719}
+  moneySO: {fileID: 11400000, guid: 43db0c6ca032b9a4abb5c0d23bce66b0, type: 2}
+  moneyText: {fileID: 1850352280}
 --- !u!1 &1665082786
 GameObject:
   m_ObjectHideFlags: 0
@@ -9578,10 +9587,10 @@ RectTransform:
   - {fileID: 2058748819}
   m_Father: {fileID: 968025933}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 150, y: -150}
-  m_SizeDelta: {x: 200, y: 200}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1880098421
 MonoBehaviour:
@@ -9657,6 +9666,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c2cabbc7c8f26b54cad119c6f66c1845, type: 3}
   - {fileID: 21300000, guid: 86ced538b46bbdd41ba2f7759371bf71, type: 3}
   - {fileID: 21300000, guid: 8433a91582f2077469a8c6b7304c6ced, type: 3}
+  moneySO: {fileID: 11400000, guid: 43db0c6ca032b9a4abb5c0d23bce66b0, type: 2}
+  moneyText: {fileID: 116494864}
 --- !u!114 &1880098425
 MonoBehaviour:
   m_ObjectHideFlags: 0

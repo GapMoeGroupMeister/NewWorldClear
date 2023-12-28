@@ -27,10 +27,16 @@ public class Weapon2 : MonoBehaviour, IPointerClickHandler
     [SerializeField] private Image[] frameImages;
     [SerializeField] private Sprite[] frameSprites;
     
+    [Space]
+    [Header("Money")]
+    [SerializeField] private Item moneySO;
+    [SerializeField] private TMP_Text moneyText;
+    
     
     private int _randomIndex;
     private Image _image;
     private ShopSO nowShopSO;
+    private SaveInfo _saveInfo;
 
     public GameObject SoldOut => soldOut;
     public WeaponDescription2[] WeaponDescription => weaponDescription;
@@ -42,6 +48,11 @@ public class Weapon2 : MonoBehaviour, IPointerClickHandler
         _randomIndex = Random.Range(0, WeaponDescription.Length);
         description.gameObject.transform.localScale = Vector3.zero;
         OnImageChanged();
+    }
+
+    private void OnEnable()
+    {
+        _saveInfo = DBManager.Get_UserInfo();
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -62,6 +73,15 @@ public class Weapon2 : MonoBehaviour, IPointerClickHandler
     public WeaponDescription2 GetWeaponDescription()
     {
         return weaponDescription[_randomIndex];
+    }
+    
+    public void MoneyTextSetup()
+    {
+        ItemSlot moneySlot = ItemManager.Instance.FindItem(moneySO);
+        if (moneySlot != null)
+            moneyText.text = "보유 돈: " + moneySlot.amount;
+        else
+            moneyText.text = "보유 돈: 0";
     }
     
     

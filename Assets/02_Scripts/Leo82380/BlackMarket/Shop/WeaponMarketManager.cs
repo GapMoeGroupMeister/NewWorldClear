@@ -13,9 +13,20 @@ public class WeaponMarketManager : MonoBehaviour
         _weapons.AddRange(FindObjectsOfType<Weapon2>());
     }
 
+    private void OnDisable()
+    {
+        SaveInfo saveInfo = DBManager.Get_UserInfo();
+        saveInfo.nowDay = saveInfo.day;
+        DBManager.Save_userInfo(saveInfo);
+    }
+
     private void OnEnable()
     {
-        WeaponChange();
+        SaveInfo saveInfo = DBManager.Get_UserInfo();
+        if (saveInfo.nowDay != saveInfo.day)
+        {
+            ItemChange();
+        }
     }
 
     /**
@@ -23,7 +34,7 @@ public class WeaponMarketManager : MonoBehaviour
      * 무기 전부 바꾸기
      * </summary>
      */
-    public void WeaponChange()
+    public void ItemChange()
     {
         foreach (var item in _weapons)
         {

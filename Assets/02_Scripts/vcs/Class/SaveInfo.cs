@@ -38,4 +38,11 @@ public class SaveInfo
      * </summary>
      */
     public int nowRequestId;
+
+    /**
+     * <summary>
+     *
+     * </summary>
+     */
+    public int nowDay;
 }

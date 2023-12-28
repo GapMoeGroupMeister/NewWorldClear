@@ -15,11 +15,10 @@ public class PlayerWeapon : MonoBehaviour
 
     public GameObject _attackEffect;
     public GameObject bulletPrefab;
-
     private GameObject _currentWeapon;
 
     Transform _weaponPivot;
-
+    WeaponSO _currentWeaponSO;
     LineRenderer _lineRenderer;
     PlayerController _playerController;
 
@@ -43,16 +42,24 @@ public class PlayerWeapon : MonoBehaviour
 
     private void Update()
     {
+        LevelUp();
         if (Input.GetKeyDown(KeyCode.F) && testWeapon != null && !_playerController.isStun)
         {
             WeaponChange(testWeapon);
         }
+    }
 
+    public void LevelUp()
+    {
+        _playerController.attackDamage = _currentWeaponSO.baseDamage + _playerController.levelUpDamage;
+        _playerController.attackDamage += _currentWeaponSO.baseDamage / 100 * _currentWeaponSO.damage;
+        _attackDelay = _currentWeaponSO.attackDelay * _playerController.levelUpDelay;
     }
 
     public void WeaponChange(WeaponSO weaponSO)
     {
         if (_currentWeapon != null) Destroy(_currentWeapon);
+        _currentWeaponSO = weaponSO;
         _currentWeapon = Instantiate(weaponSO.weaponPrefab, transform);
         _weaponPivot = _currentWeapon.transform.GetChild(0);
         _playerController.attackDamage = weaponSO.baseDamage + _playerController.levelUpDamage;
@@ -61,15 +68,15 @@ public class PlayerWeapon : MonoBehaviour
         _attackRange = weaponSO.attackRange;
         _attackMotion = weaponSO.attackMotion;
         _attackEffect = weaponSO.attackEffect;
-        //_weaponEvent = (WeaponEvent)WeaponEventManager.Instance.GetComponent(_currentWeapon.name);
+        _weaponEvent = _currentWeapon.GetComponent<WeaponEvent>();
 
         if (_weaponType.Equals(WeaponType.Else))
         {
-            StopCoroutine(ShortWeaponAttack(0));
+            StopCoroutine(ShortWeaponAttack());
         }
         else if (_weaponType.Equals(WeaponType.Gun))
         {
-            StopCoroutine(LongWeaponAttack(0));
+            StopCoroutine(LongWeaponAttack());
             _lineRenderer.enabled = false;
         }
 
@@ -77,18 +84,17 @@ public class PlayerWeapon : MonoBehaviour
 
         if (_weaponType.Equals(WeaponType.Else))
         {
-            StartCoroutine(ShortWeaponAttack(_attackDelay));
+            StartCoroutine(ShortWeaponAttack());
         }
         else if (_weaponType.Equals(WeaponType.Gun))
         {
-            StartCoroutine(LongWeaponAttack(_attackDelay));
+            StartCoroutine(LongWeaponAttack());
             _lineRenderer.enabled = true;
         }
     }
     
     public void AttackMotionPlay(Vector2 attackRange, float angle)
     {
-        print(angle);
         switch (_attackMotion)
         {
             case AttackMotion.Swing:
@@ -122,11 +128,11 @@ public class PlayerWeapon : MonoBehaviour
         }
     }
 
-    IEnumerator ShortWeaponAttack(float delay)
+    IEnumerator ShortWeaponAttack()
     {
         while (true)
         {
-            yield return new WaitForSeconds(delay);
+            yield return new WaitForSeconds(_attackDelay);
             yield return new WaitUntil(() => !_playerController.isStun);
             Vector2 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
             Vector2 attackRange = transform.position + ((Vector3)dir.normalized * (_attackRange.x / 2));
@@ -157,11 +163,11 @@ public class PlayerWeapon : MonoBehaviour
         }
     }
 
-    IEnumerator LongWeaponAttack(float delay)
+    IEnumerator LongWeaponAttack()
     {
         while (true)
         {
-            yield return new WaitForSeconds(delay);
+            yield return new WaitForSeconds(_attackDelay);
             yield return new WaitUntil(() => !_playerController.isStun);
             Vector2 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;

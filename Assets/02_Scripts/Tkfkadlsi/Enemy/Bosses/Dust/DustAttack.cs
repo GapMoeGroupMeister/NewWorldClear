@@ -60,9 +60,18 @@ namespace Tkfkadlsi
             Vector3 startpos = new Vector3(0, 4);
             Vector3 endpos = new Vector3(0, 1);
 
+            if (dust.target.transform.position.x < dust.transform.position.x)
+            {
+                dust.transform.localScale = new Vector3(-1.5f, 1.5f, 1.5f);
+            }
+            else
+            {
+                dust.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+            }
             while (t < moveTime)
             {
                 trm.localPosition = Vector3.Lerp(startpos, endpos, moveCurve.Evaluate(t / moveTime));
+
 
                 t += Time.deltaTime;
                 yield return null;
@@ -97,7 +106,9 @@ namespace Tkfkadlsi
             while (t < moveTime)
             {
                 dustsCenter.transform.position = Vector3.Lerp(startPos, endPos, moveCurve.Evaluate(t / moveTime));
-                endPos = dust.target.transform.position;
+
+                if(t < moveTime/2)
+                    endPos = dust.target.transform.position;
 
                 t += Time.deltaTime;
                 yield return null;

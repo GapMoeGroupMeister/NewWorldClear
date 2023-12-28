@@ -80,7 +80,6 @@ public class PlayerController : Damageable
         while (dashElapsedTime > 0)
         {
             dashElapsedTime -= Time.deltaTime;
-            MakeTrail();
             yield return null;
         }
         isStun = false;
@@ -151,7 +150,8 @@ public class PlayerController : Damageable
 
     public override void Die()
     {
-        Destroy(gameObject);
+        _animator.SetTrigger("Dead");
+        isStun = true;
         GameManager.Instance.GameForcedExit();
     }
     #region Stat Change functions
