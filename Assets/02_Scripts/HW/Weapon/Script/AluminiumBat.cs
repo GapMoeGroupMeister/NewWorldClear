@@ -7,7 +7,7 @@ public class AluminiumBat : WeaponEvent
     public override void OnHit(Transform enemy)
     {
         if (Random.Range(1, 101) <= 5)
-            enemy.GetComponent<Enemy_TEST>().AddDebuff(Debuffs.Stun, 1);
+            enemy.GetComponent<Damageable>().AddDebuff(Debuffs.Stun, 1);
     }
 
     public override void Passive()
