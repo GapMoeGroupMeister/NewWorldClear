@@ -54,7 +54,6 @@ public class LevelManager : MonoBehaviour
     private int CalcExpMax(int level)
     {
         int max = (int)(Mathf.Pow(((level) * 50f / 49f), 2.5f));
-        print(max);
         return max;
     }
 

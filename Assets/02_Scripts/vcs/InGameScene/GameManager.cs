@@ -57,7 +57,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         if (FindObjectOfType<PlayerController>())
         {
-            Destroy(_PlayerController.gameObject);
+            //Destroy(_PlayerController.gameObject);
         }
     }
 
