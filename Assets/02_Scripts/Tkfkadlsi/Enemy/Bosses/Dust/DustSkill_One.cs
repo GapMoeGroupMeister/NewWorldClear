@@ -31,6 +31,7 @@ namespace Tkfkadlsi
         {
             dust.AttackCount = 0;
             dust.currentState = Dust.DustState.Skill_1;
+            circleCollider.radius = 0.25f;
             StartCoroutine(SkillOne());
         }
 
@@ -63,6 +64,7 @@ namespace Tkfkadlsi
             dust.transform.localPosition = new Vector3(0, 4);
             dust.animator.SetTrigger("Move");
             dust.currentState = Dust.DustState.Idle;
+            circleCollider.radius = 0.5f;
             dust.SkillOneCount++;
         }
 
