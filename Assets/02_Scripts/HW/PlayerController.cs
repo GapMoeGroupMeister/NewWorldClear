@@ -77,6 +77,7 @@ public class PlayerController : Damageable
 
     IEnumerator IEDash()
     {
+        if (isDash) yield break;
         Vector2 prevDir = _rigidbody.velocity.normalized;
         _strikeColl.enabled = false;
         dashElapsedTime = 0.1f;
