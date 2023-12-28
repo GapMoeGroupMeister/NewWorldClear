@@ -11,6 +11,7 @@ public class PlayerController : Damageable
 {
     public static PlayerController Instance;
     public Rigidbody2D _rigidbody;
+    Collider2D _strikeColl;
     Animator _animator;
 
     Transform _weaponTrm;
@@ -50,6 +51,7 @@ public class PlayerController : Damageable
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _strikeColl = transform.Find("StrikeColl").GetComponent<Collider2D>();
 
         _weaponTrm = transform.Find("Weapon");
         _moveSpeed = 5f;
@@ -75,6 +77,7 @@ public class PlayerController : Damageable
     IEnumerator IEDash()
     {
         Vector2 prevDir = _rigidbody.velocity.normalized;
+        _strikeColl.enabled = false;
         dashElapsedTime = 0.1f;
         isStun = true;
         _rigidbody.velocity = prevDir * _moveSpeed * 5f;
@@ -83,6 +86,7 @@ public class PlayerController : Damageable
             dashElapsedTime -= Time.deltaTime;
             yield return null;
         }
+        _strikeColl.enabled = true;
         isStun = false;
         _rigidbody.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) * _moveSpeed;
     }
