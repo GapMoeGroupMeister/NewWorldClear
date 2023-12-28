@@ -6,9 +6,8 @@ namespace Tkfkadlsi
 {
     public class DustSkill_Two : MonoBehaviour
     {
-        [SerializeField] private float skill2ChargeTime;
-        [SerializeField] private GameObject skill2AttackRangeObject;
-        [SerializeField] private GameObject skill2WarningObject;
+        public float skill2Damage;
+        [SerializeField] private GameObject skill2AttackObject;
 
         private Dust dust;
 
@@ -16,11 +15,8 @@ namespace Tkfkadlsi
 
         private void Awake()
         {
-            skill2WarningObject.SetActive(false);
-            skill2AttackRangeObject.SetActive(false);
 
             dust = this.GetComponent<Dust>();
-            skill2WarningSpriteRenderer = skill2WarningObject.GetComponent<SpriteRenderer>();
         }
 
         public void StartSkill_Two()
@@ -33,27 +29,14 @@ namespace Tkfkadlsi
         private IEnumerator SkillTwo()
         {
             dust.animator.SetTrigger("Skill2");
-            skill2AttackRangeObject.SetActive(true);
+            Attack();
             yield return new WaitForSeconds(1.125f);
-            skill2AttackRangeObject.SetActive(false);
             FinishSKillTwo();
         }
-        
-        private IEnumerator ColorLerp(Color startColor, Color endColor)
+
+        private void Attack()
         {
-            float t = 0;
-
-            skill2WarningObject.SetActive(true);
-            while(t < skill2ChargeTime)
-            {
-                skill2WarningSpriteRenderer.color = Color.Lerp(startColor, endColor, t / skill2ChargeTime);
-
-                t += Time.deltaTime;
-                yield return null;
-            }
-
-            skill2WarningSpriteRenderer.color = endColor;
-            skill2WarningObject.SetActive(false);
+            Instantiate(skill2AttackObject, transform);
         }
 
         private void FinishSKillTwo()
