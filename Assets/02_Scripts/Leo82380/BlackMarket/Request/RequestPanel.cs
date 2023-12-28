@@ -84,9 +84,7 @@ public class RequestPanel : MonoBehaviour
      */
     public void RequestSetup()
     {
-        day++;
-        if (day > 3)
-            day = 1;
+        day = saveInfo.day;
         if (day % 3 == 0)
         {
             man.SetActive(true);

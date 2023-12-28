@@ -36,6 +36,7 @@ public class Weapon2 : MonoBehaviour, IPointerClickHandler
     private int _randomIndex;
     private Image _image;
     private ShopSO nowShopSO;
+    private SaveInfo _saveInfo;
 
     public GameObject SoldOut => soldOut;
     public WeaponDescription2[] WeaponDescription => weaponDescription;
@@ -51,7 +52,7 @@ public class Weapon2 : MonoBehaviour, IPointerClickHandler
 
     private void OnEnable()
     {
-        MoneyTextSetup();
+        _saveInfo = DBManager.Get_UserInfo();
     }
 
     public void OnPointerClick(PointerEventData eventData)
