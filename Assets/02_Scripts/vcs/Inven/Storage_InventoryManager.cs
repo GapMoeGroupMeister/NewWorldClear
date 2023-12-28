@@ -17,6 +17,8 @@ public class Storage_InventoryManager : InventoryManager
 
     void Start()
     {
+        ItemManager.Instance.LoadInventoryFile();
+
         SceneStart();
     }
 
@@ -24,7 +26,6 @@ public class Storage_InventoryManager : InventoryManager
 
     public override void SceneStart()
     {
-        ItemManager.Instance.LoadInventoryFile();
         Set_AllSlot();
     }
     
