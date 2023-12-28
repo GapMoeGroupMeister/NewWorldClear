@@ -38,7 +38,7 @@ namespace Tkfkadlsi
         public override void On_Idle()
         {
             if (!animator) return;
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Enemy1Idle")) return;
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName($"{EnemyName}Idle")) return;
             animator.SetTrigger("Idle");
         }
 
@@ -57,7 +57,7 @@ namespace Tkfkadlsi
             }
 
             if (!animator) return;
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Enemy1Move")) return;
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName($"{EnemyName}Move")) return;
             animator.SetTrigger("Move");
         }
 
@@ -69,7 +69,7 @@ namespace Tkfkadlsi
             obj.transform.position = transform.position;
 
             if (!animator) return;
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Enemy1Attack")) return;
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName($"{EnemyName}Attack")) return;
             animator.SetTrigger("Attack");
         }
 

@@ -794,7 +794,7 @@ MonoBehaviour:
   _currentHp: 100
   _maxHp: 100
   _moveSpeed: 0
-  attackDamage: 10
+  attackDamage: 0
   painfulAmount: 0
   isStun: 0
   isSubdue: 0
