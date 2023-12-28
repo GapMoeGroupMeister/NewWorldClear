@@ -13,6 +13,7 @@ public class GameManager : MonoSingleton<GameManager>
     public SoundManager _SoundManager { get; private set; }
     public LevelManager _LevelManager { get; private set; }
     public InGameUIManager _UIManager { get; private set; }
+    public ItemGetRange _ItemGetRange { get; private set; }
 
     public UnityEvent SceneStartEvent;
     [Space(20)]
@@ -26,6 +27,7 @@ public class GameManager : MonoSingleton<GameManager>
         _UIManager = FindObjectOfType<InGameUIManager>();
         _PlayerController = FindObjectOfType<PlayerController>();
         _LevelManager = FindObjectOfType<LevelManager>();
+        _ItemGetRange = _PlayerController.transform.Find("ItemGetRange").GetComponent<ItemGetRange>();
 
     }
 
@@ -57,6 +59,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         if (FindObjectOfType<PlayerController>())
         {
+            _PlayerController.isStun = true;
             //Destroy(_PlayerController.gameObject);
         }
     }
