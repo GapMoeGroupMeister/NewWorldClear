@@ -1,7 +1,10 @@
 using System;
+using System.Collections;
 using EasyJson;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class StartScene_UIManager : MonoBehaviour
 {
@@ -14,6 +17,14 @@ public class StartScene_UIManager : MonoBehaviour
     [Header("Player Image")]
     [SerializeField] private Image playerImage;
     [SerializeField] private Sprite[] playerImages;
+    
+    [Space]
+    [SerializeField] private SaveInfo saveInfo;
+    [SerializeField] TMP_Text dayText;
+    [SerializeField] private GameObject adventureButton;
+    [SerializeField] private GameObject restButton;
+    [SerializeField] private Image fadeImage;
+    [SerializeField] private TMP_Text dayFadeText;
 
     private void RefreshStatusGauge()
     {
@@ -39,6 +50,68 @@ public class StartScene_UIManager : MonoBehaviour
         else
         {
             playerImage.sprite = playerImages[0];
+        }
+    }
+
+    private void DayUpdate()
+    {
+        dayText.text = "<size=42>생존</size> " + saveInfo.day + "일";
+        if (saveInfo.adventureCount > 0)
+        {
+            adventureButton.SetActive(true);
+            restButton.SetActive(false);
+        }
+        else
+        {
+            adventureButton.SetActive(false);
+            restButton.SetActive(true);
+        }
+    }
+
+    public void Rest()
+    {
+        StartCoroutine(RestCoroutine());
+    }
+
+    private IEnumerator RestCoroutine()
+    {
+        RestSet(true);
+        fadeImage.DOFade(1f, 0.5f);
+        dayFadeText.DOFade(1f, 0.5f);
+        
+        dayFadeText.text = "생존 " + saveInfo.day + "일차";
+        saveInfo.day++;
+        yield return new WaitForSeconds(1f);
+        dayFadeText.text = "생존 " + saveInfo.day + "일차";
+        
+        yield return new WaitForSeconds(1.5f);
+        fadeImage.DOFade(0f, 0.5f);
+        dayFadeText.DOFade(0f, 0.5f);
+        DayUpdate();
+        StatusManager.Instance.PlayerStatus.hungry -= 10;
+        StatusManager.Instance.PlayerStatus.thirsty -= 10;
+        StatusManager.Instance.SavePlayerStatus();
+        RefreshStatusGauge();
+        yield return new WaitForSeconds(0.5f);
+        
+        RestSet(false);
+        
+    }
+
+    private void RestSet(bool set)
+    {
+        if (set)
+        {
+            fadeImage.gameObject.SetActive(true);
+            dayFadeText.gameObject.SetActive(true);
+            fadeImage.color = Color.clear;
+            dayFadeText.color = new Color(1, 1, 1, 0f);
+        }
+        else
+        {
+            fadeImage.gameObject.SetActive(false);
+            dayFadeText.gameObject.SetActive(false);
+            fadeImage.color = new Color(0, 0, 0, 225f);
         }
     }
 }
