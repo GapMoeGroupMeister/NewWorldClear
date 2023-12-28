@@ -87,7 +87,6 @@ public class StartScene_UIManager : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         fadeImage.DOFade(0f, 0.5f);
         dayFadeText.DOFade(0f, 0.5f);
-        DayUpdate();
         StatusManager.Instance.PlayerStatus.hungry -= 10;
         StatusManager.Instance.PlayerStatus.thirsty -= 10;
         StatusManager.Instance.SavePlayerStatus();
@@ -95,6 +94,8 @@ public class StartScene_UIManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         
         RestSet(false);
+        saveInfo.adventureCount = 1;
+        DayUpdate();
         
     }
 

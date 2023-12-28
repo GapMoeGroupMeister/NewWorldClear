@@ -20,7 +20,7 @@ public class InGame_RewardInventoryManager : InventoryManager
         {
             ItemManager.Instance.AddItem(slot, slot.amount);
         }
-        Set_AllSlot();
+        
         SaveInventory();
     }
 
@@ -45,7 +45,7 @@ public class InGame_RewardInventoryManager : InventoryManager
     public void LoadStorageInventory()
     {
         // 아이템 연산을 위해 +
-        
+        Set_AllSlot();
         inGameInventory = ItemManager.Instance.inventory;
         totalInventory = DBManager.Get_Inventory();
         ItemManager.Instance.inventory = totalInventory;

@@ -61,7 +61,7 @@ public abstract class DropObject : MonoBehaviour
 
         foreach (Collider2D collider in hits)
         {
-            if (collider.CompareTag("Player"))
+            if (collider.CompareTag("PlayerItemGetRange"))
             {
                 followTarget = collider.transform;
                 isTargeted = true;
