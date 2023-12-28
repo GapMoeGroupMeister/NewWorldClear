@@ -81,6 +81,7 @@ public class StartSceneToTakeInventory : MonoBehaviour, IPointerClickHandler
 
     private void Refresh()
     {
+        List<ItemSlot> slotToRemove = new List<ItemSlot>();
         Delete_Inven();
 
         if (inventory == null || inventory.Count <= 0)
@@ -93,14 +94,33 @@ public class StartSceneToTakeInventory : MonoBehaviour, IPointerClickHandler
         {
             Item thisItem = _slot.item;
 
-            if (thisItem == null)
+            if (thisItem == null || _slot.amount <= 0)
             {
-                inventory.Remove(_slot);
-                return;
+                slotToRemove.Add(_slot);
+                continue;
             }
 
             GameObject slot = Instantiate(slotPrefab, grid);
             slot.GetComponent<Slot>().SetSlot(_slot);
         }
+
+        foreach (ItemSlot _slot in slotToRemove)
+        {
+            inventory.Remove(_slot);
+        }
+
+        DBManager.Save_InGameInventory(inventory);
+    }
+
+    internal void SubItem(ItemSlot curSelectItemSlot, int amount)
+    {
+        foreach (ItemSlot _slot in inventory)
+        {
+            if(_slot == curSelectItemSlot)
+            {
+                _slot.amount -= amount;
+            }
+        }
+        Refresh();
     }
 }
