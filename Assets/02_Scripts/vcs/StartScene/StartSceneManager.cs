@@ -26,4 +26,9 @@ public class StartSceneManager : MonoBehaviour
     {
         SceneManager.LoadScene("Leo_BlackMarket");
     }
+
+    public void SceneMoveInGame()
+    {
+        SceneManager.LoadScene("InGameScene");
+    }
 }
