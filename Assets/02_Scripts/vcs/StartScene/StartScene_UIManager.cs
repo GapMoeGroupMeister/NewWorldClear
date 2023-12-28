@@ -1,5 +1,6 @@
 using System;
 using EasyJson;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +15,10 @@ public class StartScene_UIManager : MonoBehaviour
     [Header("Player Image")]
     [SerializeField] private Image playerImage;
     [SerializeField] private Sprite[] playerImages;
+    
+    [Space]
+    [SerializeField] private SaveInfo saveInfo;
+    [SerializeField] TMP_Text dayText;
 
     private void RefreshStatusGauge()
     {
@@ -40,5 +45,11 @@ public class StartScene_UIManager : MonoBehaviour
         {
             playerImage.sprite = playerImages[0];
         }
+    }
+
+    private void DayUpdate()
+    {
+        saveInfo = DBManager.Get_UserInfo();
+        dayText.text = "생존 " + saveInfo.day + "일";
     }
 }
