@@ -23178,6 +23178,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnMobList:
   - {fileID: 3363199156923919705, guid: fce2c5951e43e554ea57d5bc9dbada90, type: 3}
+  - {fileID: 3363199156923919705, guid: 46d6cfda9645edf4dad488b243bbce51, type: 3}
   spawnPoints:
   - {fileID: 1103197203}
   - {fileID: 520491432}

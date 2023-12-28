@@ -29,7 +29,9 @@ public class StartScene_UIManager : MonoBehaviour
     private void OnEnable()
     {
         StatusManager.Instance.LoadPlayerStatus();
+        saveInfo = DBManager.Get_UserInfo();
         RefreshStatusGauge();
+        RefreshPlayerImage();
     }
 
     private void OnDestroy()
