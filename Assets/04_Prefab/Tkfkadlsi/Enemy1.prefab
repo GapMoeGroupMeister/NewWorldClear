@@ -198,6 +198,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 2042ab592c3d345458b4aa6632768283, type: 2}
   target: {fileID: 0}
   attackObj: {fileID: 7161944922433878973, guid: 0d7144d5714686f4f9a1d0629b5b21c9, type: 3}
+  EnemyName: Enemy1
   spriteIsReverse: 1
 --- !u!1 &4196720022934303999
 GameObject:

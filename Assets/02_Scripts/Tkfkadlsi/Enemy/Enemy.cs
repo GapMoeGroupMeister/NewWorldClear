@@ -18,6 +18,7 @@ public abstract class Enemy : Damageable
     public GameObject target;
 
     [SerializeField] protected GameObject attackObj;
+    [SerializeField] protected string EnemyName;
     protected Animator animator;
     protected EnemyState currentState;
     protected bool canSeePlayer = false;

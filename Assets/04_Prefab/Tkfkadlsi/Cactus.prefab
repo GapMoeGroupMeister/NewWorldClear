@@ -198,6 +198,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 1fea1222bd2f8bd489337dc4ef9f1cfb, type: 2}
   target: {fileID: 0}
   attackObj: {fileID: 7161944922433878973, guid: 0d7144d5714686f4f9a1d0629b5b21c9, type: 3}
+  EnemyName: Cactus
   spriteIsReverse: 0
 --- !u!1 &4196720022934303999
 GameObject:
