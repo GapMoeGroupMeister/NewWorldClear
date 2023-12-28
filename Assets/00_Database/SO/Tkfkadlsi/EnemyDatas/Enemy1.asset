@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Enemy1
   m_EditorClassIdentifier: 
   enemyName: Enemy1
-  defaultHP: 10
+  defaultHP: 100
   defaultATK: 5
   defaultSPD: 3
   attackCycle: 0.5
