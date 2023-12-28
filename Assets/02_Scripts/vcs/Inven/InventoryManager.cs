@@ -33,6 +33,7 @@ public abstract class InventoryManager : MonoBehaviour
         Set_AllSlot();
         
     }
+
     protected void Set_AllSlot()
     {
         List<ItemSlot> inventory = ItemManager.Instance.inventory;

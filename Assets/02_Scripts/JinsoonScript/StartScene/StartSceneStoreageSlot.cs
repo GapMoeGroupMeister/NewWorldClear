@@ -11,7 +11,8 @@ public class StartSceneStoreageSlot : Slot, IPointerClickHandler
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            StartSceneStorageInventoryManager.instance.TakeItem();
+            StartSceneStorageInventoryManager.instance.TakeItem(currentItem, currentSlot.durability);
+            StartSceneStorageInventoryManager.instance.curSelectItemSlot = currentSlot;
         }
     }
 
