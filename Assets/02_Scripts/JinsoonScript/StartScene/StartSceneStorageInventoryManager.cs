@@ -101,12 +101,18 @@ public class StartSceneStorageInventoryManager : InventoryManager
         uiInfo.transform.Find("ItemName").GetComponent<TextMeshProUGUI>().SetText(item.itemName);
         uiInfo.transform.Find("ItemType").GetComponent<TextMeshProUGUI>().SetText(Enum.GetName(item.Type.GetType(), item.Type));
         uiInfo.transform.Find("ItemDescription").GetComponent<TextMeshProUGUI>().SetText(item.description);
-        uiInfo.transform.Find("DurabilityGaugeBG/DurabilityGauge").GetComponent<Image>().fillAmount = durability / item.maxDurability;
+        float dur;
+        if (item.maxDurability > 0)
+        {
+            dur = durability / item.maxDurability;
+        }
+        else dur = 1f;
+        uiInfo.transform.Find("DurabilityGaugeBG/DurabilityGauge").GetComponent<Image>().fillAmount = dur;
     }
 
     public void SetItem()
     {
-       ItemSlot newSlot = curSelectItemSlot;
+        ItemSlot newSlot = curSelectItemSlot;
         int itemAmount = curSelectItemSlot.amount;
 
         ItemManager.Instance.SubItem(curSelectItemSlot.item, itemAmount);
