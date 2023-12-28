@@ -795,10 +795,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd8d14feaece14d4aa93f7ec87bedc6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory:
-  - item: {fileID: 11400000, guid: 9436ae634a10bc24ca3807a4cc39822f, type: 2}
-    amount: 1
-    durability: 0
+  inventory: []
 --- !u!4 &503939635
 Transform:
   m_ObjectHideFlags: 0
@@ -2072,7 +2069,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 0.1388565, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:

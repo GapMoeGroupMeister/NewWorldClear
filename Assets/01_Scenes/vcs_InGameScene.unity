@@ -21363,7 +21363,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 1500}
+  m_AnchoredPosition: {x: 0, y: -1500}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1016552186
@@ -21380,7 +21380,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIName: 
   UI_Transform: {fileID: 1016552185}
-  DefaultPos: {x: 0, y: 1500}
+  DefaultPos: {x: 0, y: -1500}
   TargetPos: {x: 0, y: 0}
   duration: 0
   EaseEffect: 1
@@ -21712,6 +21712,8 @@ MonoBehaviour:
   dashElapsedTime: 0
   isThirsty: 0
   isHungry: 0
+  isDie: 0
+  isDash: 0
   _trail: {fileID: 6779528974848463264, guid: c2daa0b292091d149914760327e5a7fe, type: 3}
 --- !u!61 &1123978952
 BoxCollider2D:
