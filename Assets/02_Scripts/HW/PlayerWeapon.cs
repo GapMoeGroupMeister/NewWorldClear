@@ -68,7 +68,7 @@ public class PlayerWeapon : MonoBehaviour
         _attackRange = weaponSO.attackRange;
         _attackMotion = weaponSO.attackMotion;
         _attackEffect = weaponSO.attackEffect;
-        //_weaponEvent = (WeaponEvent)WeaponEventManager.Instance.GetComponent(_currentWeapon.name);
+        _weaponEvent = _currentWeapon.GetComponent<WeaponEvent>();
 
         if (_weaponType.Equals(WeaponType.Else))
         {
