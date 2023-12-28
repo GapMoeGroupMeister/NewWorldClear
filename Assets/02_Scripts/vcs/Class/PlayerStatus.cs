@@ -72,7 +72,14 @@ public class PlayerStatus
 		return max;
 	}
 
-
+	public PlayerStatus()
+	{
+		health = 100;
+		hungry = 100;
+		thirsty = 100;
+		
+	}
+ 
 
 
 }

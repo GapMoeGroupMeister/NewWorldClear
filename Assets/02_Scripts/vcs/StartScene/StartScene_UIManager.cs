@@ -26,11 +26,15 @@ public class StartScene_UIManager : MonoBehaviour
     [SerializeField] private Image fadeImage;
     [SerializeField] private TMP_Text dayFadeText;
 
-
     private void OnEnable()
     {
         StatusManager.Instance.LoadPlayerStatus();
         RefreshStatusGauge();
+    }
+
+    private void OnDestroy()
+    {
+        SceneOutSave();
     }
 
     private void RefreshStatusGauge()
@@ -121,5 +125,11 @@ public class StartScene_UIManager : MonoBehaviour
             dayFadeText.gameObject.SetActive(false);
             fadeImage.color = new Color(0, 0, 0, 225f);
         }
+    }
+
+    public void SceneOutSave()
+    {
+        StatusManager.Instance.SavePlayerStatus();
+        DBManager.Save_userInfo(saveInfo);        
     }
 }

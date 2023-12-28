@@ -20,5 +20,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/01_Scenes/Leo_BlackMarket.unity
     guid: 166acbe7236794d42866c0f661187e0e
+  - enabled: 1
+    path: Assets/01_Scenes/JinsoonScene/JinsoonScene_SkillTree.unity
+    guid: 3685cce813a019e4d8d2cb27fe50504e
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 28b54a3b37aef164981c267bee6ebc70, type: 2}

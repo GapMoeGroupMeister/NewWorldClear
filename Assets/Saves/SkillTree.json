@@ -1,12 +1,12 @@
 {
-    "coinNum": 3,
+    "coinNum": 0,
     "isSelected": [
         true,
         false,
         true,
         false,
-        false,
-        false,
-        false
+        true,
+        true,
+        true
     ]
 }

@@ -8,7 +8,7 @@ namespace EasyJson
     public static class EasyToJson
     {
         // 주소
-        public static string localPath = Application.dataPath + "00_Database/Json/";
+        public static string localPath = Application.dataPath + "/00_Database/Json/";
         /**
          * <summary>
          * Json 파일로 저장

@@ -24,6 +24,7 @@ public class IntroSceneUIManager : MonoBehaviour
         _pressText = transform.Find("Press");
         _blackPanel = transform.Find("BlackPanel").GetComponent<Image>();
         _finalAnswerTrm = _blackPanel.transform.Find("Image");
+        Screen.SetResolution(1920, 1080, FullScreenMode.FullScreenWindow);
     }
 
     private void Start()

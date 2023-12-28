@@ -6,12 +6,7 @@ public class StatusManager : MonoSingleton<StatusManager>
 {
     [SerializeField] [CanBeNull] private PlayerStatus playerStatus;
 
-    public PlayerStatus PlayerStatus
-    {
-        get => playerStatus;
-        set => playerStatus = value;
-    }
-
+    public PlayerStatus PlayerStatus;
     public void SavePlayerStatus()
     {
         EasyToJson.ToJson(playerStatus, "playerStatus", true);

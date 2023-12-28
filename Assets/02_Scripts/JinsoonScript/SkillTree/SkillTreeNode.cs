@@ -56,7 +56,7 @@ public class SkillTreeNode : MonoBehaviour, IPointerEnterHandler, IPointerDownHa
         RectTransform connecterRectTrm = connecterTrm.GetComponent<RectTransform>();
         Vector3 connecterPos = connecterRectTrm.position;
 
-        connecterTrm.parent = transform.root.Find("SkillTreeBackground/Viewport/Content/SkillTreeNodeHolder");
+        connecterTrm.parent = transform.root.Find("SkillTree/SkillTreeBackground/Viewport/Content/SkillTreeNodeHolder");
         connecterTrm.SetAsFirstSibling();
         connecterRectTrm.position = connecterPos;
 
