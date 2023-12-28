@@ -24,11 +24,6 @@ public abstract class Enemy : Damageable
     protected bool canAttackPlayer = false;
     protected bool isAttacking = false;
 
-    private void OnEnable()
-    {
-        SetStat();
-    }
-
     public void SetStat()
     {
         _maxHp = data.DefaultHP;
@@ -154,5 +149,11 @@ public abstract class Enemy : Damageable
     {
         LootManager.Instance.GenerateReward(data.Reward, transform.position, 2);
         PoolManager.Release(gameObject);
+    }
+
+    private void OnDisable()
+    {
+        target = null;
+        currentState = EnemyState.Idle;
     }
 }

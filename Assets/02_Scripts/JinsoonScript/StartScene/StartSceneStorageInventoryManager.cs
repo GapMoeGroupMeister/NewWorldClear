@@ -94,13 +94,15 @@ public class StartSceneStorageInventoryManager : InventoryManager
         Set_AllSlot();
     }
 
-    public void TakeItem(Item item, float durability)
+    public void TakeItem(Item item, float durability, int itemAmount)
     {
         uiInfo.MovePos();
 
         uiInfo.transform.Find("ItemName").GetComponent<TextMeshProUGUI>().SetText(item.itemName);
         uiInfo.transform.Find("ItemType").GetComponent<TextMeshProUGUI>().SetText(Enum.GetName(item.Type.GetType(), item.Type));
         uiInfo.transform.Find("ItemDescription").GetComponent<TextMeshProUGUI>().SetText(item.description);
+        uiInfo.transform.Find("Divide").GetComponent<StartScene_ItemDivider>().SetDivide(itemAmount);
+
         float dur;
         if (item.maxDurability > 0)
         {
@@ -112,12 +114,13 @@ public class StartSceneStorageInventoryManager : InventoryManager
 
     public void SetItem()
     {
-        ItemSlot newSlot = curSelectItemSlot;
-        int itemAmount = curSelectItemSlot.amount;
+        ItemSlot newSlot = new ItemSlot();
+        newSlot.item = curSelectItemSlot.item;
+        newSlot.amount = uiInfo.transform.Find("Divide").GetComponent<StartScene_ItemDivider>().CurAmount;
+        newSlot.durability = curSelectItemSlot.durability;
 
-        ItemManager.Instance.SubItem(curSelectItemSlot.item, itemAmount);
+        ItemManager.Instance.SubItem(curSelectItemSlot.item, newSlot.amount);
 
-        newSlot.amount = itemAmount;
         if (isReadyInventorySelect)
         {
             takeInventory.SetItem(newSlot);

@@ -6,7 +6,7 @@ public class NailedBat : WeaponEvent
 {
     public override void OnHit(Transform enemy)
     {
-        enemy.GetComponent<Enemy_TEST>().AddDebuff(Debuffs.Bleed, 0.5f);
+        enemy.GetComponent<Damageable>().AddDebuff(Debuffs.Bleed, 0.5f);
     }
 
     public override void Passive()
