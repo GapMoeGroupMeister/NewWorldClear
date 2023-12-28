@@ -25,6 +25,7 @@ public class PlayerController : Damageable
     public bool isThirsty = false;
     public bool isHungry = false;
     public bool isDie = false;
+    public bool isDash = false;
 
     Item _gasMask;
 
@@ -70,7 +71,7 @@ public class PlayerController : Damageable
 
     private void OnDash()
     {
-        if ((dashElapsedTime > 0 || _rigidbody.velocity == Vector2.zero) && isStun) return;
+        if ((dashElapsedTime > 0 || _rigidbody.velocity == Vector2.zero) && isStun && isDash) return;
         StartCoroutine(IEDash());
     }
 
@@ -80,6 +81,7 @@ public class PlayerController : Damageable
         _strikeColl.enabled = false;
         dashElapsedTime = 0.1f;
         isStun = true;
+        isDash = true;
         _rigidbody.velocity = prevDir * _moveSpeed * 5f;
         while (dashElapsedTime > 0)
         {
@@ -89,6 +91,8 @@ public class PlayerController : Damageable
         _strikeColl.enabled = true;
         isStun = false;
         _rigidbody.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) * _moveSpeed;
+        yield return new WaitForSeconds(2f);
+        isDash = false;
     }
 
     private void WeaponRotate()
