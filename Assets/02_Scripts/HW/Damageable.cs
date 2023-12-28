@@ -96,7 +96,7 @@ public abstract class Damageable : MonoBehaviour
     {
         float cool = values[0];
         float damage = values[1];
-        float delay = 0.5f;
+        float delay = 1f;
         float elasped = 0f;
         while (cool > 0)
         {
@@ -185,7 +185,7 @@ public abstract class Damageable : MonoBehaviour
     public IEnumerator IEPoison(float[] values)
     {
         float cool = values[0];
-        float delay = 0.5f;
+        float delay = 1f;
         float elasped = 0f;
         while (cool > 0)
         {

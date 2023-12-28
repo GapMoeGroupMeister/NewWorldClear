@@ -26,28 +26,53 @@ public class LevelUpSelectSlot : MonoBehaviour
         switch (currentLevelUpOption)
         {
             case LevelUpOption.Dam:
+                if (GameManager.Instance._LevelManager.StatusEnforceLevel_Damage >= 20)
+                {
+                    break;
+                }
                 GameManager.Instance._PlayerController.levelUpDamage += (8 + Random.Range(1, 3));
                 GameManager.Instance._LevelManager.StatusEnforceLevel_Damage++;
                 break;
             case LevelUpOption.Heal:
                 float max = GameManager.Instance._PlayerController._maxHp;
-                GameManager.Instance._PlayerController._currentHp += (int)(max * 0.5f);
+                GameManager.Instance._PlayerController._currentHp += (int)(max * 0.3f);
                 GameManager.Instance._PlayerController._currentHp =
                     Mathf.Clamp(GameManager.Instance._PlayerController._currentHp, 0, max);
                 break;
             case LevelUpOption.Spd:
+                if (GameManager.Instance._LevelManager.StatusEnforceLevel_Speed >= 20)
+                {
+                    break;
+                }
                 GameManager.Instance._PlayerController._moveSpeed += 0.3f;
                 GameManager.Instance._LevelManager.StatusEnforceLevel_Speed++;
 
                 break;
             case LevelUpOption.AtkSpd:
-                GameManager.Instance._PlayerController.levelUpDelay -= 0.05f;
+                if (GameManager.Instance._LevelManager.StatusEnforceLevel_AttackSpeed >= 20)
+                {
+                    break;
+                }
+                GameManager.Instance._PlayerController.levelUpDelay -= 0.02f;
                 GameManager.Instance._LevelManager.StatusEnforceLevel_AttackSpeed++;
 
                 break;
             case LevelUpOption.MaxHp:
+                if (GameManager.Instance._LevelManager.StatusEnforceLevel_MaxHp >= 20)
+                {
+                    break;
+                }
                 GameManager.Instance._PlayerController._maxHp += (8 + Random.Range(1, 9));
                 GameManager.Instance._LevelManager.StatusEnforceLevel_MaxHp++;
+
+                break;
+            case LevelUpOption.EpdRg:
+                if (GameManager.Instance._LevelManager.StatusEnforceLevel_ExpandRange >= 20)
+                {
+                    break;
+                }
+                GameManager.Instance._ItemGetRange.ExpandRange(0.05f);
+                GameManager.Instance._LevelManager.StatusEnforceLevel_ExpandRange++;
 
                 break;
         }
@@ -62,7 +87,7 @@ public class LevelUpSelectSlot : MonoBehaviour
      */
     public void SetOption()
     {
-        LevelUpOption levelUpOption = (LevelUpOption)Random.Range(0,5);
+        LevelUpOption levelUpOption = (LevelUpOption)Random.Range(0,6);
         currentLevelUpOption = levelUpOption;
         EdgeLight.SetActive(false);
         BtnLevel.text = LevelToString();
@@ -79,7 +104,7 @@ public class LevelUpSelectSlot : MonoBehaviour
                 result = "+ 공격력";
                 break;
             case LevelUpOption.Heal:
-                result = "<size=54>체력 50% 즉시회복</size>";
+                result = "<size=54>체력 30% 즉시회복</size>";
                 break;
             case LevelUpOption.Spd:
                 result = "+ 이동 속도";
@@ -89,6 +114,10 @@ public class LevelUpSelectSlot : MonoBehaviour
                 break;
             case LevelUpOption.MaxHp:
                 result = "+ 최대체력";
+                break;
+            
+            case LevelUpOption.EpdRg:
+                result = "+ 습득범위";
                 break;
         }
 
@@ -115,6 +144,10 @@ public class LevelUpSelectSlot : MonoBehaviour
                 break;
             case LevelUpOption.MaxHp:
                 level = GameManager.Instance._LevelManager.StatusEnforceLevel_MaxHp;
+                break;
+            
+            case LevelUpOption.EpdRg:
+                level = GameManager.Instance._LevelManager.StatusEnforceLevel_ExpandRange;
                 break;
         }
 
