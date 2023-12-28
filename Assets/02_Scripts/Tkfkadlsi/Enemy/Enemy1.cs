@@ -11,7 +11,7 @@ namespace Tkfkadlsi
         private float left;
         private float right;
 
-        private void Awake()
+        private void OnEnable()
         {
             FindTarget();
             SetStat();

@@ -95,7 +95,6 @@ public class PlayerWeapon : MonoBehaviour
     
     public void AttackMotionPlay(Vector2 attackRange, float angle)
     {
-        print(angle);
         switch (_attackMotion)
         {
             case AttackMotion.Swing:
