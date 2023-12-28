@@ -32,12 +32,14 @@ public class StartSceneStorageInventoryManager : InventoryManager
 
     void Start()
     {
+        ItemManager.Instance.LoadInventoryFile();
+
         SceneStart();
+
     }
 
     public override void SceneStart()
     {
-        ItemManager.Instance.LoadInventoryFile();
         Set_AllSlot();
     }
 

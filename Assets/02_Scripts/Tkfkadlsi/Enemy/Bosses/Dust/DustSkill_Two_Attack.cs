@@ -26,7 +26,7 @@ namespace Tkfkadlsi
 
             while(t < sizeUpTime)
             {
-                circleCollider2D.radius = Mathf.Lerp(0.1f, 4.0f, t/sizeUpTime);
+                circleCollider2D.radius = Mathf.Lerp(0.1f, 8.0f, t/sizeUpTime);
 
                 t += Time.deltaTime;
                 yield return null;

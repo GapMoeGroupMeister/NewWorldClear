@@ -9,16 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09c21cebde383634288bf6a7f376f5bf, type: 3}
-  m_Name: Dust
+  m_Script: {fileID: 11500000, guid: 67caa7b57f2c0b44a936db268ae0839d, type: 3}
+  m_Name: Machete
   m_EditorClassIdentifier: 
-  enemyName: Dust
-  defaultHP: 3000
-  defaultATK: 15
-  defaultSPD: 8
-  attackCycle: 1.25
-  detectRange: 5
-  attackRange: 1
-  reward:
-    expAmount: 0
-    DropItems: []
+  id: 0
+  Type: 0
+  Tier: 0
+  itemName: 
+  itemSpriteName: 
+  description: 
+  isLimited: 0
+  maxDurability: 0
+  SlotSetAmount: 0

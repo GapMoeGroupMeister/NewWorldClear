@@ -24,5 +24,5 @@ MonoBehaviour:
     DropItems:
     - itemName: 
       item: {fileID: 11400000, guid: 43db0c6ca032b9a4abb5c0d23bce66b0, type: 2}
-      amount: 2
-      percentage: 70
+      amount: 1
+      percentage: 60
