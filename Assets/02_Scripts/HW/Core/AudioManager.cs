@@ -27,6 +27,7 @@ public class AudioManager : MonoSingleton<AudioManager>
             return;
         }
         _audioSource.clip = clips[index];
-        _audioSource.Play();
+        if(_audioSource.clip != null)
+            _audioSource.Play();
     }
 }

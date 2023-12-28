@@ -6,7 +6,9 @@ public class ChainSaw : WeaponEvent
 {
     public override void OnHit(Transform enemy)
     {
-        enemy.GetComponent<Damageable>().AddDebuff(Debuffs.Bleed, 5, 50);
+        Damageable d = enemy.GetComponent<Damageable>();
+        d.DeleteBuffs(Buffs.None, Debuffs.Bleed);
+        d.AddDebuff(Debuffs.Bleed, 5, 10);
     }
 
     public override void Passive()
