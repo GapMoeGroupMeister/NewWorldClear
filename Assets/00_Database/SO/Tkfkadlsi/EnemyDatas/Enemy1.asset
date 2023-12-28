@@ -20,7 +20,7 @@ MonoBehaviour:
   detectRange: 15
   attackRange: 1
   reward:
-    expAmount: 40
+    expAmount: 3
     DropItems:
     - itemName: 
       item: {fileID: 11400000, guid: 43db0c6ca032b9a4abb5c0d23bce66b0, type: 2}

@@ -88,10 +88,13 @@ public class LevelManager : MonoBehaviour
     private void LevelUp()
     {
         exp -= ExpMax;
-        LevelBeforeAfter.text = (level-1) +"   ▶  " + level;
+        LevelBeforeAfter.text = (level) +"   ▶  " + (level+1);
         level++;
         RefreshExp();
-        OnLevelUpDetailUI();
+        if (!UI_LevelUp.onOff)
+        {
+            OnLevelUpDetailUI();
+        }
         lvlUpStack++;
         IsLevelUp();
         

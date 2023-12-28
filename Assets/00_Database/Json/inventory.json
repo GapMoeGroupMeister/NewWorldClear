@@ -13,7 +13,7 @@
       "name": "Item_Wood",
       "hideFlags": 0
     },
-    "amount": 12,
+    "amount": 48,
     "durability": 0
   },
   {
@@ -30,7 +30,7 @@
       "name": "Item_Money",
       "hideFlags": 0
     },
-    "amount": 176,
+    "amount": 4,
     "durability": 0
   },
   {
@@ -47,7 +47,7 @@
       "name": "Item_Bandage",
       "hideFlags": 0
     },
-    "amount": 32,
+    "amount": 128,
     "durability": 0
   }
 ]

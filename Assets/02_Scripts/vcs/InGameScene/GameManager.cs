@@ -21,6 +21,8 @@ public class GameManager : MonoSingleton<GameManager>
     public UnityEvent GameOverEvent;
     public UnityEvent GameClearEvent;
 
+
+    public bool isGameOver;
     private void Awake()
     {
         _SoundManager = FindObjectOfType<SoundManager>();
@@ -39,17 +41,25 @@ public class GameManager : MonoSingleton<GameManager>
     
     public void GameForcedExit()
     {
-        StopAll();
-        GameExitEvent?.Invoke();
-        GameOverEvent?.Invoke();
+        if (!isGameOver)
+        {
+            
+            StopAll();
+            GameExitEvent?.Invoke();
+            GameOverEvent?.Invoke();
+        }
     }
 
     [ContextMenu("DebugGameClear")]
     public void GameClearExit()
     {
-        StopAll();
-        GameExitEvent?.Invoke();
-        GameClearEvent?.Invoke();
+        if (!isGameOver)
+        {
+            StopAll();
+            GameExitEvent?.Invoke();
+            GameClearEvent?.Invoke();
+        }
+
     }
     
     
