@@ -31,7 +31,7 @@ namespace Tkfkadlsi
                 polygonCollider.enabled = false;
                 dust.target.HitDamage(dust.attackDamage);
                 dust.target.DeleteBuffs(Buffs.None, Debuffs.Bleed);
-                dust.target.AddDebuff(Debuffs.Bleed, 3, 5);
+                dust.target.AddDebuff(Debuffs.Bleed, 3, 3);
             }
         }
     }
