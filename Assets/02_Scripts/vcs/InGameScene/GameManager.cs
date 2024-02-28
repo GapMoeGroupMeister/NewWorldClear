@@ -20,6 +20,7 @@ public class GameManager : MonoSingleton<GameManager>
     public UnityEvent GameExitEvent;
     public UnityEvent GameOverEvent;
     public UnityEvent GameClearEvent;
+    [SerializeField] private GameObject DamageEvent;
 
 
     public bool isGameOver;
@@ -96,6 +97,13 @@ public class GameManager : MonoSingleton<GameManager>
         playTime += Time.deltaTime;
         Phase = 1 + (playTime * 0.01f);
 
+    }
+
+    public void DamageEffect(Vector2 pos, int damage, bool isCrit)
+    {
+        Transform damageEvent = PoolManager.Get(DamageEvent).transform;
+        damageEvent.position = pos;
+        damageEvent.GetComponent<DamageEvent>().ShowEvent(damage, isCrit);
     }
     
     

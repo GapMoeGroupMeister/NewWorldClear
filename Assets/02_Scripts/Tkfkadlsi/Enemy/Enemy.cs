@@ -141,6 +141,7 @@ public abstract class Enemy : Damageable
 
     public override void HitDamage(float damage)
     {
+        GameManager.Instance.DamageEffect( transform.position, (int)damage, false);
         StopCoroutine("Hit_Delay");
         StartCoroutine("Hit_Delay");
 

@@ -1,10 +1,9 @@
 fileFormatVersion: 2
-guid: 6c5f6576d12cd15408dc49cc56c9a86b
+guid: d438fb82845cf6c4988c4a35ba9fbf9b
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - DamageEvent: {fileID: 260713717422062169, guid: 80f2b182e639cb64e99e454d644b9607, type: 3}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
