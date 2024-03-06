@@ -1,0 +1,19 @@
+[
+  {
+    "item": {
+      "id": 1,
+      "Type": 2,
+      "Tier": 5,
+      "itemName": "화폐",
+      "itemSpriteName": "Money",
+      "description": "현지에서 통용되는 화폐이다. ",
+      "isLimited": false,
+      "maxDurability": 0,
+      "SlotSetAmount": 999999,
+      "name": "Item_Money",
+      "hideFlags": 0
+    },
+    "amount": 107,
+    "durability": 0
+  }
+]

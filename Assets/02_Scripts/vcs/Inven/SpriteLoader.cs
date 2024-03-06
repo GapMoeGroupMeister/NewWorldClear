@@ -15,7 +15,7 @@ public class SpriteLoader : MonoBehaviour
     [ContextMenu("Custom/SpriteLoad")]
     public static void Load()
     {
-        string dataPath = Application.dataPath + "/itemicon";
+        string dataPath = Application.dataPath + "/AssetBundles/itemicon";
         AssetBundle bundle = AssetBundle.LoadFromFile(dataPath);
         spriteBase = bundle.LoadAllAssets<Sprite>();
 
